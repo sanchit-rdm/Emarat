@@ -39,8 +39,8 @@ export default function SiteNav() {
             src={logo}
             alt="Emarat Realty"
             priority
-            className="h-9 w-auto lg:h-11"
-            sizes="(min-width: 1024px) 140px, 110px"
+            className="h-auto w-[130px]"
+            sizes="130px"
           />
         </a>
 

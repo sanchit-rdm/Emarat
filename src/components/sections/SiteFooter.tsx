@@ -10,8 +10,8 @@ export default function SiteFooter() {
           <Image
             src={logo}
             alt="Emarat Realty"
-            className="h-20 w-auto lg:h-24"
-            sizes="(min-width: 1024px) 280px, 220px"
+            className="h-auto w-[200px]"
+            sizes="200px"
           />
           <p className="mt-6 max-w-md text-sm text-[color:var(--muted)]">
             A distinguished leader in luxury real estate, specialising in exquisite
