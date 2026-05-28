@@ -57,20 +57,20 @@ export default function News({ posts }: { posts: Post[] }) {
             </Reveal>
             <SplitReveal
               as="h2"
-              className="font-display text-[clamp(2rem,6vw,5.5rem)] leading-[1] tracking-tight"
+              className="font-display h-section"
             >
               Latest from
             </SplitReveal>
             <SplitReveal
               as="h2"
               delay={0.1}
-              className="font-display text-[clamp(2rem,6vw,5.5rem)] leading-[1] tracking-tight text-[color:var(--muted)]"
+              className="font-display h-section text-[color:var(--muted)]"
             >
               Emarat Realty.
             </SplitReveal>
           </div>
           <Reveal delay={0.2} className="self-end">
-            <a href="https://www.emaratrealty.com/" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-3 text-sm">
+            <a href="/news" className="group inline-flex items-center gap-3 text-sm">
               <span className="border-b border-[color:var(--line)] pb-1 transition-colors group-hover:border-[color:var(--fg)]">
                 All articles
               </span>

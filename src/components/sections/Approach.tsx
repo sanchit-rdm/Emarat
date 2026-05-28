@@ -43,29 +43,30 @@ export default function Approach() {
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
-    const { gsap, ScrollTrigger } = ensureGsap();
+    const { gsap } = ensureGsap();
 
     const ctx = gsap.context(() => {
       const items = el.querySelectorAll<HTMLElement>("[data-value]");
-      items.forEach((item) => {
-        gsap.fromTo(
-          item,
-          { opacity: 0.2, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.9,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: item,
-              start: "top 78%",
-              end: "bottom 28%",
-              toggleActions: "play reverse play reverse",
-            },
-          }
-        );
-      });
-      return () => ScrollTrigger.refresh();
+      // Each value enters from the right and slides into place. Stagger so they
+      // come in 1 by 1, with the section itself acting as the trigger so the
+      // sequence starts when the user reaches the section — not when each
+      // individual item happens to scroll past.
+      gsap.fromTo(
+        items,
+        { opacity: 0, x: 120 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 1.0,
+          ease: "power3.out",
+          stagger: 0.22,
+          scrollTrigger: {
+            trigger: el,
+            start: "top 65%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
     }, el);
 
     return () => ctx.revert();
@@ -85,26 +86,29 @@ export default function Approach() {
             </Reveal>
             <SplitReveal
               as="h2"
-              className="font-display text-[clamp(1.8rem,4vw,3.5rem)] leading-[1.05] tracking-tight"
+              className="font-display h-section"
             >
               Building with Ethics,
             </SplitReveal>
             <SplitReveal
               as="h2"
               delay={0.1}
-              className="font-display text-[clamp(1.8rem,4vw,3.5rem)] leading-[1.05] tracking-tight text-[color:var(--muted)]"
+              className="font-display h-section text-[color:var(--muted)]"
             >
               Excellence & Efficiency.
             </SplitReveal>
           </div>
         </div>
 
-        <ol className="col-span-12 flex flex-col lg:col-span-8">
+        {/* overflow-x-clip lets the values slide from outside the right edge
+            without ever causing a horizontal page scroll. */}
+        <ol className="col-span-12 flex flex-col overflow-x-clip lg:col-span-8">
           {values.map((v) => (
             <li
               key={v.no}
               data-value
               className="grid grid-cols-12 gap-6 border-t border-[color:var(--line)] py-12 last:border-b lg:py-16"
+              style={{ willChange: "transform, opacity" }}
             >
               <span className="col-span-12 font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--accent)] lg:col-span-1">
                 {v.no}

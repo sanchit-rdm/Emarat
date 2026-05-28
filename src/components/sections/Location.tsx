@@ -78,10 +78,10 @@ export default function Location() {
 
         {/* Animated heading (changes per tab using a key prop to retrigger reveal) */}
         <div key={`heading-${active}`} className="places-fade">
-          <h2 className="font-display text-[clamp(2.4rem,8vw,8rem)] leading-[0.95] tracking-[-0.015em]">
+          <h2 className="font-display h-page">
             {current.heading[0]}
           </h2>
-          <h2 className="font-display text-[clamp(2.4rem,8vw,8rem)] leading-[0.95] tracking-[-0.015em] text-[color:var(--accent)]">
+          <h2 className="font-display h-page text-[color:var(--accent)]">
             {current.heading[1]}
           </h2>
         </div>

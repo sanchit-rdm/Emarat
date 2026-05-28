@@ -22,12 +22,18 @@ export default async function Home() {
         <Hero />
         <StatsMarquee />
         <Gallery />
-        <Projects />
+        <div className="theme-light">
+          <Projects />
+        </div>
         <About />
         <Location />
-        <Approach />
+        <div className="theme-light">
+          <Approach />
+        </div>
         <Materials />
-        <News posts={posts} />
+        <div className="theme-light">
+          <News posts={posts} />
+        </div>
         <Contact />
       </main>
       <SiteFooter />

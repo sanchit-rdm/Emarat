@@ -64,20 +64,20 @@ export default function Projects() {
             </Reveal>
             <SplitReveal
               as="h2"
-              className="font-display text-[clamp(2rem,6vw,5.5rem)] leading-[1] tracking-tight"
+              className="font-display h-section"
             >
               Residences built
             </SplitReveal>
             <SplitReveal
               as="h2"
               delay={0.1}
-              className="font-display text-[clamp(2rem,6vw,5.5rem)] leading-[1] tracking-tight text-[color:var(--muted)]"
+              className="font-display h-section text-[color:var(--muted)]"
             >
               to be lived in.
             </SplitReveal>
           </div>
           <Reveal delay={0.2} className="self-end">
-            <a href="https://www.emaratrealty.com/" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-3 text-sm">
+            <a href="/projects" className="group inline-flex items-center gap-3 text-sm">
               <span className="border-b border-[color:var(--line)] pb-1 transition-colors group-hover:border-[color:var(--fg)]">
                 All projects
               </span>

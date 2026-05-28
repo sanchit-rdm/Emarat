@@ -22,7 +22,7 @@ export default function StatsMarquee() {
             <span className="text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
               {it.k}
             </span>
-            <span className="mx-8 text-[color:var(--muted)]">/</span>
+            <span className="mx-8 text-[color:var(--brand-green)]/60">/</span>
           </div>
         ))}
       </Marquee>

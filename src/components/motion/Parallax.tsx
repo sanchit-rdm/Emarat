@@ -3,13 +3,28 @@
 import { useEffect, useRef } from "react";
 import { ensureGsap } from "@/lib/gsap";
 
+type Direction = "lag" | "lead";
+
 type Props = {
   children: React.ReactNode;
   className?: string;
   speed?: number;
+  /**
+   * "lag"  — traditional parallax. Image drifts slower than the page scroll
+   *          (looks like depth — the image hangs back).
+   * "lead" — image translates UP faster than the page, so it appears to
+   *          "run upward" as you scroll down. Useful for image grids that
+   *          need a sense of forward momentum.
+   */
+  direction?: Direction;
 };
 
-export default function Parallax({ children, className, speed = 0.2 }: Props) {
+export default function Parallax({
+  children,
+  className,
+  speed = 0.2,
+  direction = "lag",
+}: Props) {
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const innerRef = useRef<HTMLDivElement | null>(null);
 
@@ -19,12 +34,15 @@ export default function Parallax({ children, className, speed = 0.2 }: Props) {
     if (!wrap || !inner) return;
     const { gsap } = ensureGsap();
 
+    const yStart = direction === "lead" ? speed * 50 : -speed * 50;
+    const yEnd = direction === "lead" ? -speed * 50 : speed * 50;
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
         inner,
-        { yPercent: -speed * 50 },
+        { yPercent: yStart },
         {
-          yPercent: speed * 50,
+          yPercent: yEnd,
           ease: "none",
           scrollTrigger: {
             trigger: wrap,
@@ -37,7 +55,7 @@ export default function Parallax({ children, className, speed = 0.2 }: Props) {
     }, wrap);
 
     return () => ctx.revert();
-  }, [speed]);
+  }, [speed, direction]);
 
   return (
     <div ref={wrapRef} className={`overflow-hidden ${className ?? ""}`}>

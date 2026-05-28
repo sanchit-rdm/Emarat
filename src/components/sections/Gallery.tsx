@@ -71,14 +71,14 @@ export default function Gallery() {
           </Reveal>
           <SplitReveal
             as="h2"
-            className="font-display text-[clamp(1.8rem,3.2vw,3rem)] leading-[1.05] tracking-tight"
+            className="font-display h-sub"
           >
             Crafted for
           </SplitReveal>
           <SplitReveal
             as="h2"
             delay={0.1}
-            className="font-display text-[clamp(1.8rem,3.2vw,3rem)] leading-[1.05] tracking-tight text-[color:var(--muted)]"
+            className="font-display h-sub text-[color:var(--muted)]"
           >
             luxury living.
           </SplitReveal>

@@ -35,14 +35,14 @@ export default function Hero() {
       <div className="mt-24 max-w-6xl">
         <SplitReveal
           as="h1"
-          className="font-display text-[clamp(2.8rem,9.5vw,10rem)] leading-[0.93] tracking-[-0.025em]"
+          className="font-display h-page"
         >
           Homes that define
         </SplitReveal>
         <SplitReveal
           as="h1"
           delay={0.1}
-          className="font-display text-[clamp(2.8rem,9.5vw,10rem)] leading-[0.93] tracking-[-0.025em] text-[color:var(--muted)]"
+          className="font-display h-page text-[color:var(--muted)]"
         >
           how you live.
         </SplitReveal>
@@ -58,10 +58,10 @@ export default function Hero() {
         </Reveal>
 
         <Reveal as="div" delay={0.55} className="mt-10 flex flex-wrap items-center gap-4">
-          <CircleButton href="#projects" variant="filled">
+          <CircleButton href="/projects" variant="filled">
             Explore Projects
           </CircleButton>
-          <CircleButton href="#contact" variant="outline">
+          <CircleButton href="/contact" variant="outline">
             Get in Touch
           </CircleButton>
         </Reveal>

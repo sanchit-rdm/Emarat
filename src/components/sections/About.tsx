@@ -17,14 +17,14 @@ export default function About() {
         <div className="col-span-12 lg:col-span-7">
           <SplitReveal
             as="h2"
-            className="font-display text-[clamp(1.8rem,4.5vw,4rem)] leading-[1.05] tracking-tight"
+            className="font-display h-section"
           >
             A distinguished leader
           </SplitReveal>
           <SplitReveal
             as="h2"
             delay={0.1}
-            className="font-display text-[clamp(1.8rem,4.5vw,4rem)] leading-[1.05] tracking-tight text-[color:var(--muted)]"
+            className="font-display h-section text-[color:var(--muted)]"
           >
             in luxury real estate.
           </SplitReveal>

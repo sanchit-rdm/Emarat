@@ -16,9 +16,13 @@ type Props = {
 };
 
 /**
- * Button with an SVG rounded-rect stroke that "draws" itself on hover —
- * mirrors the `link-hover` effect on vp.moscow. The rect uses stroke-dashoffset
- * animated from the rect's perimeter to 0.
+ * Button with an SVG stroke that draws itself around the button border on hover.
+ *
+ * The outline shape automatically follows the button's actual `border-radius` —
+ * change the className from `rounded-full` to `rounded-md`, `rounded-none`,
+ * `rounded-3xl` etc. and the stroke will redraw to match without any extra
+ * configuration. Width, height and corner radius are measured from the live
+ * DOM, then re-measured via ResizeObserver whenever the button changes size.
  */
 export default function CircleButton({
   children,
@@ -30,27 +34,50 @@ export default function CircleButton({
   className = "",
   target,
 }: Props) {
+  const wrapRef = useRef<HTMLElement | null>(null);
   const rectRef = useRef<SVGRectElement | null>(null);
 
-  // Measure the rect path length so the stroke-dashoffset trick works
-  // regardless of button width.
   useEffect(() => {
-    const r = rectRef.current;
-    if (!r) return;
-    const set = () => {
-      try {
-        const len = r.getTotalLength();
-        if (len > 0) {
-          r.parentElement?.style.setProperty("--len", String(len));
-          // also set on the link-hover wrapper (great-grandparent)
-          const wrap = r.closest(".link-hover") as HTMLElement | null;
-          if (wrap) wrap.style.setProperty("--len", String(len));
-        }
-      } catch {}
+    const wrap = wrapRef.current;
+    const rect = rectRef.current;
+    if (!wrap || !rect) return;
+
+    const sync = () => {
+      const { width, height } = wrap.getBoundingClientRect();
+      if (!width || !height) return;
+
+      // Read the button's actual CSS border-radius. Caps at half the smaller
+      // dimension so border-radius:9999px (pill) renders correctly.
+      const cssRadius = parseFloat(getComputedStyle(wrap).borderRadius) || 0;
+      const maxRadius = Math.min(width, height) / 2;
+      const radius = Math.min(cssRadius, maxRadius);
+
+      // Inset by half a stroke-width so the painted line sits flush on the
+      // button's visible border rather than overdrawing outside it.
+      const inset = 0.5;
+      const w = Math.max(0, width - inset * 2);
+      const h = Math.max(0, height - inset * 2);
+      const r = Math.max(0, radius - inset);
+
+      rect.setAttribute("x", String(inset));
+      rect.setAttribute("y", String(inset));
+      rect.setAttribute("width", String(w));
+      rect.setAttribute("height", String(h));
+      rect.setAttribute("rx", String(r));
+      rect.setAttribute("ry", String(r));
+
+      // Defer so getTotalLength reflects the new attributes
+      requestAnimationFrame(() => {
+        try {
+          const len = rect.getTotalLength();
+          if (len > 0) wrap.style.setProperty("--len", String(len));
+        } catch {}
+      });
     };
-    set();
-    const ro = new ResizeObserver(set);
-    ro.observe(r);
+
+    sync();
+    const ro = new ResizeObserver(sync);
+    ro.observe(wrap);
     return () => ro.disconnect();
   }, []);
 
@@ -66,29 +93,25 @@ export default function CircleButton({
 
   const inner = (
     <>
-      <svg
-        className="link-hover__circle"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        <rect ref={rectRef} x="0.75" y="0.75" width="calc(100% - 1.5px)" height="calc(100% - 1.5px)" />
+      <svg className="link-hover__circle" aria-hidden="true">
+        <rect ref={rectRef} fill="none" />
       </svg>
       <span className="relative z-10 uppercase">{children}</span>
     </>
   );
 
-  const cls = `link-hover group relative inline-flex items-center justify-center gap-2 rounded-full transition-colors ${sizeCls} ${variantCls} ${className}`;
+  const cls = `link-hover relative inline-flex items-center justify-center gap-2 rounded-full transition-colors ${sizeCls} ${variantCls} ${className}`;
 
   if (href) {
     return (
-      <a href={href} target={target} className={cls}>
+      <a ref={wrapRef as React.Ref<HTMLAnchorElement>} href={href} target={target} className={cls}>
         {inner}
       </a>
     );
   }
 
   return (
-    <button type={type} onClick={onClick} className={cls}>
+    <button ref={wrapRef as React.Ref<HTMLButtonElement>} type={type} onClick={onClick} className={cls}>
       {inner}
     </button>
   );

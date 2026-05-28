@@ -30,14 +30,14 @@ export default function Contact() {
         <div className="col-span-12 lg:col-span-10">
           <SplitReveal
             as="h2"
-            className="font-display text-[clamp(2.4rem,8vw,8rem)] leading-[0.96] tracking-[-0.025em]"
+            className="font-display h-page"
           >
             Ready to find
           </SplitReveal>
           <SplitReveal
             as="h2"
             delay={0.1}
-            className="font-display text-[clamp(2.4rem,8vw,8rem)] leading-[0.96] tracking-[-0.025em] text-[color:var(--muted)]"
+            className="font-display h-page text-[color:var(--muted)]"
           >
             your perfect home?
           </SplitReveal>
@@ -136,10 +136,10 @@ export default function Contact() {
                 Visit Us
               </div>
               <p className="font-display text-base leading-relaxed">
-                Shop No-4, First Floor<br />
-                S.C.O.-2, 3 &amp; 4, Old Judicial Complex<br />
-                Near Sec-15, Jharsa Road<br />
-                Gurugram, Haryana — 122001
+                Emarat Realty<br />
+                2nd Floor, Sector-15<br />
+                Civil Lines, Gurugram<br />
+                Haryana — 122001
               </p>
             </Reveal>
           </div>

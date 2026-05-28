@@ -2,21 +2,38 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import CircleButton from "@/components/CircleButton";
 import logo from "@/images/logo.png";
 
-const links = [
-  { href: "#projects", label: "Projects" },
-  { href: "#about", label: "About" },
-  { href: "#location", label: "Location" },
-  { href: "#properties", label: "Properties" },
-  { href: "#news", label: "News" },
-  { href: "#contact", label: "Contact" },
+const corporate = [
+  { href: "/about", label: "About Us" },
+  { href: "/directors-desk", label: "Director's Desk" },
+  { href: "/team", label: "Our Team" },
+];
+
+const projectLinks = [
+  { href: "/projects", label: "All Projects" },
+  { href: "/projects#c2", label: "C2 — DLF Garden City" },
+  { href: "/projects#c5", label: "C5 — DLF Garden City" },
+  { href: "/projects#e11", label: "E11 — DLF Garden City" },
+  { href: "/projects#ea04", label: "EA 04 — Almeda" },
+];
+
+const topLevel = [
+  { label: "Corporate", dropdown: corporate },
+  { label: "Projects", dropdown: projectLinks },
+  { href: "/location", label: "Location" },
+  { href: "/properties", label: "Properties" },
+  { href: "/careers", label: "Careers" },
+  { href: "/news", label: "News" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -34,7 +51,7 @@ export default function SiteNav() {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-6 lg:h-20 lg:px-10">
-        <a href="#top" className="flex items-center" aria-label="Emarat Realty home">
+        <Link href="/" className="flex items-center" aria-label="Emarat Realty home">
           <Image
             src={logo}
             alt="Emarat Realty"
@@ -42,23 +59,56 @@ export default function SiteNav() {
             className="h-auto w-[130px]"
             sizes="130px"
           />
-        </a>
+        </Link>
 
-        <nav className="hidden gap-8 text-sm md:flex">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-[color:var(--muted)] transition-colors hover:text-[color:var(--fg)]"
-            >
-              {l.label}
-            </a>
-          ))}
+        <nav className="hidden gap-7 text-sm md:flex">
+          {topLevel.map((item) =>
+            item.dropdown ? (
+              <div
+                key={item.label}
+                className="relative"
+                onMouseEnter={() => setOpenDropdown(item.label)}
+                onMouseLeave={() => setOpenDropdown(null)}
+              >
+                <button
+                  type="button"
+                  className="flex items-center gap-1 text-[color:var(--muted)] transition-colors hover:text-[color:var(--fg)]"
+                  aria-expanded={openDropdown === item.label}
+                >
+                  {item.label}
+                  <span aria-hidden className="text-[0.6rem]">▾</span>
+                </button>
+                {openDropdown === item.label && (
+                  <div className="absolute left-0 top-full pt-4">
+                    <div className="min-w-[220px] rounded-md border border-[color:var(--line)] bg-[color:var(--bg)]/95 p-2 backdrop-blur-md">
+                      {item.dropdown.map((d) => (
+                        <Link
+                          key={d.href}
+                          href={d.href}
+                          className="block rounded px-3 py-2 text-xs uppercase tracking-[0.14em] text-[color:var(--muted)] transition-colors hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--accent)]"
+                        >
+                          {d.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href!}
+                className="text-[color:var(--muted)] transition-colors hover:text-[color:var(--fg)]"
+              >
+                {item.label}
+              </Link>
+            )
+          )}
         </nav>
 
         <div className="flex items-center gap-4">
           <div className="hidden md:inline-flex">
-            <CircleButton href="#contact" size="sm" variant="outline">
+            <CircleButton href="/contact" size="sm" variant="outline">
               Enquire Now
             </CircleButton>
           </div>
@@ -77,20 +127,41 @@ export default function SiteNav() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="border-t border-[color:var(--line)] bg-[color:var(--bg)]/95 backdrop-blur-md md:hidden">
-          <nav className="flex flex-col px-6 py-6">
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setMenuOpen(false)}
-                className="border-b border-[color:var(--line)] py-4 text-sm text-[color:var(--muted)] transition-colors hover:text-[color:var(--fg)]"
-              >
-                {l.label}
-              </a>
-            ))}
+        <div className="max-h-[80vh] overflow-y-auto border-t border-[color:var(--line)] bg-[color:var(--bg)]/95 backdrop-blur-md md:hidden">
+          <nav className="flex flex-col px-6 py-4">
+            {topLevel.map((item) =>
+              item.dropdown ? (
+                <details key={item.label} className="border-b border-[color:var(--line)]">
+                  <summary className="flex cursor-pointer items-center justify-between py-4 text-sm text-[color:var(--muted)]">
+                    <span>{item.label}</span>
+                    <span aria-hidden className="text-[0.6rem]">▾</span>
+                  </summary>
+                  <div className="pb-3">
+                    {item.dropdown.map((d) => (
+                      <Link
+                        key={d.href}
+                        href={d.href}
+                        onClick={() => setMenuOpen(false)}
+                        className="block py-2 pl-3 text-xs uppercase tracking-[0.14em] text-[color:var(--muted)] transition-colors hover:text-[color:var(--accent)]"
+                      >
+                        {d.label}
+                      </Link>
+                    ))}
+                  </div>
+                </details>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href!}
+                  onClick={() => setMenuOpen(false)}
+                  className="border-b border-[color:var(--line)] py-4 text-sm text-[color:var(--muted)] transition-colors hover:text-[color:var(--fg)]"
+                >
+                  {item.label}
+                </Link>
+              )
+            )}
             <div className="mt-6">
-              <CircleButton href="#contact" variant="outline" className="w-full">
+              <CircleButton href="/contact" variant="outline" className="w-full">
                 Enquire Now
               </CircleButton>
             </div>

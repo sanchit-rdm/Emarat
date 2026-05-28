@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
+import Parallax from "@/components/motion/Parallax";
 
 const propertyTypes = [
   {
@@ -58,14 +59,14 @@ export default function Materials() {
             </Reveal>
             <SplitReveal
               as="h2"
-              className="font-display text-[clamp(2rem,6vw,5.5rem)] leading-[1] tracking-tight"
+              className="font-display h-section"
             >
               Homes, plots,
             </SplitReveal>
             <SplitReveal
               as="h2"
               delay={0.1}
-              className="font-display text-[clamp(2rem,6vw,5.5rem)] leading-[1] tracking-tight text-[color:var(--muted)]"
+              className="font-display h-section text-[color:var(--muted)]"
             >
               and the spaces between.
             </SplitReveal>
@@ -77,30 +78,40 @@ export default function Materials() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {propertyTypes.map((s, i) => (
-            <Reveal key={s.id} as="figure" delay={i * 0.06} className="group">
-              <div className={`relative ${s.ratio} overflow-hidden rounded-md bg-[color:var(--bg-alt)]`}>
-                <Image
-                  src={s.src}
-                  alt={s.caption}
-                  fill
-                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105"
-                  style={{ filter: "sepia(0.12) saturate(0.9) brightness(0.88)" }}
-                />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[color:var(--bg)]/80 via-[color:var(--bg)]/10 to-transparent" />
-                <div className="absolute inset-x-5 bottom-5 flex items-end justify-between">
-                  <span className="font-display text-2xl tracking-tight">{s.label}</span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+          {propertyTypes.map((s, i) => {
+            // Alternate parallax speeds so the grid has rhythmic upward motion,
+            // not a uniform slab. Slight stagger of speeds: 0.35, 0.55, 0.4...
+            const parallaxSpeed = 0.35 + (i % 3) * 0.1;
+            return (
+              <Reveal key={s.id} as="figure" delay={i * 0.06} className="group">
+                <div className={`relative ${s.ratio} overflow-hidden rounded-md bg-[color:var(--bg-alt)]`}>
+                  {/* Image scrolls upward faster than the section — the "running up" effect */}
+                  <Parallax direction="lead" speed={parallaxSpeed} className="absolute inset-0">
+                    <div className="relative h-full w-full">
+                      <Image
+                        src={s.src}
+                        alt={s.caption}
+                        fill
+                        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                        className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105"
+                        style={{ filter: "sepia(0.12) saturate(0.9) brightness(0.88)" }}
+                      />
+                    </div>
+                  </Parallax>
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[color:var(--bg)]/80 via-[color:var(--bg)]/10 to-transparent" />
+                  <div className="absolute inset-x-5 bottom-5 flex items-end justify-between">
+                    <span className="font-display text-2xl tracking-tight">{s.label}</span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <figcaption className="mt-3 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
-                {s.caption}
-              </figcaption>
-            </Reveal>
-          ))}
+                <figcaption className="mt-3 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
+                  {s.caption}
+                </figcaption>
+              </Reveal>
+            );
+          })}
         </div>
 
         <Reveal as="div" delay={0.2} className="mt-12 lg:mt-16">

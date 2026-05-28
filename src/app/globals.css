@@ -1,16 +1,38 @@
 @import "tailwindcss";
 
 :root {
-  /* Warm dark palette inspired by vp.moscow luxury real estate aesthetic */
-  --bg: #0e0c08;
-  --bg-alt: #15110a;
-  --fg: #f3ece0;
-  --muted: #8a8170;
-  --line: rgba(243, 236, 224, 0.09);
-  /* Champagne / soft gold — matches the luxury accent used on the reference */
-  --accent: #c4a169;
-  --accent-soft: rgba(196, 161, 105, 0.18);
-  --accent-2: #6e8a8c;
+  /* ----- Dark theme palette (default) ----- */
+  --bg: #0b110d;             /* very dark, faint green undertone */
+  --bg-alt: #0f1611;
+  --fg: #f5efe1;             /* warm cream */
+  --muted: #8a8378;
+  --line: rgba(245, 239, 225, 0.10);
+
+  /* Emarat brand colors */
+  --accent: #E9B231;         /* primary brand gold */
+  --accent-2: #EDC149;       /* brighter highlight gold */
+  --accent-soft: rgba(233, 178, 49, 0.18);
+  --brand-green: #01472E;    /* deep forest green — used sparingly */
+  --brand-green-soft: rgba(1, 71, 46, 0.18);
+}
+
+/* ----------------------------------------------------------------------------
+   Light theme — applied per-section by wrapping in `.theme-light`.
+   Redefines the same variables so every component reading them adapts
+   automatically. In light sections the practical accent becomes the brand
+   green (visible on cream), while gold becomes a decorative-only colour.
+---------------------------------------------------------------------------- */
+.theme-light {
+  --bg: #f4eedf;             /* warm cream */
+  --bg-alt: #e9e2cf;         /* deeper cream */
+  --fg: #0d1611;             /* deep ink, slight green undertone */
+  --muted: #6b6356;
+  --line: rgba(13, 22, 17, 0.10);
+  --accent: var(--brand-green);
+  --accent-2: #03613f;
+  --accent-soft: rgba(1, 71, 46, 0.12);
+  background: var(--bg);
+  color: var(--fg);
 }
 
 @theme inline {
@@ -55,6 +77,39 @@ body {
 }
 
 /* ----------------------------------------------------------------------------
+   Heading hierarchy — three sizes, used everywhere so the visual rhythm
+   stays consistent across pages.
+
+   .h-page    — page hero. Big, bold, dominates the viewport.
+   .h-section — major section opener. Clearly secondary to the hero but
+                still large enough to read at ease without leaning in.
+   .h-sub     — smaller section / subsection opener. Sits comfortably
+                between section headings and card titles.
+
+   A subtle text-shadow on .h-page synthesises slightly thicker strokes
+   on the Italiana display face (which only ships at weight 400), giving
+   the "bold" feeling at the largest size without losing the elegance.
+---------------------------------------------------------------------------- */
+.h-page {
+  font-size: clamp(3.5rem, 10vw, 11rem);
+  line-height: 0.92;
+  letter-spacing: -0.028em;
+  text-shadow: 0 0 0.6px currentColor;
+}
+
+.h-section {
+  font-size: clamp(2.4rem, 6.5vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.h-sub {
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+/* ----------------------------------------------------------------------------
    Marquee
 ---------------------------------------------------------------------------- */
 @keyframes emarat-marquee {
@@ -79,8 +134,7 @@ html {
 }
 
 /* ----------------------------------------------------------------------------
-   Link-hover circle (replicates vp.moscow's .link-hover effect)
-   A circular SVG stroke that draws on hover using stroke-dashoffset.
+   Link-hover button — SVG stroke that traces the button's exact border
 ---------------------------------------------------------------------------- */
 .link-hover {
   position: relative;
@@ -88,7 +142,6 @@ html {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 9999px;
   transition: color 0.4s ease;
 }
 
@@ -101,12 +154,12 @@ html {
   overflow: visible;
 }
 
+/* The rect's x, y, width, height, rx, ry are set by JS so the stroke shape
+   always tracks the button's actual border-radius (pill, rounded-md, square…). */
 .link-hover .link-hover__circle rect {
   fill: none;
   stroke: var(--accent);
-  stroke-width: 1.25;
-  rx: 9999px;
-  ry: 9999px;
+  stroke-width: 1;
   vector-effect: non-scaling-stroke;
   stroke-dasharray: var(--len, 800);
   stroke-dashoffset: var(--len, 800);
@@ -118,13 +171,18 @@ html {
   stroke-dashoffset: 0;
 }
 
-/* Variant: solid filled (still gets the circle stroke on hover, outside) */
+/* Solid filled variant */
 .link-hover--filled {
   background: var(--accent);
   color: var(--bg);
 }
 .link-hover--filled .link-hover__circle rect {
   stroke: var(--fg);
+}
+
+/* In light theme the filled stroke needs to be cream against the green fill */
+.theme-light .link-hover--filled .link-hover__circle rect {
+  stroke: var(--bg);
 }
 
 /* ----------------------------------------------------------------------------
@@ -148,4 +206,20 @@ html {
   border-radius: 50%;
   border: 1px solid var(--accent);
   opacity: 0.55;
+}
+
+/* ----------------------------------------------------------------------------
+   Brand green accent strip — used for the footer top border (sparing use)
+---------------------------------------------------------------------------- */
+.brand-green-strip {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--brand-green) 20%,
+    var(--accent) 50%,
+    var(--brand-green) 80%,
+    transparent
+  );
+  opacity: 0.85;
 }
