@@ -1,36 +1,238 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Emarat CMS - Next.js + Sanity + Vercel
 
-## Getting Started
+A modern full-stack application combining Next.js for the frontend, Sanity CMS for content management, and Vercel for deployment.
 
-First, run the development server:
+## 🚀 Features
+
+- **Next.js 15+** with App Router for optimal performance
+- **TypeScript** for type-safe development
+- **Sanity CMS** for headless content management
+- **Tailwind CSS** for styling
+- **ESLint** for code quality
+- **Ready for Vercel** deployment with environment configuration
+
+## 📋 Prerequisites
+
+- Node.js 18+ (LTS recommended)
+- npm or yarn package manager
+- Sanity account (free at [sanity.io](https://sanity.io))
+
+## 🛠️ Installation & Setup
+
+### 1. Clone and Install Dependencies
+
+```bash
+cd emarat-cms
+npm install
+```
+
+### 2. Create Sanity Project
+
+If you don't have a Sanity project yet:
+
+```bash
+npm run studio
+```
+
+This will guide you through creating a new Sanity project. Follow the prompts and note your:
+- Project ID
+- Dataset name (usually "production")
+
+### 3. Set Environment Variables
+
+Copy `.env.local.example` to `.env.local` and fill in your values:
+
+```bash
+cp .env.local.example .env.local
+```
+
+Update `.env.local` with:
+```
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
+NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_SANITY_API_VERSION=2024-05-25
+SANITY_API_TOKEN=your_api_token_here
+```
+
+To get your API token:
+1. Go to [sanity.io/manage](https://sanity.io/manage)
+2. Select your project
+3. Navigate to API → Tokens
+4. Create a new token with Editor permissions
+
+## 🏃 Development
+
+### Start Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see your app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Start Sanity Studio
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+In a separate terminal:
 
-## Learn More
+```bash
+npm run studio
+```
 
-To learn more about Next.js, take a look at the following resources:
+Sanity Studio will be available at [http://localhost:3333](http://localhost:3333)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Build for Production
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run build
+```
 
-## Deploy on Vercel
+Start the production server:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Lint Code
+
+```bash
+npm run lint
+```
+
+## 📁 Project Structure
+
+```
+emarat-cms/
+├── src/
+│   ├── app/              # Next.js app routes
+│   ├── components/       # Reusable React components
+│   ├── lib/
+│   │   └── sanity.client.ts  # Sanity client configuration
+│   └── styles/           # Global styles
+├── sanity/
+│   ├── schemaTypes/      # Sanity schema definitions
+│   │   ├── postType.ts      # Blog post schema
+│   │   ├── authorType.ts    # Author schema
+│   │   └── blockContentType.ts  # Portable Text blocks
+│   └── desk/             # Desk configuration
+├── public/               # Static assets
+├── sanity.config.ts      # Sanity studio configuration
+├── next.config.ts        # Next.js configuration
+├── vercel.json           # Vercel deployment config
+└── .env.local            # Environment variables (create from .env.local.example)
+```
+
+## 🗄️ Schema Overview
+
+### Post Type
+- Title (required)
+- Slug (auto-generated from title)
+- Author (reference to Author type)
+- Main Image
+- Published Date
+- Body (Portable Text with formatting options)
+
+### Author Type
+- Name (required)
+- Slug
+- Image
+- Bio
+
+### Block Content
+Reusable Portable Text blocks with:
+- Headings (H1-H4)
+- Lists
+- Bold, italic, code formatting
+- Links
+
+## 🔗 API Routes
+
+The project includes GROQ query functions in `src/lib/sanity.client.ts`:
+
+- `getAllPosts()` - Fetch all posts
+- `getPostBySlug(slug)` - Fetch a specific post
+- `getAllAuthors()` - Fetch all authors
+
+## 🚀 Deploying to Vercel
+
+### 1. Push to GitHub
+
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/your-username/emarat-cms.git
+git push -u origin main
+```
+
+### 2. Connect to Vercel
+
+1. Go to [vercel.com](https://vercel.com)
+2. Sign in with GitHub
+3. Click "New Project"
+4. Select your repository
+5. Vercel will auto-detect Next.js settings
+6. Add environment variables:
+   - `NEXT_PUBLIC_SANITY_PROJECT_ID`
+   - `NEXT_PUBLIC_SANITY_DATASET`
+   - `NEXT_PUBLIC_SANITY_API_VERSION`
+   - `SANITY_API_TOKEN`
+
+### 3. Deploy
+
+Click "Deploy" and wait for deployment to complete. Your site will be live at a Vercel URL.
+
+## 🔐 Security Best Practices
+
+- **API Tokens**: Never commit `.env.local` to git (it's in `.gitignore`)
+- **CORS Configuration**: Configure CORS in Sanity if querying from different domains
+- **Published vs Draft**: Use appropriate query filters for draft content
+- **Rate Limiting**: Consider implementing rate limiting for API routes
+
+## 📚 Useful Resources
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Sanity Documentation](https://www.sanity.io/docs)
+- [Vercel Documentation](https://vercel.com/docs)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+
+## 🐛 Troubleshooting
+
+### Port Already in Use
+
+If port 3000 is already in use:
+
+```bash
+npm run dev -- -p 3001
+```
+
+### Sanity Connection Issues
+
+- Verify `NEXT_PUBLIC_SANITY_PROJECT_ID` is correct
+- Check that your Sanity project exists
+- Ensure API token has proper permissions
+
+### Build Errors
+
+Clear cache and reinstall:
+
+```bash
+rm -rf .next node_modules
+npm install
+npm run build
+```
+
+## 📝 License
+
+This project is open source and available under the MIT License.
+
+## 🤝 Support
+
+For issues or questions:
+- Check the [Next.js docs](https://nextjs.org/docs)
+- Visit [Sanity community](https://www.sanity.io/community)
+- Report issues on GitHub
+
+---
+
+Happy coding! 🎉

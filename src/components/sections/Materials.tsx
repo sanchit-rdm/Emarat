@@ -1,0 +1,130 @@
+import Image from "next/image";
+import Reveal from "@/components/motion/Reveal";
+import SplitReveal from "@/components/motion/SplitReveal";
+
+const spaces = [
+  {
+    id: "residences",
+    label: "Residences",
+    caption: "Two- to four-bed homes, Mira Residences",
+    src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=80&auto=format&fit=crop",
+    ratio: "aspect-[3/4]",
+  },
+  {
+    id: "penthouses",
+    label: "Penthouses",
+    caption: "Top-floor duplexes, Bayt Al Noor",
+    src: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&q=80&auto=format&fit=crop",
+    ratio: "aspect-[4/3]",
+  },
+  {
+    id: "villas",
+    label: "Villas",
+    caption: "Private homes, Lisbon & Dubai",
+    src: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=80&auto=format&fit=crop",
+    ratio: "aspect-[3/4]",
+  },
+  {
+    id: "interiors",
+    label: "Interiors",
+    caption: "Living rooms designed in-house",
+    src: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=80&auto=format&fit=crop",
+    ratio: "aspect-[4/3]",
+  },
+  {
+    id: "amenities",
+    label: "Amenities",
+    caption: "Lobbies, pools, residents' lounges",
+    src: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=900&q=80&auto=format&fit=crop",
+    ratio: "aspect-[3/4]",
+  },
+  {
+    id: "courtyards",
+    label: "Courtyards",
+    caption: "Shaded outdoor living, every site",
+    src: "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1200&q=80&auto=format&fit=crop",
+    ratio: "aspect-[4/3]",
+  },
+];
+
+export default function Materials() {
+  return (
+    <section id="materials" className="px-6 py-28 lg:px-10 lg:py-40">
+      <div className="mx-auto max-w-[1440px]">
+        <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <Reveal as="div" className="mb-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
+              <span>(04) Property types</span>
+            </Reveal>
+            <SplitReveal
+              as="h2"
+              className="font-display text-[clamp(2rem,6vw,5.5rem)] leading-[1] tracking-tight"
+            >
+              Homes, towers,
+            </SplitReveal>
+            <SplitReveal
+              as="h2"
+              delay={0.1}
+              className="font-display text-[clamp(2rem,6vw,5.5rem)] leading-[1] tracking-tight text-[color:var(--muted)]"
+            >
+              and the rooms between.
+            </SplitReveal>
+          </div>
+          <Reveal as="p" delay={0.2} className="max-w-sm text-sm text-[color:var(--muted)]">
+            From a single villa to an 84-unit residential tower — we develop,
+            design and deliver each property end-to-end.
+          </Reveal>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+          {spaces.map((s, i) => (
+            <Reveal key={s.id} as="figure" delay={i * 0.06} className="group">
+              <div className={`relative ${s.ratio} overflow-hidden rounded-md bg-[color:var(--bg-alt)]`}>
+                <Image
+                  src={s.src}
+                  alt={s.caption}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105"
+                  style={{ filter: "sepia(0.18) saturate(0.9) brightness(0.92)" }}
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[color:var(--bg)]/80 via-[color:var(--bg)]/10 to-transparent" />
+                <div className="absolute inset-x-5 bottom-5 flex items-end justify-between">
+                  <span className="font-display text-2xl tracking-tight">{s.label}</span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+              </div>
+              <figcaption className="mt-3 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
+                {s.caption}
+              </figcaption>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal as="div" delay={0.2} className="mt-12 lg:mt-16">
+          <div className="relative aspect-[21/9] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
+            <Image
+              src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=2100&q=80&auto=format&fit=crop"
+              alt="Living room interior — Mira Residences"
+              fill
+              sizes="100vw"
+              className="object-cover"
+              style={{ filter: "sepia(0.2) saturate(0.9) brightness(0.85)" }}
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[color:var(--bg)]/85 via-[color:var(--bg)]/20 to-transparent" />
+            <div className="absolute inset-y-0 left-0 flex max-w-md flex-col justify-end p-8 lg:p-12">
+              <div className="mb-2 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
+                Inside / Mira Residences
+              </div>
+              <p className="font-display text-2xl leading-snug tracking-tight lg:text-3xl">
+                Every room sees daylight from two sides. That is not luxury — that is the brief.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}

@@ -1,0 +1,22 @@
+{
+  "buildCommand": "npm run build",
+  "installCommand": "npm ci",
+  "devCommand": "npm run dev",
+  "framework": "nextjs",
+  "env": {
+    "NEXT_PUBLIC_SANITY_PROJECT_ID": {
+      "description": "Your Sanity project ID"
+    },
+    "NEXT_PUBLIC_SANITY_DATASET": {
+      "description": "Your Sanity dataset name",
+      "default": "production"
+    },
+    "NEXT_PUBLIC_SANITY_API_VERSION": {
+      "description": "Sanity API version",
+      "default": "2024-05-25"
+    },
+    "SANITY_API_TOKEN": {
+      "description": "Sanity API token for server-side operations"
+    }
+  }
+}
