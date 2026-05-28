@@ -1,12 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #0d0c0a;
-  --bg-alt: #131210;
-  --fg: #f2ede4;
-  --muted: #8a8275;
-  --line: rgba(242, 237, 228, 0.08);
-  --accent: #c9a86a;
+  /* Warm dark palette inspired by vp.moscow luxury real estate aesthetic */
+  --bg: #0e0c08;
+  --bg-alt: #15110a;
+  --fg: #f3ece0;
+  --muted: #8a8170;
+  --line: rgba(243, 236, 224, 0.09);
+  /* Champagne / soft gold — matches the luxury accent used on the reference */
+  --accent: #c4a169;
+  --accent-soft: rgba(196, 161, 105, 0.18);
   --accent-2: #6e8a8c;
 }
 
@@ -14,8 +17,8 @@
   --color-background: var(--bg);
   --color-foreground: var(--fg);
   --font-sans: var(--font-sans-pri);
-  --font-mono: var(--font-mono-pri);
   --font-display: var(--font-display-pri);
+  --font-display-alt: var(--font-display-alt);
 }
 
 html {
@@ -40,13 +43,20 @@ body {
 .font-display {
   font-family: var(--font-display-pri), Georgia, "Times New Roman", serif;
   font-weight: 400;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
+}
+
+.font-display-alt {
+  font-family: var(--font-display-alt), Georgia, "Times New Roman", serif;
 }
 
 .font-mono {
-  font-family: var(--font-mono-pri), ui-monospace, monospace;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
 }
 
+/* ----------------------------------------------------------------------------
+   Marquee
+---------------------------------------------------------------------------- */
 @keyframes emarat-marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -66,4 +76,76 @@ body {
 
 html {
   scroll-behavior: auto;
+}
+
+/* ----------------------------------------------------------------------------
+   Link-hover circle (replicates vp.moscow's .link-hover effect)
+   A circular SVG stroke that draws on hover using stroke-dashoffset.
+---------------------------------------------------------------------------- */
+.link-hover {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  transition: color 0.4s ease;
+}
+
+.link-hover .link-hover__circle {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.link-hover .link-hover__circle rect {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.25;
+  rx: 9999px;
+  ry: 9999px;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: var(--len, 800);
+  stroke-dashoffset: var(--len, 800);
+  transition: stroke-dashoffset 0.85s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.link-hover:hover .link-hover__circle rect,
+.link-hover:focus-visible .link-hover__circle rect {
+  stroke-dashoffset: 0;
+}
+
+/* Variant: solid filled (still gets the circle stroke on hover, outside) */
+.link-hover--filled {
+  background: var(--accent);
+  color: var(--bg);
+}
+.link-hover--filled .link-hover__circle rect {
+  stroke: var(--fg);
+}
+
+/* ----------------------------------------------------------------------------
+   Tab fade transitions (Places section)
+---------------------------------------------------------------------------- */
+@keyframes places-fade-in {
+  0%   { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.places-fade {
+  animation: places-fade-in 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ----------------------------------------------------------------------------
+   Decorative deco circle (between places thumbnails)
+---------------------------------------------------------------------------- */
+.deco-circle {
+  display: inline-flex;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  opacity: 0.55;
 }

@@ -14,24 +14,24 @@ type Post = {
 const placeholders: Post[] = [
   {
     _id: "p1",
-    title: "How we think about residential value in 2026",
-    author: { name: "Market note" },
-    publishedAt: "2026-03-12",
-    mainImage: { asset: { url: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=900&q=80&auto=format&fit=crop" } },
+    title: "E11 at DLF Garden City: Why it is Gurugram's most anticipated launch",
+    author: { name: "Project Update" },
+    publishedAt: "2026-04-18",
+    mainImage: { asset: { url: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&q=80&auto=format&fit=crop" } },
   },
   {
     _id: "p2",
-    title: "Mira Residences breaks ground in Dubai South",
-    author: { name: "Project update" },
-    publishedAt: "2026-02-04",
-    mainImage: { asset: { url: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=900&q=80&auto=format&fit=crop" } },
+    title: "Investing in Gurugram real estate in 2026 — what the numbers say",
+    author: { name: "Market Note" },
+    publishedAt: "2026-03-07",
+    mainImage: { asset: { url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&q=80&auto=format&fit=crop" } },
   },
   {
     _id: "p3",
-    title: "What makes a home outlive its first owner",
-    author: { name: "Essay" },
-    publishedAt: "2026-01-21",
-    mainImage: { asset: { url: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=900&q=80&auto=format&fit=crop" } },
+    title: "Why DLF Garden City remains Sector 93's most sought-after address",
+    author: { name: "Feature" },
+    publishedAt: "2026-02-14",
+    mainImage: { asset: { url: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=900&q=80&auto=format&fit=crop" } },
   },
 ];
 
@@ -53,27 +53,29 @@ export default function News({ posts }: { posts: Post[] }) {
         <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
           <div>
             <Reveal as="div" className="mb-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-              <span>(05) Journal</span>
+              <span>(07) News & Insights</span>
             </Reveal>
             <SplitReveal
               as="h2"
               className="font-display text-[clamp(2rem,6vw,5.5rem)] leading-[1] tracking-tight"
             >
-              Notes from
+              Latest from
             </SplitReveal>
             <SplitReveal
               as="h2"
               delay={0.1}
               className="font-display text-[clamp(2rem,6vw,5.5rem)] leading-[1] tracking-tight text-[color:var(--muted)]"
             >
-              the drawing table.
+              Emarat Realty.
             </SplitReveal>
           </div>
-          <Reveal as="a" delay={0.2} className="group inline-flex items-center gap-3 self-end text-sm">
-            <span className="border-b border-[color:var(--line)] pb-1 transition-colors group-hover:border-[color:var(--fg)]">
-              All entries
-            </span>
-            <span aria-hidden>→</span>
+          <Reveal delay={0.2} className="self-end">
+            <a href="https://www.emaratrealty.com/" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-3 text-sm">
+              <span className="border-b border-[color:var(--line)] pb-1 transition-colors group-hover:border-[color:var(--fg)]">
+                All articles
+              </span>
+              <span aria-hidden>→</span>
+            </a>
           </Reveal>
         </div>
 
@@ -94,12 +96,12 @@ export default function News({ posts }: { posts: Post[] }) {
                       fill
                       sizes="(min-width: 768px) 33vw, 100vw"
                       className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
-                      style={{ filter: "sepia(0.18) saturate(0.9) brightness(0.92)" }}
+                      style={{ filter: "sepia(0.12) saturate(0.9) brightness(0.88)" }}
                     />
                   )}
                 </div>
                 <div className="flex items-center gap-3 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
-                  <span>{post.author?.name ?? "Studio"}</span>
+                  <span>{post.author?.name ?? "Emarat Realty"}</span>
                   <span>·</span>
                   <span>{formatDate(post.publishedAt)}</span>
                 </div>

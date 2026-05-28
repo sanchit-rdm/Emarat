@@ -1,6 +1,7 @@
 import Image from "next/image";
 import SplitReveal from "@/components/motion/SplitReveal";
 import Reveal from "@/components/motion/Reveal";
+import CircleButton from "@/components/CircleButton";
 
 export default function Hero() {
   return (
@@ -10,40 +11,40 @@ export default function Hero() {
     >
       <div className="pointer-events-none absolute inset-0 -z-20">
         <Image
-          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=2400&q=80&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=2400&q=80&auto=format&fit=crop"
           alt=""
           fill
           priority
           sizes="100vw"
           className="object-cover"
-          style={{ filter: "sepia(0.18) saturate(0.9) brightness(0.72) contrast(1.02)" }}
+          style={{ filter: "sepia(0.15) saturate(0.85) brightness(0.62) contrast(1.05)" }}
         />
       </div>
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-[color:var(--bg)]/25 via-[color:var(--bg)]/45 to-[color:var(--bg)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[color:var(--bg)]/30 via-[color:var(--bg)]/50 to-[color:var(--bg)]" />
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[color:var(--line)] to-transparent" />
-        <div className="absolute -left-40 top-1/3 h-[420px] w-[420px] rounded-full bg-[color:var(--accent)]/10 blur-[140px]" />
-        <div className="absolute -right-40 bottom-0 h-[520px] w-[520px] rounded-full bg-[color:var(--accent-2)]/10 blur-[180px]" />
+        <div className="absolute -left-40 top-1/3 h-[480px] w-[480px] rounded-full bg-[color:var(--accent)]/8 blur-[160px]" />
+        <div className="absolute -right-40 bottom-0 h-[560px] w-[560px] rounded-full bg-[color:var(--accent)]/6 blur-[200px]" />
       </div>
 
       <Reveal as="div" y={20} className="flex items-center gap-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
         <span className="inline-block h-1.5 w-1.5 rounded-full bg-[color:var(--accent)]" />
-        <span>Architecture & Property Development — Est. 2009</span>
+        <span>Luxury Real Estate — Gurugram, Haryana · Est. 2014</span>
       </Reveal>
 
       <div className="mt-24 max-w-6xl">
         <SplitReveal
           as="h1"
-          className="font-display text-[clamp(2.6rem,9vw,9.5rem)] leading-[0.95] tracking-[-0.025em]"
+          className="font-display text-[clamp(2.8rem,9.5vw,10rem)] leading-[0.93] tracking-[-0.025em]"
         >
-          Buildings that
+          Homes that define
         </SplitReveal>
         <SplitReveal
           as="h1"
           delay={0.1}
-          className="font-display text-[clamp(2.6rem,9vw,9.5rem)] leading-[0.95] tracking-[-0.025em] text-[color:var(--muted)]"
+          className="font-display text-[clamp(2.8rem,9.5vw,10rem)] leading-[0.93] tracking-[-0.025em] text-[color:var(--muted)]"
         >
-          outlive their decade.
+          how you live.
         </SplitReveal>
 
         <Reveal
@@ -51,20 +52,29 @@ export default function Hero() {
           delay={0.4}
           className="mt-10 max-w-xl text-base leading-relaxed text-[color:var(--muted)] lg:text-lg"
         >
-          We design, develop and deliver residential and mixed-use projects
-          where craft, climate and context matter more than fashion. A small
-          studio. Long horizons. One building at a time.
+          Emarat Realty is a distinguished leader in luxury real estate,
+          specialising in exquisite residences and high-end commercial spaces
+          built on quality, elegance and innovation.
+        </Reveal>
+
+        <Reveal as="div" delay={0.55} className="mt-10 flex flex-wrap items-center gap-4">
+          <CircleButton href="#projects" variant="filled">
+            Explore Projects
+          </CircleButton>
+          <CircleButton href="#contact" variant="outline">
+            Get in Touch
+          </CircleButton>
         </Reveal>
       </div>
 
       <Reveal
         as="div"
-        delay={0.6}
+        delay={0.7}
         className="mt-16 flex flex-wrap items-end justify-between gap-6 border-t border-[color:var(--line)] pt-8 text-xs uppercase tracking-[0.2em] text-[color:var(--muted)]"
       >
-        <span>Scroll</span>
-        <span className="hidden md:inline">A studio practice across MENA & Europe</span>
-        <span>2026 — Selected works</span>
+        <span>Scroll to explore</span>
+        <span className="hidden md:inline">DLF Garden City · Sector 93 · Gurugram</span>
+        <span>2026 — Selected Residences</span>
       </Reveal>
     </section>
   );

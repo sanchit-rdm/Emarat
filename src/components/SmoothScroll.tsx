@@ -10,10 +10,14 @@ export default function SmoothScroll({
   children: React.ReactNode;
 }) {
   useEffect(() => {
+    // Register ScrollTrigger before anything — even if reduced motion is on
+    const { gsap, ScrollTrigger } = ensureGsap();
+
+    // Prevent mobile viewport-resize from retriggering all scroll positions
+    ScrollTrigger.config({ ignoreMobileResize: true });
+
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return;
-
-    const { ScrollTrigger } = ensureGsap();
 
     const lenis = new Lenis({
       duration: 1.15,
@@ -23,17 +27,19 @@ export default function SmoothScroll({
       touchMultiplier: 1.2,
     });
 
-    lenis.on("scroll", () => ScrollTrigger.update());
+    // Pass the direct reference so Lenis notifies ScrollTrigger on every scroll tick
+    lenis.on("scroll", ScrollTrigger.update);
 
-    let rafId = 0;
-    const raf = (time: number) => {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    };
-    rafId = requestAnimationFrame(raf);
+    // GSAP ticker drives Lenis — the officially recommended integration.
+    // gsap.ticker time is in seconds; lenis.raf expects milliseconds.
+    const tickerFn = (time: number) => lenis.raf(time * 1000);
+    gsap.ticker.add(tickerFn);
+
+    // Prevent GSAP from throttling the ticker on slow CPUs / background tabs
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
-      cancelAnimationFrame(rafId);
+      gsap.ticker.remove(tickerFn);
       lenis.destroy();
     };
   }, []);

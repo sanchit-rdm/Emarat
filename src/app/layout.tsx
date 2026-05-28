@@ -1,28 +1,36 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Inter, Italiana, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 
-const geistSans = Geist({
+// Body — geometric sans, alternative to Euclid Square used on vp.moscow
+const inter = Inter({
   variable: "--font-sans-pri",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-mono-pri",
-  subsets: ["latin"],
-});
-
-const instrument = Instrument_Serif({
+// Display — high-contrast serif, free alternative to SangBleu Empire (vp.moscow)
+const italiana = Italiana({
   variable: "--font-display-pri",
   subsets: ["latin"],
   weight: "400",
+  display: "swap",
+});
+
+// Secondary display — softer companion serif for smaller headings & paragraphs
+const cormorant = Cormorant_Garamond({
+  variable: "--font-display-alt",
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Emarat Studio — Architecture & Property Development",
+  title: "Emarat Realty — Luxury Real Estate in Gurugram",
   description:
-    "An independent architecture and property development practice working in residential, mixed-use and adaptive reuse across MENA and Europe since 2009.",
+    "A distinguished leader in luxury real estate, specialising in exquisite residences and high-end commercial spaces at DLF Garden City, Sector 93, Gurugram.",
 };
 
 export default function RootLayout({
@@ -33,7 +41,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${instrument.variable} antialiased`}
+      className={`${inter.variable} ${italiana.variable} ${cormorant.variable} antialiased`}
     >
       <body className="min-h-screen">
         <SmoothScroll>{children}</SmoothScroll>

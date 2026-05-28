@@ -1,8 +1,10 @@
 import SiteNav from "@/components/SiteNav";
 import Hero from "@/components/sections/Hero";
 import StatsMarquee from "@/components/sections/StatsMarquee";
+import Gallery from "@/components/sections/Gallery";
 import Projects from "@/components/sections/Projects";
 import About from "@/components/sections/About";
+import Location from "@/components/sections/Location";
 import Approach from "@/components/sections/Approach";
 import Materials from "@/components/sections/Materials";
 import News from "@/components/sections/News";
@@ -19,8 +21,10 @@ export default async function Home() {
       <main>
         <Hero />
         <StatsMarquee />
+        <Gallery />
         <Projects />
         <About />
+        <Location />
         <Approach />
         <Materials />
         <News posts={posts} />
