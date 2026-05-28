@@ -1,12 +1,18 @@
+import Image from "next/image";
+import logo from "@/images/logo.png";
+
 export default function SiteFooter() {
   const year = new Date().getFullYear();
   return (
     <footer className="border-t border-[color:var(--line)] px-6 pb-10 pt-16 lg:px-10">
       <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-5">
-          <div className="font-display text-3xl tracking-tight lg:text-5xl">
-            Emarat<span className="text-[color:var(--accent)]"> Realty</span>
-          </div>
+          <Image
+            src={logo}
+            alt="Emarat Realty"
+            className="h-20 w-auto lg:h-24"
+            sizes="(min-width: 1024px) 280px, 220px"
+          />
           <p className="mt-6 max-w-md text-sm text-[color:var(--muted)]">
             A distinguished leader in luxury real estate, specialising in exquisite
             residences and high-end commercial spaces at DLF Garden City, Gurugram.

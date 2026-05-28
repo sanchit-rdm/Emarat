@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import CircleButton from "@/components/CircleButton";
+import logo from "@/images/logo.png";
 
 const links = [
   { href: "#projects", label: "Projects" },
@@ -32,11 +34,14 @@ export default function SiteNav() {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-6 lg:h-20 lg:px-10">
-        <a href="#top" className="flex items-center gap-2">
-          <span className="font-display text-lg tracking-tight">
-            <span className="font-medium">Emarat</span>
-            <span className="text-[color:var(--accent)]"> Realty</span>
-          </span>
+        <a href="#top" className="flex items-center" aria-label="Emarat Realty home">
+          <Image
+            src={logo}
+            alt="Emarat Realty"
+            priority
+            className="h-9 w-auto lg:h-11"
+            sizes="(min-width: 1024px) 140px, 110px"
+          />
         </a>
 
         <nav className="hidden gap-8 text-sm md:flex">
