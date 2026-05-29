@@ -83,7 +83,6 @@ export default function ProjectsPage() {
       <SiteNav />
       <main>
         <PageHero
-          eyebrow="(01) Our Projects"
           titleTop="Selected works"
           titleBottom="across Gurugram."
           subtitle="A portfolio of residential and commercial developments at DLF Garden City and Almeda — every Emarat project built on the same principles of quality, elegance and innovation."
@@ -191,9 +190,6 @@ export default function ProjectsPage() {
         {/* Additional offerings */}
         <section id="additional" className="border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-28 lg:px-10 lg:py-40">
           <div className="mx-auto max-w-[1440px]">
-            <Reveal as="div" className="mb-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-              <span>(02) Also Available</span>
-            </Reveal>
             <SplitReveal
               as="h2"
               className="font-display h-section"

@@ -52,7 +52,6 @@ export default function TeamPage() {
       <SiteNav />
       <main>
         <PageHero
-          eyebrow="(01) Our Team"
           titleTop="Leaders in innovation,"
           titleBottom="architects of change."
           subtitle="Emarat is driven by a team of visionary leaders, expert architects and dedicated professionals who share a passion for excellence — collaborating to create spaces that inspire and endure."
@@ -88,9 +87,6 @@ export default function TeamPage() {
           <div className="mx-auto max-w-[1440px]">
             <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
               <div>
-                <Reveal as="div" className="mb-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                  <span>(02) Leadership</span>
-                </Reveal>
                 <SplitReveal
                   as="h2"
                   className="font-display h-section"
@@ -147,9 +143,6 @@ export default function TeamPage() {
           <div className="pointer-events-none absolute -right-32 top-1/3 h-[480px] w-[480px] rounded-full bg-[color:var(--accent)]/10 blur-[200px]" />
           <div className="mx-auto grid max-w-[1280px] grid-cols-12 items-end gap-8">
             <div className="col-span-12 lg:col-span-8">
-              <Reveal as="div" className="mb-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                <span>(03) Join Us</span>
-              </Reveal>
               <SplitReveal
                 as="h2"
                 className="font-display h-section"

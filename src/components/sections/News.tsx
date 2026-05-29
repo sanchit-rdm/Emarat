@@ -52,9 +52,6 @@ export default function News({ posts }: { posts: Post[] }) {
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
           <div>
-            <Reveal as="div" className="mb-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-              <span>(07) News & Insights</span>
-            </Reveal>
             <SplitReveal
               as="h2"
               className="font-display h-section"

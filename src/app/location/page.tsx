@@ -17,7 +17,6 @@ export default function LocationPage() {
       <SiteNav />
       <main>
         <PageHero
-          eyebrow="(01) Location"
           titleTop="DLF Garden City,"
           titleBottom="Sector 93, Gurugram."
           subtitle="A township strategically placed in Gurugram's most coveted residential corridor — connected, serene, and designed for effortless urban living. Direct access to the Dwarka Expressway and minutes from Golf Course Extension Road."

@@ -3,7 +3,7 @@ import SplitReveal from "@/components/motion/SplitReveal";
 import Reveal from "@/components/motion/Reveal";
 
 type Props = {
-  eyebrow: string;
+  eyebrow?: string;
   titleTop: string;
   titleBottom?: string;
   subtitle?: string;
@@ -42,14 +42,17 @@ export default function PageHero({
         )}
       </div>
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-[color:var(--bg)]/55 via-[color:var(--bg)]/65 to-[color:var(--bg)]" />
+        <div className="absolute inset-0 bg-[color:var(--bg)]/50" />
         <div className="absolute -left-40 top-1/4 h-[420px] w-[420px] rounded-full bg-[color:var(--accent)]/8 blur-[160px]" />
       </div>
 
-      <Reveal as="div" y={20} className="flex items-center gap-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-        <span className="inline-block h-1.5 w-1.5 rounded-full bg-[color:var(--accent)]" />
-        <span>{eyebrow}</span>
-      </Reveal>
+      {eyebrow && (
+        <Reveal as="div" y={20} className="flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
+          <span className="inline-block h-px w-8 bg-[color:var(--brand-green)]" />
+          <span className="inline-block h-1.5 w-1.5 rounded-full bg-[color:var(--brand-green)]" />
+          <span>{eyebrow}</span>
+        </Reveal>
+      )}
 
       <div className="my-12 max-w-6xl lg:my-20">
         <SplitReveal

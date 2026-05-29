@@ -72,7 +72,7 @@ export default function SiteNav() {
               >
                 <button
                   type="button"
-                  className="flex items-center gap-1 text-[color:var(--muted)] transition-colors hover:text-[color:var(--fg)]"
+                  className="nav-link flex items-center gap-1 text-[color:var(--muted)] transition-colors hover:text-[color:var(--fg)]"
                   aria-expanded={openDropdown === item.label}
                 >
                   {item.label}
@@ -98,7 +98,7 @@ export default function SiteNav() {
               <Link
                 key={item.href}
                 href={item.href!}
-                className="text-[color:var(--muted)] transition-colors hover:text-[color:var(--fg)]"
+                className="nav-link text-[color:var(--muted)] transition-colors hover:text-[color:var(--fg)]"
               >
                 {item.label}
               </Link>

@@ -1,7 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  /* ----- Dark theme palette (default) ----- */
+  /* ----- Dark theme palette (default) -----
+     The bulk of the site is neutral near-black with gold accents. Green is a
+     deliberate ~25% presence: green text in light sections, the left rail, and
+     the green surfaces (`.theme-green`) used for select sections. */
   --bg: #0b110d;             /* very dark, faint green undertone */
   --bg-alt: #0f1611;
   --fg: #f5efe1;             /* warm cream */
@@ -9,18 +12,36 @@
   --line: rgba(245, 239, 225, 0.10);
 
   /* Emarat brand colors */
-  --accent: #E9B231;         /* primary brand gold */
+  --accent: #E9B231;         /* primary gold — accent text & decorative */
   --accent-2: #EDC149;       /* brighter highlight gold */
   --accent-soft: rgba(233, 178, 49, 0.18);
-  --brand-green: #01472E;    /* deep forest green — used sparingly */
+  --brand-green: #01472E;    /* deep forest green — primary brand colour */
   --brand-green-soft: rgba(1, 71, 46, 0.18);
+}
+
+/* ----------------------------------------------------------------------------
+   Green surface — deliberate brand-green sections. Cream text on green with
+   gold accents. Used as punctuation (stats band, footer, select sections) so
+   green reads as roughly a quarter of the site without dominating it.
+---------------------------------------------------------------------------- */
+.theme-green {
+  --bg: #01472E;             /* brand green */
+  --bg-alt: #013a26;         /* deeper green for elevation */
+  --fg: #f5efe1;             /* warm cream */
+  --muted: #c4bda3;          /* lightened so labels stay legible on green */
+  --line: rgba(245, 239, 225, 0.18);
+  --accent: #EDC149;         /* brighter gold pops against the green */
+  --accent-2: #E9B231;
+  --accent-soft: rgba(237, 193, 73, 0.18);
+  background: var(--bg);
+  color: var(--fg);
 }
 
 /* ----------------------------------------------------------------------------
    Light theme — applied per-section by wrapping in `.theme-light`.
    Redefines the same variables so every component reading them adapts
-   automatically. In light sections the practical accent becomes the brand
-   green (visible on cream), while gold becomes a decorative-only colour.
+   automatically. On cream surfaces the accent becomes the brand green, so
+   accent text in light sections reads green — green's text role lives here.
 ---------------------------------------------------------------------------- */
 .theme-light {
   --bg: #f4eedf;             /* warm cream */
@@ -28,7 +49,7 @@
   --fg: #0d1611;             /* deep ink, slight green undertone */
   --muted: #6b6356;
   --line: rgba(13, 22, 17, 0.10);
-  --accent: var(--brand-green);
+  --accent: var(--brand-green);   /* green — accent text on cream */
   --accent-2: #03613f;
   --accent-soft: rgba(1, 71, 46, 0.12);
   background: var(--bg);
@@ -107,6 +128,13 @@ body {
   font-size: clamp(2rem, 5vw, 4.5rem);
   line-height: 1.05;
   letter-spacing: -0.015em;
+}
+
+/* Headings on light (cream) sections read in brand green. Zero-specificity
+   selector so explicit text-colour utilities — the muted second lines, or any
+   accent override — still win over this default. */
+:where(.theme-light) :where(.h-page, .h-section, .h-sub) {
+  color: var(--brand-green);
 }
 
 /* ----------------------------------------------------------------------------
@@ -209,17 +237,101 @@ html {
 }
 
 /* ----------------------------------------------------------------------------
-   Brand green accent strip — used for the footer top border (sparing use)
+   Brand green accents — visible expressions of #01472E across the site
 ---------------------------------------------------------------------------- */
+
+/* Footer top strip — uses the per-section accent so it stays visible on the
+   green dark surface (gold) and reads green on cream light sections. */
 .brand-green-strip {
-  height: 2px;
+  height: 4px;
   background: linear-gradient(
     90deg,
-    transparent,
-    var(--brand-green) 20%,
-    var(--accent) 50%,
-    var(--brand-green) 80%,
-    transparent
+    transparent 0%,
+    var(--accent) 35%,
+    var(--accent-2) 50%,
+    var(--accent) 65%,
+    transparent 100%
   );
-  opacity: 0.85;
+}
+
+/* Fixed thin vertical rail on the far left of every page. A constant brand
+   signature in deep green — present without dominating. Hidden on mobile to
+   keep all the layout width for content. */
+.brand-rail {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  background: linear-gradient(
+    180deg,
+    var(--brand-green) 0%,
+    var(--brand-green) 70%,
+    var(--accent) 100%
+  );
+  z-index: 40;
+  pointer-events: none;
+}
+@media (max-width: 1023px) {
+  .brand-rail { display: none; }
+}
+
+/* Section eyebrow with a leading green dash — non-invasive: the dash is added
+   inside the first child element so the wrapper's grid/flex/block layout is
+   preserved exactly. Apply by adding `eyebrow` to any wrapper whose first
+   child is the eyebrow text span. */
+.eyebrow > :first-child::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5px;
+  background: var(--brand-green);
+  vertical-align: middle;
+  margin-right: 0.75rem;
+  margin-bottom: 2px;
+}
+/* On the green surface the dash would vanish — show it in the accent instead. */
+.theme-green .eyebrow > :first-child::before {
+  background: var(--accent);
+}
+.theme-light .eyebrow > :first-child::before {
+  opacity: 0.9;
+}
+
+/* Pill / badge styling for the "RERA · Argo Group" type small markers. */
+.brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--accent);
+  border-radius: 9999px;
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* Animated underline for nav links — draws in the section accent on hover. */
+.nav-link {
+  position: relative;
+  padding-bottom: 4px;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1.5px;
+  background: var(--accent);
+  transform-origin: right center;
+  transform: scaleX(0);
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform-origin: left center;
+  transform: scaleX(1);
 }

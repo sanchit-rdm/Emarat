@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { ensureGsap } from "@/lib/gsap";
+import { ensureGsap, scheduleScrollRefresh } from "@/lib/gsap";
 
 type Props = {
   children: string;
@@ -30,19 +30,26 @@ export default function SplitReveal({
     const ctx = gsap.context(() => {
       const words = el.querySelectorAll<HTMLSpanElement>("[data-word]");
       gsap.set(words, { yPercent: 110 });
-      gsap.to(words, {
-        yPercent: 0,
-        ease: "power4.out",
-        duration: 1.0,
-        stagger,
-        delay,
-        scrollTrigger: {
-          trigger: el,
-          start,
-          toggleActions: "play none none none",
-        },
-      });
+      const to = { yPercent: 0, ease: "power4.out", duration: 1.0, stagger, delay };
+      // In-view headings play immediately; see Reveal for why this avoids the
+      // cold-load font/measure race that left them stuck hidden until reload.
+      const inView = el.getBoundingClientRect().top < window.innerHeight * 0.95;
+      gsap.to(
+        words,
+        inView
+          ? to
+          : {
+              ...to,
+              scrollTrigger: {
+                trigger: el,
+                start,
+                toggleActions: "play none none none",
+              },
+            }
+      );
     }, el);
+
+    scheduleScrollRefresh();
 
     return () => ctx.revert();
   }, [start, stagger, delay]);

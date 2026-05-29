@@ -46,7 +46,6 @@ export default function AboutPage() {
       <SiteNav />
       <main>
         <PageHero
-          eyebrow="(01) About Emarat"
           titleTop="Redefining the standard"
           titleBottom="of luxury living."
           subtitle="At Emarat, we're passionate about creating exquisite spaces that elevate the art of living. Our mission is to redefine the standards of living — one breath-taking space at a time."
@@ -57,10 +56,6 @@ export default function AboutPage() {
         {/* Opening statement + highlights (light cream) */}
         <section className="theme-light px-6 py-28 lg:px-10 lg:py-40">
           <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
-            <Reveal as="div" className="col-span-12 mb-6 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)] lg:col-span-2 lg:mb-0">
-              <span>(02) The Vision</span>
-            </Reveal>
-
             <div className="col-span-12 lg:col-span-10">
               <SplitReveal
                 as="h2"
@@ -117,10 +112,6 @@ export default function AboutPage() {
           </div>
 
           <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
-            <Reveal as="div" className="col-span-12 mb-6 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)] lg:col-span-2 lg:mb-0">
-              <span>(03) Parent Group</span>
-            </Reveal>
-
             <div className="col-span-12 lg:col-span-7">
               <SplitReveal
                 as="h2"
@@ -186,9 +177,6 @@ export default function AboutPage() {
           <div className="mx-auto max-w-[1440px]">
             <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
               <div>
-                <Reveal as="div" className="mb-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                  <span>(04) In the Community</span>
-                </Reveal>
                 <SplitReveal
                   as="h2"
                   className="font-display h-section"
@@ -235,9 +223,6 @@ export default function AboutPage() {
 
           <div className="mx-auto grid max-w-[1440px] grid-cols-12 items-center gap-12">
             <div className="col-span-12 lg:col-span-7">
-              <Reveal as="div" className="mb-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                <span>(05) Leadership</span>
-              </Reveal>
               <SplitReveal
                 as="blockquote"
                 className="font-display h-sub"

@@ -66,9 +66,6 @@ export default function Gallery() {
       <div className="flex h-screen items-center overflow-hidden">
         {/* Floating heading — stays fixed while images scroll past */}
         <div className="pointer-events-none absolute left-6 top-1/2 z-10 -translate-y-1/2 lg:left-10">
-          <Reveal as="div" className="mb-3 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-            <span>(02) Design</span>
-          </Reveal>
           <SplitReveal
             as="h2"
             className="font-display h-sub"

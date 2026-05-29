@@ -39,7 +39,6 @@ export default function ContactPage() {
       <SiteNav />
       <main>
         <PageHero
-          eyebrow="(01) Get in Touch"
           titleTop="Speak to our"
           titleBottom="sales team."
           subtitle="Whether you're enquiring about a specific residence, planning a site visit, or simply exploring the right investment for your family — we're here to help."
@@ -78,9 +77,6 @@ export default function ContactPage() {
           <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8 lg:gap-16">
             {/* Form */}
             <div className="col-span-12 lg:col-span-7">
-              <Reveal as="div" className="mb-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                <span>(02) Request a Callback</span>
-              </Reveal>
               <SplitReveal
                 as="h2"
                 className="font-display h-section"
@@ -185,9 +181,6 @@ export default function ContactPage() {
 
             {/* Office card */}
             <div className="col-span-12 lg:col-span-5">
-              <Reveal as="div" className="mb-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                <span>(03) Visit Us</span>
-              </Reveal>
               <div className="rounded-md border border-[color:var(--line)] p-8 lg:p-10">
                 <div className="text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
                   Corporate Office
@@ -239,9 +232,6 @@ export default function ContactPage() {
         {/* Map */}
         <section className="px-6 pb-28 lg:px-10 lg:pb-40">
           <div className="mx-auto max-w-[1440px]">
-            <Reveal as="div" className="mb-6 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-              <span>(04) Find us on the map</span>
-            </Reveal>
             <div className="relative aspect-[21/9] overflow-hidden rounded-md border border-[color:var(--line)] bg-[color:var(--bg-alt)]">
               <iframe
                 title="Emarat Realty — Civil Lines, Gurugram"

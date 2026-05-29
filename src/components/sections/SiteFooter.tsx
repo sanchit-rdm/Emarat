@@ -5,8 +5,8 @@ import logo from "@/images/logo.png";
 export default function SiteFooter() {
   const year = new Date().getFullYear();
   return (
-    <footer className="relative px-6 pb-10 pt-16 lg:px-10">
-      {/* Brand accent strip — only place green appears prominently */}
+    <footer className="theme-green relative px-6 pb-10 pt-16 lg:px-10">
+      {/* Gold accent strip across the top of the green footer surface */}
       <div className="brand-green-strip absolute inset-x-0 top-0" aria-hidden />
       <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-4">

@@ -18,15 +18,11 @@ export default function Contact() {
           className="object-cover opacity-25"
           style={{ filter: "sepia(0.2) saturate(0.8) brightness(0.45) contrast(1.05)" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[color:var(--bg-alt)]/60 via-[color:var(--bg-alt)]/75 to-[color:var(--bg-alt)]" />
+        <div className="absolute inset-0 bg-[color:var(--bg-alt)]/50" />
       </div>
       <div className="pointer-events-none absolute -right-32 top-1/4 h-[440px] w-[440px] rounded-full bg-[color:var(--accent)]/12 blur-[200px]" />
 
       <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
-        <Reveal as="div" className="col-span-12 mb-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)] lg:col-span-2 lg:mb-0">
-          <span>(08) Get in Touch</span>
-        </Reveal>
-
         <div className="col-span-12 lg:col-span-10">
           <SplitReveal
             as="h2"

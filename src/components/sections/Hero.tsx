@@ -21,15 +21,19 @@ export default function Hero() {
         />
       </div>
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-[color:var(--bg)]/30 via-[color:var(--bg)]/50 to-[color:var(--bg)]" />
+        <div className="absolute inset-0 bg-[color:var(--bg)]/50" />
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[color:var(--line)] to-transparent" />
         <div className="absolute -left-40 top-1/3 h-[480px] w-[480px] rounded-full bg-[color:var(--accent)]/8 blur-[160px]" />
         <div className="absolute -right-40 bottom-0 h-[560px] w-[560px] rounded-full bg-[color:var(--accent)]/6 blur-[200px]" />
       </div>
 
-      <Reveal as="div" y={20} className="flex items-center gap-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-        <span className="inline-block h-1.5 w-1.5 rounded-full bg-[color:var(--accent)]" />
+      <Reveal as="div" y={20} className="flex flex-wrap items-center gap-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
+        <span className="inline-block h-1.5 w-1.5 rounded-full bg-[color:var(--brand-green)]" />
         <span>Luxury Real Estate — Gurugram, Haryana · Est. 2014</span>
+        <span className="brand-pill ml-auto">
+          <span className="inline-block h-1.5 w-1.5 rounded-full bg-[color:var(--accent)]" />
+          RERA Approved · An Argo Group Company
+        </span>
       </Reveal>
 
       <div className="mt-24 max-w-6xl">

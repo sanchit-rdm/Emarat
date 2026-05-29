@@ -73,7 +73,6 @@ export default function PropertiesPage() {
       <SiteNav />
       <main>
         <PageHero
-          eyebrow="(01) Property Types"
           titleTop="Homes, plots,"
           titleBottom="and the spaces between."
           subtitle="From a single freehold plot to a luxury duplex penthouse — every Emarat property is delivered with uncompromising attention to design, materials and the rooms in between."
@@ -84,9 +83,6 @@ export default function PropertiesPage() {
         {/* Unparalleled luxury features (light cream) */}
         <section className="theme-light px-6 py-24 lg:px-10 lg:py-32">
           <div className="mx-auto max-w-[1440px]">
-            <Reveal as="div" className="mb-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-              <span>(02) Unparalleled Luxury</span>
-            </Reveal>
             <SplitReveal
               as="h2"
               className="font-display h-section"
@@ -205,7 +201,7 @@ export default function PropertiesPage() {
               className="object-cover opacity-25"
               style={{ filter: "sepia(0.2) saturate(0.8) brightness(0.45) contrast(1.05)" }}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-[color:var(--bg)]/60 to-[color:var(--bg)]/85" />
+            <div className="absolute inset-0 bg-[color:var(--bg)]/50" />
           </div>
           <div className="mx-auto max-w-3xl text-center">
             <Reveal as="div" className="text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">

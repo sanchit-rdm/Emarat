@@ -44,6 +44,8 @@ export default function RootLayout({
       className={`${inter.variable} ${italiana.variable} ${cormorant.variable} antialiased`}
     >
       <body className="min-h-screen">
+        {/* Brand-green vertical rail — present on every page as a quiet brand signature */}
+        <div className="brand-rail" aria-hidden />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

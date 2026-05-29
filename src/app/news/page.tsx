@@ -86,7 +86,6 @@ export default async function NewsPage() {
       <SiteNav />
       <main>
         <PageHero
-          eyebrow="(01) News & Insights"
           titleTop="From Vision"
           titleBottom="to Value."
           subtitle="The Emarat perspective — project updates, market notes from Gurugram and longer feature articles about how we think about luxury real estate in 2026."
@@ -213,9 +212,6 @@ export default async function NewsPage() {
         <section className="border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-24 lg:px-10 lg:py-32">
           <div className="mx-auto grid max-w-[1280px] grid-cols-12 items-end gap-8">
             <div className="col-span-12 lg:col-span-7">
-              <Reveal as="div" className="mb-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                <span>(02) Newsletter</span>
-              </Reveal>
               <SplitReveal
                 as="h2"
                 className="font-display h-section"

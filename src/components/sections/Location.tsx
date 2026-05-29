@@ -68,14 +68,9 @@ export default function Location() {
           />
         ))}
       </div>
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-[color:var(--bg)]/55 via-[color:var(--bg)]/55 to-[color:var(--bg)]" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[color:var(--bg)]/50" />
 
       <div className="mx-auto max-w-[1440px]">
-        {/* Section label */}
-        <Reveal as="div" className="mb-8 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)] lg:mb-12">
-          <span>(04) Connectivity — DLF Garden City, Sector 93</span>
-        </Reveal>
-
         {/* Animated heading (changes per tab using a key prop to retrigger reveal) */}
         <div key={`heading-${active}`} className="places-fade">
           <h2 className="font-display h-page">

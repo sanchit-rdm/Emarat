@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { ensureGsap } from "@/lib/gsap";
-import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 
 const values = [
@@ -81,9 +80,6 @@ export default function Approach() {
       <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-4">
           <div className="lg:sticky lg:top-32">
-            <Reveal as="div" className="mb-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-              <span>(05) Our Values</span>
-            </Reveal>
             <SplitReveal
               as="h2"
               className="font-display h-section"

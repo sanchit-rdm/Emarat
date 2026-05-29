@@ -20,7 +20,6 @@ export default function DirectorsDeskPage() {
       <SiteNav />
       <main>
         <PageHero
-          eyebrow="(01) Director's Desk"
           titleTop="A message from"
           titleBottom="our Managing Director."
           subtitle="On vision, the work that drives us, and what it takes to build landmarks that define aspirations and enhance lifestyles for generations to come."
@@ -51,9 +50,6 @@ export default function DirectorsDeskPage() {
             </div>
 
             <div className="col-span-12 lg:col-span-7">
-              <Reveal as="div" className="mb-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                <span>(02) Leadership Message</span>
-              </Reveal>
               <SplitReveal
                 as="blockquote"
                 className="font-display h-sub"
@@ -105,10 +101,6 @@ export default function DirectorsDeskPage() {
         {/* Mission + Vision cards (light cream) */}
         <section className="theme-light px-6 py-28 lg:px-10 lg:py-40">
           <div className="mx-auto max-w-[1440px]">
-            <Reveal as="div" className="mb-12 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-              <span>(03) Mission & Vision</span>
-            </Reveal>
-
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
               <Reveal className="group relative overflow-hidden rounded-md border border-[color:var(--line)] p-8 transition-colors hover:border-[color:var(--accent)]/40 lg:p-12">
                 <div className="font-mono text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">

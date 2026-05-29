@@ -51,7 +51,6 @@ export default function CareersPage() {
       <SiteNav />
       <main>
         <PageHero
-          eyebrow="(01) Careers"
           titleTop="Build your career,"
           titleBottom="building landmarks."
           subtitle="At Emarat, we're always looking for passionate, innovative and driven individuals who want to shape the future of luxury living in Gurugram."
@@ -64,9 +63,6 @@ export default function CareersPage() {
           <div className="mx-auto max-w-[1440px]">
             <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
               <div>
-                <Reveal as="div" className="mb-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                  <span>(02) Why Emarat</span>
-                </Reveal>
                 <SplitReveal
                   as="h2"
                   className="font-display h-section"
@@ -120,10 +116,6 @@ export default function CareersPage() {
           </div>
 
           <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
-            <Reveal as="div" className="col-span-12 mb-6 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)] lg:col-span-2 lg:mb-0">
-              <span>(03) We hire in</span>
-            </Reveal>
-
             <div className="col-span-12 lg:col-span-10">
               <SplitReveal
                 as="h2"
@@ -162,9 +154,6 @@ export default function CareersPage() {
         <section className="px-6 py-28 lg:px-10 lg:py-40">
           <div className="mx-auto grid max-w-[1280px] grid-cols-12 items-end gap-8 lg:gap-16">
             <div className="col-span-12 lg:col-span-7">
-              <Reveal as="div" className="mb-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                <span>(04) How to Apply</span>
-              </Reveal>
               <SplitReveal
                 as="h2"
                 className="font-display h-section"

@@ -11,7 +11,11 @@ const items = [
 
 export default function StatsMarquee() {
   return (
-    <section className="border-y border-[color:var(--line)] bg-[color:var(--bg-alt)] py-10 lg:py-12">
+    <section className="theme-green relative border-y border-[color:var(--line)] bg-[color:var(--bg)] py-10 lg:py-12">
+      {/* Top + bottom hairline accents in the section accent (gold on green) */}
+      <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[color:var(--accent)] to-transparent" />
+      <span aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[color:var(--accent)] to-transparent" />
+
       <Marquee speed={50} className="font-display">
         {items.map((it) => (
           <div
@@ -22,7 +26,8 @@ export default function StatsMarquee() {
             <span className="text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
               {it.k}
             </span>
-            <span className="mx-8 text-[color:var(--brand-green)]/60">/</span>
+            {/* Divider in the section accent — gold on the green dark surface */}
+            <span className="mx-8 font-display text-2xl text-[color:var(--accent)] lg:text-3xl">/</span>
           </div>
         ))}
       </Marquee>

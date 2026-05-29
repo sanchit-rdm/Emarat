@@ -10,10 +10,6 @@ export default function About() {
       className="px-6 py-28 lg:px-10 lg:py-40"
     >
       <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
-        <Reveal as="div" className="col-span-12 mb-6 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)] lg:col-span-2 lg:mb-0">
-          <span>(03) About Us</span>
-        </Reveal>
-
         <div className="col-span-12 lg:col-span-7">
           <SplitReveal
             as="h2"
