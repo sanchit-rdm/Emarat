@@ -28,7 +28,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Emarat Realty — Luxury Real Estate in Gurugram",
+  title: "Emarat Realty Luxury Real Estate in Gurugram",
   description:
     "A distinguished leader in luxury real estate, specialising in exquisite residences and high-end commercial spaces at DLF Garden City, Sector 93, Gurugram.",
 };

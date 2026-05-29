@@ -32,7 +32,7 @@ export default function About() {
           >
             Emarat Realty specialises in exquisite residences and high-end
             commercial spaces across Gurugram. With over a decade of experience,
-            we deliver homes built on quality, elegance and innovation — where
+            we deliver homes built on quality, elegance and innovation where
             every detail reflects our unwavering commitment to excellence.
           </Reveal>
 
@@ -61,7 +61,7 @@ export default function About() {
           <Parallax speed={0.25} className="relative aspect-[3/4] overflow-hidden rounded-md">
             <Image
               src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=900&q=80&auto=format&fit=crop"
-              alt="Emarat Realty — Luxury Residence Interior"
+              alt="Emarat Realty Luxury Residence Interior"
               fill
               sizes="(min-width: 1024px) 25vw, 100vw"
               className="object-cover"
@@ -73,7 +73,7 @@ export default function About() {
             delay={0.2}
             className="mt-4 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]"
           >
-            C5 Residences — DLF Garden City, 2023
+            C5 Residences DLF Garden City, 2023
           </Reveal>
         </div>
       </div>

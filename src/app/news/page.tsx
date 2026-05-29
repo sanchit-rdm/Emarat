@@ -9,9 +9,9 @@ import CircleButton from "@/components/CircleButton";
 import { getAllPosts } from "@/lib/sanity.client";
 
 export const metadata: Metadata = {
-  title: "News & Insights — Emarat Realty",
+  title: "News & Insights Emarat Realty",
   description:
-    "From Vision to Value — project updates, market notes and feature articles from Emarat Realty in Gurugram.",
+    "From Vision to Value project updates, market notes and feature articles from Emarat Realty in Gurugram.",
 };
 
 type Post = {
@@ -35,7 +35,7 @@ const placeholders: Post[] = [
   },
   {
     _id: "p2",
-    title: "Investing in Gurugram real estate in 2026 — what the numbers actually say",
+    title: "Investing in Gurugram real estate in 2026 what the numbers actually say",
     author: { name: "Market Note" },
     publishedAt: "2026-03-07",
     excerpt: "Five years of price data from Sectors 92–94 reveal a more nuanced story than the headlines suggest.",
@@ -46,7 +46,7 @@ const placeholders: Post[] = [
     title: "Why DLF Garden City remains Sector 93's most sought-after address",
     author: { name: "Feature" },
     publishedAt: "2026-02-14",
-    excerpt: "A walking tour of the township — the architecture, the courtyards, the connectivity, and what comes next.",
+    excerpt: "A walking tour of the township the architecture, the courtyards, the connectivity, and what comes next.",
     mainImage: { asset: { url: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&q=80&auto=format&fit=crop" } },
   },
   {
@@ -54,7 +54,7 @@ const placeholders: Post[] = [
     title: "Inside the Dwarka Expressway: how Gurugram's most important road is being completed",
     author: { name: "Infrastructure" },
     publishedAt: "2026-01-22",
-    excerpt: "The signal-free corridor that will reshape NCR connectivity — and what it means for property values along Sector 93.",
+    excerpt: "The signal-free corridor that will reshape NCR connectivity and what it means for property values along Sector 93.",
     mainImage: { asset: { url: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80&auto=format&fit=crop" } },
   },
   {
@@ -62,7 +62,7 @@ const placeholders: Post[] = [
     title: "What a luxury home actually costs to build in 2026",
     author: { name: "Essay" },
     publishedAt: "2025-12-30",
-    excerpt: "Italian marble, German plumbing, Indian craftsmanship — a breakdown of where every rupee goes in a premium residence.",
+    excerpt: "Italian marble, German plumbing, Indian craftsmanship a breakdown of where every rupee goes in a premium residence.",
     mainImage: { asset: { url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80&auto=format&fit=crop" } },
   },
 ];
@@ -88,7 +88,7 @@ export default async function NewsPage() {
         <PageHero
           titleTop="From Vision"
           titleBottom="to Value."
-          subtitle="The Emarat perspective — project updates, market notes from Gurugram and longer feature articles about how we think about luxury real estate in 2026."
+          subtitle="The Emarat perspective project updates, market notes from Gurugram and longer feature articles about how we think about luxury real estate in 2026."
           bgImage="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=2400&q=80&auto=format&fit=crop"
           trailing="Updated monthly"
         />

@@ -9,9 +9,9 @@ const values = [
   {
     no: "I.",
     title: "Ethics",
-    body: "Every transaction is built on complete transparency. We believe that trust is the foundation of every lasting relationship — between developer, buyer, and community.",
+    body: "Every transaction is built on complete transparency. We believe that trust is the foundation of every lasting relationship between developer, buyer, and community.",
     img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80&auto=format&fit=crop",
-    alt: "Handshake — trust and integrity",
+    alt: "Handshake trust and integrity",
   },
   {
     no: "II.",
@@ -23,14 +23,14 @@ const values = [
   {
     no: "III.",
     title: "Efficiency",
-    body: "From design to delivery, we optimise every stage of development. On-time handovers, streamlined processes and client-centric service — no compromises.",
+    body: "From design to delivery, we optimise every stage of development. On-time handovers, streamlined processes and client-centric service no compromises.",
     img: "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=80&auto=format&fit=crop",
     alt: "Construction and development",
   },
   {
     no: "IV.",
     title: "Innovation",
-    body: "We integrate modern technology and sustainable development practices into every project — building homes that are as forward-thinking as the families who live in them.",
+    body: "We integrate modern technology and sustainable development practices into every project building homes that are as forward-thinking as the families who live in them.",
     img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80&auto=format&fit=crop",
     alt: "Modern residential architecture",
   },

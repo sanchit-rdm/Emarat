@@ -14,10 +14,10 @@ const corporate = [
 
 const projectLinks = [
   { href: "/projects", label: "All Projects" },
-  { href: "/projects#c2", label: "C2 — DLF Garden City" },
-  { href: "/projects#c5", label: "C5 — DLF Garden City" },
-  { href: "/projects#e11", label: "E11 — DLF Garden City" },
-  { href: "/projects#ea04", label: "EA 04 — Almeda" },
+  { href: "/projects#c2", label: "C2 DLF Garden City" },
+  { href: "/projects#c5", label: "C5 DLF Garden City" },
+  { href: "/projects#e11", label: "E11 DLF Garden City" },
+  { href: "/projects#ea04", label: "EA 04 Almeda" },
 ];
 
 const topLevel = [
@@ -50,7 +50,7 @@ export default function SiteNav() {
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-6 lg:h-20 lg:px-10">
+      <div className="mx-auto flex h-28 max-w-[1440px] items-center justify-between px-6 lg:px-10">
         <Link href="/" className="flex items-center" aria-label="Emarat Realty home">
           <Image
             src={logo}

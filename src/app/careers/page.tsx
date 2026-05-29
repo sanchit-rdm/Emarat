@@ -8,9 +8,9 @@ import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
 
 export const metadata: Metadata = {
-  title: "Careers — Emarat Realty",
+  title: "Careers Emarat Realty",
   description:
-    "Build a career with Emarat Realty — opportunities in architecture, engineering, sales, marketing and project management at our Gurugram office.",
+    "Build a career with Emarat Realty opportunities in architecture, engineering, sales, marketing and project management at our Gurugram office.",
 };
 
 const pillars = [
@@ -22,7 +22,7 @@ const pillars = [
   {
     n: "II.",
     title: "Innovation & Excellence",
-    body: "Be part of a team that pushes boundaries — from material innovation to construction technology, the curious thrive here.",
+    body: "Be part of a team that pushes boundaries from material innovation to construction technology, the curious thrive here.",
   },
   {
     n: "III.",
@@ -170,7 +170,7 @@ export default function CareersPage() {
 
               <Reveal as="p" delay={0.2} className="mt-8 max-w-xl text-base text-[color:var(--muted)] lg:text-lg">
                 Email your résumé and a short note about what you&apos;d like to work on
-                — we&apos;ll get back to you within five business days if there&apos;s a fit.
+                we&apos;ll get back to you within five business days if there&apos;s a fit.
               </Reveal>
             </div>
 

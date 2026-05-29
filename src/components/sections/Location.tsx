@@ -17,7 +17,7 @@ const places = [
     minutes: 5,
     name: "Dwarka Expressway",
     heading: ["Dwarka", "Expressway"],
-    body: "Direct, signal-free access to NH-248BB — connecting Gurugram to Delhi in minutes. The most important infrastructure corridor of the NCR.",
+    body: "Direct, signal-free access to NH-248BB connecting Gurugram to Delhi in minutes. The most important infrastructure corridor of the NCR.",
     thumb: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80&auto=format&fit=crop",
     bg: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=2400&q=80&auto=format&fit=crop",
   },
@@ -26,7 +26,7 @@ const places = [
     minutes: 8,
     name: "Golf Course Extension",
     heading: ["Golf Course", "Extension Road"],
-    body: "The premium business address of Gurugram — fine dining, retail and Grade-A offices, all within an eight-minute drive of your home.",
+    body: "The premium business address of Gurugram\nfine dining, retail and Grade-A offices,\nall within an eight-minute drive of your home.",
     thumb: "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=600&q=80&auto=format&fit=crop",
     bg: "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=2400&q=80&auto=format&fit=crop",
   },
@@ -35,7 +35,7 @@ const places = [
     minutes: 35,
     name: "IGI Airport",
     heading: ["Indira Gandhi", "Airport"],
-    body: "International connectivity in thirty-five minutes — Asia's seventh busiest airport, accessible via the Dwarka Expressway with zero traffic signals.",
+    body: "International connectivity in thirty-five minutes Asia's seventh busiest airport, accessible via the Dwarka Expressway with zero traffic signals.",
     thumb: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&q=80&auto=format&fit=crop",
     bg: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=2400&q=80&auto=format&fit=crop",
   },
@@ -84,7 +84,7 @@ export default function Location() {
         {/* Description */}
         <div
           key={`body-${active}`}
-          className="places-fade mt-8 max-w-xl text-base leading-relaxed text-[color:var(--fg)]/80 lg:text-lg"
+          className="places-fade mt-8 max-w-xl whitespace-pre-line text-base leading-relaxed text-[color:var(--fg)]/80 lg:text-lg"
         >
           {current.body}
         </div>
@@ -153,7 +153,7 @@ export default function Location() {
         {/* Hint */}
         <Reveal delay={0.2} className="mt-12 flex items-center gap-3 border-t border-[color:var(--line)] pt-6 text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
           <span className="inline-block h-1 w-1 rounded-full bg-[color:var(--accent)]" />
-          <span>Hover or tap a landmark — the view changes</span>
+          <span>Hover or tap a landmark the view changes</span>
         </Reveal>
       </div>
     </section>

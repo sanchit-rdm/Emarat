@@ -10,9 +10,9 @@ import Parallax from "@/components/motion/Parallax";
 import CircleButton from "@/components/CircleButton";
 
 export const metadata: Metadata = {
-  title: "About — Emarat Realty",
+  title: "About Emarat Realty",
   description:
-    "Emarat — an Argo Group company redefining luxury living in Gurugram. Vision, mission, and a 15-year legacy across real estate, hospitality, manufacturing and trading.",
+    "Emarat an Argo Group company redefining luxury living in Gurugram. Vision, mission, and a 15-year legacy across real estate, hospitality, manufacturing and trading.",
 };
 
 const highlights = [
@@ -32,7 +32,7 @@ const argoIndustries = [
 const communityInitiatives = [
   {
     name: "Rukmani Devi Ji Charitable Trust",
-    body: "Education and healthcare programmes serving the underprivileged in Haryana — supporting schools, scholarships and free medical care.",
+    body: "Education and healthcare programmes serving the underprivileged in Haryana supporting schools, scholarships and free medical care.",
   },
   {
     name: "Anmol Ratan",
@@ -48,7 +48,7 @@ export default function AboutPage() {
         <PageHero
           titleTop="Redefining the standard"
           titleBottom="of luxury living."
-          subtitle="At Emarat, we're passionate about creating exquisite spaces that elevate the art of living. Our mission is to redefine the standards of living — one breath-taking space at a time."
+          subtitle="At Emarat, we're passionate about creating exquisite spaces that elevate the art of living. Our mission is to redefine the standards of living one breath-taking space at a time."
           bgImage="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=2400&q=80&auto=format&fit=crop"
           trailing="An Argo Group company"
         />
@@ -73,7 +73,7 @@ export default function AboutPage() {
 
               <Reveal as="p" delay={0.2} className="mt-10 max-w-2xl text-base leading-relaxed text-[color:var(--muted)] lg:text-lg">
                 With a vision to transform the luxury real estate landscape, Argo Group
-                presents Emarat — a testament to opulence and sophistication. Our goal
+                presents Emarat a testament to opulence and sophistication. Our goal
                 is to craft spaces that inspire, delight, and leave a lasting impression.
               </Reveal>
 
@@ -117,7 +117,7 @@ export default function AboutPage() {
                 as="h2"
                 className="font-display h-section"
               >
-                Argo Group —
+                Argo Group
               </SplitReveal>
               <SplitReveal
                 as="h2"
@@ -129,7 +129,7 @@ export default function AboutPage() {
 
               <Reveal as="p" delay={0.2} className="mt-10 max-w-xl text-base leading-relaxed text-[color:var(--muted)] lg:text-lg">
                 For over fifteen years, Argo Group has been a driving force across
-                industries — shaping businesses with vision, integrity, and excellence.
+                industries shaping businesses with vision, integrity, and excellence.
                 Emarat&apos;s luxurious developments, rooted in innovation and meticulous
                 planning, align seamlessly with the Group&apos;s vision of redefining
                 modern real estate.

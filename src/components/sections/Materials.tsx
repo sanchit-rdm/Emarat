@@ -7,35 +7,35 @@ const propertyTypes = [
   {
     id: "apartments",
     label: "Luxury Apartments",
-    caption: "3 & 4 BHK — C2, C5, E11 at DLF Garden City",
+    caption: "3 & 4 BHK C2, C5, E11 at DLF Garden City",
     src: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&q=80&auto=format&fit=crop",
     ratio: "aspect-[3/4]",
   },
   {
     id: "penthouses",
     label: "Penthouses",
-    caption: "Top-floor residences — DLF Garden City",
+    caption: "Top-floor residences DLF Garden City",
     src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80&auto=format&fit=crop",
     ratio: "aspect-[4/3]",
   },
   {
     id: "plots",
     label: "Residential Plots",
-    caption: "Freehold plots — Sector 93, Gurugram",
+    caption: "Freehold plots Sector 93, Gurugram",
     src: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=80&auto=format&fit=crop",
     ratio: "aspect-[3/4]",
   },
   {
     id: "floors",
     label: "Independent Floors",
-    caption: "Builder floors — Phase 3, DLF",
+    caption: "Builder floors Phase 3, DLF",
     src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80&auto=format&fit=crop",
     ratio: "aspect-[4/3]",
   },
   {
     id: "commercial",
     label: "Commercial",
-    caption: "High-end retail & offices — EA 04 at Almeda",
+    caption: "High-end retail & offices EA 04 at Almeda",
     src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&q=80&auto=format&fit=crop",
     ratio: "aspect-[3/4]",
   },
@@ -69,7 +69,7 @@ export default function Materials() {
             </SplitReveal>
           </div>
           <Reveal as="p" delay={0.2} className="max-w-sm text-sm text-[color:var(--muted)]">
-            From a single plot to a luxury penthouse — we source, develop and
+            From a single plot to a luxury penthouse we source, develop and
             deliver every property with uncompromising attention to quality.
           </Reveal>
         </div>
@@ -115,7 +115,7 @@ export default function Materials() {
           <div className="relative aspect-[21/9] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
             <Image
               src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=2100&q=80&auto=format&fit=crop"
-              alt="Luxury living room — DLF Garden City"
+              alt="Luxury living room DLF Garden City"
               fill
               sizes="100vw"
               className="object-cover"
@@ -127,7 +127,7 @@ export default function Materials() {
                 Inside / C5 Residences
               </div>
               <p className="font-display text-2xl leading-snug tracking-tight lg:text-3xl">
-                Every room designed for the way you actually live. That is not a promise — that is the brief.
+                Every room designed for the way you actually live. That is not a promise that is the brief.
               </p>
             </div>
           </div>

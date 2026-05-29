@@ -8,9 +8,9 @@ import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
 
 export const metadata: Metadata = {
-  title: "Properties — Emarat Realty",
+  title: "Properties Emarat Realty",
   description:
-    "Property types by Emarat Realty — luxury apartments, penthouses, residential plots, independent floors and high-end commercial spaces in Gurugram.",
+    "Property types by Emarat Realty luxury apartments, penthouses, residential plots, independent floors and high-end commercial spaces in Gurugram.",
 };
 
 const types = [
@@ -20,7 +20,7 @@ const types = [
     blurb: "Three and four-bedroom residences with double-height lobbies, landscaped courtyards and curated amenities.",
     config: "3 & 4 BHK",
     size: "1,850 – 2,800 sq.ft.",
-    where: "C2, C5, E11 — DLF Garden City",
+    where: "C2, C5, E11 DLF Garden City",
     img: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1800&q=80&auto=format&fit=crop",
   },
   {
@@ -29,13 +29,13 @@ const types = [
     blurb: "Top-floor duplexes with private terraces, double-height living spaces, panoramic skyline views and dedicated valet entrances.",
     config: "Duplex 4–5 BHK",
     size: "3,800 – 5,200 sq.ft.",
-    where: "E11 — DLF Garden City",
+    where: "E11 DLF Garden City",
     img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=80&auto=format&fit=crop",
   },
   {
     id: "plots",
     label: "Residential Plots",
-    blurb: "Freehold residential plots in the heart of DLF Garden City — design and build your own home in Gurugram's most coveted address.",
+    blurb: "Freehold residential plots in the heart of DLF Garden City design and build your own home in Gurugram's most coveted address.",
     config: "Freehold land",
     size: "240 – 500 sq. yards",
     where: "Sector 93, Gurugram",
@@ -53,18 +53,18 @@ const types = [
   {
     id: "commercial",
     label: "Commercial & Retail",
-    blurb: "Grade-A office suites and high-end retail spaces in Gurugram's premium business corridors — ideal for boutique brands and forward-thinking firms.",
+    blurb: "Grade-A office suites and high-end retail spaces in Gurugram's premium business corridors ideal for boutique brands and forward-thinking firms.",
     config: "Suites & Retail Units",
     size: "From 500 sq.ft.",
-    where: "EA 04 — Almeda",
+    where: "EA 04 Almeda",
     img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1800&q=80&auto=format&fit=crop",
   },
 ];
 
 const features = [
   ["Opulent Interiors", "Italian marble, brass detailing and curated palettes selected for permanence."],
-  ["Bespoke Amenities", "Concierge, club, pools, landscaped gardens — every residence is supported by world-class facilities."],
-  ["Exquisite Details", "From the placement of a window to the door handle in your hand — every detail considered."],
+  ["Bespoke Amenities", "Concierge, club, pools, landscaped gardens every residence is supported by world-class facilities."],
+  ["Exquisite Details", "From the placement of a window to the door handle in your hand every detail considered."],
 ];
 
 export default function PropertiesPage() {
@@ -75,7 +75,7 @@ export default function PropertiesPage() {
         <PageHero
           titleTop="Homes, plots,"
           titleBottom="and the spaces between."
-          subtitle="From a single freehold plot to a luxury duplex penthouse — every Emarat property is delivered with uncompromising attention to design, materials and the rooms in between."
+          subtitle="From a single freehold plot to a luxury duplex penthouse every Emarat property is delivered with uncompromising attention to design, materials and the rooms in between."
           bgImage="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=2400&q=80&auto=format&fit=crop"
           trailing="Five property categories"
         />
@@ -176,7 +176,7 @@ export default function PropertiesPage() {
                   </div>
 
                   <Reveal delay={0.35} className="mt-6 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
-                    Available at — <span className="text-[color:var(--fg)]">{t.where}</span>
+                    Available at <span className="text-[color:var(--fg)]">{t.where}</span>
                   </Reveal>
 
                   <Reveal delay={0.4} className="mt-8">
@@ -218,7 +218,7 @@ export default function PropertiesPage() {
               delay={0.1}
               className="font-display h-sub text-[color:var(--muted)]"
             >
-              That is not luxury — that is the brief.
+              That is not luxury that is the brief.
             </SplitReveal>
           </div>
         </section>

@@ -22,7 +22,7 @@ export default function SiteFooter() {
           </p>
           <p className="mt-4 max-w-md text-xs leading-relaxed text-[color:var(--muted)]/70">
             Emarat Realty, 2nd Floor, Sector-15,<br />
-            Civil Lines, Gurugram (Haryana) — 122001
+            Civil Lines, Gurugram (Haryana) 122001
           </p>
         </div>
 
@@ -79,7 +79,7 @@ export default function SiteFooter() {
             info@emaratrealty.com
           </a>
           <p className="mt-3 text-xs text-[color:var(--muted)]">
-            Mon — Fri · 9am – 6pm
+            Mon Fri · 9am – 6pm
           </p>
           <div className="mt-6 flex flex-wrap gap-3 text-xs uppercase tracking-[0.16em] text-[color:var(--muted)]">
             <a href="https://www.linkedin.com/company/emarat-realty/" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-[color:var(--fg)]">LinkedIn</a>

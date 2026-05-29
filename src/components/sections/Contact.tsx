@@ -135,7 +135,7 @@ export default function Contact() {
                 Emarat Realty<br />
                 2nd Floor, Sector-15<br />
                 Civil Lines, Gurugram<br />
-                Haryana — 122001
+                Haryana 122001
               </p>
             </Reveal>
           </div>

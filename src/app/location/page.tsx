@@ -6,9 +6,9 @@ import Location from "@/components/sections/Location";
 import Gallery from "@/components/sections/Gallery";
 
 export const metadata: Metadata = {
-  title: "Location — Emarat Realty",
+  title: "Location Emarat Realty",
   description:
-    "DLF Garden City, Sector 93, Gurugram — the most coveted residential corridor in the NCR. Connected to Dwarka Expressway, Golf Course Road and IGI Airport.",
+    "DLF Garden City, Sector 93, Gurugram the most coveted residential corridor in the NCR. Connected to Dwarka Expressway, Golf Course Road and IGI Airport.",
 };
 
 export default function LocationPage() {
@@ -19,7 +19,7 @@ export default function LocationPage() {
         <PageHero
           titleTop="DLF Garden City,"
           titleBottom="Sector 93, Gurugram."
-          subtitle="A township strategically placed in Gurugram's most coveted residential corridor — connected, serene, and designed for effortless urban living. Direct access to the Dwarka Expressway and minutes from Golf Course Extension Road."
+          subtitle="A township strategically placed in Gurugram's most coveted residential corridor connected, serene, and designed for effortless urban living. Direct access to the Dwarka Expressway and minutes from Golf Course Extension Road."
           bgImage="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=2400&q=80&auto=format&fit=crop"
           trailing="5 min Dwarka Expressway · 35 min IGI"
         />

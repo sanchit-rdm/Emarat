@@ -9,9 +9,9 @@ import Parallax from "@/components/motion/Parallax";
 import CircleButton from "@/components/CircleButton";
 
 export const metadata: Metadata = {
-  title: "Director's Desk — Emarat Realty",
+  title: "Director's Desk Emarat Realty",
   description:
-    "A message from Dr. Raahul Goel, Managing Director at Emarat Realty — on quality, innovation, and building landmarks that define aspirations.",
+    "A message from Dr. Raahul Goel, Managing Director at Emarat Realty on quality, innovation, and building landmarks that define aspirations.",
 };
 
 export default function DirectorsDeskPage() {
@@ -54,7 +54,7 @@ export default function DirectorsDeskPage() {
                 as="blockquote"
                 className="font-display h-sub"
               >
-                We don&apos;t just build structures —
+                We don&apos;t just build structures
               </SplitReveal>
               <SplitReveal
                 as="blockquote"
@@ -79,20 +79,20 @@ export default function DirectorsDeskPage() {
             </Reveal>
 
             <Reveal as="p" delay={0.1} className="mt-8 font-display-alt text-xl leading-[1.7] text-[color:var(--fg)]/85 lg:text-2xl">
-              Each development is a reflection of our excellence vision — where
+              Each development is a reflection of our excellence vision where
               architecture meets functionality and luxury integrates seamlessly with
               sustainability. From the placement of a window to the choice of every
               material, decisions are taken with care, with the long view in mind.
             </Reveal>
 
             <Reveal as="p" delay={0.2} className="mt-8 font-display-alt text-xl leading-[1.7] text-[color:var(--fg)]/85 lg:text-2xl">
-              We welcome you to be a part of Emarat&apos;s journey — where vision meets
+              We welcome you to be a part of Emarat&apos;s journey where vision meets
               reality, and excellence is built to last.
             </Reveal>
 
             <Reveal delay={0.3} className="mt-12 flex items-center gap-4 border-t border-[color:var(--line)] pt-8">
               <div className="font-display text-2xl tracking-tight text-[color:var(--accent)]">
-                — Dr. Raahul Goel
+                Dr. Raahul Goel
               </div>
             </Reveal>
           </div>
@@ -113,7 +113,7 @@ export default function DirectorsDeskPage() {
                   To develop transformative real estate that establishes new standards
                   of quality and sustainability. We prioritise exceptional spaces that
                   foster growth, elevated lifestyles, and meaningful contributions to
-                  urban life — through innovation and a customer-centric approach in
+                  urban life through innovation and a customer-centric approach in
                   everything we do.
                 </p>
               </Reveal>

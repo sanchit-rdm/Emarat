@@ -29,7 +29,7 @@ export default function Hero() {
 
       <Reveal as="div" y={20} className="flex flex-wrap items-center gap-4 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
         <span className="inline-block h-1.5 w-1.5 rounded-full bg-[color:var(--brand-green)]" />
-        <span>Luxury Real Estate — Gurugram, Haryana · Est. 2014</span>
+        <span>Luxury Real Estate Gurugram, Haryana · Est. 2014</span>
         <span className="brand-pill ml-auto">
           <span className="inline-block h-1.5 w-1.5 rounded-full bg-[color:var(--accent)]" />
           RERA Approved · An Argo Group Company
@@ -78,7 +78,7 @@ export default function Hero() {
       >
         <span>Scroll to explore</span>
         <span className="hidden md:inline">DLF Garden City · Sector 93 · Gurugram</span>
-        <span>2026 — Selected Residences</span>
+        <span>2026 Selected Residences</span>
       </Reveal>
     </section>
   );

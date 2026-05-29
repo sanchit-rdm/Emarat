@@ -9,23 +9,23 @@ import Reveal from "@/components/motion/Reveal";
 const images = [
   {
     src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1800&q=80&auto=format&fit=crop",
-    label: "DLF Garden City — Street Elevation",
+    label: "DLF Garden City Street Elevation",
   },
   {
     src: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1800&q=80&auto=format&fit=crop",
-    label: "C5 Residences — Grand Living Hall",
+    label: "C5 Residences Grand Living Hall",
   },
   {
     src: "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1800&q=80&auto=format&fit=crop",
-    label: "Garden City — Landscaped Courtyard",
+    label: "Garden City Landscaped Courtyard",
   },
   {
     src: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1800&q=80&auto=format&fit=crop",
-    label: "E11 — Master Bedroom Suite",
+    label: "E11 Master Bedroom Suite",
   },
   {
     src: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1800&q=80&auto=format&fit=crop",
-    label: "Almeda — Reception Lobby",
+    label: "Almeda Reception Lobby",
   },
 ];
 
@@ -87,7 +87,7 @@ export default function Gallery() {
           </Reveal>
           <Reveal delay={0.35} className="mt-6">
             <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--accent)]">
-              01 — {String(images.length).padStart(2, "0")}
+              01 {String(images.length).padStart(2, "0")}
             </span>
           </Reveal>
         </div>

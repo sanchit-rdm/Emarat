@@ -8,9 +8,9 @@ import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
 
 export const metadata: Metadata = {
-  title: "Projects — Emarat Realty",
+  title: "Projects Emarat Realty",
   description:
-    "Selected projects by Emarat Realty — C2, C5 and E11 at DLF Garden City; EA 04 at Almeda; plots and independent floors across Gurugram, Haryana.",
+    "Selected projects by Emarat Realty C2, C5 and E11 at DLF Garden City; EA 04 at Almeda; plots and independent floors across Gurugram, Haryana.",
 };
 
 const projects = [
@@ -47,7 +47,7 @@ const projects = [
     config: "Luxury Flats & Penthouses",
     size: "2,400 – 5,200 sq.ft.",
     img: "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1800&q=80&auto=format&fit=crop",
-    body: "The most anticipated launch in DLF Garden City — featuring duplex penthouses with private terraces, sky lounges and double-height living spaces.",
+    body: "The most anticipated launch in DLF Garden City featuring duplex penthouses with private terraces, sky lounges and double-height living spaces.",
     highlights: ["Duplex penthouses", "Private terraces", "Sky lounge", "Concierge & valet"],
   },
   {
@@ -59,7 +59,7 @@ const projects = [
     config: "Commercial & Retail Spaces",
     size: "Suites from 500 sq.ft.",
     img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1800&q=80&auto=format&fit=crop",
-    body: "High-end retail and Grade-A office spaces at Almeda — designed for boutique brands, restaurants and forward-thinking firms looking for a premium business address.",
+    body: "High-end retail and Grade-A office spaces at Almeda designed for boutique brands, restaurants and forward-thinking firms looking for a premium business address.",
     highlights: ["Grade-A specifications", "Triple-height retail", "Dedicated visitor parking", "F&B-ready services"],
   },
 ];
@@ -85,7 +85,7 @@ export default function ProjectsPage() {
         <PageHero
           titleTop="Selected works"
           titleBottom="across Gurugram."
-          subtitle="A portfolio of residential and commercial developments at DLF Garden City and Almeda — every Emarat project built on the same principles of quality, elegance and innovation."
+          subtitle="A portfolio of residential and commercial developments at DLF Garden City and Almeda every Emarat project built on the same principles of quality, elegance and innovation."
           bgImage="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=2400&q=80&auto=format&fit=crop"
           trailing="Six developments · 500+ residences"
         />

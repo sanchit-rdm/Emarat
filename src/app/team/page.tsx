@@ -8,9 +8,9 @@ import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
 
 export const metadata: Metadata = {
-  title: "Our Team — Emarat Realty",
+  title: "Our Team Emarat Realty",
   description:
-    "Meet the Emarat Realty leadership — visionary leaders, expert architects and dedicated professionals collaborating to create spaces that inspire and endure.",
+    "Meet the Emarat Realty leadership visionary leaders, expert architects and dedicated professionals collaborating to create spaces that inspire and endure.",
 };
 
 const team = [
@@ -24,7 +24,7 @@ const team = [
     name: "Head of Architecture",
     role: "Architecture Lead",
     img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=900&q=80&auto=format&fit=crop",
-    bio: "Leads design and planning across every Emarat development — from massing studies to material specification.",
+    bio: "Leads design and planning across every Emarat development from massing studies to material specification.",
   },
   {
     name: "Head of Sales",
@@ -42,7 +42,7 @@ const team = [
 
 const values = [
   { label: "Integrity", body: "Every transaction. Every promise. Every time." },
-  { label: "Quality", body: "From first sketch to final handover — no compromises." },
+  { label: "Quality", body: "From first sketch to final handover no compromises." },
   { label: "Customer-first", body: "The people we build for shape every decision." },
 ];
 
@@ -54,7 +54,7 @@ export default function TeamPage() {
         <PageHero
           titleTop="Leaders in innovation,"
           titleBottom="architects of change."
-          subtitle="Emarat is driven by a team of visionary leaders, expert architects and dedicated professionals who share a passion for excellence — collaborating to create spaces that inspire and endure."
+          subtitle="Emarat is driven by a team of visionary leaders, expert architects and dedicated professionals who share a passion for excellence collaborating to create spaces that inspire and endure."
           bgImage="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=2400&q=80&auto=format&fit=crop"
           trailing="A small team. Long horizons."
         />
@@ -102,7 +102,7 @@ export default function TeamPage() {
                 </SplitReveal>
               </div>
               <Reveal as="p" delay={0.2} className="max-w-sm text-sm text-[color:var(--muted)]">
-                Decisions are made by the same people who sign the drawings — that&apos;s
+                Decisions are made by the same people who sign the drawings that&apos;s
                 how we keep quality consistent across every Emarat residence.
               </Reveal>
             </div>

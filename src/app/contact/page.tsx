@@ -7,9 +7,9 @@ import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
 
 export const metadata: Metadata = {
-  title: "Contact — Emarat Realty",
+  title: "Contact Emarat Realty",
   description:
-    "Speak to the Emarat Realty team — 2nd Floor, Sector-15, Civil Lines, Gurugram. Call +91 84509 84509 or email info@emaratrealty.com.",
+    "Speak to the Emarat Realty team 2nd Floor, Sector-15, Civil Lines, Gurugram. Call +91 84509 84509 or email info@emaratrealty.com.",
 };
 
 const contactMethods = [
@@ -41,7 +41,7 @@ export default function ContactPage() {
         <PageHero
           titleTop="Speak to our"
           titleBottom="sales team."
-          subtitle="Whether you're enquiring about a specific residence, planning a site visit, or simply exploring the right investment for your family — we're here to help."
+          subtitle="Whether you're enquiring about a specific residence, planning a site visit, or simply exploring the right investment for your family we're here to help."
           bgImage="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=2400&q=80&auto=format&fit=crop"
           trailing="+91 84509 84509 · info@emaratrealty.com"
         />
@@ -189,7 +189,7 @@ export default function ContactPage() {
                   Emarat Realty<br />
                   2nd Floor, Sector-15,<br />
                   Civil Lines, Gurugram<br />
-                  Haryana — 122001
+                  Haryana 122001
                 </p>
 
                 <div className="mt-8 grid grid-cols-2 gap-4 border-t border-[color:var(--line)] pt-6">
@@ -215,7 +215,7 @@ export default function ContactPage() {
                   <div className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--muted)]">
                     Office Hours
                   </div>
-                  <div className="mt-1 text-sm">Monday — Friday · 9am – 6pm</div>
+                  <div className="mt-1 text-sm">Monday Friday · 9am – 6pm</div>
                 </div>
 
                 <div className="mt-8 flex flex-wrap gap-3 text-xs uppercase tracking-[0.16em]">
@@ -234,7 +234,7 @@ export default function ContactPage() {
           <div className="mx-auto max-w-[1440px]">
             <div className="relative aspect-[21/9] overflow-hidden rounded-md border border-[color:var(--line)] bg-[color:var(--bg-alt)]">
               <iframe
-                title="Emarat Realty — Civil Lines, Gurugram"
+                title="Emarat Realty Civil Lines, Gurugram"
                 src="https://www.google.com/maps?q=Sector+15+Civil+Lines+Gurugram&output=embed"
                 className="absolute inset-0 h-full w-full"
                 style={{ border: 0, filter: "grayscale(0.4) contrast(0.95) brightness(0.95)" }}

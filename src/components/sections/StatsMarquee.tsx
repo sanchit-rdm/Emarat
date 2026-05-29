@@ -6,7 +6,7 @@ const items = [
   { v: "500+", k: "Happy families" },
   { v: "4", k: "Unique developments" },
   { v: "3", k: "Property types" },
-  { v: "1", k: "Prime location — Gurugram" },
+  { v: "1", k: "Prime location Gurugram" },
 ];
 
 export default function StatsMarquee() {

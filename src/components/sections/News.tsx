@@ -21,7 +21,7 @@ const placeholders: Post[] = [
   },
   {
     _id: "p2",
-    title: "Investing in Gurugram real estate in 2026 — what the numbers say",
+    title: "Investing in Gurugram real estate in 2026 what the numbers say",
     author: { name: "Market Note" },
     publishedAt: "2026-03-07",
     mainImage: { asset: { url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&q=80&auto=format&fit=crop" } },
