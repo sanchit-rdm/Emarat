@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CircleButton from "@/components/CircleButton";
@@ -34,16 +34,34 @@ export default function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const headerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      // On the home page the scroll-video hero (`#top`) should keep the bar
+      // transparent for its full pinned run, then turn it solid once real
+      // content scrolls up behind it. Elsewhere there is no `#top`, so fall
+      // back to the simple 24px threshold.
+      const hero = document.getElementById("top");
+      if (!hero) {
+        setScrolled(window.scrollY > 24);
+        return;
+      }
+      const headerH = headerRef.current?.offsetHeight ?? 0;
+      setScrolled(hero.getBoundingClientRect().bottom <= headerH);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   return (
     <header
+      ref={headerRef}
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
         scrolled
           ? "bg-[color:var(--bg)]/85 backdrop-blur-md border-b border-[color:var(--line)]"

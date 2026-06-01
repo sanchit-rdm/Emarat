@@ -1,5 +1,5 @@
 import SiteNav from "@/components/SiteNav";
-import Hero from "@/components/sections/Hero";
+import ScrollVideoHero from "@/components/sections/ScrollVideoHero";
 import StatsMarquee from "@/components/sections/StatsMarquee";
 import Gallery from "@/components/sections/Gallery";
 import Projects from "@/components/sections/Projects";
@@ -19,7 +19,7 @@ export default async function Home() {
     <>
       <SiteNav />
       <main>
-        <Hero />
+        <ScrollVideoHero />
         <StatsMarquee />
         <Gallery />
         <div className="theme-light">
