@@ -70,7 +70,7 @@ const TEXT_BLOCKS: TextBlock[] = [
     eyebrow: "Design & Materials",
     heading: "Crafted in stone, light and silence.",
     sub: "Every residence is composed around how it feels to live in it.",
-    anchor: "center",
+    anchor: "bot-left",
     enterAt: 0.36,
     exitAt: 0.62,
   },
@@ -78,7 +78,7 @@ const TEXT_BLOCKS: TextBlock[] = [
     id: "place",
     eyebrow: "DLF Garden City · Sector 93",
     heading: "An address that appreciates.",
-    anchor: "top-right",
+    anchor: "bot-left",
     enterAt: 0.68,
     exitAt: 0.96,
   },
@@ -251,7 +251,7 @@ export default function ScrollVideoHero() {
                 style={{ textShadow: "0 1px 40px rgba(0,0,0,0.45)" }}
               >
                 {b.eyebrow && (
-                  <p className="eyebrow mb-5 text-xs uppercase tracking-[0.24em] text-[color:var(--muted)]">
+                  <p className="eyebrow mb-5 text-xs uppercase tracking-[0.24em] text-white">
                     <span>{b.eyebrow}</span>
                   </p>
                 )}
@@ -259,7 +259,7 @@ export default function ScrollVideoHero() {
                   {b.heading}
                 </Heading>
                 {b.sub && (
-                  <p className="mt-6 max-w-xl text-base leading-relaxed text-[color:var(--muted)] lg:text-lg">
+                  <p className="mt-6 max-w-xl text-base leading-relaxed text-white lg:text-lg">
                     {b.sub}
                   </p>
                 )}

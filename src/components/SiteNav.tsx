@@ -90,7 +90,7 @@ export default function SiteNav() {
               >
                 <button
                   type="button"
-                  className="nav-link flex items-center gap-1 text-[color:var(--muted)] transition-colors hover:text-[color:var(--fg)]"
+                  className="nav-link flex items-center gap-1 text-white transition-colors hover:text-[color:var(--accent)]"
                   aria-expanded={openDropdown === item.label}
                 >
                   {item.label}
@@ -103,7 +103,7 @@ export default function SiteNav() {
                         <Link
                           key={d.href}
                           href={d.href}
-                          className="block rounded px-3 py-2 text-xs uppercase tracking-[0.14em] text-[color:var(--muted)] transition-colors hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--accent)]"
+                          className="block rounded px-3 py-2 text-sm tracking-[0.02em] text-white transition-colors hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--accent)]"
                         >
                           {d.label}
                         </Link>
@@ -116,7 +116,7 @@ export default function SiteNav() {
               <Link
                 key={item.href}
                 href={item.href!}
-                className="nav-link text-[color:var(--muted)] transition-colors hover:text-[color:var(--fg)]"
+                className="nav-link text-white transition-colors hover:text-[color:var(--accent)]"
               >
                 {item.label}
               </Link>
@@ -126,7 +126,7 @@ export default function SiteNav() {
 
         <div className="flex items-center gap-4">
           <div className="hidden md:inline-flex">
-            <CircleButton href="/contact" size="sm" variant="outline">
+            <CircleButton href="/contact" size="sm" variant="outline" className="enquire-btn">
               Enquire Now
             </CircleButton>
           </div>
@@ -150,7 +150,7 @@ export default function SiteNav() {
             {topLevel.map((item) =>
               item.dropdown ? (
                 <details key={item.label} className="border-b border-[color:var(--line)]">
-                  <summary className="flex cursor-pointer items-center justify-between py-4 text-sm text-[color:var(--muted)]">
+                  <summary className="flex cursor-pointer items-center justify-between py-4 text-sm text-white">
                     <span>{item.label}</span>
                     <span aria-hidden className="text-[0.6rem]">▾</span>
                   </summary>
@@ -160,7 +160,7 @@ export default function SiteNav() {
                         key={d.href}
                         href={d.href}
                         onClick={() => setMenuOpen(false)}
-                        className="block py-2 pl-3 text-xs uppercase tracking-[0.14em] text-[color:var(--muted)] transition-colors hover:text-[color:var(--accent)]"
+                        className="block py-2 pl-3 text-sm tracking-[0.02em] text-white transition-colors hover:text-[color:var(--accent)]"
                       >
                         {d.label}
                       </Link>
@@ -172,14 +172,14 @@ export default function SiteNav() {
                   key={item.href}
                   href={item.href!}
                   onClick={() => setMenuOpen(false)}
-                  className="border-b border-[color:var(--line)] py-4 text-sm text-[color:var(--muted)] transition-colors hover:text-[color:var(--fg)]"
+                  className="border-b border-[color:var(--line)] py-4 text-sm text-white transition-colors hover:text-[color:var(--accent)]"
                 >
                   {item.label}
                 </Link>
               )
             )}
             <div className="mt-6">
-              <CircleButton href="/contact" variant="outline" className="w-full">
+              <CircleButton href="/contact" variant="outline" className="enquire-btn w-full">
                 Enquire Now
               </CircleButton>
             </div>

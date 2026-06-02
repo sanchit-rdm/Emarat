@@ -213,6 +213,16 @@ html {
   stroke: var(--bg);
 }
 
+/* Enquire Now button — static gold border at rest; the animated stroke that
+   traces the border on hover switches to white at 2px. */
+.enquire-btn {
+  border: 1px solid var(--accent);
+}
+.enquire-btn .link-hover__circle rect {
+  stroke: #ffffff;
+  stroke-width: 2;
+}
+
 /* ----------------------------------------------------------------------------
    Tab fade transitions (Places section)
 ---------------------------------------------------------------------------- */
