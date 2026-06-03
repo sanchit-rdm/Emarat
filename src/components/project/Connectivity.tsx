@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { Landmark } from "@/lib/projects";
+import type { LandmarkGroup } from "@/lib/projects";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 
@@ -10,12 +10,11 @@ export default function Connectivity({
   mapQuery,
   location,
 }: {
-  landmarks: Landmark[];
+  landmarks: LandmarkGroup[];
   mapQuery: string;
   location: string;
 }) {
   const [active, setActive] = useState(0);
-  const max = Math.max(...landmarks.map((l) => l.minutes));
 
   return (
     <section
@@ -25,7 +24,7 @@ export default function Connectivity({
       <div className="pointer-events-none absolute -left-40 top-1/4 h-[420px] w-[420px] rounded-full bg-[color:var(--brand-green)]/15 blur-[160px]" />
 
       <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-10 lg:gap-16">
-        {/* Left: heading + distances */}
+        {/* Left: heading + categorised landmarks */}
         <div className="col-span-12 lg:col-span-5">
           <SplitReveal as="h2" className="font-display h-section">
             Location &amp;
@@ -35,40 +34,42 @@ export default function Connectivity({
           </SplitReveal>
 
           <Reveal as="p" delay={0.2} className="mt-6 text-sm text-[color:var(--muted)]">
-            {location} — moments from the corridors that connect the whole of the NCR.
+            {location} — anchored among the corridors, retail and institutions that
+            connect the whole of the NCR.
           </Reveal>
 
           <ul className="mt-10 flex flex-col">
-            {landmarks.map((l, i) => (
-              <li key={l.name}>
+            {landmarks.map((g, i) => (
+              <li key={g.category}>
                 <button
                   type="button"
                   onMouseEnter={() => setActive(i)}
                   onFocus={() => setActive(i)}
                   onClick={() => setActive(i)}
                   aria-pressed={i === active}
-                  className={`group w-full border-t border-[color:var(--line)] py-5 text-left transition-colors last:border-b ${
-                    i === active ? "" : "opacity-70 hover:opacity-100"
+                  className={`group w-full border-t border-[color:var(--line)] py-5 text-left transition-opacity last:border-b ${
+                    i === active ? "opacity-100" : "opacity-65 hover:opacity-100"
                   }`}
                 >
-                  <div className="flex items-baseline justify-between gap-4">
-                    <span className="font-display-alt text-xl lg:text-2xl">{l.name}</span>
-                    <span className="flex items-baseline gap-1.5 whitespace-nowrap">
-                      <span className="font-display text-2xl tracking-tight text-[color:var(--accent)] lg:text-3xl">
-                        {l.minutes}
-                      </span>
-                      <span className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--muted)]">min</span>
+                  <div className="flex items-center gap-3">
+                    <span
+                      className={`h-1.5 w-1.5 rounded-full transition-colors ${
+                        i === active ? "bg-[color:var(--accent)]" : "bg-[color:var(--line)]"
+                      }`}
+                    />
+                    <span className="text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
+                      {g.category}
                     </span>
                   </div>
-                  <div className="mt-2 flex items-center gap-3">
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--muted)]">{l.category}</span>
-                    {/* progress bar — closer = fuller */}
-                    <span className="relative h-px flex-1 bg-[color:var(--line)]">
-                      <span
-                        className="absolute inset-y-0 left-0 bg-[color:var(--accent)] transition-all duration-500"
-                        style={{ width: `${100 - (l.minutes / max) * 80}%` }}
-                      />
-                    </span>
+                  <div className="mt-2 flex flex-wrap gap-x-2 gap-y-1 pl-[1.125rem] font-display-alt text-lg leading-snug lg:text-xl">
+                    {g.items.map((item, j) => (
+                      <span key={item}>
+                        {item}
+                        {j < g.items.length - 1 && (
+                          <span className="ml-2 text-[color:var(--accent)]/50">·</span>
+                        )}
+                      </span>
+                    ))}
                   </div>
                 </button>
               </li>

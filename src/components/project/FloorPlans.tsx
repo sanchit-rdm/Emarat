@@ -18,7 +18,7 @@ export default function FloorPlans({ plans }: { plans: FloorPlan[] }) {
             Floor Plans
           </SplitReveal>
           <Reveal as="p" delay={0.15} className="max-w-sm text-sm text-[color:var(--muted)]">
-            Indicative layouts. Select a configuration to view its plan and key dimensions.
+            Indicative layouts. Select a floor to view its plan and key finishes.
           </Reveal>
         </div>
 
@@ -68,15 +68,10 @@ export default function FloorPlans({ plans }: { plans: FloorPlan[] }) {
             <p className="mt-2 text-sm text-[color:var(--muted)]">{plan.config}</p>
 
             <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-[color:var(--line)] pt-8">
-              {[
-                ["Saleable Area", plan.area],
-                ["Bedrooms", plan.bedrooms],
-                ["Bathrooms", plan.baths],
-                ["Facing", plan.facing],
-              ].map(([k, v]) => (
-                <div key={k}>
-                  <dt className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--muted)]">{k}</dt>
-                  <dd className="mt-1 font-display text-2xl tracking-tight">{v}</dd>
+              {plan.specs.map((s) => (
+                <div key={s.label}>
+                  <dt className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--muted)]">{s.label}</dt>
+                  <dd className="mt-1 font-display-alt text-xl tracking-tight lg:text-2xl">{s.value}</dd>
                 </div>
               ))}
             </dl>

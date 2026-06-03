@@ -46,7 +46,7 @@ export default function SiteFooter() {
             <li><Link href="/projects/c2" className="transition-colors hover:text-[color:var(--accent)]">C2 at DLF Garden City</Link></li>
             <li><Link href="/projects/c5" className="transition-colors hover:text-[color:var(--accent)]">C5 at DLF Garden City</Link></li>
             <li><Link href="/projects/e11" className="transition-colors hover:text-[color:var(--accent)]">E11 at DLF Garden City</Link></li>
-            <li><Link href="/projects/ea04" className="transition-colors hover:text-[color:var(--accent)]">EA 04 at Almeda</Link></li>
+            <li><Link href="/projects/ea04" className="transition-colors hover:text-[color:var(--accent)]">EA 04 at Alameda</Link></li>
           </ul>
         </div>
 

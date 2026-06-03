@@ -52,4 +52,28 @@ export const amenityIcons: Record<AmenityIcon, React.ReactNode> = {
   retail: (
     <svg viewBox="0 0 24 24" {...C}><path d="M4 9h16l-1 11H5zM4 9l1.5-5h13L20 9M9 13a3 3 0 0 0 6 0" /></svg>
   ),
+  balcony: (
+    <svg viewBox="0 0 24 24" {...C}><path d="M3 21h18M5 21v-7h14v7M5 14V9h14v5M8 14v7M12 14v7M16 14v7M9 9V4h6v5" /></svg>
+  ),
+  kitchen: (
+    <svg viewBox="0 0 24 24" {...C}><rect x="4" y="4" width="16" height="16" rx="2" /><circle cx="9" cy="9" r="1.6" /><circle cx="15" cy="9" r="1.6" /><path d="M7 14h10" /></svg>
+  ),
+  wardrobe: (
+    <svg viewBox="0 0 24 24" {...C}><rect x="5" y="3" width="14" height="18" rx="1" /><path d="M12 3v18M10 10h.5M14 10h-.5" /></svg>
+  ),
+  ev: (
+    <svg viewBox="0 0 24 24" {...C}><rect x="5" y="4" width="11" height="16" rx="1.5" /><path d="M16 9h2.5a1.5 1.5 0 0 1 1.5 1.5V15a1.5 1.5 0 0 1-3 0M11 8l-2 3.5h3L10 15" /></svg>
+  ),
+  ac: (
+    <svg viewBox="0 0 24 24" {...C}><rect x="3" y="5" width="18" height="8" rx="2" /><path d="M6 9h9M7 17c1.5 0 1.5-1.5 0-1.5M11 18c1.5 0 1.5-1.5 0-1.5M15 17c1.5 0 1.5-1.5 0-1.5" /></svg>
+  ),
+  vastu: (
+    <svg viewBox="0 0 24 24" {...C}><circle cx="12" cy="12" r="9" /><path d="M12 3v2M12 19v2M3 12h2M19 12h2M14.5 9.5l-2 5-2.5 2 2-5z" /></svg>
+  ),
+  lock: (
+    <svg viewBox="0 0 24 24" {...C}><rect x="5" y="10" width="14" height="10" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v2" /></svg>
+  ),
+  family: (
+    <svg viewBox="0 0 24 24" {...C}><circle cx="8" cy="7" r="2.2" /><circle cx="16" cy="7" r="2.2" /><path d="M3.5 20v-1a4.5 4.5 0 0 1 9 0v1M11.5 20v-1a4.5 4.5 0 0 1 9 0v1" /></svg>
+  ),
 };

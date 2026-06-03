@@ -1,10 +1,13 @@
 /* ----------------------------------------------------------------------------
    Project content model + data.
 
-   Drives the dynamic project detail pages at /projects/[slug]. Each project
-   carries everything the page renders: hero, overview, amenities, floor plans,
-   gallery, connectivity and the enquiry context. Images reuse the compressed
-   /public/images set for now — swap per-project renders/plans in later.
+   Drives the dynamic project detail pages at /projects/[slug]. Content is drawn
+   from the official Emarat project brochures (public/emarat pdf/*). All four are
+   Spanish-inspired independent / private floors. Distances and saleable areas
+   are not published in the brochures, so floor plans carry real material
+   specifications and connectivity is grouped by category (as in the brochures)
+   rather than fabricated drive-times. Images reuse the compressed
+   /public/images set — swap per-project renders / plans in later.
 ---------------------------------------------------------------------------- */
 
 export type AmenityIcon =
@@ -21,22 +24,29 @@ export type AmenityIcon =
   | "cafe"
   | "spa"
   | "lift"
-  | "retail";
+  | "retail"
+  | "balcony"
+  | "kitchen"
+  | "wardrobe"
+  | "ev"
+  | "ac"
+  | "vastu"
+  | "lock"
+  | "family";
 
 export type Amenity = { name: string; icon: AmenityIcon };
+
+export type Spec = { label: string; value: string };
 
 export type FloorPlan = {
   id: string;
   label: string;
   config: string;
-  area: string;
-  bedrooms: string;
-  baths: string;
-  facing: string;
   image: string;
+  specs: Spec[];
 };
 
-export type Landmark = { name: string; minutes: number; category: string };
+export type LandmarkGroup = { category: string; items: string[] };
 
 export type GalleryImage = { src: string; label: string };
 
@@ -61,24 +71,66 @@ export type Project = {
   amenities: Amenity[];
   floorPlans: FloorPlan[];
   gallery: GalleryImage[];
-  connectivity: Landmark[];
+  connectivity: LandmarkGroup[];
   mapQuery: string;
   highlights: string[];
 };
 
-const commonAmenities: Amenity[] = [
-  { name: "Grand Clubhouse", icon: "clubhouse" },
-  { name: "Swimming Pool", icon: "pool" },
-  { name: "Fitness Centre", icon: "gym" },
-  { name: "Landscaped Gardens", icon: "garden" },
-  { name: "24×7 Security", icon: "security" },
-  { name: "Covered Parking", icon: "parking" },
-  { name: "100% Power Backup", icon: "power" },
-  { name: "Concierge Service", icon: "concierge" },
-  { name: "Kids' Play Area", icon: "kids" },
-  { name: "Sports Courts", icon: "sports" },
-  { name: "Café & Lounge", icon: "cafe" },
-  { name: "Spa & Wellness", icon: "spa" },
+/* Shared, brochure-accurate floor finishes. The three floor types (Stilt /
+   Typical residence / Terrace) are common across all four developments. */
+function stiltFloor(image: string): FloorPlan {
+  return {
+    id: "stilt",
+    label: "Stilt Floor",
+    config: "Covered parking, services & EV-charging provision.",
+    image,
+    specs: [
+      { label: "Flooring", value: "Vitrified Tiles" },
+      { label: "Walls", value: "Texture Paint" },
+      { label: "Ceiling", value: "Exposed Soffit" },
+      { label: "Provision", value: "EV Charging" },
+    ],
+  };
+}
+
+function terraceFloor(image: string): FloorPlan {
+  return {
+    id: "terrace",
+    label: "Terrace Floor",
+    config: "Private terrace with sky-garden potential.",
+    image,
+    specs: [
+      { label: "Flooring", value: "Granite / Marble" },
+      { label: "Railing", value: "Frameless Glass" },
+      { label: "Walls", value: "OBD Finish" },
+      { label: "Access", value: "Private Staircase" },
+    ],
+  };
+}
+
+function typicalFloor(config: string, image: string): FloorPlan {
+  return {
+    id: "typical",
+    label: "Typical Floor",
+    config,
+    image,
+    specs: [
+      { label: "Living & Dining", value: "Italian Marble" },
+      { label: "Bedrooms", value: "Engineered Wood" },
+      { label: "Kitchen", value: "Quartz Counter" },
+      { label: "Toilets", value: "Anti-Skid Tiles" },
+    ],
+  };
+}
+
+/* Shared connectivity for the three DLF Garden City developments. */
+const dlfGardenCityConnectivity: LandmarkGroup[] = [
+  { category: "Connectivity", items: ["Dwarka Expressway", "NH-48"] },
+  { category: "Retail", items: ["Saphire Mall", "Elan Miracle", "32nd Avenue"] },
+  { category: "Growth Corridor", items: ["Manesar Golf Course", "Nakhrola Stadium", "Eros Corporate Park"] },
+  { category: "Universities", items: ["Gurugram University", "The NorthCap University", "Sushant University"] },
+  { category: "Schools", items: ["St. Xavier's High School", "Basant Valley School", "Rao Bharat Singh Intl. School"] },
+  { category: "Healthcare", items: ["Aarvy Healthcare", "Silver Streak Hospital", "Medanta Hospital"] },
 ];
 
 export const projects: Project[] = [
@@ -87,295 +139,227 @@ export const projects: Project[] = [
     no: "01",
     title: "C2 at DLF Garden City",
     shortName: "C2",
-    tagline: "Podium living on the Dwarka Expressway.",
-    location: "Sector 93, Gurugram",
-    status: "Ready to Move",
-    config: "3 & 4 BHK Luxury Apartments",
-    size: "1,850 – 2,400 sq.ft.",
-    possession: "Ready",
-    rera: "RERA-GGM-2019-C2",
-    heroImage: "/images/alameda-entrance.webp",
-    overviewImage: "/images/alameda-lounge.webp",
+    tagline: "The address within the address.",
+    location: "DLF Garden City, Sector 93, Gurugram",
+    status: "Now Selling",
+    config: "5 BHK Independent Floors",
+    size: "G+4 · 5 BHK",
+    possession: "On Request",
+    rera: "HARERA Registered",
+    heroImage: "/images/C-2/Building.jpeg",
+    overviewImage: "/images/C-2/C2 Living Dining_Interior View 02_APPROVED_R0_20240122.png",
     overview: [
-      "C2 is a collection of premium high-rise residences set on a landscaped podium, with double-height entrance lobbies and curated club amenities. Direct frontage on the Dwarka Expressway places the whole of the NCR within easy reach.",
-      "Every apartment is planned for light and cross-ventilation, with three-side-open units, expansive balconies and a refined palette of natural stone and engineered timber.",
+      "C2 at DLF Garden City is a collection of Spanish-inspired 5 BHK independent floors — self-contained homes with generous proportions, expansive wrap-around balconies and abundant open space. Designed so light lingers longer and life feels effortless, it is, quite simply, the address within the address.",
+      "Every residence opens to park-facing greenery, with a family lounge, a dedicated puja room and walk-in wardrobes. Italian marble, engineered timber and a quartz-topped modular kitchen complete a home made for a larger-than-life way of living, set within the DLF gated community.",
     ],
     stats: [
-      { label: "Configuration", value: "3 & 4 BHK" },
-      { label: "Saleable Area", value: "1,850–2,400 sq.ft." },
-      { label: "Towers", value: "4 High-rise" },
-      { label: "Status", value: "Ready to Move" },
+      { label: "Configuration", value: "5 BHK" },
+      { label: "Built Form", value: "G+4" },
+      { label: "Per Floor", value: "1 Home" },
+      { label: "Community", value: "DLF Gated" },
     ],
-    amenities: commonAmenities,
+    amenities: [
+      { name: "Wrap-around Balconies", icon: "balcony" },
+      { name: "Modular Kitchen", icon: "kitchen" },
+      { name: "Walk-in Wardrobes", icon: "wardrobe" },
+      { name: "Dedicated Puja Room", icon: "spa" },
+      { name: "Guest & Family Lounge", icon: "family" },
+      { name: "High-Speed Elevator", icon: "lift" },
+      { name: "EV Charging Provision", icon: "ev" },
+      { name: "Adjacent Car Parking", icon: "parking" },
+      { name: "DLF Club House", icon: "clubhouse" },
+      { name: "Park-Facing Greens", icon: "garden" },
+      { name: "100% Power Backup", icon: "power" },
+      { name: "VRV / VRF Air Conditioning", icon: "ac" },
+    ],
     floorPlans: [
-      {
-        id: "3bhk",
-        label: "3 BHK",
-        config: "3 Bed · 3 Bath · Utility",
-        area: "1,850 sq.ft.",
-        bedrooms: "3",
-        baths: "3",
-        facing: "East / Park",
-        image: "/images/alameda-bedroom-1.webp",
-      },
-      {
-        id: "3bhk-study",
-        label: "3 BHK + Study",
-        config: "3 Bed · Study · 3 Bath",
-        area: "2,100 sq.ft.",
-        bedrooms: "3",
-        baths: "3",
-        facing: "North-East",
-        image: "/images/alameda-bedroom-2.webp",
-      },
-      {
-        id: "4bhk",
-        label: "4 BHK",
-        config: "4 Bed · 4 Bath · Servant",
-        area: "2,400 sq.ft.",
-        bedrooms: "4",
-        baths: "4",
-        facing: "Corner / 3-side open",
-        image: "/images/alameda-bedroom-3.webp",
-      },
+      stiltFloor("/images/C-2/DLFGC_REAR 3D View_INITIAL DESIGN_20250307.jpg.jpeg"),
+      typicalFloor("Spanish-inspired 5 BHK residence per floor.", "/images/C-2/C2 Living Dining_Interior View 01_APPROVED_R0_20240122.png"),
+      terraceFloor("/images/C-2/C2 Master Bedroom _Interior View 02_20250201.png"),
     ],
     gallery: [
-      { src: "/images/alameda-entrance.webp", label: "Entrance Foyer" },
-      { src: "/images/alameda-lounge.webp", label: "Living Lounge" },
-      { src: "/images/alameda-dining.webp", label: "Dining Area" },
-      { src: "/images/alameda-kitchen.webp", label: "Modular Kitchen" },
-      { src: "/images/alameda-bedroom-1.webp", label: "Master Bedroom" },
-      { src: "/images/alameda-bathroom.webp", label: "Bathroom" },
+      { src: "/images/C-2/C2 Living _Interior View_APPROVED_R0_20240122.png", label: "Living Room" },
+      { src: "/images/C-2/C2 Living Dining_Interior View 01_APPROVED_R0_20240122.png", label: "Living & Dining" },
+      { src: "/images/C-2/C2 Dining_Interior View_APPROVED_R0_20240122.png", label: "Dining Room" },
+      { src: "/images/C-2/C2 Kitchen_Interior View_R0_20240129.png", label: "Kitchen" },
+      { src: "/images/C-2/C2  Family Lounge_Interior View_R0_20240129.png", label: "Family Lounge" },
+      { src: "/images/C-2/C2 Master Bedroom _Interior View 01_20250201.png", label: "Master Bedroom" },
     ],
-    connectivity: [
-      { name: "Dwarka Expressway", minutes: 1, category: "Highway" },
-      { name: "Golf Course Ext. Road", minutes: 8, category: "Business" },
-      { name: "IGI Airport", minutes: 35, category: "Airport" },
-      { name: "CPR Metro Station", minutes: 12, category: "Metro" },
-    ],
+    connectivity: dlfGardenCityConnectivity,
     mapQuery: "DLF Garden City Sector 93 Gurugram",
-    highlights: ["Podium-level club", "Three-side open units", "100% power backup", "Concierge service"],
+    highlights: ["Spanish-inspired 5 BHK floors", "Wrap-around balconies", "Dedicated puja room", "Italian marble & quartz finishes"],
   },
   {
     slug: "c5",
     no: "02",
     title: "C5 at DLF Garden City",
     shortName: "C5",
-    tagline: "Courtyard residences, composed in light.",
-    location: "Sector 93, Gurugram",
-    status: "Possession Ready",
-    config: "Premium 3 & 4 BHK Residences",
-    size: "2,100 – 2,800 sq.ft.",
-    possession: "Ready",
-    rera: "RERA-GGM-2020-C5",
-    heroImage: "/images/alameda-lounge.webp",
-    overviewImage: "/images/alameda-dining.webp",
+    tagline: "Own the Red Diamond of Gurugram.",
+    location: "DLF Garden City, Sector 93, Gurugram",
+    status: "Now Selling",
+    config: "Independent Floors",
+    size: "G+4 Independent Floors",
+    possession: "On Request",
+    rera: "HARERA Registered",
+    heroImage: "/images/C-5/Building.jpeg",
+    overviewImage: "/images/C-5/C-5-11 DOUBLE HEIGHT.jpg.jpeg",
     overview: [
-      "C5 gathers spacious, cross-ventilated residences around a central landscaped courtyard. French balconies, refined interiors and a curated palette of natural materials give every home a quiet, enduring elegance.",
-      "Generous floor plates and courtyard-facing layouts mean light reaches deep into each apartment through the day — a calm counterpoint to the city beyond.",
+      "C5 at DLF Garden City is a collection of independent floors designed to invite light in and open life out — the Red Diamond of Gurugram. Crafted for those who see more and seek more, each home is an interplay of height, light and architectural drama.",
+      "From the double-height Vertical Majesty to the Garden in the Sky terrace, every space is composed with Italian marble, quartz and frameless glass. A sanctuary of green brilliance within the prestigious DLF gated community, moments from Gurugram's beating heart.",
     ],
     stats: [
-      { label: "Configuration", value: "3 & 4 BHK" },
-      { label: "Saleable Area", value: "2,100–2,800 sq.ft." },
-      { label: "Towers", value: "3 Mid-rise" },
-      { label: "Status", value: "Possession Ready" },
+      { label: "Built Form", value: "G+4" },
+      { label: "Per Floor", value: "1 Home" },
+      { label: "Terrace", value: "Sky-Garden" },
+      { label: "Community", value: "DLF Gated" },
     ],
-    amenities: commonAmenities,
+    amenities: [
+      { name: "Wrap-around Balconies", icon: "balcony" },
+      { name: "Modular Kitchen", icon: "kitchen" },
+      { name: "Walk-in Wardrobes", icon: "wardrobe" },
+      { name: "Guest & Family Space", icon: "family" },
+      { name: "High-Speed Elevator", icon: "lift" },
+      { name: "EV Charging Provision", icon: "ev" },
+      { name: "Adjacent Car Parking", icon: "parking" },
+      { name: "DLF Club House", icon: "clubhouse" },
+      { name: "Park Facing", icon: "garden" },
+      { name: "VRV / VRF Air Conditioning", icon: "ac" },
+      { name: "Digital Secure Lock", icon: "lock" },
+      { name: "Vastu Compliant", icon: "vastu" },
+    ],
     floorPlans: [
-      {
-        id: "3bhk",
-        label: "3 BHK",
-        config: "3 Bed · 3 Bath · Utility",
-        area: "2,100 sq.ft.",
-        bedrooms: "3",
-        baths: "3",
-        facing: "Courtyard",
-        image: "/images/alameda-bedroom-2.webp",
-      },
-      {
-        id: "4bhk",
-        label: "4 BHK",
-        config: "4 Bed · 4 Bath · Servant",
-        area: "2,500 sq.ft.",
-        bedrooms: "4",
-        baths: "4",
-        facing: "East / Park",
-        image: "/images/alameda-bedroom-3.webp",
-      },
-      {
-        id: "4bhk-pent",
-        label: "4 BHK Grand",
-        config: "4 Bed · 4 Bath · Family Lounge",
-        area: "2,800 sq.ft.",
-        bedrooms: "4",
-        baths: "4",
-        facing: "Corner",
-        image: "/images/alameda-bedroom-4.webp",
-      },
+      stiltFloor("/images/C-5/C-5-11 STILT.jpg.jpeg"),
+      typicalFloor("Full-floor independent residence.", "/images/C-5/C-5-11 DOUBLE HEIGHT.jpg.jpeg"),
+      terraceFloor("/images/C-5/C5 LEFT SIDE Image 2026-03-06 at 2.44.10 PM.jpeg"),
     ],
     gallery: [
-      { src: "/images/alameda-lounge.webp", label: "Living Lounge" },
-      { src: "/images/alameda-dining.webp", label: "Dining Area" },
-      { src: "/images/alameda-kitchen.webp", label: "Modular Kitchen" },
-      { src: "/images/alameda-bedroom-2.webp", label: "Master Bedroom" },
-      { src: "/images/alameda-powder-room.webp", label: "Powder Room" },
-      { src: "/images/alameda-entrance.webp", label: "Entrance Foyer" },
+      { src: "/images/C-5/C-5-11 DOUBLE HEIGHT.jpg.jpeg", label: "Double Height Living" },
+      { src: "/images/C-5/c-5-11 dnd.jpg.jpeg", label: "Dining" },
+      { src: "/images/C-5/C-5-11 KITCHEN.jpg.jpeg", label: "Kitchen" },
+      { src: "/images/C-5/c-5-11 bedroom-1.jpg.jpeg", label: "Bedroom" },
+      { src: "/images/C-5/C-5-11_Family Lounge.jpg.jpeg", label: "Family Lounge" },
+      { src: "/images/C-5/C-5-11_passage.jpg.jpeg", label: "Passage" },
     ],
-    connectivity: [
-      { name: "Dwarka Expressway", minutes: 2, category: "Highway" },
-      { name: "Golf Course Ext. Road", minutes: 9, category: "Business" },
-      { name: "IGI Airport", minutes: 35, category: "Airport" },
-      { name: "Diplomatic Enclave", minutes: 20, category: "Landmark" },
-    ],
+    connectivity: dlfGardenCityConnectivity,
     mapQuery: "DLF Garden City Sector 93 Gurugram",
-    highlights: ["Cross-ventilated layouts", "French balconies", "Courtyard-facing units", "Italian marble flooring"],
+    highlights: ["The Red Diamond of Gurugram", "Garden in the Sky terrace", "Double-height living", "Italian marble flooring"],
   },
   {
     slug: "e11",
     no: "03",
     title: "E11 at DLF Garden City",
     shortName: "E11",
-    tagline: "Penthouses with a private sky.",
-    location: "Sector 93, Gurugram",
+    tagline: "A home that doesn't just hold your story — it reflects how it was written.",
+    location: "DLF Garden City, Sector 93, Gurugram",
     status: "New Launch",
-    config: "Luxury Flats & Penthouses",
-    size: "2,400 – 5,200 sq.ft.",
-    possession: "2027",
-    rera: "RERA-GGM-2024-E11",
-    heroImage: "/images/alameda-bedroom-1.webp",
-    overviewImage: "/images/alameda-bedroom-3.webp",
+    config: "Independent Floors · Three-Side Open",
+    size: "G+4 · Three-Side Open",
+    possession: "On Request",
+    rera: "HARERA Registered",
+    heroImage: "/images/E11/Building.jpg",
+    overviewImage: "/images/E11/E11-14_Living Dining_Interior View_R0_20250313.png",
     overview: [
-      "The most anticipated launch in DLF Garden City, E11 introduces duplex penthouses with private terraces, sky lounges and double-height living spaces — homes designed for those who want the city at their feet.",
-      "Below the penthouses, generously proportioned flats share the same uncompromising specification: full-height glazing, concierge and valet, and amenities that read more like a private resort than a residence.",
+      "E11 at DLF Garden City is a collection of thoughtfully designed, three-side-open independent floors where imagination meets form. Created for those who don't just look for a home — they look for what a home can become.",
+      "Volume, light and architectural drama define every level, from the grand living spaces to the private sky-garden terrace. Finished in Italian marble, engineered timber and a jeweller-precise modular kitchen — rare, radiant, redefined.",
     ],
     stats: [
-      { label: "Configuration", value: "3, 4 BHK & Penthouses" },
-      { label: "Saleable Area", value: "2,400–5,200 sq.ft." },
-      { label: "Towers", value: "2 Signature" },
-      { label: "Possession", value: "2027" },
+      { label: "Built Form", value: "G+4" },
+      { label: "Aspect", value: "3-Side" },
+      { label: "Per Floor", value: "1 Home" },
+      { label: "Community", value: "DLF Gated" },
     ],
-    amenities: commonAmenities,
+    amenities: [
+      { name: "Three-Side Open Layout", icon: "garden" },
+      { name: "Wrap-around Balconies", icon: "balcony" },
+      { name: "Modular Kitchen", icon: "kitchen" },
+      { name: "Walk-in Wardrobes", icon: "wardrobe" },
+      { name: "Guest & Family Space", icon: "family" },
+      { name: "High-Speed Elevator", icon: "lift" },
+      { name: "EV Charging Provision", icon: "ev" },
+      { name: "Adjacent Car Parking", icon: "parking" },
+      { name: "DLF Club House", icon: "clubhouse" },
+      { name: "Community Shopping", icon: "retail" },
+      { name: "VRV / VRF Air Conditioning", icon: "ac" },
+      { name: "Vastu Compliant", icon: "vastu" },
+    ],
     floorPlans: [
-      {
-        id: "3bhk",
-        label: "3 BHK",
-        config: "3 Bed · 3 Bath · Utility",
-        area: "2,400 sq.ft.",
-        bedrooms: "3",
-        baths: "3",
-        facing: "City / Park",
-        image: "/images/alameda-bedroom-1.webp",
-      },
-      {
-        id: "4bhk",
-        label: "4 BHK",
-        config: "4 Bed · 4 Bath · Servant",
-        area: "3,200 sq.ft.",
-        bedrooms: "4",
-        baths: "4",
-        facing: "Corner",
-        image: "/images/alameda-bedroom-5.webp",
-      },
-      {
-        id: "penthouse",
-        label: "Duplex Penthouse",
-        config: "4 Bed · Private Terrace · Sky Lounge",
-        area: "5,200 sq.ft.",
-        bedrooms: "4+",
-        baths: "5",
-        facing: "Panoramic",
-        image: "/images/alameda-lounge.webp",
-      },
+      stiltFloor("/images/E11/E11-14_Lobby_Interior View_R0_20250313.png"),
+      typicalFloor("Three-side-open independent residence.", "/images/E11/E11-14_Living Room_Interior View_R1_20250412.png"),
+      terraceFloor("/images/E11/Building Night.jpg"),
     ],
     gallery: [
-      { src: "/images/alameda-bedroom-1.webp", label: "Master Bedroom" },
-      { src: "/images/alameda-lounge.webp", label: "Double-height Living" },
-      { src: "/images/alameda-dining.webp", label: "Dining Area" },
-      { src: "/images/alameda-bedroom-5.webp", label: "Guest Suite" },
-      { src: "/images/alameda-kitchen.webp", label: "Island Kitchen" },
-      { src: "/images/alameda-bathroom.webp", label: "Spa Bathroom" },
+      { src: "/images/E11/E11-14_Living Dining_Interior View_R0_20250313.png", label: "Living & Dining" },
+      { src: "/images/E11/E11-14_Living Room_Interior View_R1_20250412.png", label: "Living Room" },
+      { src: "/images/E11/E11-14_Kitchen_Interior View_V1_R2_20250412.png", label: "Kitchen" },
+      { src: "/images/E11/E11-14_Master Bedroom_Interior View_ V1_R1_20250412.png", label: "Master Bedroom" },
+      { src: "/images/E11/E11-14_Family Lounge_Interior View_V1_R1_20250412.png", label: "Family Lounge" },
+      { src: "/images/E11/E11-14_Foyer_Interior View_R1_20250326.png", label: "Foyer" },
     ],
-    connectivity: [
-      { name: "Dwarka Expressway", minutes: 1, category: "Highway" },
-      { name: "Golf Course Ext. Road", minutes: 8, category: "Business" },
-      { name: "IGI Airport", minutes: 32, category: "Airport" },
-      { name: "Upcoming Metro", minutes: 10, category: "Metro" },
-    ],
+    connectivity: dlfGardenCityConnectivity,
     mapQuery: "DLF Garden City Sector 93 Gurugram",
-    highlights: ["Duplex penthouses", "Private terraces", "Sky lounge", "Concierge & valet"],
+    highlights: ["Three-side open floors", "Volume, light & drama", "Sky-garden terrace", "Premium modular kitchen"],
   },
   {
     slug: "ea04",
     no: "04",
-    title: "EA 04 at Almeda",
+    title: "EA 04 at Alameda",
     shortName: "EA 04",
-    tagline: "A premium address for business.",
-    location: "Gurugram, Haryana",
-    status: "Operational",
-    config: "Commercial & Retail Spaces",
-    size: "Suites from 500 sq.ft.",
-    possession: "Operational",
-    rera: "RERA-GGM-2018-EA04",
-    heroImage: "/images/alameda-dining.webp",
-    overviewImage: "/images/alameda-kitchen.webp",
+    tagline: "Architecture that commands, interiors that whisper.",
+    location: "Sector 73, Gurugram",
+    status: "Now Selling",
+    config: "Boutique Private Floors",
+    size: "Two-Side Open Private Floors",
+    possession: "On Request",
+    rera: "HARERA Registered",
+    heroImage: "/images/EA4/Building.jpeg",
+    overviewImage: "/images/EA4/EA 4 LOUNGE.& DININGjpg.jpeg",
     overview: [
-      "EA 04 at Almeda brings together high-end retail and Grade-A office space designed for boutique brands, restaurants and forward-thinking firms looking for a premium business address.",
-      "Triple-height retail frontage, dedicated visitor parking and F&B-ready services make it as practical as it is striking — a place that works as hard as the businesses inside it.",
+      "EA-04, Alameda is a boutique luxury residence in Sector 73, Gurugram — private, two-side-open floors for those who value space, elegance and absolute privacy. Architecture that commands; interiors that whisper, in a palette of deep emerald stone and 24k-gold accents.",
+      "From the monumental entrance foyer to the panoramic sky terrace, every space is a deliberate act of luxury — high-gloss marble, a culinary studio of a kitchen and a spa-like master bath. Dual high-speed elevators and rear park access complete the address.",
     ],
     stats: [
-      { label: "Use", value: "Retail & Office" },
-      { label: "Suite Sizes", value: "From 500 sq.ft." },
-      { label: "Grade", value: "Grade-A" },
-      { label: "Status", value: "Operational" },
+      { label: "Built Form", value: "G+4" },
+      { label: "Aspect", value: "2-Side" },
+      { label: "Elevators", value: "Dual" },
+      { label: "Address", value: "Sector-73" },
     ],
     amenities: [
-      { name: "Triple-height Retail", icon: "retail" },
-      { name: "Grade-A Offices", icon: "clubhouse" },
-      { name: "Visitor Parking", icon: "parking" },
-      { name: "24×7 Security", icon: "security" },
-      { name: "100% Power Backup", icon: "power" },
-      { name: "High-speed Lifts", icon: "lift" },
-      { name: "F&B-ready Services", icon: "cafe" },
-      { name: "Concierge & Reception", icon: "concierge" },
+      { name: "Dual High-Speed Elevators", icon: "lift" },
+      { name: "Wrap-around Balconies", icon: "balcony" },
+      { name: "Modular Kitchen", icon: "kitchen" },
+      { name: "Walk-in Wardrobes", icon: "wardrobe" },
+      { name: "Guest & Family Space", icon: "family" },
+      { name: "Rear Park Access", icon: "garden" },
+      { name: "EV Charging Provision", icon: "ev" },
+      { name: "Adjacent Car Parking", icon: "parking" },
+      { name: "DLF Club House", icon: "clubhouse" },
+      { name: "VRV / VRF Air Conditioning", icon: "ac" },
+      { name: "Digital Secure Lock", icon: "lock" },
+      { name: "Vastu Compliant", icon: "vastu" },
     ],
     floorPlans: [
-      {
-        id: "retail",
-        label: "Retail Suite",
-        config: "Triple-height frontage",
-        area: "500–1,200 sq.ft.",
-        bedrooms: "—",
-        baths: "Shared",
-        facing: "High-street",
-        image: "/images/alameda-entrance.webp",
-      },
-      {
-        id: "office",
-        label: "Office Floor",
-        config: "Grade-A open floor plate",
-        area: "2,000–8,000 sq.ft.",
-        bedrooms: "—",
-        baths: "Per floor",
-        facing: "Curtain-wall glazing",
-        image: "/images/alameda-lounge.webp",
-      },
+      stiltFloor("/images/EA4/EA-4 STILT FLOOR.jpg.jpeg"),
+      typicalFloor("Two-side-open boutique private floor.", "/images/EA4/EA 4 LOUNGE.& DININGjpg.jpeg"),
+      terraceFloor("/images/EA4/E A-4 Elevation View_.jpg.jpeg"),
     ],
     gallery: [
-      { src: "/images/alameda-dining.webp", label: "Retail Atrium" },
-      { src: "/images/alameda-entrance.webp", label: "Lobby" },
-      { src: "/images/alameda-lounge.webp", label: "Office Lounge" },
-      { src: "/images/alameda-kitchen.webp", label: "Café Space" },
-      { src: "/images/alameda-powder-room.webp", label: "Washrooms" },
-      { src: "/images/alameda-bathroom.webp", label: "Amenity Core" },
+      { src: "/images/EA4/EA 4 ENT. LOBBYjpg.jpeg", label: "Entry Lobby" },
+      { src: "/images/EA4/EA 4 LOUNGE.& DININGjpg.jpeg", label: "Lounge & Dining" },
+      { src: "/images/EA4/EA 4  Formal DINNING.jpg.jpeg", label: "Formal Dining" },
+      { src: "/images/EA4/EA 4 KITCHEN.jpg.jpeg", label: "Kitchen" },
+      { src: "/images/EA4/EA4 A BEDROOM-1.jpg.jpeg", label: "Bedroom" },
+      { src: "/images/EA4/4 EAST AVENUE, DLF ALAMEDA PASSAGE.jpg.jpeg", label: "Passage" },
     ],
     connectivity: [
-      { name: "Dwarka Expressway", minutes: 3, category: "Highway" },
-      { name: "NH-48", minutes: 10, category: "Highway" },
-      { name: "IGI Airport", minutes: 30, category: "Airport" },
-      { name: "Cyber City", minutes: 18, category: "Business" },
+      { category: "Connectivity", items: ["Dwarka Expressway", "Golf Course Ext. Road", "Sohna Road", "NH-48"] },
+      { category: "Retail", items: ["Elan Epic Mall", "M3M Corner Walk", "M3M 65th Avenue"] },
+      { category: "Growth Corridor", items: ["DLF Corporate Greens", "American Express Campus", "Cyber City on SPR"] },
+      { category: "Universities", items: ["Gurugram University", "The NorthCap University", "Sushant University"] },
+      { category: "Schools", items: ["Indus World School", "DAV Public School", "St. Xavier's High School", "DPS International School"] },
+      { category: "Healthcare", items: ["Medanta – The Medicity", "Park Hospital"] },
     ],
-    mapQuery: "Almeda Gurugram Haryana",
-    highlights: ["Grade-A specifications", "Triple-height retail", "Dedicated visitor parking", "F&B-ready services"],
+    mapQuery: "Sector 73 Gurugram Haryana",
+    highlights: ["Boutique private floors", "Two-side open homes", "Dual high-speed elevators", "Emerald & 24k-gold palette"],
   },
 ];
 

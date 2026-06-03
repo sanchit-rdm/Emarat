@@ -11,7 +11,7 @@ import CircleButton from "@/components/CircleButton";
 export const metadata: Metadata = {
   title: "Projects Emarat Realty",
   description:
-    "Selected projects by Emarat Realty C2, C5 and E11 at DLF Garden City; EA 04 at Almeda; plots and independent floors across Gurugram, Haryana.",
+    "Selected projects by Emarat Realty C2, C5 and E11 independent floors at DLF Garden City; EA 04 boutique private floors at Alameda, Sector 73 Gurugram.",
 };
 
 const projects = [
@@ -19,49 +19,49 @@ const projects = [
     id: "c2",
     no: "01",
     title: "C2 at DLF Garden City",
-    location: "Sector 93, Gurugram",
-    status: "Ready to Move",
-    config: "3 & 4 BHK Luxury Apartments",
-    size: "1,850 – 2,400 sq.ft.",
-    img: "/images/alameda-dining.webp",
-    body: "Premium high-rise residences with double-height entrance lobbies, landscaped podium gardens and curated club amenities. Direct frontage on the Dwarka Expressway.",
-    highlights: ["Podium-level club", "Three-side open units", "100% power backup", "Concierge service"],
+    location: "DLF Garden City, Sector 93, Gurugram",
+    status: "Now Selling",
+    config: "5 BHK Independent Floors",
+    size: "G+4 · 5 BHK",
+    img: "/images/C-2/C2 Living Dining_Interior View 01_APPROVED_R0_20240122.png",
+    body: "Spanish-inspired 5 BHK independent floors with expansive wrap-around balconies, a dedicated puja room and abundant open space — the address within the address.",
+    highlights: ["Spanish-inspired 5 BHK floors", "Wrap-around balconies", "Dedicated puja room", "Italian marble & quartz"],
   },
   {
     id: "c5",
     no: "02",
     title: "C5 at DLF Garden City",
-    location: "Sector 93, Gurugram",
-    status: "Possession Ready",
-    config: "Premium 3 & 4 BHK Residences",
-    size: "2,100 – 2,800 sq.ft.",
-    img: "/images/alameda-kitchen.webp",
-    body: "Spacious cross-ventilated residences with refined interiors, French balconies and a curated palette of natural materials. Designed around a central landscaped courtyard.",
-    highlights: ["Cross-ventilated layouts", "French balconies", "Courtyard-facing units", "Italian marble flooring"],
+    location: "DLF Garden City, Sector 93, Gurugram",
+    status: "Now Selling",
+    config: "Independent Floors",
+    size: "G+4 Independent Floors",
+    img: "/images/C-5/C-5-11 DOUBLE HEIGHT.jpg.jpeg",
+    body: "Independent floors designed to invite light in and open life out — the Red Diamond of Gurugram. Double-height living and a Garden in the Sky terrace.",
+    highlights: ["The Red Diamond of Gurugram", "Garden in the Sky terrace", "Double-height living", "Italian marble flooring"],
   },
   {
     id: "e11",
     no: "03",
     title: "E11 at DLF Garden City",
-    location: "Sector 93, Gurugram",
+    location: "DLF Garden City, Sector 93, Gurugram",
     status: "New Launch",
-    config: "Luxury Flats & Penthouses",
-    size: "2,400 – 5,200 sq.ft.",
-    img: "/images/alameda-bedroom-1.webp",
-    body: "The most anticipated launch in DLF Garden City featuring duplex penthouses with private terraces, sky lounges and double-height living spaces.",
-    highlights: ["Duplex penthouses", "Private terraces", "Sky lounge", "Concierge & valet"],
+    config: "Independent Floors · Three-Side Open",
+    size: "G+4 · Three-Side Open",
+    img: "/images/E11/E11-14_Living Room_Interior View_R1_20250412.png",
+    body: "Three-side-open independent floors where imagination meets form — volume, light and architectural drama, with a private sky-garden terrace.",
+    highlights: ["Three-side open floors", "Volume, light & drama", "Sky-garden terrace", "Premium modular kitchen"],
   },
   {
     id: "ea04",
     no: "04",
-    title: "EA 04 at Almeda",
-    location: "Gurugram, Haryana",
-    status: "Operational",
-    config: "Commercial & Retail Spaces",
-    size: "Suites from 500 sq.ft.",
-    img: "/images/alameda-bedroom-2.webp",
-    body: "High-end retail and Grade-A office spaces at Almeda designed for boutique brands, restaurants and forward-thinking firms looking for a premium business address.",
-    highlights: ["Grade-A specifications", "Triple-height retail", "Dedicated visitor parking", "F&B-ready services"],
+    title: "EA 04 at Alameda",
+    location: "Sector 73, Gurugram",
+    status: "Now Selling",
+    config: "Boutique Private Floors",
+    size: "Two-Side Open Private Floors",
+    img: "/images/EA4/EA 4 LOUNGE.& DININGjpg.jpeg",
+    body: "A boutique luxury residence in Sector 73 — private, two-side-open floors in a palette of deep emerald stone and 24k-gold accents. Architecture that commands.",
+    highlights: ["Boutique private floors", "Two-side open homes", "Dual high-speed elevators", "Emerald & 24k-gold palette"],
   },
 ];
 
@@ -86,7 +86,7 @@ export default function ProjectsPage() {
         <PageHero
           titleTop="Selected works"
           titleBottom="across Gurugram."
-          subtitle="A portfolio of residential and commercial developments at DLF Garden City and Almeda every Emarat project built on the same principles of quality, elegance and innovation."
+          subtitle="A portfolio of Spanish-inspired independent and boutique private floors at DLF Garden City and Alameda every Emarat home built on the same principles of quality, elegance and innovation."
           bgImage="/images/alameda-bedroom-3.webp"
           trailing="Six developments · 500+ residences"
         />
@@ -95,10 +95,10 @@ export default function ProjectsPage() {
         <section className="border-b border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-8 lg:px-10">
           <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-x-8 gap-y-3 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
             <span className="text-[color:var(--accent)]">All Projects (6)</span>
-            <a href="#c2" className="transition-colors hover:text-[color:var(--fg)]">Residential</a>
-            <a href="#ea04" className="transition-colors hover:text-[color:var(--fg)]">Commercial</a>
+            <a href="#c2" className="transition-colors hover:text-[color:var(--fg)]">DLF Garden City</a>
+            <a href="#ea04" className="transition-colors hover:text-[color:var(--fg)]">Alameda</a>
             <a href="#additional" className="transition-colors hover:text-[color:var(--fg)]">Plots & Floors</a>
-            <span className="ml-auto hidden text-[color:var(--accent)] md:inline">DLF Garden City · Sector 93</span>
+            <span className="ml-auto hidden text-[color:var(--accent)] md:inline">Independent & Private Floors</span>
           </div>
         </section>
 

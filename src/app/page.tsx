@@ -5,6 +5,7 @@ import Gallery from "@/components/sections/Gallery";
 import Projects from "@/components/sections/Projects";
 import About from "@/components/sections/About";
 import Location from "@/components/sections/Location";
+import Testimonials from "@/components/sections/Testimonials";
 import Approach from "@/components/sections/Approach";
 import Materials from "@/components/sections/Materials";
 import News from "@/components/sections/News";
