@@ -20,7 +20,7 @@ export default function LocationPage() {
           titleTop="DLF Garden City,"
           titleBottom="Sector 93, Gurugram."
           subtitle="A township strategically placed in Gurugram's most coveted residential corridor connected, serene, and designed for effortless urban living. Direct access to the Dwarka Expressway and minutes from Golf Course Extension Road."
-          bgImage="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=2400&q=80&auto=format&fit=crop"
+          bgImage="/images/alameda-bedroom-3.webp"
           trailing="5 min Dwarka Expressway · 35 min IGI"
         />
         <Location />

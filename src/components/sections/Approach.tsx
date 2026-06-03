@@ -8,31 +8,38 @@ import SplitReveal from "@/components/motion/SplitReveal";
 const values = [
   {
     no: "I.",
-    title: "Ethics",
-    body: "Every transaction is built on complete transparency. We believe that trust is the foundation of every lasting relationship between developer, buyer, and community.",
-    img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80&auto=format&fit=crop",
-    alt: "Handshake trust and integrity",
+    title: "Built on Trust",
+    body: "We believe in transparency, accountability and delivering on our commitments. Every decision we make is guided by integrity and a responsibility to create homes our customers can trust.",
+    img: "/images/alameda-entrance.webp",
+    alt: "Emarat Realty entrance — trust and transparency",
   },
   {
     no: "II.",
-    title: "Excellence",
-    body: "We never compromise on quality. From architectural design to finishing materials, every detail is selected for enduring elegance and superior craftsmanship.",
-    img: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80&auto=format&fit=crop",
-    alt: "Luxury residence interior detail",
+    title: "Commitment to Quality",
+    body: "Every project reflects our focus on quality construction and lasting value. From the materials we use to the way we build, attention to detail remains a priority at every stage.",
+    img: "/images/alameda-lounge.webp",
+    alt: "Luxury lounge — quality craftsmanship",
   },
   {
     no: "III.",
-    title: "Efficiency",
-    body: "From design to delivery, we optimise every stage of development. On-time handovers, streamlined processes and client-centric service no compromises.",
-    img: "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=80&auto=format&fit=crop",
-    alt: "Construction and development",
+    title: "Smart Planning",
+    body: "Thoughtfully planned spaces that make everyday living more comfortable. From room layouts to shared areas, every element is designed to make the best use of space while supporting the needs of modern families.",
+    img: "/images/alameda-bedroom-1.webp",
+    alt: "Well-planned bedroom layout",
   },
   {
     no: "IV.",
-    title: "Innovation",
-    body: "We integrate modern technology and sustainable development practices into every project building homes that are as forward-thinking as the families who live in them.",
-    img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80&auto=format&fit=crop",
-    alt: "Modern residential architecture",
+    title: "Prime Locations",
+    body: "Projects located in areas that offer convenience, good connectivity and everyday ease. From daily essentials to key destinations, everything is closer to where you live.",
+    img: "/images/alameda-kitchen.webp",
+    alt: "Emarat Realty — prime location living",
+  },
+  {
+    no: "V.",
+    title: "Modern Living",
+    body: "Homes designed to suit the needs and lifestyles of modern families. From spacious interiors to community-focused surroundings, every detail is planned with residents in mind.",
+    img: "/images/alameda-bedroom-2.webp",
+    alt: "Modern family residence interior",
   },
 ];
 
@@ -46,10 +53,6 @@ export default function Approach() {
 
     const ctx = gsap.context(() => {
       const items = el.querySelectorAll<HTMLElement>("[data-value]");
-      // Each value enters from the right and slides into place. Stagger so they
-      // come in 1 by 1, with the section itself acting as the trigger so the
-      // sequence starts when the user reaches the section — not when each
-      // individual item happens to scroll past.
       gsap.fromTo(
         items,
         { opacity: 0, x: 120 },
@@ -80,24 +83,15 @@ export default function Approach() {
       <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-4">
           <div className="lg:sticky lg:top-32">
-            <SplitReveal
-              as="h2"
-              className="font-display h-section"
-            >
+            <SplitReveal as="h2" className="font-display h-section">
               Building with Ethics,
             </SplitReveal>
-            <SplitReveal
-              as="h2"
-              delay={0.1}
-              className="font-display h-section text-[color:var(--muted)]"
-            >
-              Excellence & Efficiency.
+            <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--muted)]">
+              Excellence &amp; Efficiency.
             </SplitReveal>
           </div>
         </div>
 
-        {/* overflow-x-clip lets the values slide from outside the right edge
-            without ever causing a horizontal page scroll. */}
         <ol className="col-span-12 flex flex-col overflow-x-clip lg:col-span-8">
           {values.map((v) => (
             <li
@@ -110,7 +104,8 @@ export default function Approach() {
                 {v.no}
               </span>
               <div className="col-span-12 lg:col-span-7">
-                <h3 className="font-display text-2xl tracking-tight lg:text-3xl">{v.title}</h3>
+                {/* Point titles use Adelora (subheading font) */}
+                <h3 className="font-display-alt text-2xl lg:text-3xl">{v.title}</h3>
                 <p className="mt-4 max-w-xl text-[color:var(--muted)]">{v.body}</p>
               </div>
               <div className="col-span-12 lg:col-span-4">

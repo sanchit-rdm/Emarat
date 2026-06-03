@@ -71,6 +71,14 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+/* Guard against any stray full-bleed element (decorative blurs, pinned tracks,
+   wide headings) pushing the page wider than the viewport on small screens. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   background: var(--bg);
   color: var(--fg);
@@ -86,7 +94,7 @@ body {
 .font-display {
   font-family: var(--font-display-pri), Georgia, "Times New Roman", serif;
   font-weight: 400;
-  letter-spacing: -0.005em;
+  letter-spacing: 0.1em;
 }
 
 .font-display-alt {
@@ -112,22 +120,35 @@ body {
    the "bold" feeling at the largest size without losing the elegance.
 ---------------------------------------------------------------------------- */
 .h-page {
-  font-size: clamp(3.5rem, 10vw, 11rem);
-  line-height: 0.92;
-  letter-spacing: -0.028em;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1;
+  letter-spacing: 0.1em;
   text-shadow: 0 0 0.6px currentColor;
+  overflow-wrap: break-word;
 }
 
 .h-section {
-  font-size: clamp(2.4rem, 6.5vw, 6rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
+  font-size: clamp(2rem, 5vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: 0.1em;
+  overflow-wrap: break-word;
 }
 
+@media (max-width: 640px) {
+  .h-page,
+  .h-section {
+    letter-spacing: 0.04em;
+  }
+}
+
+/* Subheadings use Adelora (the secondary display face). Declared after
+   .font-display so it wins for elements carrying both classes. */
 .h-sub {
-  font-size: clamp(2rem, 5vw, 4.5rem);
-  line-height: 1.05;
-  letter-spacing: -0.015em;
+  font-family: var(--font-display-alt), Georgia, "Times New Roman", serif;
+  font-size: clamp(1.75rem, 5vw, 4.5rem);
+  line-height: 1.1;
+  letter-spacing: 0;
+  overflow-wrap: break-word;
 }
 
 /* Headings on light (cream) sections read in brand green. Zero-specificity
@@ -159,10 +180,17 @@ body {
 
 html {
   scroll-behavior: auto;
+  /* Anchor jumps clear the fixed site header (h-28 = 7rem). */
+  scroll-padding-top: 7rem;
 }
 
 /* ----------------------------------------------------------------------------
-   Link-hover button — SVG stroke that traces the button's exact border
+   Link-hover button — SVG stroke that traces the button's exact border.
+
+   Every button carries a visible static border at rest (in the section's
+   accent colour — gold on dark/green, brand-green on cream). On hover, an
+   SVG stroke animates around that border in white at 2px, giving the same
+   look as the "Enquire Now" nav button — now the universal standard.
 ---------------------------------------------------------------------------- */
 .link-hover {
   position: relative;
@@ -171,6 +199,8 @@ html {
   align-items: center;
   justify-content: center;
   transition: color 0.4s ease;
+  /* Static border at rest — accent colour adapts per theme automatically. */
+  border: 1px solid var(--accent);
 }
 
 .link-hover .link-hover__circle {
@@ -182,12 +212,12 @@ html {
   overflow: visible;
 }
 
-/* The rect's x, y, width, height, rx, ry are set by JS so the stroke shape
-   always tracks the button's actual border-radius (pill, rounded-md, square…). */
+/* The rect is measured from the live DOM so the stroke always matches the
+   button's exact border-radius. Draws in white at 2px on hover. */
 .link-hover .link-hover__circle rect {
   fill: none;
-  stroke: var(--accent);
-  stroke-width: 1;
+  stroke: #ffffff;
+  stroke-width: 2;
   vector-effect: non-scaling-stroke;
   stroke-dasharray: var(--len, 800);
   stroke-dashoffset: var(--len, 800);
@@ -199,28 +229,26 @@ html {
   stroke-dashoffset: 0;
 }
 
-/* Solid filled variant */
+/* Filled variant — accent-colour background, border matches so it's seamless. */
 .link-hover--filled {
   background: var(--accent);
   color: var(--bg);
 }
+/* Hover stroke on filled: use the foreground (cream) so it reads against the fill. */
 .link-hover--filled .link-hover__circle rect {
   stroke: var(--fg);
+  stroke-width: 2;
 }
-
-/* In light theme the filled stroke needs to be cream against the green fill */
+/* In light (cream) sections the fill is brand-green — use the cream bg as stroke. */
 .theme-light .link-hover--filled .link-hover__circle rect {
   stroke: var(--bg);
+  stroke-width: 2;
 }
 
-/* Enquire Now button — static gold border at rest; the animated stroke that
-   traces the border on hover switches to white at 2px. */
+/* .enquire-btn is now identical to the default — kept on the nav button so it
+   can carry any future nav-specific overrides without a rename. */
 .enquire-btn {
   border: 1px solid var(--accent);
-}
-.enquire-btn .link-hover__circle rect {
-  stroke: #ffffff;
-  stroke-width: 2;
 }
 
 /* ----------------------------------------------------------------------------

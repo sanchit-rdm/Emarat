@@ -1,29 +1,31 @@
 import type { Metadata } from "next";
-import { Inter, Italiana, Cormorant_Garamond } from "next/font/google";
+import { Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 
-// Body — geometric sans, alternative to Euclid Square used on vp.moscow
-const inter = Inter({
+// Body text — Montserrat (client-specified). Drives --font-sans-pri.
+const montserrat = Montserrat({
   variable: "--font-sans-pri",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
-// Display — high-contrast serif, free alternative to SangBleu Empire (vp.moscow)
-const italiana = Italiana({
+// Headings — Bizantheum (client-licensed). Drives --font-display-pri.
+const bizantheum = localFont({
+  src: "../fonts/Bizantheum.otf",
   variable: "--font-display-pri",
-  subsets: ["latin"],
-  weight: "400",
   display: "swap",
 });
 
-// Secondary display — softer companion serif for smaller headings & paragraphs
-const cormorant = Cormorant_Garamond({
+// Subheadings — Adelora (client-licensed), regular + italic. Drives --font-display-alt.
+const adelora = localFont({
+  src: [
+    { path: "../fonts/Adelora.otf", weight: "400", style: "normal" },
+    { path: "../fonts/Adelora Italic.otf", weight: "400", style: "italic" },
+  ],
   variable: "--font-display-alt",
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
   display: "swap",
 });
 
@@ -41,7 +43,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${italiana.variable} ${cormorant.variable} antialiased`}
+      className={`${montserrat.variable} ${bizantheum.variable} ${adelora.variable} antialiased`}
     >
       <body className="min-h-screen">
         {/* Brand-green vertical rail — present on every page as a quiet brand signature */}

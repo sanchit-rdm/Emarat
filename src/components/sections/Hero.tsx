@@ -11,7 +11,7 @@ export default function Hero() {
     >
       <div className="pointer-events-none absolute inset-0 -z-20">
         <Image
-          src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=2400&q=80&auto=format&fit=crop"
+          src="/images/alameda-powder-room.webp"
           alt=""
           fill
           priority

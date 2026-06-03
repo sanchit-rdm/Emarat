@@ -17,21 +17,21 @@ const placeholders: Post[] = [
     title: "E11 at DLF Garden City: Why it is Gurugram's most anticipated launch",
     author: { name: "Project Update" },
     publishedAt: "2026-04-18",
-    mainImage: { asset: { url: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&q=80&auto=format&fit=crop" } },
+    mainImage: { asset: { url: "/images/alameda-lounge.webp" } },
   },
   {
     _id: "p2",
     title: "Investing in Gurugram real estate in 2026 what the numbers say",
     author: { name: "Market Note" },
     publishedAt: "2026-03-07",
-    mainImage: { asset: { url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&q=80&auto=format&fit=crop" } },
+    mainImage: { asset: { url: "/images/alameda-dining.webp" } },
   },
   {
     _id: "p3",
     title: "Why DLF Garden City remains Sector 93's most sought-after address",
     author: { name: "Feature" },
     publishedAt: "2026-02-14",
-    mainImage: { asset: { url: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=900&q=80&auto=format&fit=crop" } },
+    mainImage: { asset: { url: "/images/alameda-kitchen.webp" } },
   },
 ];
 
@@ -102,7 +102,7 @@ export default function News({ posts }: { posts: Post[] }) {
                   <span>·</span>
                   <span>{formatDate(post.publishedAt)}</span>
                 </div>
-                <h3 className="mt-3 font-display text-2xl leading-tight tracking-tight transition-colors group-hover:text-[color:var(--accent)]">
+                <h3 className="mt-3 font-display-alt text-2xl leading-tight transition-colors group-hover:text-[color:var(--accent)]">
                   {post.title}
                 </h3>
               </a>

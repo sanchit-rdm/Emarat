@@ -72,7 +72,7 @@ export default function TeamPage() {
                   0{i + 1}
                 </span>
                 <div>
-                  <div className="font-display text-xl">{v.label}</div>
+                  <div className="font-display-alt text-xl">{v.label}</div>
                   <div className="mt-1 text-xs uppercase tracking-[0.16em] text-[color:var(--muted)]">
                     {v.body}
                   </div>
@@ -125,7 +125,7 @@ export default function TeamPage() {
                     <div className="text-xs uppercase tracking-[0.18em] text-[color:var(--accent)]">
                       {m.role}
                     </div>
-                    <div className="mt-2 font-display text-xl tracking-tight lg:text-2xl">
+                    <div className="mt-2 font-display-alt text-xl lg:text-2xl">
                       {m.name}
                     </div>
                     <p className="mt-3 text-sm leading-relaxed text-[color:var(--muted)]">

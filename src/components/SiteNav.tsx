@@ -13,20 +13,25 @@ const corporate = [
 ];
 
 const projectLinks = [
-  { href: "/projects", label: "All Projects" },
-  { href: "/projects#c2", label: "C2 DLF Garden City" },
-  { href: "/projects#c5", label: "C5 DLF Garden City" },
-  { href: "/projects#e11", label: "E11 DLF Garden City" },
-  { href: "/projects#ea04", label: "EA 04 Almeda" },
+  { href: "/projects/c2", label: "C2 at DLF Garden City" },
+  { href: "/projects/c5", label: "C5 at DLF Garden City" },
+  { href: "/projects/e11", label: "E11 at DLF Garden City" },
+  { href: "/projects/ea04", label: "EA 04 at Almeda" },
+];
+
+const upcomingProjects = [
+  { href: "/upcoming-projects#dlf-garden-city-plots", label: "DLF Garden City Plots In Sector 93 Gurgaon" },
+  { href: "/upcoming-projects#dlf-residential", label: "DLF Residential Projects In Gurgaon Sector 93" },
+  { href: "/upcoming-projects#dlf-independent-floors", label: "DLF Independent Floors In Gurgaon Phase 3" },
 ];
 
 const topLevel = [
+  { href: "/", label: "Home" },
   { label: "Corporate", dropdown: corporate },
   { label: "Projects", dropdown: projectLinks },
-  { href: "/location", label: "Location" },
-  { href: "/properties", label: "Properties" },
+  { label: "Upcoming Projects", dropdown: upcomingProjects },
   { href: "/careers", label: "Careers" },
-  { href: "/news", label: "News" },
+  { href: "/news", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ];
 

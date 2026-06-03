@@ -60,7 +60,7 @@ export default function About() {
         <div className="col-span-12 lg:col-span-3">
           <Parallax speed={0.25} className="relative aspect-[3/4] overflow-hidden rounded-md">
             <Image
-              src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=900&q=80&auto=format&fit=crop"
+              src="/images/alameda-kitchen.webp"
               alt="Emarat Realty Luxury Residence Interior"
               fill
               sizes="(min-width: 1024px) 25vw, 100vw"

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/sections/SiteFooter";
 import PageHero from "@/components/PageHero";
@@ -22,7 +23,7 @@ const projects = [
     status: "Ready to Move",
     config: "3 & 4 BHK Luxury Apartments",
     size: "1,850 – 2,400 sq.ft.",
-    img: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1800&q=80&auto=format&fit=crop",
+    img: "/images/alameda-dining.webp",
     body: "Premium high-rise residences with double-height entrance lobbies, landscaped podium gardens and curated club amenities. Direct frontage on the Dwarka Expressway.",
     highlights: ["Podium-level club", "Three-side open units", "100% power backup", "Concierge service"],
   },
@@ -34,7 +35,7 @@ const projects = [
     status: "Possession Ready",
     config: "Premium 3 & 4 BHK Residences",
     size: "2,100 – 2,800 sq.ft.",
-    img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1800&q=80&auto=format&fit=crop",
+    img: "/images/alameda-kitchen.webp",
     body: "Spacious cross-ventilated residences with refined interiors, French balconies and a curated palette of natural materials. Designed around a central landscaped courtyard.",
     highlights: ["Cross-ventilated layouts", "French balconies", "Courtyard-facing units", "Italian marble flooring"],
   },
@@ -46,7 +47,7 @@ const projects = [
     status: "New Launch",
     config: "Luxury Flats & Penthouses",
     size: "2,400 – 5,200 sq.ft.",
-    img: "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1800&q=80&auto=format&fit=crop",
+    img: "/images/alameda-bedroom-1.webp",
     body: "The most anticipated launch in DLF Garden City featuring duplex penthouses with private terraces, sky lounges and double-height living spaces.",
     highlights: ["Duplex penthouses", "Private terraces", "Sky lounge", "Concierge & valet"],
   },
@@ -58,7 +59,7 @@ const projects = [
     status: "Operational",
     config: "Commercial & Retail Spaces",
     size: "Suites from 500 sq.ft.",
-    img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1800&q=80&auto=format&fit=crop",
+    img: "/images/alameda-bedroom-2.webp",
     body: "High-end retail and Grade-A office spaces at Almeda designed for boutique brands, restaurants and forward-thinking firms looking for a premium business address.",
     highlights: ["Grade-A specifications", "Triple-height retail", "Dedicated visitor parking", "F&B-ready services"],
   },
@@ -86,7 +87,7 @@ export default function ProjectsPage() {
           titleTop="Selected works"
           titleBottom="across Gurugram."
           subtitle="A portfolio of residential and commercial developments at DLF Garden City and Almeda every Emarat project built on the same principles of quality, elegance and innovation."
-          bgImage="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=2400&q=80&auto=format&fit=crop"
+          bgImage="/images/alameda-bedroom-3.webp"
           trailing="Six developments · 500+ residences"
         />
 
@@ -112,16 +113,18 @@ export default function ProjectsPage() {
               >
                 {/* Image */}
                 <div className={`col-span-12 lg:col-span-7 ${i % 2 === 1 ? "lg:order-2" : ""}`}>
-                  <Reveal className="relative aspect-[4/3] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
-                    <Image
-                      src={p.img}
-                      alt={p.title}
-                      fill
-                      sizes="(min-width: 1024px) 55vw, 100vw"
-                      className="object-cover"
-                      style={{ filter: "sepia(0.15) saturate(0.88) brightness(0.86)" }}
-                    />
-                  </Reveal>
+                  <Link href={`/projects/${p.id}`} className="group block">
+                    <Reveal className="relative aspect-[4/3] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
+                      <Image
+                        src={p.img}
+                        alt={p.title}
+                        fill
+                        sizes="(min-width: 1024px) 55vw, 100vw"
+                        className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105"
+                        style={{ filter: "sepia(0.15) saturate(0.88) brightness(0.86)" }}
+                      />
+                    </Reveal>
+                  </Link>
                 </div>
 
                 {/* Details */}
@@ -132,12 +135,14 @@ export default function ProjectsPage() {
                     <span className="text-[color:var(--accent)]">{p.status}</span>
                   </Reveal>
 
-                  <SplitReveal
-                    as="h2"
-                    className="mt-6 font-display h-sub"
-                  >
-                    {p.title}
-                  </SplitReveal>
+                  <Link href={`/projects/${p.id}`} className="transition-colors hover:text-[color:var(--accent)]">
+                    <SplitReveal
+                      as="h2"
+                      className="mt-6 font-display h-sub"
+                    >
+                      {p.title}
+                    </SplitReveal>
+                  </Link>
 
                   <Reveal as="p" delay={0.1} className="mt-3 text-sm text-[color:var(--muted)]">
                     {p.location}
@@ -174,11 +179,11 @@ export default function ProjectsPage() {
                   </ul>
 
                   <Reveal delay={0.4} className="mt-8 flex gap-3">
-                    <CircleButton href="/contact" size="sm" variant="filled">
-                      Request Details
+                    <CircleButton href={`/projects/${p.id}`} size="sm" variant="filled">
+                      View Project
                     </CircleButton>
-                    <CircleButton href="/contact" size="sm" variant="outline">
-                      Schedule Visit
+                    <CircleButton href={`/projects/${p.id}#enquiry`} size="sm" variant="outline">
+                      Enquire
                     </CircleButton>
                   </Reveal>
                 </div>
@@ -205,7 +210,7 @@ export default function ProjectsPage() {
                   className="group flex items-center justify-between rounded-md border border-[color:var(--line)] p-8 transition-colors hover:border-[color:var(--accent)]/40 lg:p-10"
                 >
                   <div>
-                    <h3 className="font-display text-2xl tracking-tight lg:text-3xl">{a.name}</h3>
+                    <h3 className="font-display-alt text-2xl lg:text-3xl">{a.name}</h3>
                     <div className="mt-2 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
                       {a.location} · {a.type}
                     </div>

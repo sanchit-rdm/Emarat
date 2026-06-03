@@ -8,42 +8,42 @@ const propertyTypes = [
     id: "apartments",
     label: "Luxury Apartments",
     caption: "3 & 4 BHK C2, C5, E11 at DLF Garden City",
-    src: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&q=80&auto=format&fit=crop",
+    src: "/images/alameda-bedroom-2.webp",
     ratio: "aspect-[3/4]",
   },
   {
     id: "penthouses",
     label: "Penthouses",
     caption: "Top-floor residences DLF Garden City",
-    src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80&auto=format&fit=crop",
+    src: "/images/alameda-bedroom-3.webp",
     ratio: "aspect-[4/3]",
   },
   {
     id: "plots",
     label: "Residential Plots",
     caption: "Freehold plots Sector 93, Gurugram",
-    src: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=80&auto=format&fit=crop",
+    src: "/images/alameda-bathroom.webp",
     ratio: "aspect-[3/4]",
   },
   {
     id: "floors",
     label: "Independent Floors",
     caption: "Builder floors Phase 3, DLF",
-    src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80&auto=format&fit=crop",
+    src: "/images/alameda-bedroom-4.webp",
     ratio: "aspect-[4/3]",
   },
   {
     id: "commercial",
     label: "Commercial",
     caption: "High-end retail & offices EA 04 at Almeda",
-    src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&q=80&auto=format&fit=crop",
+    src: "/images/alameda-powder-room.webp",
     ratio: "aspect-[3/4]",
   },
   {
     id: "amenities",
     label: "Amenities",
     caption: "Club, pool & resident lounges",
-    src: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1200&q=80&auto=format&fit=crop",
+    src: "/images/alameda-bedroom-5.webp",
     ratio: "aspect-[4/3]",
   },
 ];
@@ -97,7 +97,7 @@ export default function Materials() {
                   </Parallax>
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[color:var(--bg)]/80 via-[color:var(--bg)]/10 to-transparent" />
                   <div className="absolute inset-x-5 bottom-5 flex items-end justify-between">
-                    <span className="font-display text-2xl tracking-tight">{s.label}</span>
+                    <span className="font-display-alt text-2xl">{s.label}</span>
                     <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
                       {String(i + 1).padStart(2, "0")}
                     </span>
@@ -114,7 +114,7 @@ export default function Materials() {
         <Reveal as="div" delay={0.2} className="mt-12 lg:mt-16">
           <div className="relative aspect-[21/9] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
             <Image
-              src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=2100&q=80&auto=format&fit=crop"
+              src="/images/alameda-entrance.webp"
               alt="Luxury living room DLF Garden City"
               fill
               sizes="100vw"
@@ -126,7 +126,7 @@ export default function Materials() {
               <div className="mb-2 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
                 Inside / C5 Residences
               </div>
-              <p className="font-display text-2xl leading-snug tracking-tight lg:text-3xl">
+              <p className="font-display-alt text-2xl leading-snug lg:text-3xl">
                 Every room designed for the way you actually live. That is not a promise that is the brief.
               </p>
             </div>

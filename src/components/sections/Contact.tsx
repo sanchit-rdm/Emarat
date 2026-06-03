@@ -11,7 +11,7 @@ export default function Contact() {
     >
       <div className="pointer-events-none absolute inset-0 -z-20">
         <Image
-          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=2400&q=80&auto=format&fit=crop"
+          src="/images/alameda-bedroom-4.webp"
           alt=""
           fill
           sizes="100vw"
@@ -103,7 +103,7 @@ export default function Contact() {
               </div>
               <a
                 href="tel:+918450984509"
-                className="block font-display text-2xl tracking-tight transition-colors hover:text-[color:var(--accent)]"
+                className="block font-display-alt text-2xl transition-colors hover:text-[color:var(--accent)]"
               >
                 +91 84509 84509
               </a>
@@ -118,7 +118,7 @@ export default function Contact() {
               </div>
               <a
                 href="mailto:info@emaratrealty.com"
-                className="block font-display text-xl tracking-tight transition-colors hover:text-[color:var(--accent)]"
+                className="block font-display-alt text-xl transition-colors hover:text-[color:var(--accent)]"
               >
                 info@emaratrealty.com
               </a>
@@ -131,7 +131,7 @@ export default function Contact() {
               <div className="text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
                 Visit Us
               </div>
-              <p className="font-display text-base leading-relaxed">
+              <p className="font-display-alt text-base leading-relaxed">
                 Emarat Realty<br />
                 2nd Floor, Sector-15<br />
                 Civil Lines, Gurugram<br />

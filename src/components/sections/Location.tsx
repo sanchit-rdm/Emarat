@@ -3,41 +3,61 @@
 import { useState } from "react";
 import Image from "next/image";
 import Reveal from "@/components/motion/Reveal";
-import SplitReveal from "@/components/motion/SplitReveal";
 
 /**
- * Interactive "Iconic Sights" style section — mirrors vp.moscow's places-nav.
- * Three landmark cards: hovering/clicking each one crossfades the section
- * background image and swaps the heading + description below.
+ * Interactive connectivity section — hovering/clicking a landmark crossfades
+ * the section background and swaps the heading + description. Each landmark
+ * carries a feature label + icon (Seamless Connectivity / Easy Access /
+ * Convenient Travel).
  */
+
+const stroke = {
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 1.4,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+};
+
+const icons = {
+  connectivity: (
+    <svg viewBox="0 0 24 24" {...stroke}><circle cx="12" cy="12" r="2" /><path d="M8.5 8.5a5 5 0 0 0 0 7M15.5 8.5a5 5 0 0 1 0 7M6 6a9 9 0 0 0 0 12M18 6a9 9 0 0 1 0 12" /></svg>
+  ),
+  access: (
+    <svg viewBox="0 0 24 24" {...stroke}><path d="M5 20l4-16M19 20l-4-16M12 6v1m0 4v1m0 4v1" /></svg>
+  ),
+  travel: (
+    <svg viewBox="0 0 24 24" {...stroke}><path d="M3 13l8-2 4-7 2 1-2 7 6 2v2l-7-1-2 4-2-1 .5-3.5L4 16z" /></svg>
+  ),
+};
 
 const places = [
   {
     id: "dwarka",
-    minutes: 5,
     name: "Dwarka Expressway",
     heading: ["Dwarka", "Expressway"],
-    body: "Direct, signal-free access to NH-248BB connecting Gurugram to Delhi in minutes. The most important infrastructure corridor of the NCR.",
-    thumb: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80&auto=format&fit=crop",
-    bg: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=2400&q=80&auto=format&fit=crop",
+    body: "Enjoy easy access to one of the region's key road networks, connecting you to major destinations across Gurugram and Delhi NCR.",
+    feature: "Seamless Connectivity",
+    icon: "connectivity" as const,
+    bg: "/images/dwarka-Expressway.jpg",
   },
   {
-    id: "golf",
-    minutes: 8,
-    name: "Golf Course Extension",
-    heading: ["Golf Course", "Extension Road"],
-    body: "The premium business address of Gurugram\nfine dining, retail and Grade-A offices,\nall within an eight-minute drive of your home.",
-    thumb: "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=600&q=80&auto=format&fit=crop",
-    bg: "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=2400&q=80&auto=format&fit=crop",
+    id: "nh48",
+    name: "NH-48",
+    heading: ["NH-48", "National Highway"],
+    body: "Stay connected to business districts, commercial centres and everyday destinations through one of the country's most important highways.",
+    feature: "Easy Access",
+    icon: "access" as const,
+    bg: "/images/nh-48.webp",
   },
   {
     id: "airport",
-    minutes: 35,
     name: "IGI Airport",
     heading: ["Indira Gandhi", "Airport"],
-    body: "International connectivity in thirty-five minutes Asia's seventh busiest airport, accessible via the Dwarka Expressway with zero traffic signals.",
-    thumb: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&q=80&auto=format&fit=crop",
-    bg: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=2400&q=80&auto=format&fit=crop",
+    body: "Benefit from convenient access to Indira Gandhi International Airport, ensuring smoother travel and better connectivity.",
+    feature: "Convenient Travel",
+    icon: "travel" as const,
+    bg: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1920&q=75&auto=format&fit=crop",
   },
 ];
 
@@ -68,33 +88,42 @@ export default function Location() {
           />
         ))}
       </div>
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[color:var(--bg)]/50" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[color:var(--bg)]/55" />
 
       <div className="mx-auto max-w-[1440px]">
-        {/* Animated heading (changes per tab using a key prop to retrigger reveal) */}
-        <div key={`heading-${active}`} className="places-fade">
-          <h2 className="font-display h-page">
-            {current.heading[0]}
-          </h2>
-          <h2 className="font-display h-page text-[color:var(--accent)]">
-            {current.heading[1]}
-          </h2>
+        <Reveal as="p" className="eyebrow mb-8 text-xs uppercase tracking-[0.24em] text-[color:var(--muted)]">
+          <span>Location &amp; Connectivity</span>
+        </Reveal>
+
+        {/* Fixed-height content area — reserves space for the tallest landmark
+            so switching tabs never shifts the tabs / layout below. */}
+        <div className="min-h-[20rem] sm:min-h-[19rem] lg:min-h-[24rem]">
+          {/* Feature label for the active landmark */}
+          <div key={`feature-${active}`} className="places-fade mb-4 flex items-center gap-3 text-[color:var(--accent)]">
+            <span className="h-6 w-6">{icons[current.icon]}</span>
+            <span className="text-xs uppercase tracking-[0.22em]">{current.feature}</span>
+          </div>
+
+          {/* Animated heading (changes per tab using a key prop to retrigger reveal) */}
+          <div key={`heading-${active}`} className="places-fade">
+            <h2 className="font-display h-page">{current.heading[0]}</h2>
+            <h2 className="font-display h-page text-[color:var(--accent)]">{current.heading[1]}</h2>
+          </div>
+
+          {/* Description */}
+          <p
+            key={`body-${active}`}
+            className="places-fade mt-8 max-w-xl text-base leading-relaxed text-[color:var(--fg)]/80 lg:text-lg"
+          >
+            {current.body}
+          </p>
         </div>
 
-        {/* Description */}
-        <div
-          key={`body-${active}`}
-          className="places-fade mt-8 max-w-xl whitespace-pre-line text-base leading-relaxed text-[color:var(--fg)]/80 lg:text-lg"
-        >
-          {current.body}
-        </div>
-
-        {/* Tab navigation — thumbnails with decorative circles between */}
-        <div className="mt-16 lg:mt-24">
+        {/* Tab navigation — icon + feature + name */}
+        <div className="mt-12 lg:mt-16">
           <div className="flex flex-wrap items-center gap-y-6">
             {places.map((p, i) => (
               <div key={p.id} className="flex items-center">
-                {/* Deco circle between items (not before first) */}
                 {i > 0 && (
                   <div className="mx-4 hidden items-center gap-1 sm:flex lg:mx-8">
                     <span className="deco-circle" />
@@ -112,34 +141,20 @@ export default function Location() {
                     i === active ? "opacity-100" : "opacity-55 hover:opacity-90"
                   }`}
                 >
-                  {/* Thumbnail */}
-                  <div
-                    className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-full border transition-all duration-500 lg:h-24 lg:w-24 ${
+                  {/* Icon medallion */}
+                  <span
+                    className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-full border transition-colors duration-500 lg:h-20 lg:w-20 ${
                       i === active
-                        ? "border-[color:var(--accent)]"
-                        : "border-[color:var(--line)]"
+                        ? "border-[color:var(--accent)] text-[color:var(--accent)]"
+                        : "border-[color:var(--line)] text-[color:var(--fg)]/70"
                     }`}
                   >
-                    <Image
-                      src={p.thumb}
-                      alt={p.name}
-                      fill
-                      sizes="96px"
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      style={{ filter: "sepia(0.12) saturate(0.85) brightness(0.85)" }}
-                    />
-                  </div>
+                    <span className="h-7 w-7 lg:h-8 lg:w-8">{icons[p.icon]}</span>
+                  </span>
 
-                  {/* Minutes + name */}
+                  {/* Feature + name */}
                   <div>
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="font-display text-3xl tracking-tight lg:text-4xl">
-                        {p.minutes}
-                      </span>
-                      <span className="text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                        Min
-                      </span>
-                    </div>
+                    <div className="font-display-alt text-xl tracking-tight lg:text-2xl">{p.feature}</div>
                     <div className="mt-1 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
                       {p.name}
                     </div>
@@ -150,11 +165,6 @@ export default function Location() {
           </div>
         </div>
 
-        {/* Hint */}
-        <Reveal delay={0.2} className="mt-12 flex items-center gap-3 border-t border-[color:var(--line)] pt-6 text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
-          <span className="inline-block h-1 w-1 rounded-full bg-[color:var(--accent)]" />
-          <span>Hover or tap a landmark the view changes</span>
-        </Reveal>
       </div>
     </section>
   );

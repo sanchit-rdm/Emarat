@@ -14,15 +14,11 @@ import { ensureGsap, scheduleScrollRefresh } from "@/lib/gsap";
    directions. Reuses the project's `ensureGsap()` / `gsap.context()` pattern
    (see src/components/motion/Parallax.tsx).
 
-   Asset (the team's video) — drop into /public/hero/:
-     • hero.mp4          primary source. SMOOTHNESS IS ENCODING-BOUND: use a
-                         short ~5–8s clip, H.264, keyframe-dense / short GOP so
-                         any seek lands on/near an I-frame, e.g.
-                         ffmpeg -i in.mov -c:v libx264 -g 6 -pix_fmt yuv420p \
-                                -movflags +faststart -an hero.mp4
-                         (use -g 1 for the smoothest seek at a larger file).
-     • hero.webm         optional VP9/AV1 secondary source.
-     • hero-poster.jpg   first-frame still (poster + reduced-motion fallback).
+   Assets — in /public/videos/:
+     • hero-scrub.mp4    What the hero scrubs. Re-encoded keyframe-dense (a
+                         keyframe every 6 frames) so any seek decodes ≤6 frames
+                         and reverse scrubbing stays smooth. See videos/README.
+     • hero-poster.webp  First-frame still (poster + reduced-motion fallback).
 ---------------------------------------------------------------------------- */
 
 // Total scroll length of the pinned hero, in viewport heights. Tune to taste:
@@ -107,19 +103,27 @@ export default function ScrollVideoHero() {
   // video can't load. Reduced-motion is read once inside the effect (matches
   // SmoothScroll.tsx), so it doesn't need to live in state.
   const [videoFailed, setVideoFailed] = useState(false);
+  // Scrubbing (and the heavy video download) is desktop-only. On phones and
+  // under reduced-motion we show a static poster hero with the first text block
+  // — no pin, no scroll-jacking, no multi-MB fetch.
+  const [enableScrub, setEnableScrub] = useState(false);
 
   useEffect(() => {
-    if (videoFailed) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mobile = window.matchMedia("(max-width: 1023px)").matches;
+    setEnableScrub(!reduced && !mobile);
+  }, []);
+
+  useEffect(() => {
+    if (videoFailed || !enableScrub) return;
 
     const pin = pinRef.current;
     const video = videoRef.current;
     if (!pin || !video) return;
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return; // static hero: first block stays visible, no pin
-
     const { gsap } = ensureGsap();
     video.muted = true; // some browsers ignore the declarative prop
+    video.load(); // pick up the <source> that was just rendered
 
     let ctx: ReturnType<typeof gsap.context> | undefined;
 
@@ -141,6 +145,11 @@ export default function ScrollVideoHero() {
             scrub: SCRUB,
             anticipatePin: 1,
             invalidateOnRefresh: true,
+            // Highest priority so this top-of-page pin is measured (and its
+            // pin-spacer inserted) before the Gallery below it — otherwise the
+            // Gallery computes its start without this spacer and overlaps the
+            // hero before the scrub finishes.
+            refreshPriority: 2,
           },
         });
 
@@ -201,27 +210,29 @@ export default function ScrollVideoHero() {
       video.removeEventListener("loadedmetadata", init);
       ctx?.revert();
     };
-  }, [videoFailed]);
+  }, [videoFailed, enableScrub]);
 
   return (
     <section id="top" ref={sectionRef} className="relative">
-      <div ref={pinRef} className="relative isolate h-screen w-full overflow-hidden">
-        {/* Background video — never played, only scrubbed. */}
+      <div ref={pinRef} className="relative isolate h-[100svh] w-full overflow-hidden">
+        {/* Background video — never played, only scrubbed. The source is only
+            mounted on desktop (enableScrub), so phones just show the poster and
+            never download the clip. */}
         <video
           ref={videoRef}
           className="absolute inset-0 -z-20 h-full w-full object-cover"
-          poster="/videos/hero-poster.jpg"
+          poster="/videos/hero-poster.webp"
           muted
           playsInline
-          preload="auto"
+          preload={enableScrub ? "auto" : "none"}
           disablePictureInPicture
           disableRemotePlayback
           aria-hidden="true"
           onError={() => setVideoFailed(true)}
         >
-          {/* Optimized scrub copy: 1080p, keyframe every 6 frames (see README).
-              Re-encoded from the source "Sample 1.mp4" for smooth seeking. */}
-          <source src="/videos/hero-scrub.mp4" type="video/mp4" />
+          {/* Optimized scrub copy: 720p, keyframe every 6 frames (see README).
+              Re-encoded from the new hero clip for smooth seeking. */}
+          {enableScrub && <source src="/videos/hero-scrub.mp4" type="video/mp4" />}
         </video>
 
         {/* Brand tint + vignette for legibility (mirrors the old Hero). */}

@@ -49,7 +49,7 @@ export default function AboutPage() {
           titleTop="Redefining the standard"
           titleBottom="of luxury living."
           subtitle="At Emarat, we're passionate about creating exquisite spaces that elevate the art of living. Our mission is to redefine the standards of living one breath-taking space at a time."
-          bgImage="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=2400&q=80&auto=format&fit=crop"
+          bgImage="/images/alameda-entrance.webp"
           trailing="An Argo Group company"
         />
 
@@ -88,7 +88,7 @@ export default function AboutPage() {
                     <span className="font-mono text-xs text-[color:var(--accent)]">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="font-display text-xl leading-snug tracking-tight lg:text-2xl">
+                    <span className="font-display-alt text-xl leading-snug lg:text-2xl">
                       {h}
                     </span>
                   </Reveal>
@@ -102,7 +102,7 @@ export default function AboutPage() {
         <section className="relative isolate overflow-hidden bg-[color:var(--bg-alt)] px-6 py-28 lg:px-10 lg:py-40">
           <div className="pointer-events-none absolute inset-0 -z-10">
             <Image
-              src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=2400&q=80&auto=format&fit=crop"
+              src="/images/alameda-lounge.webp"
               alt=""
               fill
               sizes="100vw"
@@ -142,7 +142,7 @@ export default function AboutPage() {
                     delay={i * 0.06}
                     className="border-t border-[color:var(--line)] pt-4"
                   >
-                    <div className="font-display text-xl">{ind.name}</div>
+                    <div className="font-display-alt text-xl">{ind.name}</div>
                     <div className="mt-1 text-xs uppercase tracking-[0.16em] text-[color:var(--muted)]">
                       {ind.note}
                     </div>
@@ -154,7 +154,7 @@ export default function AboutPage() {
             <div className="col-span-12 lg:col-span-3">
               <Parallax speed={0.2} className="relative aspect-[3/4] overflow-hidden rounded-md">
                 <Image
-                  src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&q=80&auto=format&fit=crop"
+                  src="/images/alameda-dining.webp"
                   alt="Argo Group portfolio"
                   fill
                   sizes="(min-width: 1024px) 25vw, 100vw"
@@ -207,7 +207,7 @@ export default function AboutPage() {
                   <div className="text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
                     Initiative {String(i + 1).padStart(2, "0")}
                   </div>
-                  <h3 className="mt-6 font-display text-2xl leading-tight tracking-tight lg:text-3xl">
+                  <h3 className="mt-6 font-display-alt text-2xl leading-tight lg:text-3xl">
                     {c.name}
                   </h3>
                   <p className="mt-5 text-[color:var(--muted)]">{c.body}</p>

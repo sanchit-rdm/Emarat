@@ -31,7 +31,7 @@ const placeholders: Post[] = [
     author: { name: "Project Update" },
     publishedAt: "2026-04-18",
     excerpt: "Inside the new duplex penthouses, sky lounges and the design thinking behind our most ambitious residence yet.",
-    mainImage: { asset: { url: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=80&auto=format&fit=crop" } },
+    mainImage: { asset: { url: "/images/alameda-bathroom.webp" } },
   },
   {
     _id: "p2",
@@ -39,7 +39,7 @@ const placeholders: Post[] = [
     author: { name: "Market Note" },
     publishedAt: "2026-03-07",
     excerpt: "Five years of price data from Sectors 92–94 reveal a more nuanced story than the headlines suggest.",
-    mainImage: { asset: { url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80&auto=format&fit=crop" } },
+    mainImage: { asset: { url: "/images/alameda-bedroom-4.webp" } },
   },
   {
     _id: "p3",
@@ -47,7 +47,7 @@ const placeholders: Post[] = [
     author: { name: "Feature" },
     publishedAt: "2026-02-14",
     excerpt: "A walking tour of the township the architecture, the courtyards, the connectivity, and what comes next.",
-    mainImage: { asset: { url: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&q=80&auto=format&fit=crop" } },
+    mainImage: { asset: { url: "/images/alameda-powder-room.webp" } },
   },
   {
     _id: "p4",
@@ -55,7 +55,7 @@ const placeholders: Post[] = [
     author: { name: "Infrastructure" },
     publishedAt: "2026-01-22",
     excerpt: "The signal-free corridor that will reshape NCR connectivity and what it means for property values along Sector 93.",
-    mainImage: { asset: { url: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80&auto=format&fit=crop" } },
+    mainImage: { asset: { url: "/images/alameda-bedroom-5.webp" } },
   },
   {
     _id: "p5",
@@ -63,7 +63,7 @@ const placeholders: Post[] = [
     author: { name: "Essay" },
     publishedAt: "2025-12-30",
     excerpt: "Italian marble, German plumbing, Indian craftsmanship a breakdown of where every rupee goes in a premium residence.",
-    mainImage: { asset: { url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80&auto=format&fit=crop" } },
+    mainImage: { asset: { url: "/images/alameda-entrance.webp" } },
   },
 ];
 
@@ -89,7 +89,7 @@ export default async function NewsPage() {
           titleTop="From Vision"
           titleBottom="to Value."
           subtitle="The Emarat perspective project updates, market notes from Gurugram and longer feature articles about how we think about luxury real estate in 2026."
-          bgImage="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=2400&q=80&auto=format&fit=crop"
+          bgImage="/images/alameda-lounge.webp"
           trailing="Updated monthly"
         />
 
@@ -160,7 +160,7 @@ export default async function NewsPage() {
 
             {rest.length === 0 ? (
               <Reveal className="rounded-md border border-[color:var(--line)] py-20 text-center">
-                <div className="font-display text-3xl text-[color:var(--muted)]">Stay tuned.</div>
+                <div className="font-display-alt text-3xl text-[color:var(--muted)]">Stay tuned.</div>
                 <p className="mt-3 text-sm text-[color:var(--muted)]">
                   New articles published monthly.
                 </p>
@@ -192,7 +192,7 @@ export default async function NewsPage() {
                         <span>·</span>
                         <span>{formatDate(post.publishedAt)}</span>
                       </div>
-                      <h3 className="mt-3 font-display text-xl leading-tight tracking-tight transition-colors group-hover:text-[color:var(--accent)] lg:text-2xl">
+                      <h3 className="mt-3 font-display-alt text-xl leading-tight transition-colors group-hover:text-[color:var(--accent)] lg:text-2xl">
                         {post.title}
                       </h3>
                       {post.excerpt && (

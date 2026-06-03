@@ -21,7 +21,7 @@ const types = [
     config: "3 & 4 BHK",
     size: "1,850 – 2,800 sq.ft.",
     where: "C2, C5, E11 DLF Garden City",
-    img: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1800&q=80&auto=format&fit=crop",
+    img: "/images/alameda-bathroom.webp",
   },
   {
     id: "penthouses",
@@ -30,7 +30,7 @@ const types = [
     config: "Duplex 4–5 BHK",
     size: "3,800 – 5,200 sq.ft.",
     where: "E11 DLF Garden City",
-    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=80&auto=format&fit=crop",
+    img: "/images/alameda-bedroom-4.webp",
   },
   {
     id: "plots",
@@ -39,7 +39,7 @@ const types = [
     config: "Freehold land",
     size: "240 – 500 sq. yards",
     where: "Sector 93, Gurugram",
-    img: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1800&q=80&auto=format&fit=crop",
+    img: "/images/alameda-powder-room.webp",
   },
   {
     id: "floors",
@@ -48,7 +48,7 @@ const types = [
     config: "3 & 4 BHK Floors",
     size: "2,200 – 3,400 sq.ft.",
     where: "Phase 3, DLF",
-    img: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1800&q=80&auto=format&fit=crop",
+    img: "/images/alameda-bedroom-5.webp",
   },
   {
     id: "commercial",
@@ -57,7 +57,7 @@ const types = [
     config: "Suites & Retail Units",
     size: "From 500 sq.ft.",
     where: "EA 04 Almeda",
-    img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1800&q=80&auto=format&fit=crop",
+    img: "/images/alameda-entrance.webp",
   },
 ];
 
@@ -76,7 +76,7 @@ export default function PropertiesPage() {
           titleTop="Homes, plots,"
           titleBottom="and the spaces between."
           subtitle="From a single freehold plot to a luxury duplex penthouse every Emarat property is delivered with uncompromising attention to design, materials and the rooms in between."
-          bgImage="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=2400&q=80&auto=format&fit=crop"
+          bgImage="/images/alameda-lounge.webp"
           trailing="Five property categories"
         />
 
@@ -108,7 +108,7 @@ export default function PropertiesPage() {
                   <div className="font-mono text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
                     0{i + 1}
                   </div>
-                  <h3 className="mt-4 font-display text-2xl leading-tight tracking-tight lg:text-3xl">
+                  <h3 className="mt-4 font-display-alt text-2xl leading-tight lg:text-3xl">
                     {title}
                   </h3>
                   <p className="mt-4 text-sm leading-relaxed text-[color:var(--muted)]">
@@ -194,7 +194,7 @@ export default function PropertiesPage() {
         <section className="relative isolate overflow-hidden px-6 py-24 lg:px-10 lg:py-32">
           <div className="pointer-events-none absolute inset-0 -z-10">
             <Image
-              src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=2400&q=80&auto=format&fit=crop"
+              src="/images/alameda-dining.webp"
               alt=""
               fill
               sizes="100vw"

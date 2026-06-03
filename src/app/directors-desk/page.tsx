@@ -42,7 +42,7 @@ export default function DirectorsDeskPage() {
                 />
               </Parallax>
               <Reveal delay={0.2} className="mt-6">
-                <div className="font-display text-2xl tracking-tight">Dr. Raahul Goel</div>
+                <div className="font-display-alt text-2xl">Dr. Raahul Goel</div>
                 <div className="mt-1 text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
                   Managing Director · Emarat Realty
                 </div>
@@ -91,7 +91,7 @@ export default function DirectorsDeskPage() {
             </Reveal>
 
             <Reveal delay={0.3} className="mt-12 flex items-center gap-4 border-t border-[color:var(--line)] pt-8">
-              <div className="font-display text-2xl tracking-tight text-[color:var(--accent)]">
+              <div className="font-display-alt text-2xl text-[color:var(--accent)]">
                 Dr. Raahul Goel
               </div>
             </Reveal>
@@ -106,7 +106,7 @@ export default function DirectorsDeskPage() {
                 <div className="font-mono text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
                   Our Mission
                 </div>
-                <h3 className="mt-6 font-display text-3xl leading-tight tracking-tight lg:text-4xl">
+                <h3 className="mt-6 font-display-alt text-3xl leading-tight lg:text-4xl">
                   Transformative real estate that sets new standards.
                 </h3>
                 <p className="mt-6 text-base leading-relaxed text-[color:var(--muted)]">
@@ -122,7 +122,7 @@ export default function DirectorsDeskPage() {
                 <div className="font-mono text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
                   Our Vision
                 </div>
-                <h3 className="mt-6 font-display text-3xl leading-tight tracking-tight lg:text-4xl">
+                <h3 className="mt-6 font-display-alt text-3xl leading-tight lg:text-4xl">
                   Leading through excellence, sustainability and design.
                 </h3>
                 <p className="mt-6 text-base leading-relaxed text-[color:var(--muted)]">

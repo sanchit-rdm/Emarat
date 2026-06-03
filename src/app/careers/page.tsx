@@ -54,7 +54,7 @@ export default function CareersPage() {
           titleTop="Build your career,"
           titleBottom="building landmarks."
           subtitle="At Emarat, we're always looking for passionate, innovative and driven individuals who want to shape the future of luxury living in Gurugram."
-          bgImage="https://images.unsplash.com/photo-1497366216548-37526070297c?w=2400&q=80&auto=format&fit=crop"
+          bgImage="/images/alameda-kitchen.webp"
           trailing="Gurugram · On-site"
         />
 
@@ -91,7 +91,7 @@ export default function CareersPage() {
                     {p.n}
                   </span>
                   <div>
-                    <h3 className="font-display text-2xl tracking-tight lg:text-3xl">
+                    <h3 className="font-display-alt text-2xl lg:text-3xl">
                       {p.title}
                     </h3>
                     <p className="mt-4 text-[color:var(--muted)]">{p.body}</p>
@@ -106,7 +106,7 @@ export default function CareersPage() {
         <section className="relative isolate overflow-hidden border-y border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-28 lg:px-10 lg:py-40">
           <div className="pointer-events-none absolute inset-0 -z-10">
             <Image
-              src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=2400&q=80&auto=format&fit=crop"
+              src="/images/alameda-bedroom-1.webp"
               alt=""
               fill
               sizes="100vw"
@@ -139,7 +139,7 @@ export default function CareersPage() {
                     delay={i * 0.05}
                     className="flex items-baseline justify-between border-t border-[color:var(--line)] pt-4"
                   >
-                    <span className="font-display text-xl tracking-tight lg:text-2xl">{a}</span>
+                    <span className="font-display-alt text-xl lg:text-2xl">{a}</span>
                     <span className="font-mono text-xs text-[color:var(--accent)]">
                       0{i + 1}
                     </span>
@@ -181,7 +181,7 @@ export default function CareersPage() {
                 </div>
                 <a
                   href="mailto:info@emaratrealty.com?subject=Career%20Application"
-                  className="mt-4 block font-display text-2xl tracking-tight transition-colors hover:text-[color:var(--accent)] lg:text-3xl"
+                  className="mt-4 block font-display-alt text-2xl transition-colors hover:text-[color:var(--accent)] lg:text-3xl"
                 >
                   info@emaratrealty.com
                 </a>
