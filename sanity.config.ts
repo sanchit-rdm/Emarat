@@ -7,7 +7,7 @@ export default defineConfig({
   name: "default",
   title: "Emarat CMS",
 
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "",
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "k6lgt7ii",
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
 
   plugins: [structureTool(), visionTool()],
