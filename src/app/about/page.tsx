@@ -138,11 +138,10 @@ export default async function AboutPage() {
               </SplitReveal>
 
               <Reveal as="p" delay={0.2} className="mt-10 max-w-xl text-base leading-relaxed text-[color:var(--muted)] lg:text-lg">
-                For over fifteen years, Argo Group has been a driving force across
-                industries shaping businesses with vision, integrity, and excellence.
-                Emarat&apos;s luxurious developments, rooted in innovation and meticulous
-                planning, align seamlessly with the Group&apos;s vision of redefining
-                modern real estate.
+                Argo Group is a driving force across industries shaping businesses
+                with vision, integrity, and excellence. Emarat&apos;s luxurious
+                developments, rooted in innovation and meticulous planning, align
+                seamlessly with the Group&apos;s vision of redefining modern real estate.
               </Reveal>
 
               <div className="mt-12 grid grid-cols-1 gap-x-10 gap-y-6 sm:grid-cols-2">
@@ -172,12 +171,6 @@ export default async function AboutPage() {
                   style={{ filter: "sepia(0.16) saturate(0.9) brightness(0.85)" }}
                 />
               </Parallax>
-              <Reveal as="div" delay={0.2} className="mt-4 flex items-baseline gap-3">
-                <span className="font-display text-4xl text-[color:var(--accent)]">15+</span>
-                <span className="text-xs uppercase tracking-[0.16em] text-[color:var(--muted)]">
-                  Years of group experience
-                </span>
-              </Reveal>
             </div>
           </div>
         </section>

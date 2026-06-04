@@ -16,7 +16,7 @@ const HERO_FALLBACK = {
   titleBottom: "across Gurugram.",
   subtitle:
     "A portfolio of Spanish-inspired independent and boutique private floors at DLF Garden City and Alameda every Emarat home built on the same principles of quality, elegance and innovation.",
-  trailing: "Six developments · 500+ residences",
+  trailing: "DLF Garden City · Alameda",
   bgImage: "/images/alameda-bedroom-3.webp",
 };
 
@@ -38,7 +38,7 @@ const projects = [
     status: "Now Selling",
     config: "5 BHK Independent Floors",
     size: "G+4 · 5 BHK",
-    img: "/images/C-2/C2 Living Dining_Interior View 01_APPROVED_R0_20240122.png",
+    img: "/images/C-2/C2 Living Dining_Interior View 01_APPROVED_R0_20240122.jpg",
     body: "Thoughtfully designed 5 BHK independent floors within the prestigious DLF gated community — spacious layouts, modern architecture and everyday comfort for contemporary luxury living.",
     highlights: ["5BHK Independent Floors", "DLF Gated Community", "24x7 Security", "S+4 Built Form"],
   },
@@ -62,7 +62,7 @@ const projects = [
     status: "New Launch",
     config: "Independent Floors · Three-Side Open",
     size: "G+4 · Three-Side Open",
-    img: "/images/E11/E11-14_Living Room_Interior View_R1_20250412.png",
+    img: "/images/E11/E11-14_Living Room_Interior View_R1_20250412.jpg",
     body: "Three-side-open independent floors where imagination meets form — volume, light and architectural drama, with a private sky-garden terrace.",
     highlights: ["Three-side open floors", "Volume, light & drama", "Sky-garden terrace", "Premium modular kitchen"],
   },
@@ -153,7 +153,7 @@ export default async function ProjectsPage() {
         {/* Project filter strip */}
         <section className="border-b border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-8 lg:px-10">
           <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-x-8 gap-y-3 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-            <span className="text-[color:var(--accent)]">All Projects (6)</span>
+            <span className="text-[color:var(--accent)]">All Projects</span>
             <a href="#c2" className="transition-colors hover:text-[color:var(--fg)]">DLF Garden City</a>
             <a href="#ea04" className="transition-colors hover:text-[color:var(--fg)]">Alameda</a>
             <a href="#additional" className="transition-colors hover:text-[color:var(--fg)]">Plots & Floors</a>

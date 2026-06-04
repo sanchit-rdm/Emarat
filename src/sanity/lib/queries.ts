@@ -14,6 +14,8 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
       dropdown[] { label, href }
     },
     footer {
+      "image": image.asset->url,
+      headline,
       tagline,
       addressLines,
       columns[] {
@@ -48,8 +50,7 @@ export function pageQuery(type: string) {
 
 export const HOME_PAGE_QUERY = defineQuery(`
   *[_type == "homePage"][0] {
-    "heroBlocks": heroBlocks[]{ _key, eyebrow, heading, sub },
-    "stats": stats[]{ _key, value, suffix, label },
+    "heroBlocks": heroBlocks[]{ _key, heading },
     "gallery": gallery[]{
       _key,
       "src": image.asset->url,
@@ -74,12 +75,6 @@ export const HOME_PAGE_QUERY = defineQuery(`
         "img": image.asset->url,
         alt
       }
-    },
-    testimonials {
-      eyebrow,
-      heading1,
-      heading2,
-      "items": items[]{ _key, quote, name }
     },
     contact {
       heading1,

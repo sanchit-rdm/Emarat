@@ -89,7 +89,6 @@ export default function PageHero({
       >
         <span>Emarat Realty · Gurugram</span>
         {trailing && <span className="hidden md:inline">{trailing}</span>}
-        <span>Est. 2014</span>
       </Reveal>
     </section>
   );

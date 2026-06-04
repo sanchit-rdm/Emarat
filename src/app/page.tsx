@@ -1,11 +1,9 @@
 import SiteNav from "@/components/SiteNav";
 import ScrollVideoHero from "@/components/sections/ScrollVideoHero";
-import StatsMarquee from "@/components/sections/StatsMarquee";
 import Gallery from "@/components/sections/Gallery";
 import Projects from "@/components/sections/Projects";
 import About from "@/components/sections/About";
 import Location from "@/components/sections/Location";
-import Testimonials from "@/components/sections/Testimonials";
 import Approach from "@/components/sections/Approach";
 import News from "@/components/sections/News";
 import Contact from "@/components/sections/Contact";
@@ -42,7 +40,6 @@ export default async function Home() {
       <SiteNav />
       <main>
         <ScrollVideoHero blocks={homePage?.heroBlocks} />
-        <StatsMarquee stats={homePage?.stats} />
         <Gallery images={homePage?.gallery} />
         <div className="theme-light">
           <Projects />
@@ -52,7 +49,6 @@ export default async function Home() {
         <div className="theme-light">
           <Approach data={homePage?.approach} />
         </div>
-        <Testimonials data={homePage?.testimonials} />
         <div className="theme-light">
           <News posts={posts} />
         </div>

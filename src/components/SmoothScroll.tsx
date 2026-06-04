@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { ensureGsap } from "@/lib/gsap";
 
@@ -9,7 +10,14 @@ export default function SmoothScroll({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  // The Sanity Studio (/studio) manages its own scrolling — Lenis would hijack
+  // the mouse wheel there and make the editor only scrollable via the scrollbar.
+  const isStudio = pathname?.startsWith("/studio");
+
   useEffect(() => {
+    if (isStudio) return;
+
     // Register ScrollTrigger before anything — even if reduced motion is on
     const { gsap, ScrollTrigger } = ensureGsap();
 
@@ -42,7 +50,7 @@ export default function SmoothScroll({
       gsap.ticker.remove(tickerFn);
       lenis.destroy();
     };
-  }, []);
+  }, [isStudio]);
 
   return <>{children}</>;
 }

@@ -16,7 +16,7 @@ interface Props { data?: AboutData }
 export default function About({ data }: Props) {
   const heading1 = data?.heading1 ?? "A distinguished leader";
   const heading2 = data?.heading2 ?? "in luxury real estate.";
-  const description = data?.description ?? "Emarat Realty specialises in exquisite residences and high-end commercial spaces across Gurugram. With over a decade of experience, we deliver homes built on quality, elegance and innovation where every detail reflects our unwavering commitment to excellence.";
+  const description = data?.description ?? "Emarat Realty specialises in exquisite residences and high-end commercial spaces across Gurugram. We deliver homes built on quality, elegance and innovation where every detail reflects our unwavering commitment to excellence.";
   const services = data?.services ?? [
     { title: "Luxury Residential", subtitle: "3 & 4 BHK apartments" },
     { title: "Commercial Spaces", subtitle: "High-end retail & offices" },
@@ -26,7 +26,7 @@ export default function About({ data }: Props) {
     { title: "Development", subtitle: "End-to-end delivery" },
   ];
   const image = data?.image ?? "/images/alameda-kitchen.webp";
-  const imageCaption = data?.imageCaption ?? "C5 Residences DLF Garden City, 2023";
+  const imageCaption = data?.imageCaption ?? "C5 Residences, DLF Garden City";
   return (
     <section
       id="about"

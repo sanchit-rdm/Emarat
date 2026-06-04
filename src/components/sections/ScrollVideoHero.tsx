@@ -37,9 +37,7 @@ type Anchor =
 
 type TextBlock = {
   id: string;
-  eyebrow?: string;
   heading: string;
-  sub?: string;
   anchor: Anchor;
   /** Scroll progress (0..1) where the block has finished fading IN. */
   enterAt: number;
@@ -47,37 +45,13 @@ type TextBlock = {
   exitAt: number;
 };
 
-/* ----------------------------------------------------------------------------
-   EDIT ME — placeholder copy. Change the words, `anchor` (where on screen),
-   and enterAt/exitAt (when, as a fraction of the scroll) to retime each beat.
-   The first block stays visible at the very top, then fades as you scroll.
----------------------------------------------------------------------------- */
+/* Heading copy is editable in Sanity → Home Page → Hero Text Blocks. These are
+   only fallbacks (used until content is entered). `anchor` (where on screen)
+   and enterAt/exitAt (scroll timing) stay fixed in code. */
 const TEXT_BLOCKS: TextBlock[] = [
-  {
-    id: "intro",
-    eyebrow: "Luxury Real Estate · Gurugram · Est. 2014",
-    heading: "Homes that define how you live.",
-    anchor: "bot-left",
-    enterAt: 0,
-    exitAt: 0.3,
-  },
-  {
-    id: "craft",
-    eyebrow: "Design & Materials",
-    heading: "Crafted in stone, light and silence.",
-    sub: "Every residence is composed around how it feels to live in it.",
-    anchor: "bot-left",
-    enterAt: 0.36,
-    exitAt: 0.62,
-  },
-  {
-    id: "place",
-    eyebrow: "DLF Garden City · Sector 93",
-    heading: "An address that appreciates.",
-    anchor: "bot-left",
-    enterAt: 0.68,
-    exitAt: 0.96,
-  },
+  { id: "intro", heading: "Homes that define how you live.", anchor: "bot-left", enterAt: 0, exitAt: 0.3 },
+  { id: "craft", heading: "Crafted in stone, light and silence.", anchor: "bot-left", enterAt: 0.36, exitAt: 0.62 },
+  { id: "place", heading: "An address that appreciates.", anchor: "bot-left", enterAt: 0.68, exitAt: 0.96 },
 ];
 
 const ANCHOR_CLASSES: Record<Anchor, string> = {
@@ -92,22 +66,17 @@ const ANCHOR_CLASSES: Record<Anchor, string> = {
   "bot-right": "items-end justify-end text-right",
 };
 
-type SanityBlock = { _key?: string; eyebrow?: string; heading?: string; sub?: string };
+type SanityBlock = { _key?: string; heading?: string };
 
-// Overlay editable copy from Sanity onto the in-code timing/position slots,
+// Overlay editable headings from Sanity onto the in-code timing/position slots,
 // keeping the scroll choreography fixed. Extra Sanity blocks beyond the
-// designed slots are ignored; missing ones keep their default copy.
+// designed slots are ignored; missing ones keep their default heading.
 function resolveBlocks(blocks?: SanityBlock[]): TextBlock[] {
   if (!blocks?.length) return TEXT_BLOCKS;
   return TEXT_BLOCKS.map((base, i) => {
     const b = blocks[i];
     if (!b) return base;
-    return {
-      ...base,
-      eyebrow: b.eyebrow?.trim() || base.eyebrow,
-      heading: b.heading?.trim() || base.heading,
-      sub: b.sub?.trim() || base.sub,
-    };
+    return { ...base, heading: b.heading?.trim() || base.heading };
   });
 }
 
@@ -281,19 +250,9 @@ export default function ScrollVideoHero({ blocks }: { blocks?: SanityBlock[] }) 
                 className="max-w-3xl"
                 style={{ textShadow: "0 1px 40px rgba(0,0,0,0.45)" }}
               >
-                {b.eyebrow && (
-                  <p className="eyebrow mb-5 text-xs uppercase tracking-[0.24em] text-white">
-                    <span>{b.eyebrow}</span>
-                  </p>
-                )}
                 <Heading className="font-display h-section text-[color:var(--fg)]">
                   {b.heading}
                 </Heading>
-                {b.sub && (
-                  <p className="mt-6 max-w-xl text-base leading-relaxed text-white lg:text-lg">
-                    {b.sub}
-                  </p>
-                )}
               </div>
             </div>
           );

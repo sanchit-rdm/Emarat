@@ -10,6 +10,8 @@ type FooterSettings = {
   contact?: { phone?: string; email?: string };
   socialLinks?: Array<{ platform?: string; url?: string }> | null;
   footer?: {
+    image?: string | null;
+    headline?: string;
     tagline?: string;
     addressLines?: string[] | null;
     columns?: FooterColumn[] | null;
@@ -18,6 +20,9 @@ type FooterSettings = {
     legalNote?: string;
   } | null;
 };
+
+const DEFAULT_HEADLINE = "Redefining the standard of luxury living.";
+const DEFAULT_FOOTER_IMAGE = "/images/E11/Building.jpg";
 
 const DEFAULT_TAGLINE =
   "Redefining the standard of luxury living. An Argo Group company building transformative real estate in Gurugram, Haryana.";
@@ -81,6 +86,8 @@ export default async function SiteFooter() {
   }
 
   const f = settings?.footer;
+  const image = f?.image?.trim() || DEFAULT_FOOTER_IMAGE;
+  const headline = f?.headline?.trim() || DEFAULT_HEADLINE;
   const tagline = f?.tagline?.trim() || DEFAULT_TAGLINE;
   const addressLines = f?.addressLines?.length ? f.addressLines : DEFAULT_ADDRESS;
   const columns = f?.columns?.length ? f.columns : DEFAULT_COLUMNS;
@@ -98,9 +105,33 @@ export default async function SiteFooter() {
   const legalNote = f?.legalNote?.trim() || "RERA registered · Gurugram, Haryana";
 
   return (
-    <footer className="theme-green relative px-6 pb-10 pt-16 lg:px-10">
-      <div className="brand-green-strip absolute inset-x-0 top-0" aria-hidden />
-      <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
+    <footer className="theme-green relative">
+      {/* Feature image banner across the top of the footer */}
+      {image && (
+        <div className="relative h-[40vh] min-h-[240px] w-full overflow-hidden lg:h-[52vh]">
+          <Image
+            src={image}
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover"
+            style={{ filter: "sepia(0.12) saturate(0.9) brightness(0.8)" }}
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[color:var(--bg)] via-[color:var(--bg)]/20 to-transparent" />
+        </div>
+      )}
+
+      <div className="relative px-6 pb-10 pt-14 lg:px-10 lg:pt-20">
+        <div className="brand-green-strip absolute inset-x-0 top-0" aria-hidden />
+
+        {/* Large brand statement */}
+        <div className="mx-auto max-w-[1440px]">
+          <h2 className="font-display max-w-3xl text-3xl leading-[1.1] sm:text-4xl lg:text-6xl">
+            {headline}
+          </h2>
+        </div>
+
+        <div className="mx-auto mt-14 grid max-w-[1440px] grid-cols-12 gap-8 lg:mt-20">
         <div className="col-span-12 lg:col-span-4">
           <Image src={logo} alt="Emarat Realty" className="h-auto w-[200px]" sizes="200px" />
           <p className="mt-6 max-w-md text-sm text-[color:var(--muted)]">{tagline}</p>
@@ -165,6 +196,7 @@ export default async function SiteFooter() {
           <Link href="#" className="hover:text-[color:var(--fg)]">Privacy Policy</Link>
           <Link href="#" className="hover:text-[color:var(--fg)]">Terms of Use</Link>
         </div>
+      </div>
       </div>
     </footer>
   );

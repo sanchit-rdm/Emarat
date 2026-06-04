@@ -12,9 +12,9 @@
   --line: rgba(245, 239, 225, 0.10);
 
   /* Emarat brand colors */
-  --accent: #E9B231;         /* primary gold — accent text & decorative */
-  --accent-2: #EDC149;       /* brighter highlight gold */
-  --accent-soft: rgba(233, 178, 49, 0.18);
+  --accent: #E2A724;         /* primary gold — accent text & decorative */
+  --accent-2: #F6E07A;       /* brighter highlight gold */
+  --accent-soft: rgba(226, 167, 36, 0.18);
   --brand-green: #01472E;    /* deep forest green — primary brand colour */
   --brand-green-soft: rgba(1, 71, 46, 0.18);
 }
@@ -30,9 +30,9 @@
   --fg: #f5efe1;             /* warm cream */
   --muted: #c4bda3;          /* lightened so labels stay legible on green */
   --line: rgba(245, 239, 225, 0.18);
-  --accent: #EDC149;         /* brighter gold pops against the green */
-  --accent-2: #E9B231;
-  --accent-soft: rgba(237, 193, 73, 0.18);
+  --accent: #F6E07A;         /* brighter gold pops against the green */
+  --accent-2: #E2A724;
+  --accent-soft: rgba(246, 224, 122, 0.18);
   background: var(--bg);
   color: var(--fg);
 }
@@ -94,7 +94,7 @@ body {
 .font-display {
   font-family: var(--font-display-alt), Georgia, "Times New Roman", serif;
   font-weight: 400;
-  letter-spacing: 0.1em;
+  letter-spacing: normal;
 }
 
 .font-display-alt {
@@ -122,7 +122,7 @@ body {
 .h-page {
   font-size: clamp(2.5rem, 6vw, 5rem);
   line-height: 1;
-  letter-spacing: 0.1em;
+  letter-spacing: normal;
   text-shadow: 0 0 0.6px currentColor;
   overflow-wrap: break-word;
 }
@@ -130,15 +130,8 @@ body {
 .h-section {
   font-size: clamp(2rem, 5vw, 5rem);
   line-height: 1.05;
-  letter-spacing: 0.1em;
+  letter-spacing: normal;
   overflow-wrap: break-word;
-}
-
-@media (max-width: 640px) {
-  .h-page,
-  .h-section {
-    letter-spacing: 0.04em;
-  }
 }
 
 /* Subheadings use Adelora (the secondary display face). Declared after

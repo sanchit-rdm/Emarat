@@ -8,41 +8,20 @@ export const homePageType = defineType({
     /* ---- Hero text overlays (scroll-scrubbed video hero) ---- */
     defineField({
       name: "heroBlocks",
-      title: "Hero Text Blocks",
+      title: "Hero Headings",
       description:
-        "The text that fades in/out over the homepage video as you scroll. Edit the words only — scroll timing/position stays as designed.",
+        "The headings that fade in/out over the homepage video as you scroll. Edit the words only — scroll timing/position stays as designed.",
       type: "array",
       of: [
         defineArrayMember({
           type: "object",
           fields: [
-            defineField({ name: "eyebrow", title: "Eyebrow (small label)", type: "string" }),
             defineField({ name: "heading", title: "Heading", type: "string", validation: (r) => r.required() }),
-            defineField({ name: "sub", title: "Sub-text (optional)", type: "string" }),
           ],
-          preview: { select: { title: "heading", subtitle: "eyebrow" } },
+          preview: { select: { title: "heading" } },
         }),
       ],
-      validation: (r) => r.max(4).warning("The hero is designed for up to 3–4 blocks"),
-    }),
-
-    /* ---- Stats band ---- */
-    defineField({
-      name: "stats",
-      title: "Stats Band",
-      description: "The 6 count-up figures shown below the hero.",
-      type: "array",
-      of: [
-        defineArrayMember({
-          type: "object",
-          fields: [
-            defineField({ name: "value", title: "Number", type: "number" }),
-            defineField({ name: "suffix", title: "Suffix (e.g. +)", type: "string" }),
-            defineField({ name: "label", title: "Label", type: "string" }),
-          ],
-          preview: { select: { title: "label", subtitle: "value" } },
-        }),
-      ],
+      validation: (r) => r.max(4).warning("The hero is designed for up to 3–4 headings"),
     }),
 
     /* ---- Gallery ---- */
@@ -115,33 +94,6 @@ export const homePageType = defineType({
                 defineField({ name: "alt", title: "Image Alt Text", type: "string" }),
               ],
               preview: { select: { title: "title", subtitle: "no", media: "image" } },
-            }),
-          ],
-        }),
-      ],
-    }),
-
-    /* ---- Testimonials ---- */
-    defineField({
-      name: "testimonials",
-      title: "Testimonials Section",
-      type: "object",
-      fields: [
-        defineField({ name: "eyebrow", title: "Eyebrow Label", type: "string" }),
-        defineField({ name: "heading1", title: "Heading Line 1", type: "string" }),
-        defineField({ name: "heading2", title: "Heading Line 2 (muted)", type: "string" }),
-        defineField({
-          name: "items",
-          title: "Testimonials",
-          type: "array",
-          of: [
-            defineArrayMember({
-              type: "object",
-              fields: [
-                defineField({ name: "quote", title: "Quote", type: "text", rows: 4 }),
-                defineField({ name: "name", title: "Resident Name", type: "string" }),
-              ],
-              preview: { select: { title: "name", subtitle: "quote" } },
             }),
           ],
         }),

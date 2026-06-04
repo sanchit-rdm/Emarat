@@ -81,6 +81,19 @@ export const siteSettingsType = defineType({
       title: "Footer",
       type: "object",
       fields: [
+        defineField({
+          name: "image",
+          title: "Feature Image (top of footer)",
+          type: "image",
+          description: "Full-width banner image shown across the top of the footer.",
+          options: { hotspot: true },
+        }),
+        defineField({
+          name: "headline",
+          title: "Headline",
+          type: "string",
+          description: "Large statement shown on the left of the footer.",
+        }),
         defineField({ name: "tagline", title: "Tagline / Blurb", type: "text", rows: 3 }),
         defineField({ name: "addressLines", title: "Address (each line separate)", type: "array", of: [defineArrayMember({ type: "string" })] }),
         defineField({
