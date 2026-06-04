@@ -52,14 +52,14 @@ export default function Projects() {
               as="h2"
               className="font-display h-section"
             >
-              Residences built
+              Find Your
             </SplitReveal>
             <SplitReveal
               as="h2"
               delay={0.1}
               className="font-display h-section text-[color:var(--muted)]"
             >
-              to be lived in.
+              Dream Home
             </SplitReveal>
           </div>
           <Reveal delay={0.2} className="self-end">

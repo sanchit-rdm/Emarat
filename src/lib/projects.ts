@@ -139,7 +139,7 @@ export const projects: Project[] = [
     no: "01",
     title: "C2 at DLF Garden City",
     shortName: "C2",
-    tagline: "The address within the address.",
+    tagline: "Independent Floors in New Gurugram",
     location: "DLF Garden City, Sector 93, Gurugram",
     status: "Now Selling",
     config: "5 BHK Independent Floors",
@@ -149,14 +149,14 @@ export const projects: Project[] = [
     heroImage: "/images/C-2/Building.jpeg",
     overviewImage: "/images/C-2/C2 Living Dining_Interior View 02_APPROVED_R0_20240122.png",
     overview: [
-      "C2 at DLF Garden City is a collection of Spanish-inspired 5 BHK independent floors — self-contained homes with generous proportions, expansive wrap-around balconies and abundant open space. Designed so light lingers longer and life feels effortless, it is, quite simply, the address within the address.",
-      "Every residence opens to park-facing greenery, with a family lounge, a dedicated puja room and walk-in wardrobes. Italian marble, engineered timber and a quartz-topped modular kitchen complete a home made for a larger-than-life way of living, set within the DLF gated community.",
+      "C2, DLF Garden City by Emarat Realty offers thoughtfully designed independent floors in a well-established and rapidly evolving residential community in Gurugram. The project is crafted with a focus on spacious layouts, modern architecture, and everyday comfort suited for contemporary luxury living. It enjoys excellent connectivity to Dwarka Expressway, NH-48, leading schools, hospitals, retail destinations, and key business hubs, ensuring daily convenience.",
+      "With well-planned interiors, specifications and essential lifestyle amenities, C2 balances privacy, luxury and modern comfort. It is an ideal choice for those seeking a well-connected, peaceful and smartly designed ambiance within a well-developed neighbourhood.",
     ],
     stats: [
-      { label: "Configuration", value: "5 BHK" },
-      { label: "Built Form", value: "G+4" },
-      { label: "Per Floor", value: "1 Home" },
-      { label: "Community", value: "DLF Gated" },
+      { label: "Built Form", value: "S+4" },
+      { label: "Independent Floors", value: "5BHK" },
+      { label: "Gated Community", value: "DLF" },
+      { label: "Security", value: "24x7" },
     ],
     amenities: [
       { name: "Wrap-around Balconies", icon: "balcony" },
@@ -187,7 +187,7 @@ export const projects: Project[] = [
     ],
     connectivity: dlfGardenCityConnectivity,
     mapQuery: "DLF Garden City Sector 93 Gurugram",
-    highlights: ["Spanish-inspired 5 BHK floors", "Wrap-around balconies", "Dedicated puja room", "Italian marble & quartz finishes"],
+    highlights: [],
   },
   {
     slug: "c5",

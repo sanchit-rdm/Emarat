@@ -14,9 +14,12 @@ import Connectivity from "@/components/project/Connectivity";
 import EnquiryForm from "@/components/project/EnquiryForm";
 import { amenityIcons } from "@/components/project/amenityIcons";
 import { getProject, projectSlugs } from "@/lib/projects";
+import { getSanityProject, getSanityProjectSlugs } from "@/lib/sanity.projects";
 
-export function generateStaticParams() {
-  return projectSlugs.map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  const sanitySlugs = await getSanityProjectSlugs();
+  const allSlugs = [...new Set([...sanitySlugs, ...projectSlugs])];
+  return allSlugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -25,7 +28,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = (await getSanityProject(slug)) ?? getProject(slug);
   if (!project) return { title: "Project Not Found · Emarat Realty" };
   return {
     title: `${project.title} · Emarat Realty`,
@@ -48,7 +51,7 @@ export default async function ProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = (await getSanityProject(slug)) ?? getProject(slug);
   if (!project) notFound();
 
   return (
@@ -150,15 +153,6 @@ export default async function ProjectPage({
                 ))}
               </div>
 
-              {/* Highlights */}
-              <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-sm text-[color:var(--muted)]">
-                {project.highlights.map((h) => (
-                  <li key={h} className="flex items-center gap-2">
-                    <span className="inline-block h-1 w-1 rounded-full bg-[color:var(--accent)]" />
-                    {h}
-                  </li>
-                ))}
-              </ul>
             </div>
 
             <div className="col-span-12 lg:col-span-6">

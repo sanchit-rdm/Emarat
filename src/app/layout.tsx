@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 
-// Body text — Montserrat (client-specified). Drives --font-sans-pri.
+// Body text — Montserrat. Drives --font-sans-pri.
 const montserrat = Montserrat({
   variable: "--font-sans-pri",
   subsets: ["latin"],
@@ -12,14 +12,7 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-// Headings — Bizantheum (client-licensed). Drives --font-display-pri.
-const bizantheum = localFont({
-  src: "../fonts/Bizantheum.otf",
-  variable: "--font-display-pri",
-  display: "swap",
-});
-
-// Subheadings — Adelora (client-licensed), regular + italic. Drives --font-display-alt.
+// Display / headings — Adelora (client-licensed). Drives --font-display-alt.
 const adelora = localFont({
   src: [
     { path: "../fonts/Adelora.otf", weight: "400", style: "normal" },
@@ -43,7 +36,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} ${bizantheum.variable} ${adelora.variable} antialiased`}
+      className={`${montserrat.variable} ${adelora.variable} antialiased`}
     >
       <body className="min-h-screen">
         {/* Brand-green vertical rail — present on every page as a quiet brand signature */}

@@ -60,7 +60,7 @@
   --color-background: var(--bg);
   --color-foreground: var(--fg);
   --font-sans: var(--font-sans-pri);
-  --font-display: var(--font-display-pri);
+  --font-display: var(--font-display-alt);
   --font-display-alt: var(--font-display-alt);
 }
 
@@ -92,7 +92,7 @@ body {
 }
 
 .font-display {
-  font-family: var(--font-display-pri), Georgia, "Times New Roman", serif;
+  font-family: var(--font-display-alt), Georgia, "Times New Roman", serif;
   font-weight: 400;
   letter-spacing: 0.1em;
 }

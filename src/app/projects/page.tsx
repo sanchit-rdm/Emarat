@@ -7,6 +7,7 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
+import { getSanityProjectListings } from "@/lib/sanity.projects";
 
 export const metadata: Metadata = {
   title: "Projects Emarat Realty",
@@ -24,8 +25,8 @@ const projects = [
     config: "5 BHK Independent Floors",
     size: "G+4 · 5 BHK",
     img: "/images/C-2/C2 Living Dining_Interior View 01_APPROVED_R0_20240122.png",
-    body: "Spanish-inspired 5 BHK independent floors with expansive wrap-around balconies, a dedicated puja room and abundant open space — the address within the address.",
-    highlights: ["Spanish-inspired 5 BHK floors", "Wrap-around balconies", "Dedicated puja room", "Italian marble & quartz"],
+    body: "Thoughtfully designed 5 BHK independent floors within the prestigious DLF gated community — spacious layouts, modern architecture and everyday comfort for contemporary luxury living.",
+    highlights: ["5BHK Independent Floors", "DLF Gated Community", "24x7 Security", "S+4 Built Form"],
   },
   {
     id: "c5",
@@ -78,7 +79,23 @@ const additional = [
   },
 ];
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  // Try Sanity first; fall back to static data so the page never breaks.
+  const sanityListings = await getSanityProjectListings();
+  const sanityProjects = sanityListings.length
+    ? sanityListings.map((p) => ({
+        id: p.slug,
+        no: p.no,
+        title: p.title,
+        location: p.location,
+        status: p.status,
+        config: p.config,
+        size: p.size,
+        img: p.heroImage ?? "",
+        body: p.excerpt ?? p.tagline,
+        highlights: p.stats.map((s) => `${s.value} ${s.label}`),
+      }))
+    : null;
   return (
     <>
       <SiteNav />
@@ -105,7 +122,7 @@ export default function ProjectsPage() {
         {/* Detailed project cards — alternating image side (light cream) */}
         <section className="theme-light px-6 py-24 lg:px-10 lg:py-32">
           <div className="mx-auto max-w-[1440px] space-y-24 lg:space-y-32">
-            {projects.map((p, i) => (
+            {(sanityProjects ?? projects).map((p, i) => (
               <article
                 key={p.id}
                 id={p.id}
