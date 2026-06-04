@@ -8,12 +8,26 @@ import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
 import { getSanityProjectListings } from "@/lib/sanity.projects";
+import { getPageContent, mergeHero, buildMetadata } from "@/sanity/lib/page";
 
-export const metadata: Metadata = {
-  title: "Projects Emarat Realty",
-  description:
-    "Selected projects by Emarat Realty C2, C5 and E11 independent floors at DLF Garden City; EA 04 boutique private floors at Alameda, Sector 73 Gurugram.",
+const HERO_FALLBACK = {
+  eyebrow: "",
+  titleTop: "Selected works",
+  titleBottom: "across Gurugram.",
+  subtitle:
+    "A portfolio of Spanish-inspired independent and boutique private floors at DLF Garden City and Alameda every Emarat home built on the same principles of quality, elegance and innovation.",
+  trailing: "Six developments · 500+ residences",
+  bgImage: "/images/alameda-bedroom-3.webp",
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageContent("projectsPage");
+  return buildMetadata(page?.seo, {
+    title: "Projects Emarat Realty",
+    description:
+      "Selected projects by Emarat Realty C2, C5 and E11 independent floors at DLF Garden City; EA 04 boutique private floors at Alameda, Sector 73 Gurugram.",
+  });
+}
 
 const projects = [
   {
@@ -80,33 +94,61 @@ const additional = [
 ];
 
 export default async function ProjectsPage() {
-  // Try Sanity first; fall back to static data so the page never breaks.
+  // Merge any Sanity data over the static cards per slug, so a partial Sanity
+  // document never blanks out a card — empty fields fall back to static.
   const sanityListings = await getSanityProjectListings();
-  const sanityProjects = sanityListings.length
-    ? sanityListings.map((p) => ({
-        id: p.slug,
-        no: p.no,
-        title: p.title,
-        location: p.location,
-        status: p.status,
-        config: p.config,
-        size: p.size,
-        img: p.heroImage ?? "",
-        body: p.excerpt ?? p.tagline,
-        highlights: p.stats.map((s) => `${s.value} ${s.label}`),
-      }))
-    : null;
+  const bySlug = new Map(sanityListings.map((s) => [s.slug, s]));
+  const pick = <T,>(v: T | null | undefined, fb: T): T =>
+    v === null || v === undefined || (typeof v === "string" && v.trim() === "")
+      ? fb
+      : v;
+
+  const cards = projects.map((base) => {
+    const s = bySlug.get(base.id);
+    if (!s) return base;
+    return {
+      id: base.id,
+      no: pick(s.no, base.no),
+      title: pick(s.title, base.title),
+      location: pick(s.location, base.location),
+      status: pick(s.status, base.status),
+      config: pick(s.config, base.config),
+      size: pick(s.size, base.size),
+      img: pick(s.heroImage, base.img),
+      body: pick(s.excerpt, pick(s.tagline, base.body)),
+      highlights: s.stats?.length
+        ? s.stats.map((st) => `${st.value} ${st.label}`)
+        : base.highlights,
+    };
+  });
+
+  // Append any projects that exist only in Sanity (not in the static list).
+  const staticIds = new Set(projects.map((p) => p.id));
+  const sanityOnly = sanityListings
+    .filter((s) => s.slug && !staticIds.has(s.slug) && s.heroImage)
+    .map((s) => ({
+      id: s.slug,
+      no: s.no ?? "",
+      title: s.title ?? "",
+      location: s.location ?? "",
+      status: s.status ?? "",
+      config: s.config ?? "",
+      size: s.size ?? "",
+      img: s.heroImage as string,
+      body: s.excerpt ?? s.tagline ?? "",
+      highlights: (s.stats ?? []).map((st) => `${st.value} ${st.label}`),
+    }));
+
+  const sanityProjects = [...cards, ...sanityOnly];
+
+  const pageContent = await getPageContent("projectsPage");
+  const hero = mergeHero(pageContent?.hero, HERO_FALLBACK);
+
   return (
     <>
       <SiteNav />
       <main>
-        <PageHero
-          titleTop="Selected works"
-          titleBottom="across Gurugram."
-          subtitle="A portfolio of Spanish-inspired independent and boutique private floors at DLF Garden City and Alameda every Emarat home built on the same principles of quality, elegance and innovation."
-          bgImage="/images/alameda-bedroom-3.webp"
-          trailing="Six developments · 500+ residences"
-        />
+        <PageHero {...hero} />
 
         {/* Project filter strip */}
         <section className="border-b border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-8 lg:px-10">

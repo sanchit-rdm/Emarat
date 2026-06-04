@@ -5,6 +5,27 @@ export const homePageType = defineType({
   title: "Home Page",
   type: "document",
   fields: [
+    /* ---- Hero text overlays (scroll-scrubbed video hero) ---- */
+    defineField({
+      name: "heroBlocks",
+      title: "Hero Text Blocks",
+      description:
+        "The text that fades in/out over the homepage video as you scroll. Edit the words only — scroll timing/position stays as designed.",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({ name: "eyebrow", title: "Eyebrow (small label)", type: "string" }),
+            defineField({ name: "heading", title: "Heading", type: "string", validation: (r) => r.required() }),
+            defineField({ name: "sub", title: "Sub-text (optional)", type: "string" }),
+          ],
+          preview: { select: { title: "heading", subtitle: "eyebrow" } },
+        }),
+      ],
+      validation: (r) => r.max(4).warning("The hero is designed for up to 3–4 blocks"),
+    }),
+
     /* ---- Stats band ---- */
     defineField({
       name: "stats",
@@ -143,6 +164,49 @@ export const homePageType = defineType({
         defineField({ name: "address", title: "Address", type: "text", rows: 4 }),
       ],
     }),
+
+    /* ---- Location & connectivity (interactive tabs) ---- */
+    defineField({
+      name: "location",
+      title: "Location Section",
+      type: "object",
+      fields: [
+        defineField({ name: "eyebrow", title: "Eyebrow Label", type: "string" }),
+        defineField({
+          name: "places",
+          title: "Places",
+          type: "array",
+          of: [
+            defineArrayMember({
+              type: "object",
+              fields: [
+                defineField({ name: "name", title: "Name (tab label)", type: "string" }),
+                defineField({ name: "headingLine1", title: "Heading Line 1", type: "string" }),
+                defineField({ name: "headingLine2", title: "Heading Line 2 (accent)", type: "string" }),
+                defineField({ name: "feature", title: "Feature Label", type: "string" }),
+                defineField({
+                  name: "icon",
+                  title: "Icon",
+                  type: "string",
+                  options: {
+                    list: [
+                      { title: "Connectivity (signal)", value: "connectivity" },
+                      { title: "Access (road)", value: "access" },
+                      { title: "Travel (plane)", value: "travel" },
+                    ],
+                  },
+                }),
+                defineField({ name: "body", title: "Description", type: "text", rows: 3 }),
+                defineField({ name: "image", title: "Background Image", type: "image", options: { hotspot: true } }),
+              ],
+              preview: { select: { title: "name", subtitle: "feature", media: "image" } },
+            }),
+          ],
+        }),
+      ],
+    }),
+
+    defineField({ name: "seo", title: "SEO", type: "seo" }),
   ],
   preview: { prepare: () => ({ title: "Home Page" }) },
 });

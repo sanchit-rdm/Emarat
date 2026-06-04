@@ -229,6 +229,8 @@ export const projectType = defineType({
         }),
       ],
     }),
+
+    defineField({ name: "seo", title: "SEO", type: "seo" }),
   ],
 
   orderings: [

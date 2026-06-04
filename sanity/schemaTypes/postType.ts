@@ -41,9 +41,17 @@ export const postType = defineType({
       initialValue: () => new Date().toISOString(),
     }),
     defineField({
+      name: "excerpt",
+      title: "Excerpt",
+      type: "text",
+      rows: 3,
+      description: "Short summary shown on listing cards.",
+    }),
+    defineField({
       name: "body",
       title: "Body",
       type: "blockContent",
     }),
+    defineField({ name: "seo", title: "SEO", type: "seo" }),
   ],
 });

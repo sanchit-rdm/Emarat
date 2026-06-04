@@ -14,7 +14,8 @@ import Connectivity from "@/components/project/Connectivity";
 import EnquiryForm from "@/components/project/EnquiryForm";
 import { amenityIcons } from "@/components/project/amenityIcons";
 import { getProject, projectSlugs } from "@/lib/projects";
-import { getSanityProject, getSanityProjectSlugs } from "@/lib/sanity.projects";
+import { getSanityProject, getSanityProjectSlugs, getSanityProjectSeo } from "@/lib/sanity.projects";
+import { buildMetadata } from "@/sanity/lib/page";
 
 export async function generateStaticParams() {
   const sanitySlugs = await getSanityProjectSlugs();
@@ -30,10 +31,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = (await getSanityProject(slug)) ?? getProject(slug);
   if (!project) return { title: "Project Not Found · Emarat Realty" };
-  return {
+  const seo = await getSanityProjectSeo(slug);
+  return buildMetadata(seo ?? undefined, {
     title: `${project.title} · Emarat Realty`,
     description: `${project.tagline} ${project.config}, ${project.size}, at ${project.location}. ${project.status}.`,
-  };
+  });
 }
 
 const SECTION_LINKS = [

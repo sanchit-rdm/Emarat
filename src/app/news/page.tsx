@@ -7,12 +7,26 @@ import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
 import { getAllPosts } from "@/lib/sanity.client";
+import { getPageContent, mergeHero, buildMetadata } from "@/sanity/lib/page";
 
-export const metadata: Metadata = {
-  title: "News & Insights Emarat Realty",
-  description:
-    "From Vision to Value project updates, market notes and feature articles from Emarat Realty in Gurugram.",
+const HERO_FALLBACK = {
+  eyebrow: "",
+  titleTop: "From Vision",
+  titleBottom: "to Value.",
+  subtitle:
+    "The Emarat perspective project updates, market notes from Gurugram and longer feature articles about how we think about luxury real estate in 2026.",
+  trailing: "Updated monthly",
+  bgImage: "/images/alameda-lounge.webp",
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageContent("newsPage");
+  return buildMetadata(page?.seo, {
+    title: "News & Insights Emarat Realty",
+    description:
+      "From Vision to Value project updates, market notes and feature articles from Emarat Realty in Gurugram.",
+  });
+}
 
 type Post = {
   _id: string;
@@ -77,21 +91,16 @@ function formatDate(d?: string) {
 }
 
 export default async function NewsPage() {
-  const posts = await getAllPosts();
+  const [posts, page] = await Promise.all([getAllPosts(), getPageContent("newsPage")]);
   const items: Post[] = posts && posts.length > 0 ? posts : placeholders;
   const [featured, ...rest] = items;
+  const hero = mergeHero(page?.hero, HERO_FALLBACK);
 
   return (
     <>
       <SiteNav />
       <main>
-        <PageHero
-          titleTop="From Vision"
-          titleBottom="to Value."
-          subtitle="The Emarat perspective project updates, market notes from Gurugram and longer feature articles about how we think about luxury real estate in 2026."
-          bgImage="/images/alameda-lounge.webp"
-          trailing="Updated monthly"
-        />
+        <PageHero {...hero} />
 
         {/* Featured article */}
         {featured && (

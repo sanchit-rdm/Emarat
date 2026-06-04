@@ -1,34 +1,33 @@
 import type { StructureResolver } from "sanity/structure";
 
-const SINGLETONS = ["siteSettings", "homePage"];
+const singleton = (
+  S: Parameters<StructureResolver>[0],
+  id: string,
+  title: string
+) => S.listItem().title(title).id(id).child(S.document().schemaType(id).documentId(id));
 
 export const structure: StructureResolver = (S) =>
   S.list()
     .title("Emarat CMS")
     .items([
-      S.listItem()
-        .title("Site Settings")
-        .id("siteSettings")
-        .child(S.document().schemaType("siteSettings").documentId("siteSettings")),
-
-      S.listItem()
-        .title("Home Page")
-        .id("homePage")
-        .child(S.document().schemaType("homePage").documentId("homePage")),
-
+      singleton(S, "siteSettings", "⚙️ Site Settings"),
       S.divider(),
 
-      S.listItem()
-        .title("Projects")
-        .child(S.documentTypeList("project").title("Projects")),
-
-      S.listItem()
-        .title("Blog Posts")
-        .child(S.documentTypeList("post").title("Blog Posts")),
-
+      // Pages
+      singleton(S, "homePage", "Home Page"),
+      singleton(S, "aboutPage", "About Page"),
+      singleton(S, "directorsDeskPage", "Director's Desk Page"),
+      singleton(S, "teamPage", "Team Page"),
+      singleton(S, "careersPage", "Careers Page"),
+      singleton(S, "projectsPage", "Projects Listing Page"),
+      singleton(S, "propertiesPage", "Properties Page"),
+      singleton(S, "locationPage", "Location Page"),
+      singleton(S, "newsPage", "News Page"),
+      singleton(S, "contactPage", "Contact Page"),
       S.divider(),
 
-      ...S.documentTypeListItems().filter(
-        (item) => item.getId() && !SINGLETONS.includes(item.getId()!) && !["project", "post", "author"].includes(item.getId()!)
-      ),
+      // Collections
+      S.listItem().title("Projects").child(S.documentTypeList("project").title("Projects")),
+      S.listItem().title("Blog Posts").child(S.documentTypeList("post").title("Blog Posts")),
+      S.listItem().title("Authors").child(S.documentTypeList("author").title("Authors")),
     ]);

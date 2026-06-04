@@ -41,6 +41,82 @@ export const siteSettingsType = defineType({
         }),
       ],
     }),
+
+    /* ---- Header navigation ---- */
+    defineField({
+      name: "nav",
+      title: "Header Navigation",
+      description: "Top menu. A link with sub-items becomes a dropdown.",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({ name: "label", title: "Label", type: "string", validation: (r) => r.required() }),
+            defineField({ name: "href", title: "Link (leave blank if it has a dropdown)", type: "string" }),
+            defineField({
+              name: "dropdown",
+              title: "Dropdown Items",
+              type: "array",
+              of: [
+                defineArrayMember({
+                  type: "object",
+                  fields: [
+                    defineField({ name: "label", title: "Label", type: "string" }),
+                    defineField({ name: "href", title: "Link", type: "string" }),
+                  ],
+                  preview: { select: { title: "label", subtitle: "href" } },
+                }),
+              ],
+            }),
+          ],
+          preview: { select: { title: "label", subtitle: "href" } },
+        }),
+      ],
+    }),
+
+    /* ---- Footer ---- */
+    defineField({
+      name: "footer",
+      title: "Footer",
+      type: "object",
+      fields: [
+        defineField({ name: "tagline", title: "Tagline / Blurb", type: "text", rows: 3 }),
+        defineField({ name: "addressLines", title: "Address (each line separate)", type: "array", of: [defineArrayMember({ type: "string" })] }),
+        defineField({
+          name: "columns",
+          title: "Link Columns",
+          type: "array",
+          of: [
+            defineArrayMember({
+              type: "object",
+              fields: [
+                defineField({ name: "heading", title: "Column Heading", type: "string" }),
+                defineField({
+                  name: "links",
+                  title: "Links",
+                  type: "array",
+                  of: [
+                    defineArrayMember({
+                      type: "object",
+                      fields: [
+                        defineField({ name: "label", title: "Label", type: "string" }),
+                        defineField({ name: "href", title: "Link", type: "string" }),
+                      ],
+                      preview: { select: { title: "label", subtitle: "href" } },
+                    }),
+                  ],
+                }),
+              ],
+              preview: { select: { title: "heading" } },
+            }),
+          ],
+        }),
+        defineField({ name: "officeHours", title: "Office Hours", type: "string" }),
+        defineField({ name: "copyright", title: "Copyright Line", type: "string" }),
+        defineField({ name: "legalNote", title: "Legal Note (e.g. RERA)", type: "string" }),
+      ],
+    }),
   ],
   preview: { prepare: () => ({ title: "Site Settings" }) },
 });

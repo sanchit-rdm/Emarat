@@ -7,12 +7,48 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     contact {
       phone, phoneHours, email, emailNote, address
     },
-    socialLinks[] { platform, url }
+    socialLinks[] { platform, url },
+    nav[] {
+      label,
+      href,
+      dropdown[] { label, href }
+    },
+    footer {
+      tagline,
+      addressLines,
+      columns[] {
+        heading,
+        links[] { label, href }
+      },
+      officeHours,
+      copyright,
+      legalNote
+    }
   }
 `);
 
+/* Shared projections for the simple Hero + SEO page singletons. */
+const HERO_FIELDS = `
+  hero {
+    eyebrow, titleTop, titleBottom, subtitle, trailing,
+    "bgImage": bgImage.asset->url
+  }
+`;
+const SEO_FIELDS = `
+  seo {
+    metaTitle, metaDescription,
+    "ogImage": ogImage.asset->url
+  }
+`;
+
+/* Build a query for a Hero+SEO page singleton by document type. */
+export function pageQuery(type: string) {
+  return `*[_type == "${type}"][0] { ${HERO_FIELDS}, ${SEO_FIELDS} }`;
+}
+
 export const HOME_PAGE_QUERY = defineQuery(`
   *[_type == "homePage"][0] {
+    "heroBlocks": heroBlocks[]{ _key, eyebrow, heading, sub },
     "stats": stats[]{ _key, value, suffix, label },
     "gallery": gallery[]{
       _key,
@@ -54,7 +90,15 @@ export const HOME_PAGE_QUERY = defineQuery(`
       email,
       emailNote,
       address
-    }
+    },
+    location {
+      eyebrow,
+      "places": places[]{
+        _key, name, headingLine1, headingLine2, feature, icon, body,
+        "image": image.asset->url
+      }
+    },
+    ${SEO_FIELDS}
   }
 `);
 

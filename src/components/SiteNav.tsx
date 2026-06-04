@@ -1,196 +1,67 @@
-"use client";
+import { sanityFetch } from "@/sanity/lib/live";
+import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
+import SiteNavClient, { type NavItem } from "@/components/SiteNavClient";
 
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import CircleButton from "@/components/CircleButton";
-import logo from "@/images/logo.png";
-
-const corporate = [
-  { href: "/about", label: "About Us" },
-  { href: "/directors-desk", label: "Director's Desk" },
-  { href: "/team", label: "Our Team" },
-];
-
-const projectLinks = [
-  { href: "/projects/c2", label: "C2 at DLF Garden City" },
-  { href: "/projects/c5", label: "C5 at DLF Garden City" },
-  { href: "/projects/e11", label: "E11 at DLF Garden City" },
-  { href: "/projects/ea04", label: "EA 04 at Almeda" },
-];
-
-const upcomingProjects = [
-  { href: "/upcoming-projects#dlf-garden-city-plots", label: "DLF Garden City Plots In Sector 93 Gurgaon" },
-  { href: "/upcoming-projects#dlf-residential", label: "DLF Residential Projects In Gurgaon Sector 93" },
-  { href: "/upcoming-projects#dlf-independent-floors", label: "DLF Independent Floors In Gurgaon Phase 3" },
-];
-
-const topLevel = [
+// Default menu — used until/unless overridden in Sanity → Site Settings → Nav.
+const DEFAULT_NAV: NavItem[] = [
   { href: "/", label: "Home" },
-  { label: "Corporate", dropdown: corporate },
-  { label: "Projects", dropdown: projectLinks },
-  { label: "Upcoming Projects", dropdown: upcomingProjects },
+  {
+    label: "Corporate",
+    dropdown: [
+      { href: "/about", label: "About Us" },
+      { href: "/directors-desk", label: "Director's Desk" },
+      { href: "/team", label: "Our Team" },
+    ],
+  },
+  {
+    label: "Projects",
+    dropdown: [
+      { href: "/projects/c2", label: "C2 at DLF Garden City" },
+      { href: "/projects/c5", label: "C5 at DLF Garden City" },
+      { href: "/projects/e11", label: "E11 at DLF Garden City" },
+      { href: "/projects/ea04", label: "EA 04 at Almeda" },
+    ],
+  },
+  {
+    label: "Upcoming Projects",
+    dropdown: [
+      { href: "/upcoming-projects#dlf-garden-city-plots", label: "DLF Garden City Plots In Sector 93 Gurgaon" },
+      { href: "/upcoming-projects#dlf-residential", label: "DLF Residential Projects In Gurgaon Sector 93" },
+      { href: "/upcoming-projects#dlf-independent-floors", label: "DLF Independent Floors In Gurgaon Phase 3" },
+    ],
+  },
   { href: "/careers", label: "Careers" },
   { href: "/news", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ];
 
-export default function SiteNav() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const headerRef = useRef<HTMLElement | null>(null);
+type SanityNav = Array<{
+  label?: string;
+  href?: string;
+  dropdown?: Array<{ label?: string; href?: string }> | null;
+}> | null;
 
-  useEffect(() => {
-    const onScroll = () => {
-      // On the home page the scroll-video hero (`#top`) should keep the bar
-      // transparent for its full pinned run, then turn it solid once real
-      // content scrolls up behind it. Elsewhere there is no `#top`, so fall
-      // back to the simple 24px threshold.
-      const hero = document.getElementById("top");
-      if (!hero) {
-        setScrolled(window.scrollY > 24);
-        return;
-      }
-      const headerH = headerRef.current?.offsetHeight ?? 0;
-      setScrolled(hero.getBoundingClientRect().bottom <= headerH);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
+export default async function SiteNav() {
+  let nav: NavItem[] = DEFAULT_NAV;
+  try {
+    const { data } = await sanityFetch({ query: SITE_SETTINGS_QUERY, tags: ["siteSettings"] });
+    const sanityNav = (data as { nav?: SanityNav })?.nav;
+    if (sanityNav && sanityNav.length) {
+      nav = sanityNav
+        .filter((i) => i.label)
+        .map((i) => ({
+          label: i.label as string,
+          href: i.href || undefined,
+          dropdown: i.dropdown?.length
+            ? i.dropdown
+                .filter((d) => d.label && d.href)
+                .map((d) => ({ label: d.label as string, href: d.href as string }))
+            : undefined,
+        }));
+    }
+  } catch {
+    // keep defaults
+  }
 
-  return (
-    <header
-      ref={headerRef}
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-        scrolled
-          ? "bg-[color:var(--bg)]/85 backdrop-blur-md border-b border-[color:var(--line)]"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="mx-auto flex h-28 max-w-[1440px] items-center justify-between px-6 lg:px-10">
-        <Link href="/" className="flex items-center" aria-label="Emarat Realty home">
-          <Image
-            src={logo}
-            alt="Emarat Realty"
-            priority
-            className="h-auto w-[130px]"
-            sizes="130px"
-          />
-        </Link>
-
-        <nav className="hidden gap-7 text-sm md:flex">
-          {topLevel.map((item) =>
-            item.dropdown ? (
-              <div
-                key={item.label}
-                className="relative"
-                onMouseEnter={() => setOpenDropdown(item.label)}
-                onMouseLeave={() => setOpenDropdown(null)}
-              >
-                <button
-                  type="button"
-                  className="nav-link flex items-center gap-1 text-white transition-colors hover:text-[color:var(--accent)]"
-                  aria-expanded={openDropdown === item.label}
-                >
-                  {item.label}
-                  <span aria-hidden className="text-[0.6rem]">▾</span>
-                </button>
-                {openDropdown === item.label && (
-                  <div className="absolute left-0 top-full pt-4">
-                    <div className="min-w-[220px] rounded-md border border-[color:var(--line)] bg-[color:var(--bg)]/95 p-2 backdrop-blur-md">
-                      {item.dropdown.map((d) => (
-                        <Link
-                          key={d.href}
-                          href={d.href}
-                          className="block rounded px-3 py-2 text-sm tracking-[0.02em] text-white transition-colors hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--accent)]"
-                        >
-                          {d.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <Link
-                key={item.href}
-                href={item.href!}
-                className="nav-link text-white transition-colors hover:text-[color:var(--accent)]"
-              >
-                {item.label}
-              </Link>
-            )
-          )}
-        </nav>
-
-        <div className="flex items-center gap-4">
-          <div className="hidden md:inline-flex">
-            <CircleButton href="/contact" size="sm" variant="outline" className="enquire-btn">
-              Enquire Now
-            </CircleButton>
-          </div>
-          <button
-            type="button"
-            aria-label="Toggle menu"
-            onClick={() => setMenuOpen((v) => !v)}
-            className="flex flex-col gap-1.5 p-1 md:hidden"
-          >
-            <span className={`block h-px w-6 bg-[color:var(--fg)] transition-transform duration-300 ${menuOpen ? "translate-y-2.5 rotate-45" : ""}`} />
-            <span className={`block h-px w-6 bg-[color:var(--fg)] transition-opacity duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`block h-px w-6 bg-[color:var(--fg)] transition-transform duration-300 ${menuOpen ? "-translate-y-2.5 -rotate-45" : ""}`} />
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className="max-h-[80vh] overflow-y-auto border-t border-[color:var(--line)] bg-[color:var(--bg)]/95 backdrop-blur-md md:hidden">
-          <nav className="flex flex-col px-6 py-4">
-            {topLevel.map((item) =>
-              item.dropdown ? (
-                <details key={item.label} className="border-b border-[color:var(--line)]">
-                  <summary className="flex cursor-pointer items-center justify-between py-4 text-sm text-white">
-                    <span>{item.label}</span>
-                    <span aria-hidden className="text-[0.6rem]">▾</span>
-                  </summary>
-                  <div className="pb-3">
-                    {item.dropdown.map((d) => (
-                      <Link
-                        key={d.href}
-                        href={d.href}
-                        onClick={() => setMenuOpen(false)}
-                        className="block py-2 pl-3 text-sm tracking-[0.02em] text-white transition-colors hover:text-[color:var(--accent)]"
-                      >
-                        {d.label}
-                      </Link>
-                    ))}
-                  </div>
-                </details>
-              ) : (
-                <Link
-                  key={item.href}
-                  href={item.href!}
-                  onClick={() => setMenuOpen(false)}
-                  className="border-b border-[color:var(--line)] py-4 text-sm text-white transition-colors hover:text-[color:var(--accent)]"
-                >
-                  {item.label}
-                </Link>
-              )
-            )}
-            <div className="mt-6">
-              <CircleButton href="/contact" variant="outline" className="enquire-btn w-full">
-                Enquire Now
-              </CircleButton>
-            </div>
-          </nav>
-        </div>
-      )}
-    </header>
-  );
+  return <SiteNavClient items={nav} />;
 }

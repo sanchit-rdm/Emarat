@@ -5,12 +5,26 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
+import { getPageContent, mergeHero, buildMetadata } from "@/sanity/lib/page";
 
-export const metadata: Metadata = {
-  title: "Contact Emarat Realty",
-  description:
-    "Speak to the Emarat Realty team 2nd Floor, Sector-15, Civil Lines, Gurugram. Call +91 84509 84509 or email info@emaratrealty.com.",
+const HERO_FALLBACK = {
+  eyebrow: "",
+  titleTop: "Speak to our",
+  titleBottom: "sales team.",
+  subtitle:
+    "Whether you're enquiring about a specific residence, planning a site visit, or simply exploring the right investment for your family we're here to help.",
+  trailing: "+91 84509 84509 · info@emaratrealty.com",
+  bgImage: "/images/alameda-bedroom-2.webp",
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageContent("contactPage");
+  return buildMetadata(page?.seo, {
+    title: "Contact Emarat Realty",
+    description:
+      "Speak to the Emarat Realty team 2nd Floor, Sector-15, Civil Lines, Gurugram. Call +91 84509 84509 or email info@emaratrealty.com.",
+  });
+}
 
 const contactMethods = [
   {
@@ -33,18 +47,14 @@ const contactMethods = [
   },
 ];
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const page = await getPageContent("contactPage");
+  const hero = mergeHero(page?.hero, HERO_FALLBACK);
   return (
     <>
       <SiteNav />
       <main>
-        <PageHero
-          titleTop="Speak to our"
-          titleBottom="sales team."
-          subtitle="Whether you're enquiring about a specific residence, planning a site visit, or simply exploring the right investment for your family we're here to help."
-          bgImage="/images/alameda-bedroom-2.webp"
-          trailing="+91 84509 84509 · info@emaratrealty.com"
-        />
+        <PageHero {...hero} />
 
         {/* Three contact methods */}
         <section className="border-b border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-16 lg:px-10 lg:py-24">

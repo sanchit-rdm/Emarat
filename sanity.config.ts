@@ -6,7 +6,19 @@ import { schemaTypes } from "./sanity/schemaTypes";
 import { structure } from "./src/sanity/structure";
 import { apiVersion, dataset, projectId } from "./src/sanity/env";
 
-const SINGLETON_TYPES = new Set(["siteSettings", "homePage"]);
+const SINGLETON_TYPES = new Set([
+  "siteSettings",
+  "homePage",
+  "aboutPage",
+  "contactPage",
+  "teamPage",
+  "directorsDeskPage",
+  "careersPage",
+  "newsPage",
+  "propertiesPage",
+  "locationPage",
+  "projectsPage",
+]);
 const SINGLETON_ACTIONS = new Set(["publish", "discardChanges", "restore"]);
 
 export default defineConfig({

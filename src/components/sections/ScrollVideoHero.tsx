@@ -92,7 +92,27 @@ const ANCHOR_CLASSES: Record<Anchor, string> = {
   "bot-right": "items-end justify-end text-right",
 };
 
-export default function ScrollVideoHero() {
+type SanityBlock = { _key?: string; eyebrow?: string; heading?: string; sub?: string };
+
+// Overlay editable copy from Sanity onto the in-code timing/position slots,
+// keeping the scroll choreography fixed. Extra Sanity blocks beyond the
+// designed slots are ignored; missing ones keep their default copy.
+function resolveBlocks(blocks?: SanityBlock[]): TextBlock[] {
+  if (!blocks?.length) return TEXT_BLOCKS;
+  return TEXT_BLOCKS.map((base, i) => {
+    const b = blocks[i];
+    if (!b) return base;
+    return {
+      ...base,
+      eyebrow: b.eyebrow?.trim() || base.eyebrow,
+      heading: b.heading?.trim() || base.heading,
+      sub: b.sub?.trim() || base.sub,
+    };
+  });
+}
+
+export default function ScrollVideoHero({ blocks }: { blocks?: SanityBlock[] }) {
+  const TEXT_BLOCKS = resolveBlocks(blocks);
   const sectionRef = useRef<HTMLElement | null>(null);
   const pinRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);

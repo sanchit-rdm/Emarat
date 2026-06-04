@@ -8,6 +8,8 @@ import SplitReveal from "@/components/motion/SplitReveal";
 
 export default function ProjectGallery({ images }: { images: GalleryImage[] }) {
   const [active, setActive] = useState(0);
+  if (!images?.length) return null;
+  const current = images[active] ?? images[0];
 
   return (
     <section id="gallery" className="scroll-mt-44 border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-24 lg:px-10 lg:py-32">
@@ -40,7 +42,7 @@ export default function ProjectGallery({ images }: { images: GalleryImage[] }) {
           ))}
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[color:var(--bg)]/60 via-transparent to-transparent" />
           <div className="absolute bottom-5 left-5 text-sm uppercase tracking-[0.16em] text-[color:var(--fg)]/80">
-            {images[active].label}
+            {current.label}
           </div>
         </Reveal>
 

@@ -8,7 +8,8 @@ import SplitReveal from "@/components/motion/SplitReveal";
 
 export default function FloorPlans({ plans }: { plans: FloorPlan[] }) {
   const [active, setActive] = useState(0);
-  const plan = plans[active];
+  if (!plans?.length) return null;
+  const plan = plans[active] ?? plans[0];
 
   return (
     <section id="floor-plans" className="scroll-mt-44 px-6 py-24 lg:px-10 lg:py-32">

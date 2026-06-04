@@ -6,12 +6,16 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
+import { getPageContent, mergeHero, buildMetadata } from "@/sanity/lib/page";
 
-export const metadata: Metadata = {
-  title: "Properties Emarat Realty",
-  description:
-    "Property types by Emarat Realty luxury apartments, penthouses, residential plots, independent floors and high-end commercial spaces in Gurugram.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageContent("propertiesPage");
+  return buildMetadata(page?.seo, {
+    title: "Properties Emarat Realty",
+    description:
+      "Property types by Emarat Realty luxury apartments, penthouses, residential plots, independent floors and high-end commercial spaces in Gurugram.",
+  });
+}
 
 const types = [
   {
@@ -67,18 +71,24 @@ const features = [
   ["Exquisite Details", "From the placement of a window to the door handle in your hand every detail considered."],
 ];
 
-export default function PropertiesPage() {
+const HERO_FALLBACK = {
+  eyebrow: "",
+  titleTop: "Homes, plots,",
+  titleBottom: "and the spaces between.",
+  subtitle:
+    "From a single freehold plot to a luxury duplex penthouse every Emarat property is delivered with uncompromising attention to design, materials and the rooms in between.",
+  trailing: "Five property categories",
+  bgImage: "/images/alameda-lounge.webp",
+};
+
+export default async function PropertiesPage() {
+  const page = await getPageContent("propertiesPage");
+  const hero = mergeHero(page?.hero, HERO_FALLBACK);
   return (
     <>
       <SiteNav />
       <main>
-        <PageHero
-          titleTop="Homes, plots,"
-          titleBottom="and the spaces between."
-          subtitle="From a single freehold plot to a luxury duplex penthouse every Emarat property is delivered with uncompromising attention to design, materials and the rooms in between."
-          bgImage="/images/alameda-lounge.webp"
-          trailing="Five property categories"
-        />
+        <PageHero {...hero} />
 
         {/* Unparalleled luxury features (light cream) */}
         <section className="theme-light px-6 py-24 lg:px-10 lg:py-32">

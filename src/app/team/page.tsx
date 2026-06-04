@@ -6,12 +6,26 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
+import { getPageContent, mergeHero, buildMetadata } from "@/sanity/lib/page";
 
-export const metadata: Metadata = {
-  title: "Our Team Emarat Realty",
-  description:
-    "Meet the Emarat Realty leadership visionary leaders, expert architects and dedicated professionals collaborating to create spaces that inspire and endure.",
+const HERO_FALLBACK = {
+  eyebrow: "",
+  titleTop: "Leaders in innovation,",
+  titleBottom: "architects of change.",
+  subtitle:
+    "Emarat is driven by a team of visionary leaders, expert architects and dedicated professionals who share a passion for excellence collaborating to create spaces that inspire and endure.",
+  trailing: "A small team. Long horizons.",
+  bgImage: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=2400&q=80&auto=format&fit=crop",
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageContent("teamPage");
+  return buildMetadata(page?.seo, {
+    title: "Our Team Emarat Realty",
+    description:
+      "Meet the Emarat Realty leadership visionary leaders, expert architects and dedicated professionals collaborating to create spaces that inspire and endure.",
+  });
+}
 
 const team = [
   {
@@ -46,18 +60,14 @@ const values = [
   { label: "Customer-first", body: "The people we build for shape every decision." },
 ];
 
-export default function TeamPage() {
+export default async function TeamPage() {
+  const page = await getPageContent("teamPage");
+  const hero = mergeHero(page?.hero, HERO_FALLBACK);
   return (
     <>
       <SiteNav />
       <main>
-        <PageHero
-          titleTop="Leaders in innovation,"
-          titleBottom="architects of change."
-          subtitle="Emarat is driven by a team of visionary leaders, expert architects and dedicated professionals who share a passion for excellence collaborating to create spaces that inspire and endure."
-          bgImage="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=2400&q=80&auto=format&fit=crop"
-          trailing="A small team. Long horizons."
-        />
+        <PageHero {...hero} />
 
         {/* Values strip */}
         <section className="border-y border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-12 lg:px-10 lg:py-16">

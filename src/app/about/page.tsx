@@ -8,12 +8,26 @@ import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import Parallax from "@/components/motion/Parallax";
 import CircleButton from "@/components/CircleButton";
+import { getPageContent, mergeHero, buildMetadata } from "@/sanity/lib/page";
 
-export const metadata: Metadata = {
-  title: "About Emarat Realty",
-  description:
-    "Emarat an Argo Group company redefining luxury living in Gurugram. Vision, mission, and a 15-year legacy across real estate, hospitality, manufacturing and trading.",
+const HERO_FALLBACK = {
+  eyebrow: "",
+  titleTop: "Redefining the standard",
+  titleBottom: "of luxury living.",
+  subtitle:
+    "At Emarat, we're passionate about creating exquisite spaces that elevate the art of living. Our mission is to redefine the standards of living one breath-taking space at a time.",
+  trailing: "An Argo Group company",
+  bgImage: "/images/alameda-entrance.webp",
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageContent("aboutPage");
+  return buildMetadata(page?.seo, {
+    title: "About Emarat Realty",
+    description:
+      "Emarat an Argo Group company redefining luxury living in Gurugram. Vision, mission, and a 15-year legacy across real estate, hospitality, manufacturing and trading.",
+  });
+}
 
 const highlights = [
   "Luxurious living spaces, designed to perfection",
@@ -40,18 +54,14 @@ const communityInitiatives = [
   },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const page = await getPageContent("aboutPage");
+  const hero = mergeHero(page?.hero, HERO_FALLBACK);
   return (
     <>
       <SiteNav />
       <main>
-        <PageHero
-          titleTop="Redefining the standard"
-          titleBottom="of luxury living."
-          subtitle="At Emarat, we're passionate about creating exquisite spaces that elevate the art of living. Our mission is to redefine the standards of living one breath-taking space at a time."
-          bgImage="/images/alameda-entrance.webp"
-          trailing="An Argo Group company"
-        />
+        <PageHero {...hero} />
 
         {/* Opening statement + highlights (light cream) */}
         <section className="theme-light px-6 py-28 lg:px-10 lg:py-40">

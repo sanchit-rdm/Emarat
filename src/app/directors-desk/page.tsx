@@ -7,25 +7,35 @@ import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import Parallax from "@/components/motion/Parallax";
 import CircleButton from "@/components/CircleButton";
+import { getPageContent, mergeHero, buildMetadata } from "@/sanity/lib/page";
 
-export const metadata: Metadata = {
-  title: "Director's Desk Emarat Realty",
-  description:
-    "A message from Dr. Raahul Goel, Managing Director at Emarat Realty on quality, innovation, and building landmarks that define aspirations.",
+const HERO_FALLBACK = {
+  eyebrow: "",
+  titleTop: "A message from",
+  titleBottom: "our Managing Director.",
+  subtitle:
+    "On vision, the work that drives us, and what it takes to build landmarks that define aspirations and enhance lifestyles for generations to come.",
+  trailing: "Dr. Raahul Goel · Managing Director",
+  bgImage: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=2400&q=80&auto=format&fit=crop",
 };
 
-export default function DirectorsDeskPage() {
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageContent("directorsDeskPage");
+  return buildMetadata(page?.seo, {
+    title: "Director's Desk Emarat Realty",
+    description:
+      "A message from Dr. Raahul Goel, Managing Director at Emarat Realty on quality, innovation, and building landmarks that define aspirations.",
+  });
+}
+
+export default async function DirectorsDeskPage() {
+  const page = await getPageContent("directorsDeskPage");
+  const hero = mergeHero(page?.hero, HERO_FALLBACK);
   return (
     <>
       <SiteNav />
       <main>
-        <PageHero
-          titleTop="A message from"
-          titleBottom="our Managing Director."
-          subtitle="On vision, the work that drives us, and what it takes to build landmarks that define aspirations and enhance lifestyles for generations to come."
-          bgImage="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=2400&q=80&auto=format&fit=crop"
-          trailing="Dr. Raahul Goel · Managing Director"
-        />
+        <PageHero {...hero} />
 
         {/* Director portrait + intro */}
         <section className="px-6 py-24 lg:px-10 lg:py-32">

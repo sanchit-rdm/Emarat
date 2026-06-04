@@ -10,8 +10,21 @@ import Approach from "@/components/sections/Approach";
 import News from "@/components/sections/News";
 import Contact from "@/components/sections/Contact";
 import SiteFooter from "@/components/sections/SiteFooter";
+import type { Metadata } from "next";
 import { sanityFetch } from "@/sanity/lib/live";
 import { HOME_PAGE_QUERY, POSTS_QUERY } from "@/sanity/lib/queries";
+import { buildMetadata } from "@/sanity/lib/page";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { data } = await sanityFetch({ query: HOME_PAGE_QUERY, tags: ["homePage"] });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const seo = (data as any)?.seo;
+  return buildMetadata(seo, {
+    title: "Emarat Realty Luxury Real Estate in Gurugram",
+    description:
+      "A distinguished leader in luxury real estate, specialising in exquisite residences and high-end commercial spaces at DLF Garden City, Sector 93, Gurugram.",
+  });
+}
 
 export default async function Home() {
   const [{ data: homePageRaw }, { data: postsRaw }] = await Promise.all([
@@ -28,14 +41,14 @@ export default async function Home() {
     <>
       <SiteNav />
       <main>
-        <ScrollVideoHero />
+        <ScrollVideoHero blocks={homePage?.heroBlocks} />
         <StatsMarquee stats={homePage?.stats} />
         <Gallery images={homePage?.gallery} />
         <div className="theme-light">
           <Projects />
         </div>
         <About data={homePage?.about} />
-        <Location />
+        <Location data={homePage?.location} />
         <div className="theme-light">
           <Approach data={homePage?.approach} />
         </div>

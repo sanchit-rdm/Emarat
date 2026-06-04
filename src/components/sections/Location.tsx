@@ -31,14 +31,25 @@ const icons = {
   ),
 };
 
-const places = [
+type IconKey = "connectivity" | "access" | "travel";
+type Place = {
+  id: string;
+  name: string;
+  heading: [string, string];
+  body: string;
+  feature: string;
+  icon: IconKey;
+  bg: string;
+};
+
+const DEFAULT_PLACES: Place[] = [
   {
     id: "dwarka",
     name: "Dwarka Expressway",
     heading: ["Dwarka", "Expressway"],
     body: "Enjoy easy access to one of the region's key road networks, connecting you to major destinations across Gurugram and Delhi NCR.",
     feature: "Seamless Connectivity",
-    icon: "connectivity" as const,
+    icon: "connectivity",
     bg: "/images/dwarka-Expressway.jpg",
   },
   {
@@ -47,7 +58,7 @@ const places = [
     heading: ["NH-48", "National Highway"],
     body: "Stay connected to business districts, commercial centres and everyday destinations through one of the country's most important highways.",
     feature: "Easy Access",
-    icon: "access" as const,
+    icon: "access",
     bg: "/images/nh-48.webp",
   },
   {
@@ -56,14 +67,43 @@ const places = [
     heading: ["Indira Gandhi", "Airport"],
     body: "Benefit from convenient access to Indira Gandhi International Airport, ensuring smoother travel and better connectivity.",
     feature: "Convenient Travel",
-    icon: "travel" as const,
+    icon: "travel",
     bg: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1920&q=75&auto=format&fit=crop",
   },
 ];
 
-export default function Location() {
+type SanityPlace = {
+  _key?: string;
+  name?: string;
+  headingLine1?: string;
+  headingLine2?: string;
+  feature?: string;
+  icon?: string;
+  body?: string;
+  image?: string | null;
+};
+interface LocationData {
+  eyebrow?: string;
+  places?: SanityPlace[];
+}
+
+export default function Location({ data }: { data?: LocationData }) {
   const [active, setActive] = useState(0);
-  const current = places[active];
+  const eyebrow = data?.eyebrow?.trim() || "Location & Connectivity";
+  const places: Place[] = data?.places?.length
+    ? data.places.map((p, i) => ({
+        id: p._key ?? `place-${i}`,
+        name: p.name ?? "",
+        heading: [p.headingLine1 ?? p.name ?? "", p.headingLine2 ?? ""],
+        body: p.body ?? "",
+        feature: p.feature ?? "",
+        icon: (["connectivity", "access", "travel"].includes(p.icon ?? "")
+          ? p.icon
+          : "connectivity") as IconKey,
+        bg: p.image || "/images/dwarka-Expressway.jpg",
+      }))
+    : DEFAULT_PLACES;
+  const current = places[active] ?? places[0];
 
   return (
     <section
@@ -92,7 +132,7 @@ export default function Location() {
 
       <div className="mx-auto max-w-[1440px]">
         <Reveal as="p" className="eyebrow mb-8 text-xs uppercase tracking-[0.24em] text-[color:var(--muted)]">
-          <span>Location &amp; Connectivity</span>
+          <span>{eyebrow}</span>
         </Reveal>
 
         {/* Fixed-height content area — reserves space for the tallest landmark

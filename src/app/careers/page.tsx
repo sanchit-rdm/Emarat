@@ -6,12 +6,26 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
+import { getPageContent, mergeHero, buildMetadata } from "@/sanity/lib/page";
 
-export const metadata: Metadata = {
-  title: "Careers Emarat Realty",
-  description:
-    "Build a career with Emarat Realty opportunities in architecture, engineering, sales, marketing and project management at our Gurugram office.",
+const HERO_FALLBACK = {
+  eyebrow: "",
+  titleTop: "Build your career,",
+  titleBottom: "building landmarks.",
+  subtitle:
+    "At Emarat, we're always looking for passionate, innovative and driven individuals who want to shape the future of luxury living in Gurugram.",
+  trailing: "Gurugram · On-site",
+  bgImage: "/images/alameda-kitchen.webp",
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageContent("careersPage");
+  return buildMetadata(page?.seo, {
+    title: "Careers Emarat Realty",
+    description:
+      "Build a career with Emarat Realty opportunities in architecture, engineering, sales, marketing and project management at our Gurugram office.",
+  });
+}
 
 const pillars = [
   {
@@ -45,18 +59,14 @@ const areas = [
   "Customer Experience",
 ];
 
-export default function CareersPage() {
+export default async function CareersPage() {
+  const page = await getPageContent("careersPage");
+  const hero = mergeHero(page?.hero, HERO_FALLBACK);
   return (
     <>
       <SiteNav />
       <main>
-        <PageHero
-          titleTop="Build your career,"
-          titleBottom="building landmarks."
-          subtitle="At Emarat, we're always looking for passionate, innovative and driven individuals who want to shape the future of luxury living in Gurugram."
-          bgImage="/images/alameda-kitchen.webp"
-          trailing="Gurugram · On-site"
-        />
+        <PageHero {...hero} />
 
         {/* Why work with us — 4 pillars (light cream) */}
         <section className="theme-light px-6 py-28 lg:px-10 lg:py-40">
