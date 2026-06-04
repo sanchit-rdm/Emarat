@@ -1,44 +1,44 @@
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 
-const testimonials = [
-  {
-    quote:
-      "When we first visited the property, the quality of construction immediately stood out. Even after moving in, we've continued to appreciate the attention given to the details and finishing throughout the home.",
-    name: "Rohan Malhotra",
-    no: "01",
-  },
-  {
-    quote:
-      "One of the biggest reasons we chose this home was the location. Having easy access to major roads, schools and everyday conveniences has made life much easier for our family.",
-    name: "Neha Verma",
-    no: "02",
-  },
-  {
-    quote:
-      "The layout of the home works really well for our family. The rooms are well planned, the spaces feel open, and it simply feels easy to live in.",
-    name: "Amit Khanna",
-    no: "03",
-  },
+const DEFAULT_TESTIMONIALS = [
+  { quote: "When we first visited the property, the quality of construction immediately stood out. Even after moving in, we've continued to appreciate the attention given to the details and finishing throughout the home.", name: "Rohan Malhotra", no: "01" },
+  { quote: "One of the biggest reasons we chose this home was the location. Having easy access to major roads, schools and everyday conveniences has made life much easier for our family.", name: "Neha Verma", no: "02" },
+  { quote: "The layout of the home works really well for our family. The rooms are well planned, the spaces feel open, and it simply feels easy to live in.", name: "Amit Khanna", no: "03" },
 ];
 
-export default function Testimonials() {
+interface TestimonialsData {
+  eyebrow?: string;
+  heading1?: string;
+  heading2?: string;
+  items?: Array<{ _key?: string; quote: string; name: string }>;
+}
+interface Props { data?: TestimonialsData }
+
+export default function Testimonials({ data }: Props) {
+  const eyebrow = data?.eyebrow ?? "What Residents Say";
+  const heading1 = data?.heading1 ?? "More Than A Home,";
+  const heading2 = data?.heading2 ?? "A Place To Belong.";
+  const testimonials = data?.items?.length
+    ? data.items.map((t, i) => ({ _key: t._key, quote: t.quote, name: t.name, no: String(i + 1).padStart(2, "0") }))
+    : DEFAULT_TESTIMONIALS;
   return (
     <section className="px-6 py-24 lg:px-10 lg:py-32">
       <div className="mx-auto max-w-[1440px]">
         <Reveal as="p" className="eyebrow mb-8 text-xs uppercase tracking-[0.24em] text-[color:var(--muted)]">
-          <span>What Residents Say</span>
+          <span>{eyebrow}</span>
         </Reveal>
 
         <SplitReveal as="h2" className="font-display h-section max-w-2xl">
-          More Than A Home,
+          {heading1}
         </SplitReveal>
         <SplitReveal as="h2" delay={0.08} className="font-display h-section text-[color:var(--muted)]">
-          A Place To Belong.
+          {heading2}
         </SplitReveal>
 
         <div className="mt-16 grid grid-cols-1 gap-px border border-[color:var(--line)] md:grid-cols-3 lg:mt-24">
           {testimonials.map((t, i) => (
+
             <Reveal
               key={t.name}
               delay={i * 0.1}

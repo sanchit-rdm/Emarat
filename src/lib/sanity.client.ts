@@ -1,15 +1,14 @@
 import { createClient } from "@sanity/client";
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "k6lgt7ii";
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2024-05-25";
 
-// Allow building without Sanity credentials for initial setup
-const hasValidConfig = projectId && dataset;
+const hasValidConfig = true;
 
 export const client = createClient({
-  projectId: projectId || "placeholder",
-  dataset: dataset || "production",
+  projectId,
+  dataset,
   apiVersion,
   useCdn: true,
 });

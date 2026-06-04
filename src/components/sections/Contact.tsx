@@ -3,7 +3,27 @@ import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
 
-export default function Contact() {
+interface ContactData {
+  heading1?: string;
+  heading2?: string;
+  phone?: string;
+  phoneHref?: string;
+  phoneHours?: string;
+  email?: string;
+  emailNote?: string;
+  address?: string;
+}
+interface Props { data?: ContactData }
+
+export default function Contact({ data }: Props) {
+  const heading1 = data?.heading1 ?? "Ready to find";
+  const heading2 = data?.heading2 ?? "your perfect home?";
+  const phone = data?.phone ?? "+91 84509 84509";
+  const phoneHref = data?.phoneHref ?? "tel:+918450984509";
+  const phoneHours = data?.phoneHours ?? "Mon – Sat, 10am – 7pm IST";
+  const email = data?.email ?? "info@emaratrealty.com";
+  const emailNote = data?.emailNote ?? "We respond within one working day.";
+  const address = data?.address ?? "Emarat Realty\n2nd Floor, Sector-15\nCivil Lines, Gurugram\nHaryana 122001";
   return (
     <section
       id="contact"
@@ -24,18 +44,11 @@ export default function Contact() {
 
       <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-10">
-          <SplitReveal
-            as="h2"
-            className="font-display h-page"
-          >
-            Ready to find
+          <SplitReveal as="h2" className="font-display h-page">
+            {heading1}
           </SplitReveal>
-          <SplitReveal
-            as="h2"
-            delay={0.1}
-            className="font-display h-page text-[color:var(--muted)]"
-          >
-            your perfect home?
+          <SplitReveal as="h2" delay={0.1} className="font-display h-page text-[color:var(--muted)]">
+            {heading2}
           </SplitReveal>
 
           {/* Callback form */}
@@ -102,14 +115,12 @@ export default function Contact() {
                 Call Us
               </div>
               <a
-                href="tel:+918450984509"
+                href={phoneHref}
                 className="block font-display-alt text-2xl transition-colors hover:text-[color:var(--accent)]"
               >
-                +91 84509 84509
+                {phone}
               </a>
-              <p className="text-sm text-[color:var(--muted)]">
-                Mon – Sat, 10am – 7pm IST
-              </p>
+              <p className="text-sm text-[color:var(--muted)]">{phoneHours}</p>
             </Reveal>
 
             <Reveal as="div" delay={0.15} className="space-y-3">
@@ -117,25 +128,20 @@ export default function Contact() {
                 Email Us
               </div>
               <a
-                href="mailto:info@emaratrealty.com"
+                href={`mailto:${email}`}
                 className="block font-display-alt text-xl transition-colors hover:text-[color:var(--accent)]"
               >
-                info@emaratrealty.com
+                {email}
               </a>
-              <p className="text-sm text-[color:var(--muted)]">
-                We respond within one working day.
-              </p>
+              <p className="text-sm text-[color:var(--muted)]">{emailNote}</p>
             </Reveal>
 
             <Reveal as="div" delay={0.2} className="space-y-3">
               <div className="text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
                 Visit Us
               </div>
-              <p className="font-display-alt text-base leading-relaxed">
-                Emarat Realty<br />
-                2nd Floor, Sector-15<br />
-                Civil Lines, Gurugram<br />
-                Haryana 122001
+              <p className="font-display-alt text-base leading-relaxed" style={{ whiteSpace: "pre-line" }}>
+                {address}
               </p>
             </Reveal>
           </div>

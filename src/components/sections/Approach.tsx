@@ -5,45 +5,29 @@ import Image from "next/image";
 import { ensureGsap } from "@/lib/gsap";
 import SplitReveal from "@/components/motion/SplitReveal";
 
-const values = [
-  {
-    no: "I.",
-    title: "Built on Trust",
-    body: "We believe in transparency, accountability and delivering on our commitments. Every decision we make is guided by integrity and a responsibility to create homes our customers can trust.",
-    img: "/images/alameda-entrance.webp",
-    alt: "Emarat Realty entrance — trust and transparency",
-  },
-  {
-    no: "II.",
-    title: "Commitment to Quality",
-    body: "Every project reflects our focus on quality construction and lasting value. From the materials we use to the way we build, attention to detail remains a priority at every stage.",
-    img: "/images/alameda-lounge.webp",
-    alt: "Luxury lounge — quality craftsmanship",
-  },
-  {
-    no: "III.",
-    title: "Smart Planning",
-    body: "Thoughtfully planned spaces that make everyday living more comfortable. From room layouts to shared areas, every element is designed to make the best use of space while supporting the needs of modern families.",
-    img: "/images/alameda-bedroom-1.webp",
-    alt: "Well-planned bedroom layout",
-  },
-  {
-    no: "IV.",
-    title: "Prime Locations",
-    body: "Projects located in areas that offer convenience, good connectivity and everyday ease. From daily essentials to key destinations, everything is closer to where you live.",
-    img: "/images/alameda-kitchen.webp",
-    alt: "Emarat Realty — prime location living",
-  },
-  {
-    no: "V.",
-    title: "Modern Living",
-    body: "Homes designed to suit the needs and lifestyles of modern families. From spacious interiors to community-focused surroundings, every detail is planned with residents in mind.",
-    img: "/images/alameda-bedroom-2.webp",
-    alt: "Modern family residence interior",
-  },
+type Value = { _key?: string; no: string; title: string; body: string; img: string; alt: string };
+
+const DEFAULT_VALUES: Value[] = [
+  { no: "I.", title: "Built on Trust", body: "We believe in transparency, accountability and delivering on our commitments. Every decision we make is guided by integrity and a responsibility to create homes our customers can trust.", img: "/images/alameda-entrance.webp", alt: "Emarat Realty entrance — trust and transparency" },
+  { no: "II.", title: "Commitment to Quality", body: "Every project reflects our focus on quality construction and lasting value. From the materials we use to the way we build, attention to detail remains a priority at every stage.", img: "/images/alameda-lounge.webp", alt: "Luxury lounge — quality craftsmanship" },
+  { no: "III.", title: "Smart Planning", body: "Thoughtfully planned spaces that make everyday living more comfortable. From room layouts to shared areas, every element is designed to make the best use of space while supporting the needs of modern families.", img: "/images/alameda-bedroom-1.webp", alt: "Well-planned bedroom layout" },
+  { no: "IV.", title: "Prime Locations", body: "Projects located in areas that offer convenience, good connectivity and everyday ease. From daily essentials to key destinations, everything is closer to where you live.", img: "/images/alameda-kitchen.webp", alt: "Emarat Realty — prime location living" },
+  { no: "V.", title: "Modern Living", body: "Homes designed to suit the needs and lifestyles of modern families. From spacious interiors to community-focused surroundings, every detail is planned with residents in mind.", img: "/images/alameda-bedroom-2.webp", alt: "Modern family residence interior" },
 ];
 
-export default function Approach() {
+interface ApproachData {
+  heading1?: string;
+  heading2?: string;
+  values?: Array<{ _key?: string; no: string; title: string; body: string; img?: string; alt?: string }>;
+}
+interface Props { data?: ApproachData }
+
+export default function Approach({ data }: Props) {
+  const heading1 = data?.heading1 ?? "Building with Ethics,";
+  const heading2 = data?.heading2 ?? "Excellence & Efficiency.";
+  const values: Value[] = data?.values?.length
+    ? data.values.map((v) => ({ ...v, img: v.img ?? "/images/alameda-entrance.webp", alt: v.alt ?? v.title }))
+    : DEFAULT_VALUES;
   const sectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -84,10 +68,10 @@ export default function Approach() {
         <div className="col-span-12 lg:col-span-4">
           <div className="lg:sticky lg:top-32">
             <SplitReveal as="h2" className="font-display h-section">
-              Building with Ethics,
+              {heading1}
             </SplitReveal>
             <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--muted)]">
-              Excellence &amp; Efficiency.
+              {heading2}
             </SplitReveal>
           </div>
         </div>
@@ -95,7 +79,7 @@ export default function Approach() {
         <ol className="col-span-12 flex flex-col overflow-x-clip lg:col-span-8">
           {values.map((v) => (
             <li
-              key={v.no}
+              key={v._key ?? v.no}
               data-value
               className="grid grid-cols-12 gap-6 border-t border-[color:var(--line)] py-12 last:border-b lg:py-16"
               style={{ willChange: "transform, opacity" }}

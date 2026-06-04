@@ -12,7 +12,7 @@ import Reveal from "@/components/motion/Reveal";
 
 type Stat = { n: number; suffix?: string; k: string };
 
-const stats: Stat[] = [
+const DEFAULT_STATS: Stat[] = [
   { n: 10, suffix: "+", k: "Years of experience" },
   { n: 7, k: "Projects delivered" },
   { n: 500, suffix: "+", k: "Happy families" },
@@ -20,6 +20,9 @@ const stats: Stat[] = [
   { n: 3, k: "Property types" },
   { n: 1, k: "Prime location, Gurugram" },
 ];
+
+type SanityStat = { _key?: string; value: number; suffix?: string; label: string };
+interface Props { stats?: SanityStat[] }
 
 function useCountUp(target: number, run: boolean, duration = 1600) {
   const [value, setValue] = useState(0);
@@ -64,7 +67,10 @@ function StatItem({ stat, run, index }: { stat: Stat; run: boolean; index: numbe
   );
 }
 
-export default function StatsMarquee() {
+export default function StatsMarquee({ stats: rawStats }: Props) {
+  const stats: Stat[] = rawStats?.length
+    ? rawStats.map((s) => ({ n: s.value, suffix: s.suffix, k: s.label }))
+    : DEFAULT_STATS;
   const ref = useRef<HTMLElement | null>(null);
   const [run, setRun] = useState(false);
 
@@ -105,7 +111,7 @@ export default function StatsMarquee() {
 
         <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-6 lg:gap-y-0 lg:divide-x lg:divide-[color:var(--line)]">
           {stats.map((s, i) => (
-            <StatItem key={s.k} stat={s} run={run} index={i} />
+            <StatItem key={`${s.k}-${i}`} stat={s} run={run} index={i} />
           ))}
         </div>
       </div>

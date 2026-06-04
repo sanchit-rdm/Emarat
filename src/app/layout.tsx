@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import localFont from "next/font/local";
+import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity/visual-editing";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import { SanityLive } from "@/sanity/lib/live";
 
 // Body text — Montserrat. Drives --font-sans-pri.
 const montserrat = Montserrat({
@@ -28,11 +31,13 @@ export const metadata: Metadata = {
     "A distinguished leader in luxury real estate, specialising in exquisite residences and high-end commercial spaces at DLF Garden City, Sector 93, Gurugram.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { isEnabled: isDraftMode } = await draftMode();
+
   return (
     <html
       lang="en"
@@ -42,6 +47,8 @@ export default function RootLayout({
         {/* Brand-green vertical rail — present on every page as a quiet brand signature */}
         <div className="brand-rail" aria-hidden />
         <SmoothScroll>{children}</SmoothScroll>
+        <SanityLive />
+        {isDraftMode && <VisualEditing />}
       </body>
     </html>
   );
