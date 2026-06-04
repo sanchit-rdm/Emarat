@@ -9,13 +9,13 @@ import Reveal from "@/components/motion/Reveal";
 type GalleryImg = { _key?: string; src: string; label: string };
 
 const DEFAULT_IMAGES: GalleryImg[] = [
-  { src: "/images/E11/E11-14_Living Dining_Interior View_R0_20250313.jpg", label: "E11 · Living & Dining" },
-  { src: "/images/C-2/C2 Living _Interior View_APPROVED_R0_20240122.jpg", label: "C2 · Living Room" },
-  { src: "/images/EA4/EA 4 ENT. LOBBYjpg.jpeg", label: "EA 04 · Entry Lobby" },
-  { src: "/images/C-5/C-5-11 DOUBLE HEIGHT.jpg.jpeg", label: "C5 · Double Height Living" },
-  { src: "/images/E11/E11-14_Kitchen_Interior View_V1_R2_20250412.jpg", label: "E11 · Kitchen" },
-  { src: "/images/C-2/C2 Master Bedroom _Interior View 01_20250201.jpg", label: "C2 · Master Bedroom" },
-  { src: "/images/EA4/EA 4 LOUNGE.& DININGjpg.jpeg", label: "EA 04 · Lounge & Dining" },
+  { src: "/images/E11/e11-14-living-dining-interior-view-r0-20250313.jpg", label: "E11 · Living & Dining" },
+  { src: "/images/C-2/c2-living-interior-view-approved-r0-20240122.jpg", label: "C2 · Living Room" },
+  { src: "/images/EA4/ea-4-ent-lobbyjpg.jpg", label: "EA 04 · Entry Lobby" },
+  { src: "/images/C-5/c-5-11-double-height.jpg", label: "C5 · Double Height Living" },
+  { src: "/images/E11/e11-14-kitchen-interior-view-v1-r2-20250412.jpg", label: "E11 · Kitchen" },
+  { src: "/images/C-2/c2-master-bedroom-interior-view-01-20250201.jpg", label: "C2 · Master Bedroom" },
+  { src: "/images/EA4/ea-4-lounge-diningjpg.jpg", label: "EA 04 · Lounge & Dining" },
 ];
 
 interface Props { images?: GalleryImg[] }

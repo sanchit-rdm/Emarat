@@ -10,7 +10,7 @@ const projects = [
     place: "Sector 93, Gurugram",
     year: "Now Selling",
     type: "5 BHK Independent Floors",
-    img: "/images/C-2/Building.jpeg",
+    img: "/images/C-2/building.jpg",
     href: "/projects/c2",
   },
   {
@@ -19,7 +19,7 @@ const projects = [
     place: "Sector 93, Gurugram",
     year: "Now Selling",
     type: "Independent Floors",
-    img: "/images/C-5/Building.jpeg",
+    img: "/images/C-5/building.jpg",
     href: "/projects/c5",
   },
   {
@@ -28,7 +28,7 @@ const projects = [
     place: "Sector 93, Gurugram",
     year: "New Launch",
     type: "Three-Side Open Floors",
-    img: "/images/E11/Building.jpg",
+    img: "/images/E11/building.jpg",
     href: "/projects/e11",
   },
   {
@@ -37,7 +37,7 @@ const projects = [
     place: "Sector 73, Gurugram",
     year: "Now Selling",
     type: "Boutique Private Floors",
-    img: "/images/EA4/Building.jpeg",
+    img: "/images/EA4/building.jpg",
     href: "/projects/ea04",
   },
 ];

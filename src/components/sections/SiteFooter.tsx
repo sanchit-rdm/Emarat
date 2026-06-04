@@ -22,7 +22,7 @@ type FooterSettings = {
 };
 
 const DEFAULT_HEADLINE = "Redefining the standard of luxury living.";
-const DEFAULT_FOOTER_IMAGE = "/images/E11/Building.jpg";
+const DEFAULT_FOOTER_IMAGE = "/images/E11/building.jpg";
 
 const DEFAULT_TAGLINE =
   "Redefining the standard of luxury living. An Argo Group company building transformative real estate in Gurugram, Haryana.";

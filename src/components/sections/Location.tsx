@@ -50,7 +50,7 @@ const DEFAULT_PLACES: Place[] = [
     body: "Enjoy easy access to one of the region's key road networks, connecting you to major destinations across Gurugram and Delhi NCR.",
     feature: "Seamless Connectivity",
     icon: "connectivity",
-    bg: "/images/dwarka-Expressway.jpg",
+    bg: "/images/dwarka-expressway.jpg",
   },
   {
     id: "nh48",
@@ -100,7 +100,7 @@ export default function Location({ data }: { data?: LocationData }) {
         icon: (["connectivity", "access", "travel"].includes(p.icon ?? "")
           ? p.icon
           : "connectivity") as IconKey,
-        bg: p.image || "/images/dwarka-Expressway.jpg",
+        bg: p.image || "/images/dwarka-expressway.jpg",
       }))
     : DEFAULT_PLACES;
   const current = places[active] ?? places[0];
