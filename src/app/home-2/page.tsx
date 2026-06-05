@@ -51,7 +51,7 @@ export default async function HomeV2() {
     <>
       <SiteNav />
       <main className="home-v2">
-        <ScrollVideoHero blocks={homePage?.heroBlocks} videoSrc="/videos/home%202.mp4" />
+        <ScrollVideoHero blocks={homePage?.heroBlocks} videoSrc="/videos/home%202.mp4" posterSrc="/videos/home2-poster.webp" />
         <IntroV2 data={homePage?.about} />
         <ElegantDesignV2 images={homePage?.gallery} />
         <IconicIntroV2 data={homePage?.location} />

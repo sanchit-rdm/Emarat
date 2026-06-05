@@ -80,7 +80,7 @@ function resolveBlocks(blocks?: SanityBlock[]): TextBlock[] {
   });
 }
 
-export default function ScrollVideoHero({ blocks, videoSrc }: { blocks?: SanityBlock[]; videoSrc?: string }) {
+export default function ScrollVideoHero({ blocks, videoSrc, posterSrc }: { blocks?: SanityBlock[]; videoSrc?: string; posterSrc?: string }) {
   const TEXT_BLOCKS = resolveBlocks(blocks);
   const sectionRef = useRef<HTMLElement | null>(null);
   const pinRef = useRef<HTMLDivElement | null>(null);
@@ -210,7 +210,7 @@ export default function ScrollVideoHero({ blocks, videoSrc }: { blocks?: SanityB
         <video
           ref={videoRef}
           className="absolute inset-0 -z-20 h-full w-full object-cover"
-          poster="/videos/hero-poster.webp"
+          poster={posterSrc ?? "/videos/hero-poster.webp"}
           muted
           playsInline
           preload={enableScrub ? "auto" : "none"}
