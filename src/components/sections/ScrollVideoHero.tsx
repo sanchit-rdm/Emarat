@@ -80,7 +80,7 @@ function resolveBlocks(blocks?: SanityBlock[]): TextBlock[] {
   });
 }
 
-export default function ScrollVideoHero({ blocks }: { blocks?: SanityBlock[] }) {
+export default function ScrollVideoHero({ blocks, videoSrc }: { blocks?: SanityBlock[]; videoSrc?: string }) {
   const TEXT_BLOCKS = resolveBlocks(blocks);
   const sectionRef = useRef<HTMLElement | null>(null);
   const pinRef = useRef<HTMLDivElement | null>(null);
@@ -221,12 +221,12 @@ export default function ScrollVideoHero({ blocks }: { blocks?: SanityBlock[] }) 
         >
           {/* Optimized scrub copy: 720p, keyframe every 6 frames (see README).
               Re-encoded from the new hero clip for smooth seeking. */}
-          {enableScrub && <source src="/videos/hero-scrub.mp4" type="video/mp4" />}
+          {enableScrub && <source src={videoSrc ?? "/videos/hero-scrub.mp4"} type="video/mp4" />}
         </video>
 
-        {/* Brand tint + vignette for legibility (mirrors the old Hero). */}
+        {/* Overlay only beneath the text content area (bottom ~55%). */}
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-[color:var(--bg)]/55" />
+          <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-[color:var(--bg)]/70 to-transparent" />
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[color:var(--line)] to-transparent" />
           <div className="absolute -left-40 top-1/3 h-[480px] w-[480px] rounded-full bg-[color:var(--accent)]/8 blur-[160px]" />
           <div className="absolute -right-40 bottom-0 h-[560px] w-[560px] rounded-full bg-[color:var(--accent)]/6 blur-[200px]" />

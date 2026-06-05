@@ -21,7 +21,6 @@ type FooterSettings = {
   } | null;
 };
 
-const DEFAULT_HEADLINE = "Redefining the standard of luxury living.";
 const DEFAULT_FOOTER_IMAGE = "/images/E11/building.jpg";
 
 const DEFAULT_TAGLINE =
@@ -87,7 +86,6 @@ export default async function SiteFooter() {
 
   const f = settings?.footer;
   const image = f?.image?.trim() || DEFAULT_FOOTER_IMAGE;
-  const headline = f?.headline?.trim() || DEFAULT_HEADLINE;
   const tagline = f?.tagline?.trim() || DEFAULT_TAGLINE;
   const addressLines = f?.addressLines?.length ? f.addressLines : DEFAULT_ADDRESS;
   const columns = f?.columns?.length ? f.columns : DEFAULT_COLUMNS;
@@ -124,14 +122,7 @@ export default async function SiteFooter() {
       <div className="relative px-6 pb-10 pt-14 lg:px-10 lg:pt-20">
         <div className="brand-green-strip absolute inset-x-0 top-0" aria-hidden />
 
-        {/* Large brand statement */}
-        <div className="mx-auto max-w-[1440px]">
-          <h2 className="font-display max-w-3xl text-3xl leading-[1.1] sm:text-4xl lg:text-6xl">
-            {headline}
-          </h2>
-        </div>
-
-        <div className="mx-auto mt-14 grid max-w-[1440px] grid-cols-12 gap-8 lg:mt-20">
+        <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-4">
           <Image src={logo} alt="Emarat Realty" className="h-auto w-[200px]" sizes="200px" />
           <p className="mt-6 max-w-md text-sm text-[color:var(--muted)]">{tagline}</p>

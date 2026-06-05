@@ -1,0 +1,68 @@
+import SiteNav from "@/components/SiteNav";
+import ScrollVideoHero from "@/components/sections/ScrollVideoHero";
+import IntroV2 from "@/components/sections/v2/IntroV2";
+import ElegantDesignV2 from "@/components/sections/v2/ElegantDesignV2";
+import IconicIntroV2 from "@/components/sections/v2/IconicIntroV2";
+import Location from "@/components/sections/Location";
+import ResidencesV2 from "@/components/sections/v2/ResidencesV2";
+import StatementV2 from "@/components/sections/v2/StatementV2";
+import PrinciplesV2 from "@/components/sections/v2/PrinciplesV2";
+import NewsV2 from "@/components/sections/v2/NewsV2";
+import ContactV2 from "@/components/sections/v2/ContactV2";
+import SiteFooter from "@/components/sections/SiteFooter";
+import type { Metadata } from "next";
+import { sanityFetch } from "@/sanity/lib/live";
+import { HOME_PAGE_QUERY, POSTS_QUERY } from "@/sanity/lib/queries";
+import { buildMetadata } from "@/sanity/lib/page";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { data } = await sanityFetch({ query: HOME_PAGE_QUERY, tags: ["homePage"] });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const seo = (data as any)?.seo;
+  return buildMetadata(seo, {
+    title: "Emarat Realty — Home (Design Option 2)",
+    description:
+      "A distinguished leader in luxury real estate, specialising in exquisite residences and high-end commercial spaces at DLF Garden City, Sector 93, Gurugram.",
+  });
+}
+
+/**
+ * Home Page — Design Option 2.
+ *
+ * Same hero video, same content and imagery as the primary home page, but a
+ * distinct, lighter and more spacious layout inspired by the reference design
+ * (vp.moscow): a fading "elegant design" gallery, a three-column iconic-sights
+ * grid, a full-width alternating residence slider, style cards and an airy
+ * callback section. Lives at /home-2 so the client can compare the two
+ * directions side by side via the on-screen Design switcher.
+ */
+export default async function HomeV2() {
+  const [{ data: homePageRaw }, { data: postsRaw }] = await Promise.all([
+    sanityFetch({ query: HOME_PAGE_QUERY, tags: ["homePage"] }),
+    sanityFetch({ query: POSTS_QUERY, tags: ["post"] }),
+  ]);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const homePage = homePageRaw as any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const posts = (postsRaw as any[]) ?? [];
+
+  return (
+    <>
+      <SiteNav />
+      <main className="home-v2">
+        <ScrollVideoHero blocks={homePage?.heroBlocks} videoSrc="/videos/home%202.mp4" />
+        <IntroV2 data={homePage?.about} />
+        <ElegantDesignV2 images={homePage?.gallery} />
+        <IconicIntroV2 data={homePage?.location} />
+        <Location data={homePage?.location} />
+        <ResidencesV2 />
+        <StatementV2 />
+        <PrinciplesV2 data={homePage?.approach} />
+        <NewsV2 posts={posts} />
+        <ContactV2 data={homePage?.contact} />
+      </main>
+      <SiteFooter />
+    </>
+  );
+}

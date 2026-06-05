@@ -128,7 +128,7 @@ export default function Location({ data }: { data?: LocationData }) {
           />
         ))}
       </div>
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[color:var(--bg)]/55" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[color:var(--bg)]/35" />
 
       <div className="mx-auto max-w-[1440px]">
         <Reveal as="p" className="eyebrow mb-8 text-xs uppercase tracking-[0.24em] text-[color:var(--muted)]">

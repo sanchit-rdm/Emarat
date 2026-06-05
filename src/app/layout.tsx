@@ -25,6 +25,15 @@ const adelora = localFont({
   display: "swap",
 });
 
+// Cursive script accent — Bizantheum (client-licensed). Drives --font-script,
+// used for decorative flourishes such as the "Elegant Design" title on Home
+// Design 2. Applied only where the `.font-script` class is set.
+const bizantheum = localFont({
+  src: [{ path: "../fonts/Bizantheum.otf", weight: "400", style: "normal" }],
+  variable: "--font-script",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Emarat Realty Luxury Real Estate in Gurugram",
   description:
@@ -41,7 +50,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} ${adelora.variable} antialiased`}
+      className={`${montserrat.variable} ${adelora.variable} ${bizantheum.variable} antialiased`}
     >
       <body className="min-h-screen">
         {/* Brand-green vertical rail — present on every page as a quiet brand signature */}

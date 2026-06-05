@@ -4,7 +4,13 @@ import SiteNavClient, { type NavItem } from "@/components/SiteNavClient";
 
 // Default menu — used until/unless overridden in Sanity → Site Settings → Nav.
 const DEFAULT_NAV: NavItem[] = [
-  { href: "/", label: "Home" },
+  {
+    label: "Home",
+    dropdown: [
+      { href: "/", label: "Home 1" },
+      { href: "/home-2", label: "Home 2" },
+    ],
+  },
   {
     label: "Corporate",
     dropdown: [

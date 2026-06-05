@@ -5,8 +5,8 @@
      The bulk of the site is neutral near-black with gold accents. Green is a
      deliberate ~25% presence: green text in light sections, the left rail, and
      the green surfaces (`.theme-green`) used for select sections. */
-  --bg: #0b110d;             /* very dark, faint green undertone */
-  --bg-alt: #0f1611;
+  --bg: #011f14;             /* deep brand green — a darker shade of #01472E */
+  --bg-alt: #032619;         /* slightly lifted green for elevation */
   --fg: #f5efe1;             /* warm cream */
   --muted: #8a8378;
   --line: rgba(245, 239, 225, 0.10);
@@ -99,6 +99,14 @@ body {
 
 .font-display-alt {
   font-family: var(--font-display-alt), Georgia, "Times New Roman", serif;
+}
+
+/* Cursive script accent (Bizantheum) — decorative flourishes such as the
+   "Elegant Design" title on Home Design 2. Falls back to the display face. */
+.font-script {
+  font-family: var(--font-script), var(--font-display-alt), "Brush Script MT", cursive;
+  font-weight: 400;
+  letter-spacing: normal;
 }
 
 .font-mono {
@@ -316,17 +324,34 @@ html {
   display: inline-block;
   width: 1.5rem;
   height: 1.5px;
-  background: var(--brand-green);
+  /* Dark sections: a gold dash reads clearly against the near-black surface.
+     Light sections override this to brand green below. */
+  background: var(--accent);
   vertical-align: middle;
   margin-right: 0.75rem;
   margin-bottom: 2px;
 }
-/* On the green surface the dash would vanish — show it in the accent instead. */
+/* On the green surface the accent (gold) already pops. */
 .theme-green .eyebrow > :first-child::before {
   background: var(--accent);
 }
+/* On cream the dash reads in brand green. */
 .theme-light .eyebrow > :first-child::before {
+  background: var(--brand-green);
   opacity: 0.9;
+}
+
+/* ----------------------------------------------------------------------------
+   Home Design 2 typographic tuning — wider tracking on the cursive eyebrow
+   labels, a hair of tracking on the section headings. Scoped to `.home-v2`
+   so the rest of the site keeps its own spacing.
+---------------------------------------------------------------------------- */
+.home-v2 .eyebrow > :first-child {
+  letter-spacing: 5px;
+}
+.home-v2 .h-page,
+.home-v2 .h-section {
+  letter-spacing: 1px;
 }
 
 /* Pill / badge styling for the "RERA · Argo Group" type small markers. */
