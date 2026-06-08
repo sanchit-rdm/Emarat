@@ -97,6 +97,121 @@ export const HOME_PAGE_QUERY = defineQuery(`
       eyebrow, lead, rest, body, ctaHref,
       "image": image.asset->url
     },
+    projectsSection { heading1, heading2, allLabel, allHref },
+    designTwo {
+      introEyebrow,
+      elegant { title, buttonLabel, buttonHref },
+      iconic { line1, line2, line3, watermark, ctaLabel, ctaHref },
+      residences { eyebrow, heading1, heading2, allLabel, allHref, locationLabel, configLabel, viewLabel },
+      news { eyebrow, heading1, heading2, allLabel, allHref },
+      contact { eyebrow, lead, namePlaceholder, phonePlaceholder, categoryPlaceholder, categoryOptions, submitLabel, privacy }
+    },
+    ${SEO_FIELDS}
+  }
+`);
+
+export const ABOUT_PAGE_QUERY = defineQuery(`
+  *[_type == "aboutPage"][0] {
+    ${HERO_FIELDS},
+    intro {
+      heading1, heading2, paragraph, highlights
+    },
+    argo {
+      heading1, heading2, body,
+      "industries": industries[]{ _key, name, note }
+    },
+    community {
+      heading1, heading2, blurb,
+      "initiatives": initiatives[]{ _key, name, body }
+    },
+    leadership {
+      quote, body, personName, personRole, personInitials,
+      primaryCtaLabel, primaryCtaHref, secondaryCtaLabel, secondaryCtaHref
+    },
+    ${SEO_FIELDS}
+  }
+`);
+
+export const DIRECTORS_DESK_PAGE_QUERY = defineQuery(`
+  *[_type == "directorsDeskPage"][0] {
+    ${HERO_FIELDS},
+    portrait { personName, personRole, "image": image.asset->url },
+    quote { line1, line2 },
+    message,
+    signatureName,
+    mission { label, heading, body },
+    vision { label, heading, body },
+    cta { heading, body, primaryLabel, primaryHref, secondaryLabel, secondaryHref },
+    ${SEO_FIELDS}
+  }
+`);
+
+export const TEAM_PAGE_QUERY = defineQuery(`
+  *[_type == "teamPage"][0] {
+    ${HERO_FIELDS},
+    "values": values[]{ _key, label, body },
+    intro { heading1, heading2, blurb },
+    "members": members[]{ _key, name, role, bio, "image": image.asset->url },
+    cta { heading1, heading2, body, buttonLabel, buttonHref },
+    ${SEO_FIELDS}
+  }
+`);
+
+export const CAREERS_PAGE_QUERY = defineQuery(`
+  *[_type == "careersPage"][0] {
+    ${HERO_FIELDS},
+    pillarsHeading { heading1, heading2 },
+    "pillars": pillars[]{ _key, n, title, body },
+    areasHeading { heading1, heading2 },
+    areas,
+    apply { heading1, heading2, body, cardLabel, email, hours, office, buttonLabel },
+    ${SEO_FIELDS}
+  }
+`);
+
+export const CONTACT_PAGE_QUERY = defineQuery(`
+  *[_type == "contactPage"][0] {
+    ${HERO_FIELDS},
+    "methods": methods[]{ _key, label, primary, href, sub },
+    form {
+      heading1, heading2, nameLabel, namePlaceholder, phoneLabel, phonePlaceholder,
+      emailLabel, emailPlaceholder, categoryLabel, categoryPlaceholder, categoryOptions,
+      messageLabel, messagePlaceholder, consent, privacy, submitLabel
+    },
+    office {
+      label, addressLines, phoneLabel, phone, emailLabel, email, hoursLabel, hours,
+      "socials": socials[]{ _key, label, href }
+    },
+    map { title, embedUrl },
+    ${SEO_FIELDS}
+  }
+`);
+
+export const NEWS_PAGE_QUERY = defineQuery(`
+  *[_type == "newsPage"][0] {
+    ${HERO_FIELDS},
+    featuredLabel, readArticleLabel, gridHeading, authorFallback, emptyTitle, emptyBody,
+    newsletter { heading1, heading2, placeholder, buttonLabel, note },
+    ${SEO_FIELDS}
+  }
+`);
+
+export const PROJECTS_PAGE_QUERY = defineQuery(`
+  *[_type == "projectsPage"][0] {
+    ${HERO_FIELDS},
+    filter { allLabel, "links": links[]{ _key, label, href }, trailing },
+    cardButtons { viewLabel, enquireLabel },
+    additionalHeading,
+    "additional": additional[]{ _key, name, location, type },
+    cta { heading, body, buttonLabel, buttonHref },
+    detail {
+      breadcrumbHome, breadcrumbProjects, heroEnquireLabel, heroFloorPlansLabel,
+      navOverview, navAmenities, navFloorPlans, navGallery, navLocation, navEnquire,
+      overviewHeading1, overviewHeading2, amenitiesHeading, amenitiesBlurb,
+      floorPlansHeading, floorPlansBlurb, floorPlansRequestLabel, galleryHeading,
+      connectivityHeading1, connectivityHeading2, connectivityBlurb,
+      enquiryHeading, enquiryBlurb, enquiryPhone, enquiryEmail, enquirySubmitLabel
+    },
     ${SEO_FIELDS}
   }
 `);

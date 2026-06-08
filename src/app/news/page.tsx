@@ -7,7 +7,25 @@ import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
 import { getAllPosts } from "@/lib/sanity.client";
-import { getPageContent, mergeHero, buildMetadata } from "@/sanity/lib/page";
+import { sanityFetch } from "@/sanity/lib/live";
+import { NEWS_PAGE_QUERY } from "@/sanity/lib/queries";
+import { getPageContent, mergeHero, buildMetadata, pickStr } from "@/sanity/lib/page";
+
+const FB = {
+  featuredLabel: "★ Featured",
+  readArticleLabel: "Read article",
+  gridHeading: "More from the journal.",
+  authorFallback: "Emarat",
+  emptyTitle: "Stay tuned.",
+  emptyBody: "New articles published monthly.",
+  newsletter: {
+    heading1: "Monthly notes from",
+    heading2: "the drawing table.",
+    placeholder: "your@email.com",
+    buttonLabel: "Subscribe →",
+    note: "Monthly. New work, market notes and essays. No marketing.",
+  },
+};
 
 const HERO_FALLBACK = {
   eyebrow: "",
@@ -91,10 +109,29 @@ function formatDate(d?: string) {
 }
 
 export default async function NewsPage() {
-  const [posts, page] = await Promise.all([getAllPosts(), getPageContent("newsPage")]);
+  const [posts, { data }] = await Promise.all([
+    getAllPosts(),
+    sanityFetch({ query: NEWS_PAGE_QUERY, tags: ["newsPage"] }),
+  ]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const c = (data as any) ?? {};
   const items: Post[] = posts && posts.length > 0 ? posts : placeholders;
   const [featured, ...rest] = items;
-  const hero = mergeHero(page?.hero, HERO_FALLBACK);
+  const hero = mergeHero(c?.hero, HERO_FALLBACK);
+
+  const featuredLabel = pickStr(c?.featuredLabel, FB.featuredLabel);
+  const readArticleLabel = pickStr(c?.readArticleLabel, FB.readArticleLabel);
+  const gridHeading = pickStr(c?.gridHeading, FB.gridHeading);
+  const authorFallback = pickStr(c?.authorFallback, FB.authorFallback);
+  const emptyTitle = pickStr(c?.emptyTitle, FB.emptyTitle);
+  const emptyBody = pickStr(c?.emptyBody, FB.emptyBody);
+  const nl = {
+    heading1: pickStr(c?.newsletter?.heading1, FB.newsletter.heading1),
+    heading2: pickStr(c?.newsletter?.heading2, FB.newsletter.heading2),
+    placeholder: pickStr(c?.newsletter?.placeholder, FB.newsletter.placeholder),
+    buttonLabel: pickStr(c?.newsletter?.buttonLabel, FB.newsletter.buttonLabel),
+    note: pickStr(c?.newsletter?.note, FB.newsletter.note),
+  };
 
   return (
     <>
@@ -107,7 +144,7 @@ export default async function NewsPage() {
           <section className="border-y border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-20 lg:px-10 lg:py-28">
             <div className="mx-auto max-w-[1440px]">
               <Reveal as="div" className="mb-8 text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
-                <span>★ Featured</span>
+                <span>{featuredLabel}</span>
               </Reveal>
               <div className="grid grid-cols-12 items-center gap-8 lg:gap-12">
                 <div className="col-span-12 lg:col-span-7">
@@ -126,7 +163,7 @@ export default async function NewsPage() {
                 </div>
                 <div className="col-span-12 lg:col-span-5">
                   <div className="flex items-center gap-3 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
-                    <span>{featured.author?.name ?? "Emarat"}</span>
+                    <span>{featured.author?.name ?? authorFallback}</span>
                     <span>·</span>
                     <span>{formatDate(featured.publishedAt)}</span>
                   </div>
@@ -143,7 +180,7 @@ export default async function NewsPage() {
                   )}
                   <Reveal delay={0.3} className="mt-8">
                     <CircleButton href="#" variant="outline" size="sm">
-                      Read article
+                      {readArticleLabel}
                     </CircleButton>
                   </Reveal>
                 </div>
@@ -160,7 +197,7 @@ export default async function NewsPage() {
                 as="h2"
                 className="font-display h-section"
               >
-                More from the journal.
+                {gridHeading}
               </SplitReveal>
               <Reveal as="p" delay={0.15} className="text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
                 {rest.length} articles
@@ -169,9 +206,9 @@ export default async function NewsPage() {
 
             {rest.length === 0 ? (
               <Reveal className="rounded-md border border-[color:var(--line)] py-20 text-center">
-                <div className="font-display-alt text-3xl text-[color:var(--muted)]">Stay tuned.</div>
+                <div className="font-display-alt text-3xl text-[color:var(--muted)]">{emptyTitle}</div>
                 <p className="mt-3 text-sm text-[color:var(--muted)]">
-                  New articles published monthly.
+                  {emptyBody}
                 </p>
               </Reveal>
             ) : (
@@ -197,7 +234,7 @@ export default async function NewsPage() {
                         )}
                       </div>
                       <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-[color:var(--muted)]">
-                        <span>{post.author?.name ?? "Emarat"}</span>
+                        <span>{post.author?.name ?? authorFallback}</span>
                         <span>·</span>
                         <span>{formatDate(post.publishedAt)}</span>
                       </div>
@@ -225,21 +262,21 @@ export default async function NewsPage() {
                 as="h2"
                 className="font-display h-section"
               >
-                Monthly notes from
+                {nl.heading1}
               </SplitReveal>
               <SplitReveal
                 as="h2"
                 delay={0.1}
                 className="font-display h-section text-[color:var(--muted)]"
               >
-                the drawing table.
+                {nl.heading2}
               </SplitReveal>
             </div>
             <div className="col-span-12 lg:col-span-5">
               <form className="flex items-center border-b border-[color:var(--line)] py-2">
                 <input
                   type="email"
-                  placeholder="your@email.com"
+                  placeholder={nl.placeholder}
                   className="flex-1 bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
                   aria-label="Email"
                 />
@@ -247,11 +284,11 @@ export default async function NewsPage() {
                   type="submit"
                   className="text-xs uppercase tracking-[0.18em] text-[color:var(--accent)] transition-colors hover:text-[color:var(--fg)]"
                 >
-                  Subscribe →
+                  {nl.buttonLabel}
                 </button>
               </form>
               <p className="mt-3 text-xs text-[color:var(--muted)]">
-                Monthly. New work, market notes and essays. No marketing.
+                {nl.note}
               </p>
             </div>
           </div>

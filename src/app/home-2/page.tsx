@@ -55,15 +55,15 @@ export default async function HomeV2() {
       <SiteNav />
       <main className="home-v2">
         <ScrollVideoHero blocks={homePage?.heroBlocks} videoSrc="/videos/home2-scrub.mp4" posterSrc="/videos/home2-poster.webp" />
-        <IntroV2 data={homePage?.about} />
-        <ElegantDesignV2 images={homePage?.gallery} />
-        <IconicIntroV2 data={homePage?.location} />
+        <IntroV2 data={homePage?.about} eyebrow={homePage?.designTwo?.introEyebrow} />
+        <ElegantDesignV2 images={homePage?.gallery} labels={homePage?.designTwo?.elegant} />
+        <IconicIntroV2 data={homePage?.location} labels={homePage?.designTwo?.iconic} />
         <Location data={homePage?.location} />
-        <ResidencesV2 projects={projects} />
+        <ResidencesV2 projects={projects} labels={homePage?.designTwo?.residences} />
         <StatementV2 data={homePage?.statement} />
         <PrinciplesV2 data={homePage?.approach} />
-        <NewsV2 posts={posts} />
-        <ContactV2 data={homePage?.contact} />
+        <NewsV2 posts={posts} labels={homePage?.designTwo?.news} />
+        <ContactV2 data={homePage?.contact} labels={homePage?.designTwo?.contact} />
       </main>
       <SiteFooter />
     </>

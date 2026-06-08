@@ -17,7 +17,10 @@ const DEFAULT_IMAGES: GalleryImg[] = [
   { src: "/images/EA4/ea-4-lounge-diningjpg.jpg", label: "EA 04 · Lounge & Dining" },
 ];
 
-interface Props { images?: GalleryImg[] }
+interface Props {
+  images?: GalleryImg[];
+  labels?: { title?: string; buttonLabel?: string; buttonHref?: string };
+}
 
 /**
  * Design Option 2 — "Elegant Design".
@@ -28,8 +31,11 @@ interface Props { images?: GalleryImg[] }
  * a circular "Learn More" button sit fixed in the centre. Mirrors the reference
  * design's signature elegant-design band.
  */
-export default function ElegantDesignV2({ images: rawImages }: Props) {
+export default function ElegantDesignV2({ images: rawImages, labels }: Props) {
   const images = rawImages?.length ? rawImages : DEFAULT_IMAGES;
+  const title = labels?.title?.trim() || "Elegant Design";
+  const buttonLabel = labels?.buttonLabel?.trim() || "Learn More";
+  const buttonHref = labels?.buttonHref?.trim() || "/projects";
   const sectionRef = useRef<HTMLElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
 
@@ -100,18 +106,14 @@ export default function ElegantDesignV2({ images: rawImages }: Props) {
         {/* Fixed centre overlay — cursive title + circular call to action. */}
         <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center">
           <h2 className="font-script whitespace-nowrap text-[clamp(2.75rem,9vw,8rem)] leading-none text-[color:var(--fg)] drop-shadow-[0_4px_40px_rgba(0,0,0,0.55)]">
-            Elegant Design
+            {title}
           </h2>
 
           <Link
-            href="/projects"
+            href={buttonHref}
             className="pointer-events-auto mt-8 flex h-28 w-28 items-center justify-center rounded-full border border-[color:var(--accent)]/70 text-[10px] uppercase tracking-[0.24em] text-[color:var(--fg)] backdrop-blur-sm transition-all duration-500 hover:border-[color:var(--accent)] hover:bg-[color:var(--accent)] hover:text-[color:var(--bg)] lg:h-32 lg:w-32"
           >
-            <span className="text-center leading-[1.5]">
-              Learn
-              <br />
-              More
-            </span>
+            <span className="text-center leading-[1.5]">{buttonLabel}</span>
           </Link>
         </div>
       </div>

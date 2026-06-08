@@ -9,12 +9,17 @@ export default function Connectivity({
   landmarks,
   mapQuery,
   location,
+  labels,
 }: {
   landmarks: LandmarkGroup[];
   mapQuery: string;
   location: string;
+  labels?: { heading1?: string; heading2?: string; blurb?: string };
 }) {
   const [active, setActive] = useState(0);
+  const heading1 = labels?.heading1?.trim() || "Location &";
+  const heading2 = labels?.heading2?.trim() || "Connectivity.";
+  const blurb = labels?.blurb?.trim() || "anchored among the corridors, retail and institutions that connect the whole of the NCR.";
 
   return (
     <section
@@ -27,15 +32,14 @@ export default function Connectivity({
         {/* Left: heading + categorised landmarks */}
         <div className="col-span-12 lg:col-span-5">
           <SplitReveal as="h2" className="font-display h-section">
-            Location &amp;
+            {heading1}
           </SplitReveal>
           <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--muted)]">
-            Connectivity.
+            {heading2}
           </SplitReveal>
 
           <Reveal as="p" delay={0.2} className="mt-6 text-sm text-[color:var(--muted)]">
-            {location} — anchored among the corridors, retail and institutions that
-            connect the whole of the NCR.
+            {location} — {blurb}
           </Reveal>
 
           <ul className="mt-10 flex flex-col">

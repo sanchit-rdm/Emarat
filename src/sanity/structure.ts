@@ -20,8 +20,6 @@ export const structure: StructureResolver = (S) =>
       singleton(S, "teamPage", "Team Page"),
       singleton(S, "careersPage", "Careers Page"),
       singleton(S, "projectsPage", "Projects Listing Page"),
-      singleton(S, "propertiesPage", "Properties Page"),
-      singleton(S, "locationPage", "Location Page"),
       singleton(S, "newsPage", "News Page"),
       singleton(S, "contactPage", "Contact Page"),
       S.divider(),

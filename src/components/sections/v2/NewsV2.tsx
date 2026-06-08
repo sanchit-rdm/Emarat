@@ -49,8 +49,21 @@ function formatDate(d?: string) {
  * Design Option 2 — "News & Offers" grid on a cream surface. Same posts as the
  * primary page, styled to match the lighter, airier reference layout.
  */
-export default function NewsV2({ posts }: { posts: Post[] }) {
+interface NewsLabels {
+  eyebrow?: string;
+  heading1?: string;
+  heading2?: string;
+  allLabel?: string;
+  allHref?: string;
+}
+
+export default function NewsV2({ posts, labels }: { posts: Post[]; labels?: NewsLabels }) {
   const items = (posts && posts.length > 0 ? posts : placeholders).slice(0, 3);
+  const eyebrow = labels?.eyebrow?.trim() || "News & Offers";
+  const heading1 = labels?.heading1?.trim() || "Latest from";
+  const heading2 = labels?.heading2?.trim() || "Emarat Realty.";
+  const allLabel = labels?.allLabel?.trim() || "All articles";
+  const allHref = labels?.allHref?.trim() || "/news";
 
   return (
     <section id="news" className="theme-light px-6 py-24 lg:px-10 lg:py-36">
@@ -58,19 +71,19 @@ export default function NewsV2({ posts }: { posts: Post[] }) {
         <div className="mb-14 flex flex-wrap items-end justify-between gap-6 lg:mb-20">
           <div>
             <Reveal className="eyebrow mb-4 flex items-center font-script text-2xl text-[color:var(--accent)]">
-              <span>News &amp; Offers</span>
+              <span>{eyebrow}</span>
             </Reveal>
             <SplitReveal as="h2" className="font-display h-section">
-              Latest from
+              {heading1}
             </SplitReveal>
             <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--muted)]">
-              Emarat Realty.
+              {heading2}
             </SplitReveal>
           </div>
           <Reveal delay={0.2} className="self-end">
-            <a href="/news" className="group inline-flex items-center gap-3 text-sm">
+            <a href={allHref} className="group inline-flex items-center gap-3 text-sm">
               <span className="border-b border-[color:var(--line)] pb-1 transition-colors group-hover:border-[color:var(--fg)]">
-                All articles
+                {allLabel}
               </span>
               <span aria-hidden>→</span>
             </a>

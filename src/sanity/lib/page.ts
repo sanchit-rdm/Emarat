@@ -46,6 +46,16 @@ export function mergeHero(sanity: HeroData | undefined, fallback: Required<Omit<
   };
 }
 
+/* Use a Sanity string if present & non-empty, else the in-code fallback. */
+export function pickStr(v: string | null | undefined, fb: string): string {
+  return typeof v === "string" && v.trim() !== "" ? v : fb;
+}
+
+/* Use a Sanity array if present & non-empty, else the in-code fallback. */
+export function pickArr<T>(v: T[] | null | undefined, fb: T[]): T[] {
+  return Array.isArray(v) && v.length > 0 ? v : fb;
+}
+
 /* Build Next.js Metadata from Sanity SEO, falling back to provided defaults. */
 export function buildMetadata(
   seo: SeoData | undefined,

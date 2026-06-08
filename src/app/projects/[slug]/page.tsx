@@ -15,7 +15,9 @@ import EnquiryForm from "@/components/project/EnquiryForm";
 import { amenityIcons } from "@/components/project/amenityIcons";
 import { getProject, projectSlugs } from "@/lib/projects";
 import { getSanityProject, getSanityProjectSlugs, getSanityProjectSeo } from "@/lib/sanity.projects";
-import { buildMetadata } from "@/sanity/lib/page";
+import { sanityFetch } from "@/sanity/lib/live";
+import { PROJECTS_PAGE_QUERY } from "@/sanity/lib/queries";
+import { buildMetadata, pickStr } from "@/sanity/lib/page";
 
 export async function generateStaticParams() {
   const sanitySlugs = await getSanityProjectSlugs();
@@ -38,15 +40,6 @@ export async function generateMetadata({
   });
 }
 
-const SECTION_LINKS = [
-  { href: "#overview", label: "Overview" },
-  { href: "#amenities", label: "Amenities" },
-  { href: "#floor-plans", label: "Floor Plans" },
-  { href: "#gallery", label: "Gallery" },
-  { href: "#location", label: "Location" },
-  { href: "#enquiry", label: "Enquire" },
-];
-
 export default async function ProjectPage({
   params,
 }: {
@@ -55,6 +48,46 @@ export default async function ProjectPage({
   const { slug } = await params;
   const project = (await getSanityProject(slug)) ?? getProject(slug);
   if (!project) notFound();
+
+  const { data: ppRaw } = await sanityFetch({ query: PROJECTS_PAGE_QUERY, tags: ["projectsPage"] });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const d = (ppRaw as any)?.detail ?? {};
+  const dl = {
+    breadcrumbHome: pickStr(d.breadcrumbHome, "Home"),
+    breadcrumbProjects: pickStr(d.breadcrumbProjects, "Projects"),
+    heroEnquireLabel: pickStr(d.heroEnquireLabel, "Enquire Now"),
+    heroFloorPlansLabel: pickStr(d.heroFloorPlansLabel, "View Floor Plans"),
+    overviewHeading1: pickStr(d.overviewHeading1, "Project"),
+    overviewHeading2: pickStr(d.overviewHeading2, "Overview."),
+    amenitiesHeading: pickStr(d.amenitiesHeading, "Amenities"),
+    amenitiesBlurb: pickStr(d.amenitiesBlurb, "Everything within the gates — designed to make everyday living effortless."),
+  };
+  const sectionLinks = [
+    { href: "#overview", label: pickStr(d.navOverview, "Overview") },
+    { href: "#amenities", label: pickStr(d.navAmenities, "Amenities") },
+    { href: "#floor-plans", label: pickStr(d.navFloorPlans, "Floor Plans") },
+    { href: "#gallery", label: pickStr(d.navGallery, "Gallery") },
+    { href: "#location", label: pickStr(d.navLocation, "Location") },
+    { href: "#enquiry", label: pickStr(d.navEnquire, "Enquire") },
+  ];
+  const floorPlansLabels = {
+    heading: pickStr(d.floorPlansHeading, "Floor Plans"),
+    blurb: pickStr(d.floorPlansBlurb, "Indicative layouts. Select a floor to view its plan and key finishes."),
+    requestLabel: pickStr(d.floorPlansRequestLabel, "Request detailed plan"),
+  };
+  const galleryLabels = { heading: pickStr(d.galleryHeading, "Gallery") };
+  const connectivityLabels = {
+    heading1: pickStr(d.connectivityHeading1, "Location &"),
+    heading2: pickStr(d.connectivityHeading2, "Connectivity."),
+    blurb: pickStr(d.connectivityBlurb, "anchored among the corridors, retail and institutions that connect the whole of the NCR."),
+  };
+  const enquiryLabels = {
+    heading: pickStr(d.enquiryHeading, "Enquire about"),
+    blurb: pickStr(d.enquiryBlurb, "Share your details and our sales team will get back to you within one business day with availability, pricing and a private site visit."),
+    phone: pickStr(d.enquiryPhone, "+91 84509 84509"),
+    email: pickStr(d.enquiryEmail, "info@emaratrealty.com"),
+    submitLabel: pickStr(d.enquirySubmitLabel, "Send Enquiry"),
+  };
 
   return (
     <>
@@ -85,9 +118,9 @@ export default async function ProjectPage({
 
           {/* Breadcrumb */}
           <Reveal as="div" y={16} className="mb-auto flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-[color:var(--muted)]">
-            <Link href="/" className="transition-colors hover:text-[color:var(--fg)]">Home</Link>
+            <Link href="/" className="transition-colors hover:text-[color:var(--fg)]">{dl.breadcrumbHome}</Link>
             <span aria-hidden>/</span>
-            <Link href="/projects" className="transition-colors hover:text-[color:var(--fg)]">Projects</Link>
+            <Link href="/projects" className="transition-colors hover:text-[color:var(--fg)]">{dl.breadcrumbProjects}</Link>
             <span aria-hidden>/</span>
             <span className="text-[color:var(--accent)]">{project.shortName}</span>
           </Reveal>
@@ -110,8 +143,8 @@ export default async function ProjectPage({
             </Reveal>
 
             <Reveal as="div" delay={0.45} className="mt-10 flex flex-wrap gap-3">
-              <CircleButton href="#enquiry" variant="filled">Enquire Now</CircleButton>
-              <CircleButton href="#floor-plans" variant="outline">View Floor Plans</CircleButton>
+              <CircleButton href="#enquiry" variant="filled">{dl.heroEnquireLabel}</CircleButton>
+              <CircleButton href="#floor-plans" variant="outline">{dl.heroFloorPlansLabel}</CircleButton>
             </Reveal>
           </div>
         </section>
@@ -120,7 +153,7 @@ export default async function ProjectPage({
         <nav className="sticky top-28 z-40 border-y border-[color:var(--line)] bg-[color:var(--bg)]/85 backdrop-blur-md">
           <div className="mx-auto flex max-w-[1440px] items-center gap-x-6 gap-y-2 overflow-x-auto px-6 py-4 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)] lg:px-10 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <span className="hidden font-mono text-[color:var(--accent)] md:inline">{project.no}</span>
-            {SECTION_LINKS.map((s) => (
+            {sectionLinks.map((s) => (
               <a key={s.href} href={s.href} className="whitespace-nowrap transition-colors hover:text-[color:var(--fg)]">
                 {s.label}
               </a>
@@ -134,10 +167,10 @@ export default async function ProjectPage({
           <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-10 lg:gap-16">
             <div className="col-span-12 lg:col-span-6">
               <SplitReveal as="h2" className="font-display h-section">
-                Project
+                {dl.overviewHeading1}
               </SplitReveal>
               <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--muted)]">
-                Overview.
+                {dl.overviewHeading2}
               </SplitReveal>
               {project.overview.map((para, i) => (
                 <Reveal as="p" key={i} delay={0.15 + i * 0.08} className="mt-6 max-w-xl text-base leading-relaxed text-[color:var(--muted)] lg:text-lg">
@@ -181,10 +214,10 @@ export default async function ProjectPage({
           <div className="mx-auto max-w-[1440px]">
             <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
               <SplitReveal as="h2" className="font-display h-section">
-                Amenities
+                {dl.amenitiesHeading}
               </SplitReveal>
               <Reveal as="p" delay={0.15} className="max-w-sm text-sm text-[color:var(--muted)]">
-                Everything within the gates — designed to make everyday living effortless.
+                {dl.amenitiesBlurb}
               </Reveal>
             </div>
 
@@ -207,16 +240,16 @@ export default async function ProjectPage({
         </section>
 
         {/* ---------------- 4 · Floor Plans ---------------- */}
-        <FloorPlans plans={project.floorPlans} />
+        <FloorPlans plans={project.floorPlans} labels={floorPlansLabels} />
 
         {/* ---------------- 5 · Gallery ---------------- */}
-        <ProjectGallery images={project.gallery} />
+        <ProjectGallery images={project.gallery} labels={galleryLabels} />
 
         {/* ---------------- 6 · Location & Connectivity ---------------- */}
-        <Connectivity landmarks={project.connectivity} mapQuery={project.mapQuery} location={project.location} />
+        <Connectivity landmarks={project.connectivity} mapQuery={project.mapQuery} location={project.location} labels={connectivityLabels} />
 
         {/* ---------------- 7 · Enquiry Form ---------------- */}
-        <EnquiryForm projectTitle={project.title} config={project.config} />
+        <EnquiryForm projectTitle={project.title} config={project.config} labels={enquiryLabels} />
       </main>
       <SiteFooter />
     </>

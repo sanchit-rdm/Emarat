@@ -11,7 +11,15 @@ interface LocationData {
   eyebrow?: string;
   places?: SanityPlace[];
 }
-interface Props { data?: LocationData }
+interface IconicLabels {
+  line1?: string;
+  line2?: string;
+  line3?: string;
+  watermark?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+interface Props { data?: LocationData; labels?: IconicLabels }
 
 /**
  * Design Option 2 — connectivity teaser.
@@ -22,9 +30,15 @@ interface Props { data?: LocationData }
  * headline — the "slightly visible image appears on scroll" beat from the
  * reference design. Flows straight into the full-screen connectivity section.
  */
-export default function IconicIntroV2({ data }: Props) {
+export default function IconicIntroV2({ data, labels }: Props) {
   const bgImage = data?.places?.[0]?.image || "/images/dwarka-expressway.jpg";
   const eyebrow = data?.eyebrow?.trim() || "Location & Connectivity";
+  const line1 = labels?.line1?.trim() || "Life within reach";
+  const line2 = labels?.line2?.trim() || "of every iconic";
+  const line3 = labels?.line3?.trim() || "Gurugram landmark";
+  const watermark = labels?.watermark?.trim() || "Iconic";
+  const ctaLabel = labels?.ctaLabel?.trim() || "Go to Location";
+  const ctaHref = labels?.ctaHref?.trim() || "#location";
 
   const sectionRef = useRef<HTMLElement | null>(null);
   const imgRef = useRef<HTMLDivElement | null>(null);
@@ -105,7 +119,7 @@ export default function IconicIntroV2({ data }: Props) {
         style={{ opacity: 0, visibility: "hidden" }}
       >
         <span className="font-script select-none text-[28vw] leading-[0.8] text-[color:var(--fg)]" style={{ marginBottom: "-0.12em" }}>
-          Iconic
+          {watermark}
         </span>
       </div>
 
@@ -115,15 +129,13 @@ export default function IconicIntroV2({ data }: Props) {
           {eyebrow}
         </div>
         <h2 className="font-display mx-auto max-w-4xl text-[clamp(2.25rem,6.5vw,5.5rem)] uppercase leading-[1.08] tracking-[1px]">
-          <span className="block">Life within reach</span>
-          <span className="block">
-            of every <span className="text-[color:var(--accent)]">iconic</span>
-          </span>
-          <span className="block">Gurugram landmark</span>
+          <span className="block">{line1}</span>
+          <span className="block text-[color:var(--accent)]">{line2}</span>
+          <span className="block">{line3}</span>
         </h2>
         <div className="mt-12 flex justify-center">
-          <CircleButton href="/location" variant="outline">
-            Go to Location
+          <CircleButton href={ctaHref} variant="outline">
+            {ctaLabel}
           </CircleButton>
         </div>
       </Reveal>

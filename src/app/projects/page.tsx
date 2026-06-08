@@ -8,7 +8,9 @@ import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
 import { getSanityProjectListings } from "@/lib/sanity.projects";
-import { getPageContent, mergeHero, buildMetadata } from "@/sanity/lib/page";
+import { sanityFetch } from "@/sanity/lib/live";
+import { PROJECTS_PAGE_QUERY } from "@/sanity/lib/queries";
+import { getPageContent, mergeHero, buildMetadata, pickStr, pickArr } from "@/sanity/lib/page";
 
 const HERO_FALLBACK = {
   eyebrow: "",
@@ -93,6 +95,12 @@ const additional = [
   },
 ];
 
+const FILTER_LINKS = [
+  { label: "DLF Garden City", href: "#c2" },
+  { label: "Alameda", href: "#ea04" },
+  { label: "Plots & Floors", href: "#additional" },
+];
+
 export default async function ProjectsPage() {
   // Merge any Sanity data over the static cards per slug, so a partial Sanity
   // document never blanks out a card — empty fields fall back to static.
@@ -141,8 +149,31 @@ export default async function ProjectsPage() {
 
   const sanityProjects = [...cards, ...sanityOnly];
 
-  const pageContent = await getPageContent("projectsPage");
-  const hero = mergeHero(pageContent?.hero, HERO_FALLBACK);
+  const { data: pageRaw } = await sanityFetch({ query: PROJECTS_PAGE_QUERY, tags: ["projectsPage"] });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const pc = (pageRaw as any) ?? {};
+  const hero = mergeHero(pc?.hero, HERO_FALLBACK);
+
+  const filter = {
+    allLabel: pickStr(pc?.filter?.allLabel, "All Projects"),
+    links: pickArr(pc?.filter?.links, FILTER_LINKS),
+    trailing: pickStr(pc?.filter?.trailing, "Independent & Private Floors"),
+  };
+  const cardButtons = {
+    viewLabel: pickStr(pc?.cardButtons?.viewLabel, "View Project"),
+    enquireLabel: pickStr(pc?.cardButtons?.enquireLabel, "Enquire"),
+  };
+  const additionalHeading = pickStr(pc?.additionalHeading, "Plots and independent floors.");
+  const additionalItems = pickArr(pc?.additional, additional);
+  const cta = {
+    heading: pickStr(pc?.cta?.heading, "Considering a residence?"),
+    body: pickStr(
+      pc?.cta?.body,
+      "Our sales team will walk you through availability, pricing and the right configuration for your family."
+    ),
+    buttonLabel: pickStr(pc?.cta?.buttonLabel, "Speak to Sales"),
+    buttonHref: pickStr(pc?.cta?.buttonHref, "/contact"),
+  };
 
   return (
     <>
@@ -153,11 +184,13 @@ export default async function ProjectsPage() {
         {/* Project filter strip */}
         <section className="border-b border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-8 lg:px-10">
           <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-x-8 gap-y-3 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-            <span className="text-[color:var(--accent)]">All Projects</span>
-            <a href="#c2" className="transition-colors hover:text-[color:var(--fg)]">DLF Garden City</a>
-            <a href="#ea04" className="transition-colors hover:text-[color:var(--fg)]">Alameda</a>
-            <a href="#additional" className="transition-colors hover:text-[color:var(--fg)]">Plots & Floors</a>
-            <span className="ml-auto hidden text-[color:var(--accent)] md:inline">Independent & Private Floors</span>
+            <span className="text-[color:var(--accent)]">{filter.allLabel}</span>
+            {filter.links.map((l) => (
+              <a key={l.href ?? l.label} href={l.href} className="transition-colors hover:text-[color:var(--fg)]">
+                {l.label}
+              </a>
+            ))}
+            <span className="ml-auto hidden text-[color:var(--accent)] md:inline">{filter.trailing}</span>
           </div>
         </section>
 
@@ -239,10 +272,10 @@ export default async function ProjectsPage() {
 
                   <Reveal delay={0.4} className="mt-8 flex gap-3">
                     <CircleButton href={`/projects/${p.id}`} size="sm" variant="filled">
-                      View Project
+                      {cardButtons.viewLabel}
                     </CircleButton>
                     <CircleButton href={`/projects/${p.id}#enquiry`} size="sm" variant="outline">
-                      Enquire
+                      {cardButtons.enquireLabel}
                     </CircleButton>
                   </Reveal>
                 </div>
@@ -258,11 +291,11 @@ export default async function ProjectsPage() {
               as="h2"
               className="font-display h-section"
             >
-              Plots and independent floors.
+              {additionalHeading}
             </SplitReveal>
 
             <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
-              {additional.map((a, i) => (
+              {additionalItems.map((a, i) => (
                 <Reveal
                   key={a.name}
                   delay={i * 0.07}
@@ -291,15 +324,14 @@ export default async function ProjectsPage() {
                 as="h2"
                 className="font-display h-sub"
               >
-                Considering a residence?
+                {cta.heading}
               </SplitReveal>
               <Reveal as="p" delay={0.15} className="mt-4 max-w-md text-sm text-[color:var(--muted)]">
-                Our sales team will walk you through availability, pricing and the right
-                configuration for your family.
+                {cta.body}
               </Reveal>
             </div>
-            <CircleButton href="/contact" variant="filled">
-              Speak to Sales
+            <CircleButton href={cta.buttonHref} variant="filled">
+              {cta.buttonLabel}
             </CircleButton>
           </div>
         </section>

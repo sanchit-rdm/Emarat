@@ -10,7 +10,7 @@ import Contact from "@/components/sections/Contact";
 import SiteFooter from "@/components/sections/SiteFooter";
 import type { Metadata } from "next";
 import { sanityFetch } from "@/sanity/lib/live";
-import { HOME_PAGE_QUERY, POSTS_QUERY } from "@/sanity/lib/queries";
+import { HOME_PAGE_QUERY, POSTS_QUERY, PROJECTS_LISTING_QUERY } from "@/sanity/lib/queries";
 import { buildMetadata } from "@/sanity/lib/page";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -25,15 +25,18 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [{ data: homePageRaw }, { data: postsRaw }] = await Promise.all([
+  const [{ data: homePageRaw }, { data: postsRaw }, { data: projectsRaw }] = await Promise.all([
     sanityFetch({ query: HOME_PAGE_QUERY, tags: ["homePage"] }),
     sanityFetch({ query: POSTS_QUERY, tags: ["post"] }),
+    sanityFetch({ query: PROJECTS_LISTING_QUERY, tags: ["project"] }),
   ]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const homePage = homePageRaw as any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const posts = (postsRaw as any[]) ?? [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const projects = (projectsRaw as any[]) ?? [];
 
   return (
     <>
@@ -42,7 +45,7 @@ export default async function Home() {
         <ScrollVideoHero blocks={homePage?.heroBlocks} />
         <Gallery images={homePage?.gallery} />
         <div className="theme-light">
-          <Projects />
+          <Projects data={homePage?.projectsSection} projects={projects} />
         </div>
         <About data={homePage?.about} />
         <Location data={homePage?.location} />

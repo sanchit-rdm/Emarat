@@ -8,11 +8,18 @@ import CircleButton from "@/components/CircleButton";
 export default function EnquiryForm({
   projectTitle,
   config,
+  labels,
 }: {
   projectTitle: string;
   config: string;
+  labels?: { heading?: string; blurb?: string; phone?: string; email?: string; submitLabel?: string };
 }) {
   const [sent, setSent] = useState(false);
+  const heading = labels?.heading?.trim() || "Enquire about";
+  const blurb = labels?.blurb?.trim() || "Share your details and our sales team will get back to you within one business day with availability, pricing and a private site visit.";
+  const phone = labels?.phone?.trim() || "+91 84509 84509";
+  const email = labels?.email?.trim() || "info@emaratrealty.com";
+  const submitLabel = labels?.submitLabel?.trim() || "Send Enquiry";
 
   return (
     <section
@@ -24,22 +31,21 @@ export default function EnquiryForm({
       <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-10 lg:gap-16">
         <div className="col-span-12 lg:col-span-5">
           <SplitReveal as="h2" className="font-display h-section">
-            Enquire about
+            {heading}
           </SplitReveal>
           <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--muted)]">
             {`${projectTitle.replace(/ at .*/, "")}.`}
           </SplitReveal>
           <Reveal as="p" delay={0.2} className="mt-6 max-w-md text-base leading-relaxed text-[color:var(--muted)]">
-            Share your details and our sales team will get back to you within one
-            business day with availability, pricing and a private site visit.
+            {blurb}
           </Reveal>
 
           <Reveal delay={0.3} className="mt-10 space-y-4 border-t border-[color:var(--line)] pt-8 text-sm">
-            <a href="tel:+918450984509" className="block transition-colors hover:text-[color:var(--accent)]">
-              +91 84509 84509
+            <a href={`tel:${phone.replace(/[^+\d]/g, "")}`} className="block transition-colors hover:text-[color:var(--accent)]">
+              {phone}
             </a>
-            <a href="mailto:info@emaratrealty.com" className="block transition-colors hover:text-[color:var(--accent)]">
-              info@emaratrealty.com
+            <a href={`mailto:${email}`} className="block transition-colors hover:text-[color:var(--accent)]">
+              {email}
             </a>
           </Reveal>
         </div>
@@ -92,7 +98,7 @@ export default function EnquiryForm({
                   {sent ? "Thank you — we'll be in touch shortly." : "By submitting you agree to our privacy policy."}
                 </p>
                 <CircleButton type="submit" variant="filled">
-                  {sent ? "Sent" : "Send Enquiry"}
+                  {sent ? "Sent" : submitLabel}
                 </CircleButton>
               </div>
             </form>

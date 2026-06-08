@@ -15,8 +15,6 @@ const SINGLETON_TYPES = new Set([
   "directorsDeskPage",
   "careersPage",
   "newsPage",
-  "propertiesPage",
-  "locationPage",
   "projectsPage",
 ]);
 const SINGLETON_ACTIONS = new Set(["publish", "discardChanges", "restore"]);

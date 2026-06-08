@@ -11,7 +11,7 @@ interface AboutData {
   image?: string | null;
   imageCaption?: string;
 }
-interface Props { data?: AboutData }
+interface Props { data?: AboutData; eyebrow?: string }
 
 /**
  * Design Option 2 — opening brand statement.
@@ -21,7 +21,8 @@ interface Props { data?: AboutData }
  * feature image with a quiet caption and a thin services row beneath. Mirrors
  * the spacious, image-led "statement" sections of the reference design.
  */
-export default function IntroV2({ data }: Props) {
+export default function IntroV2({ data, eyebrow }: Props) {
+  const eyebrowText = eyebrow?.trim() || "Emarat Realty — Est. Gurugram";
   const heading1 = data?.heading1 ?? "A distinguished leader";
   const heading2 = data?.heading2 ?? "in luxury real estate.";
   const description =
@@ -40,7 +41,7 @@ export default function IntroV2({ data }: Props) {
     <section id="intro" className="theme-light px-6 py-24 lg:px-10 lg:py-40">
       <div className="mx-auto max-w-[1100px] text-center">
         <Reveal className="eyebrow mb-6 flex items-center justify-center font-script text-2xl text-[color:var(--muted)]">
-          <span>Emarat Realty — Est. Gurugram</span>
+          <span>{eyebrowText}</span>
         </Reveal>
 
         <SplitReveal as="h2" className="font-display h-page">

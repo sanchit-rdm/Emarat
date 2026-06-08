@@ -51,8 +51,6 @@ const DEFAULT_COLUMNS: FooterColumn[] = [
   {
     heading: "Explore",
     links: [
-      { label: "Properties", href: "/properties" },
-      { label: "Location", href: "/location" },
       { label: "News", href: "/news" },
       { label: "Contact", href: "/contact" },
     ],

@@ -77,7 +77,17 @@ type SanityProject = {
   heroImage?: string | null;
 };
 
-interface Props { projects?: SanityProject[] }
+interface ResidencesLabels {
+  eyebrow?: string;
+  heading1?: string;
+  heading2?: string;
+  allLabel?: string;
+  allHref?: string;
+  locationLabel?: string;
+  configLabel?: string;
+  viewLabel?: string;
+}
+interface Props { projects?: SanityProject[]; labels?: ResidencesLabels }
 
 // Map the Sanity `project` listing onto the slider's shape. Projects without a
 // hero image are skipped (the stage is image-led); if nothing usable comes back
@@ -97,8 +107,16 @@ function toResidences(projects?: SanityProject[]): Residence[] {
   return mapped.length ? mapped : RESIDENCES;
 }
 
-export default function ResidencesV2({ projects }: Props) {
+export default function ResidencesV2({ projects, labels }: Props) {
   const list = toResidences(projects);
+  const eyebrow = labels?.eyebrow?.trim() || "The Residences";
+  const heading1 = labels?.heading1?.trim() || "Find your";
+  const heading2 = labels?.heading2?.trim() || "dream home.";
+  const allLabel = labels?.allLabel?.trim() || "All residences";
+  const allHref = labels?.allHref?.trim() || "/projects";
+  const locationLabel = labels?.locationLabel?.trim() || "Location";
+  const configLabel = labels?.configLabel?.trim() || "Configuration";
+  const viewLabel = labels?.viewLabel?.trim() || "View Residence";
   const [active, setActive] = useState(0);
   const count = list.length;
   const go = (dir: number) => setActive((i) => (i + dir + count) % count);
@@ -110,19 +128,19 @@ export default function ResidencesV2({ projects }: Props) {
         <div className="mb-12 flex flex-wrap items-end justify-between gap-6 lg:mb-16">
           <div>
             <Reveal className="eyebrow mb-4 flex items-center font-script text-2xl text-[color:var(--accent)]">
-              <span>The Residences</span>
+              <span>{eyebrow}</span>
             </Reveal>
             <SplitReveal as="h2" className="font-display h-section">
-              Find your
+              {heading1}
             </SplitReveal>
             <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
-              dream home.
+              {heading2}
             </SplitReveal>
           </div>
           <Reveal delay={0.2} className="self-end">
-            <Link href="/projects" className="group inline-flex items-center gap-3 text-sm">
+            <Link href={allHref} className="group inline-flex items-center gap-3 text-sm">
               <span className="border-b border-[color:var(--line)] pb-1 transition-colors group-hover:border-[color:var(--fg)]">
-                All residences
+                {allLabel}
               </span>
               <span aria-hidden>→</span>
             </Link>
@@ -171,18 +189,18 @@ export default function ResidencesV2({ projects }: Props) {
 
               <dl className="mt-8 space-y-4">
                 <div className="flex items-center justify-between border-t border-[color:var(--line)] pt-4">
-                  <dt className="text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">Location</dt>
+                  <dt className="text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">{locationLabel}</dt>
                   <dd className="text-sm">{current.place}</dd>
                 </div>
                 <div className="flex items-center justify-between border-t border-[color:var(--line)] pt-4">
-                  <dt className="text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">Configuration</dt>
+                  <dt className="text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">{configLabel}</dt>
                   <dd className="text-sm">{current.type}</dd>
                 </div>
               </dl>
 
               <div className="mt-10">
                 <CircleButton href={current.href} variant="filled">
-                  View Residence
+                  {viewLabel}
                 </CircleButton>
               </div>
             </div>

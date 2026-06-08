@@ -175,6 +175,102 @@ export const homePageType = defineType({
       ],
     }),
 
+    /* ---- Projects section (Home Design 1) ---- */
+    defineField({
+      name: "projectsSection",
+      title: "Projects Section (Design 1)",
+      description: "Heading + link for the projects list on the primary home page. The list itself comes from the Projects collection.",
+      type: "object",
+      fields: [
+        defineField({ name: "heading1", title: "Heading Line 1", type: "string" }),
+        defineField({ name: "heading2", title: "Heading Line 2 (muted)", type: "string" }),
+        defineField({ name: "allLabel", title: "“All Projects” Link Label", type: "string" }),
+        defineField({ name: "allHref", title: "“All Projects” Link", type: "string" }),
+      ],
+    }),
+
+    /* ---- Home Design 2 — section labels/chrome ---- */
+    defineField({
+      name: "designTwo",
+      title: "Home Design 2 — Section Labels",
+      description: "Headings, eyebrows and button labels for the Home (Design 2) sections. Body content reuses the shared sections above.",
+      type: "object",
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: "introEyebrow", title: "Intro — Eyebrow", type: "string" }),
+        defineField({
+          name: "elegant",
+          title: "Elegant Design Band",
+          type: "object",
+          fields: [
+            defineField({ name: "title", title: "Title", type: "string" }),
+            defineField({ name: "buttonLabel", title: "Button Label", type: "string" }),
+            defineField({ name: "buttonHref", title: "Button Link", type: "string" }),
+          ],
+        }),
+        defineField({
+          name: "iconic",
+          title: "Iconic / Location Intro",
+          type: "object",
+          fields: [
+            defineField({ name: "line1", title: "Heading Line 1", type: "string" }),
+            defineField({ name: "line2", title: "Heading Line 2 (accent)", type: "string" }),
+            defineField({ name: "line3", title: "Heading Line 3", type: "string" }),
+            defineField({ name: "watermark", title: "Watermark Word", type: "string" }),
+            defineField({ name: "ctaLabel", title: "Button Label", type: "string" }),
+            defineField({ name: "ctaHref", title: "Button Link", type: "string" }),
+          ],
+        }),
+        defineField({
+          name: "residences",
+          title: "Residences Slider",
+          type: "object",
+          fields: [
+            defineField({ name: "eyebrow", title: "Eyebrow", type: "string" }),
+            defineField({ name: "heading1", title: "Heading Line 1", type: "string" }),
+            defineField({ name: "heading2", title: "Heading Line 2 (accent)", type: "string" }),
+            defineField({ name: "allLabel", title: "“All Residences” Label", type: "string" }),
+            defineField({ name: "allHref", title: "“All Residences” Link", type: "string" }),
+            defineField({ name: "locationLabel", title: "Detail — Location Label", type: "string" }),
+            defineField({ name: "configLabel", title: "Detail — Configuration Label", type: "string" }),
+            defineField({ name: "viewLabel", title: "View Button Label", type: "string" }),
+          ],
+        }),
+        defineField({
+          name: "news",
+          title: "News Section",
+          type: "object",
+          fields: [
+            defineField({ name: "eyebrow", title: "Eyebrow", type: "string" }),
+            defineField({ name: "heading1", title: "Heading Line 1", type: "string" }),
+            defineField({ name: "heading2", title: "Heading Line 2 (muted)", type: "string" }),
+            defineField({ name: "allLabel", title: "“All Articles” Label", type: "string" }),
+            defineField({ name: "allHref", title: "“All Articles” Link", type: "string" }),
+          ],
+        }),
+        defineField({
+          name: "contact",
+          title: "Callback Section",
+          type: "object",
+          fields: [
+            defineField({ name: "eyebrow", title: "Eyebrow", type: "string" }),
+            defineField({ name: "lead", title: "Lead Paragraph", type: "text", rows: 2 }),
+            defineField({ name: "namePlaceholder", title: "Name Placeholder", type: "string" }),
+            defineField({ name: "phonePlaceholder", title: "Phone Placeholder", type: "string" }),
+            defineField({ name: "categoryPlaceholder", title: "Category Placeholder", type: "string" }),
+            defineField({
+              name: "categoryOptions",
+              title: "Category Options",
+              type: "array",
+              of: [defineArrayMember({ type: "string" })],
+            }),
+            defineField({ name: "submitLabel", title: "Submit Button Label", type: "string" }),
+            defineField({ name: "privacy", title: "Privacy Note", type: "string" }),
+          ],
+        }),
+      ],
+    }),
+
     defineField({ name: "seo", title: "SEO", type: "seo" }),
   ],
   preview: { prepare: () => ({ title: "Home Page" }) },

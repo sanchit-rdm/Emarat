@@ -6,17 +6,24 @@ import type { GalleryImage } from "@/lib/projects";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 
-export default function ProjectGallery({ images }: { images: GalleryImage[] }) {
+export default function ProjectGallery({
+  images,
+  labels,
+}: {
+  images: GalleryImage[];
+  labels?: { heading?: string };
+}) {
   const [active, setActive] = useState(0);
   if (!images?.length) return null;
   const current = images[active] ?? images[0];
+  const heading = labels?.heading?.trim() || "Gallery";
 
   return (
     <section id="gallery" className="scroll-mt-44 border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-24 lg:px-10 lg:py-32">
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
           <SplitReveal as="h2" className="font-display h-section">
-            Gallery
+            {heading}
           </SplitReveal>
           <Reveal as="p" delay={0.15} className="text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
             {String(active + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
