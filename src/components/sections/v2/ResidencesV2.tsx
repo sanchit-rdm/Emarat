@@ -66,11 +66,43 @@ const RESIDENCES: Residence[] = [
   },
 ];
 
-export default function ResidencesV2() {
+// Shape returned by PROJECTS_LISTING_QUERY (the fields this slider needs).
+type SanityProject = {
+  slug?: string;
+  no?: string;
+  title?: string;
+  location?: string;
+  status?: string;
+  config?: string;
+  heroImage?: string | null;
+};
+
+interface Props { projects?: SanityProject[] }
+
+// Map the Sanity `project` listing onto the slider's shape. Projects without a
+// hero image are skipped (the stage is image-led); if nothing usable comes back
+// we fall back to the built-in residences so the section never empties.
+function toResidences(projects?: SanityProject[]): Residence[] {
+  const mapped = (projects ?? [])
+    .filter((p) => p.heroImage)
+    .map((p, i) => ({
+      no: p.no ?? String(i + 1).padStart(2, "0"),
+      title: p.title ?? "",
+      place: p.location ?? "",
+      status: p.status ?? "",
+      type: p.config ?? "",
+      img: p.heroImage as string,
+      href: p.slug ? `/projects/${p.slug}` : "/projects",
+    }));
+  return mapped.length ? mapped : RESIDENCES;
+}
+
+export default function ResidencesV2({ projects }: Props) {
+  const list = toResidences(projects);
   const [active, setActive] = useState(0);
-  const count = RESIDENCES.length;
+  const count = list.length;
   const go = (dir: number) => setActive((i) => (i + dir + count) % count);
-  const current = RESIDENCES[active];
+  const current = list[active];
 
   return (
     <section id="residences" className="theme-green px-6 py-24 lg:px-10 lg:py-36">
@@ -112,7 +144,7 @@ export default function ResidencesV2() {
                 </div>
               }
             >
-              {RESIDENCES.map((r, i) => (
+              {list.map((r, i) => (
                 <Image
                   key={r.no}
                   src={r.img}
@@ -179,7 +211,7 @@ export default function ResidencesV2() {
 
         {/* Track */}
         <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-md sm:grid-cols-4">
-          {RESIDENCES.map((r, i) => (
+          {list.map((r, i) => (
             <button
               key={r.no}
               type="button"

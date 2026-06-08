@@ -92,15 +92,16 @@ export default function ScrollVideoHero({ blocks, videoSrc, posterSrc }: { block
   // video can't load. Reduced-motion is read once inside the effect (matches
   // SmoothScroll.tsx), so it doesn't need to live in state.
   const [videoFailed, setVideoFailed] = useState(false);
-  // Scrubbing (and the heavy video download) is desktop-only. On phones and
-  // under reduced-motion we show a static poster hero with the first text block
-  // — no pin, no scroll-jacking, no multi-MB fetch.
+  // Scrubbing runs on every screen size now; only reduced-motion opts out (it
+  // falls back to a static poster hero with the first text block — no pin, no
+  // scroll-jacking, no multi-MB fetch). The scrub clip is keyframe-dense (any
+  // seek decodes ≤6 frames) and ~6 MB, which keeps currentTime seeking smooth
+  // on phones too.
   const [enableScrub, setEnableScrub] = useState(false);
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const mobile = window.matchMedia("(max-width: 1023px)").matches;
-    setEnableScrub(!reduced && !mobile);
+    setEnableScrub(!reduced);
   }, []);
 
   useEffect(() => {
@@ -119,6 +120,13 @@ export default function ScrollVideoHero({ blocks, videoSrc, posterSrc }: { block
     const init = () => {
       const duration = video.duration;
       if (!Number.isFinite(duration) || duration === 0) return;
+
+      // iOS Safari won't paint a frame written via `currentTime` until the
+      // video decoder has been started at least once. A muted + playsInline
+      // clip may be play()ed without a user gesture, so prime it and pause
+      // immediately — the scrub then drives every subsequent frame. (No-op /
+      // harmless on desktop, where seeking paints without this.)
+      video.play().then(() => video.pause()).catch(() => {});
 
       ctx = gsap.context(() => {
         const tl = gsap.timeline({
@@ -204,9 +212,9 @@ export default function ScrollVideoHero({ blocks, videoSrc, posterSrc }: { block
   return (
     <section id="top" ref={sectionRef} className="relative">
       <div ref={pinRef} className="relative isolate h-[100svh] w-full overflow-hidden">
-        {/* Background video — never played, only scrubbed. The source is only
-            mounted on desktop (enableScrub), so phones just show the poster and
-            never download the clip. */}
+        {/* Background video — never played, only scrubbed. The source is
+            mounted whenever scrubbing is on (all sizes except reduced-motion);
+            reduced-motion users keep the static poster and never fetch it. */}
         <video
           ref={videoRef}
           className="absolute inset-0 -z-20 h-full w-full object-cover"

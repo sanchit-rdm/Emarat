@@ -3,14 +3,15 @@ import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 
-interface Props {
-  image?: string;
+interface StatementData {
+  image?: string | null;
   eyebrow?: string;
   lead?: string;
   rest?: string;
   body?: string;
-  href?: string;
+  ctaHref?: string;
 }
+interface Props { data?: StatementData }
 
 /**
  * Design Option 2 — full-bleed lifestyle statement.
@@ -20,14 +21,15 @@ interface Props {
  * "here freedom begins" beat from the reference design. Sits after the
  * residences slider as a quiet, atmospheric pause before the principles band.
  */
-export default function StatementV2({
-  image = "/images/E11/building.jpg",
-  eyebrow = "A Place to Belong",
-  lead = "Garden City Residences",
-  rest = "— here freedom begins",
-  body = "Far from the noise yet minutes from everything that matters. At DLF Garden City, Sector 93, Emarat Realty shapes homes around care, generosity and an unhurried sense of space — a project that turns true, lasting values into everyday living.",
-  href = "/projects",
-}: Props) {
+export default function StatementV2({ data }: Props) {
+  const image = data?.image || "/images/E11/building.jpg";
+  const eyebrow = data?.eyebrow || "A Place to Belong";
+  const lead = data?.lead || "Garden City Residences";
+  const rest = data?.rest || "— here freedom begins";
+  const body =
+    data?.body ||
+    "Far from the noise yet minutes from everything that matters. At DLF Garden City, Sector 93, Emarat Realty shapes homes around care, generosity and an unhurried sense of space — a project that turns true, lasting values into everyday living.";
+  const href = data?.ctaHref || "/projects";
   return (
     <section className="relative isolate flex min-h-screen flex-col justify-between overflow-hidden px-6 py-24 lg:px-10 lg:py-28">
       {/* Full-bleed background image with gentle, warm grading */}

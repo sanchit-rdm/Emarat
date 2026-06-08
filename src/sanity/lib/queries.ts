@@ -93,6 +93,10 @@ export const HOME_PAGE_QUERY = defineQuery(`
         "image": image.asset->url
       }
     },
+    statement {
+      eyebrow, lead, rest, body, ctaHref,
+      "image": image.asset->url
+    },
     ${SEO_FIELDS}
   }
 `);

@@ -12,7 +12,7 @@ import ContactV2 from "@/components/sections/v2/ContactV2";
 import SiteFooter from "@/components/sections/SiteFooter";
 import type { Metadata } from "next";
 import { sanityFetch } from "@/sanity/lib/live";
-import { HOME_PAGE_QUERY, POSTS_QUERY } from "@/sanity/lib/queries";
+import { HOME_PAGE_QUERY, POSTS_QUERY, PROJECTS_LISTING_QUERY } from "@/sanity/lib/queries";
 import { buildMetadata } from "@/sanity/lib/page";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -37,27 +37,30 @@ export async function generateMetadata(): Promise<Metadata> {
  * directions side by side via the on-screen Design switcher.
  */
 export default async function HomeV2() {
-  const [{ data: homePageRaw }, { data: postsRaw }] = await Promise.all([
+  const [{ data: homePageRaw }, { data: postsRaw }, { data: projectsRaw }] = await Promise.all([
     sanityFetch({ query: HOME_PAGE_QUERY, tags: ["homePage"] }),
     sanityFetch({ query: POSTS_QUERY, tags: ["post"] }),
+    sanityFetch({ query: PROJECTS_LISTING_QUERY, tags: ["project"] }),
   ]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const homePage = homePageRaw as any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const posts = (postsRaw as any[]) ?? [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const projects = (projectsRaw as any[]) ?? [];
 
   return (
     <>
       <SiteNav />
       <main className="home-v2">
-        <ScrollVideoHero blocks={homePage?.heroBlocks} videoSrc="/videos/home%202.mp4" posterSrc="/videos/home2-poster.webp" />
+        <ScrollVideoHero blocks={homePage?.heroBlocks} videoSrc="/videos/home2-scrub.mp4" posterSrc="/videos/home2-poster.webp" />
         <IntroV2 data={homePage?.about} />
         <ElegantDesignV2 images={homePage?.gallery} />
         <IconicIntroV2 data={homePage?.location} />
         <Location data={homePage?.location} />
-        <ResidencesV2 />
-        <StatementV2 />
+        <ResidencesV2 projects={projects} />
+        <StatementV2 data={homePage?.statement} />
         <PrinciplesV2 data={homePage?.approach} />
         <NewsV2 posts={posts} />
         <ContactV2 data={homePage?.contact} />

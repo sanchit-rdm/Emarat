@@ -158,6 +158,23 @@ export const homePageType = defineType({
       ],
     }),
 
+    /* ---- Statement (full-bleed lifestyle band — Home Design 2 only) ---- */
+    defineField({
+      name: "statement",
+      title: "Statement Section (Design 2)",
+      description:
+        "Full-bleed lifestyle statement on the Home (Design 2) page, between the residences slider and the principles band.",
+      type: "object",
+      fields: [
+        defineField({ name: "eyebrow", title: "Eyebrow (script)", type: "string" }),
+        defineField({ name: "lead", title: "Headline Line 1 (accent)", type: "string" }),
+        defineField({ name: "rest", title: "Headline Line 2", type: "string" }),
+        defineField({ name: "body", title: "Body", type: "text", rows: 4 }),
+        defineField({ name: "image", title: "Background Image", type: "image", options: { hotspot: true } }),
+        defineField({ name: "ctaHref", title: "Button Link", type: "string", description: "e.g. /projects" }),
+      ],
+    }),
+
     defineField({ name: "seo", title: "SEO", type: "seo" }),
   ],
   preview: { prepare: () => ({ title: "Home Page" }) },
