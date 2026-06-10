@@ -78,11 +78,6 @@ export default async function CareersPage() {
     heading2: pickStr(c?.pillarsHeading?.heading2, FB.pillarsHeading.heading2),
   };
   const pillars = pickArr(c?.pillars, FB.pillars);
-  const areasHeading = {
-    heading1: pickStr(c?.areasHeading?.heading1, FB.areasHeading.heading1),
-    heading2: pickStr(c?.areasHeading?.heading2, FB.areasHeading.heading2),
-  };
-  const areas = pickArr<string>(c?.areas, FB.areas);
   const apply = {
     heading1: pickStr(c?.apply?.heading1, FB.apply.heading1),
     heading2: pickStr(c?.apply?.heading2, FB.apply.heading2),
@@ -93,13 +88,12 @@ export default async function CareersPage() {
     office: pickStr(c?.apply?.office, FB.apply.office),
     buttonLabel: pickStr(c?.apply?.buttonLabel, FB.apply.buttonLabel),
   };
-  const applyMailto = `mailto:${apply.email}?subject=${encodeURIComponent("Career Application")}`;
 
   return (
     <>
       <SiteNav />
       <main>
-        <PageHero {...hero} />
+        <PageHero {...hero} hideFooterStrip />
 
         {/* Why work with us — pillars (light cream) */}
         <section className="theme-light px-6 py-28 lg:px-10 lg:py-40">
@@ -138,51 +132,10 @@ export default async function CareersPage() {
           </div>
         </section>
 
-        {/* Areas we hire in */}
-        <section className="relative isolate overflow-hidden border-y border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-28 lg:px-10 lg:py-40">
-          <div className="pointer-events-none absolute inset-0 -z-10">
-            <Image
-              src="/images/alameda-bedroom-1.webp"
-              alt=""
-              fill
-              sizes="100vw"
-              className="object-cover opacity-[0.08]"
-              style={{ filter: "sepia(0.25) saturate(0.5) brightness(0.55)" }}
-            />
-          </div>
-
-          <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
-            <div className="col-span-12 lg:col-span-10">
-              <SplitReveal as="h2" className="font-display h-section">
-                {areasHeading.heading1}
-              </SplitReveal>
-              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
-                {areasHeading.heading2}
-              </SplitReveal>
-
-              <ul className="mt-12 grid grid-cols-1 gap-x-12 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
-                {areas.map((a, i) => (
-                  <Reveal
-                    as="li"
-                    key={a}
-                    delay={i * 0.05}
-                    className="flex items-baseline justify-between border-t border-[color:var(--line)] pt-4"
-                  >
-                    <span className="font-display-alt text-xl lg:text-2xl">{a}</span>
-                    <span className="font-mono text-xs text-[color:var(--accent)]">
-                      0{i + 1}
-                    </span>
-                  </Reveal>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
         {/* How to apply */}
         <section className="px-6 py-28 lg:px-10 lg:py-40">
-          <div className="mx-auto grid max-w-[1280px] grid-cols-12 items-end gap-8 lg:gap-16">
-            <div className="col-span-12 lg:col-span-7">
+          <div className="mx-auto max-w-[900px] text-center">
+            <div>
               <SplitReveal as="h2" className="font-display h-section">
                 {apply.heading1}
               </SplitReveal>
@@ -190,32 +143,82 @@ export default async function CareersPage() {
                 {apply.heading2}
               </SplitReveal>
 
-              <Reveal as="p" delay={0.2} className="mt-8 max-w-xl text-base text-[color:var(--muted)] lg:text-lg">
+              <Reveal as="p" delay={0.2} className="mx-auto mt-8 max-w-xl text-base text-[color:var(--muted)] lg:text-lg">
                 {apply.body}
               </Reveal>
             </div>
 
-            <div className="col-span-12 flex flex-col gap-4 lg:col-span-5">
-              <div className="rounded-md border border-[color:var(--line)] p-8 lg:p-10">
-                <div className="text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
-                  {apply.cardLabel}
+            <div className="mt-16">
+              <form action="#" method="post" className="mx-auto max-w-xl rounded-md border border-[color:var(--line)] bg-[color:var(--bg-alt)] p-8 lg:p-10 text-left">
+                <div className="grid gap-6">
+                  <label className="block text-sm text-[color:var(--muted)]">
+                    <span className="font-display-alt text-base">Full name</span>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Your full name"
+                      className="mt-3 w-full rounded-md border border-[color:var(--line)] bg-transparent px-4 py-3 text-[color:var(--fg)] outline-none transition-shadow focus:shadow-[0_0_0_4px_rgba(255,255,255,0.08)]"
+                    />
+                  </label>
+
+                  <label className="block text-sm text-[color:var(--muted)]">
+                    <span className="font-display-alt text-base">Email address</span>
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="you@example.com"
+                      className="mt-3 w-full rounded-md border border-[color:var(--line)] bg-transparent px-4 py-3 text-[color:var(--fg)] outline-none transition-shadow focus:shadow-[0_0_0_4px_rgba(255,255,255,0.08)]"
+                    />
+                  </label>
+
+                  <label className="block text-sm text-[color:var(--muted)]">
+                    <span className="font-display-alt text-base">Phone number</span>
+                    <input
+                      type="tel"
+                      name="phone"
+                      placeholder="+91 12345 67890"
+                      className="mt-3 w-full rounded-md border border-[color:var(--line)] bg-transparent px-4 py-3 text-[color:var(--fg)] outline-none transition-shadow focus:shadow-[0_0_0_4px_rgba(255,255,255,0.08)]"
+                    />
+                  </label>
+
+                  <label className="block text-sm text-[color:var(--muted)]">
+                    <span className="font-display-alt text-base">Position / department</span>
+                    <input
+                      type="text"
+                      name="position"
+                      placeholder="Role or department you are applying for"
+                      className="mt-3 w-full rounded-md border border-[color:var(--line)] bg-transparent px-4 py-3 text-[color:var(--fg)] outline-none transition-shadow focus:shadow-[0_0_0_4px_rgba(255,255,255,0.08)]"
+                    />
+                  </label>
+
+                  <label className="block text-sm text-[color:var(--muted)]">
+                    <span className="font-display-alt text-base">Upload resume</span>
+                    <input
+                      type="file"
+                      name="resume"
+                      accept=".pdf,.doc,.docx"
+                      className="mt-3 w-full rounded-md border border-[color:var(--line)] bg-transparent px-4 py-3 text-[color:var(--fg)] outline-none"
+                    />
+                  </label>
+
+                  <label className="block text-sm text-[color:var(--muted)]">
+                    <span className="font-display-alt text-base">Message</span>
+                    <textarea
+                      name="message"
+                      rows={5}
+                      placeholder="Tell us about your experience and what excites you about this role."
+                      className="mt-3 w-full rounded-md border border-[color:var(--line)] bg-transparent px-4 py-3 text-[color:var(--fg)] outline-none transition-shadow focus:shadow-[0_0_0_4px_rgba(255,255,255,0.08)]"
+                    />
+                  </label>
                 </div>
-                <a
-                  href={applyMailto}
-                  className="mt-4 block font-display-alt text-2xl transition-colors hover:text-[color:var(--accent)] lg:text-3xl"
+
+                <button
+                  type="submit"
+                  className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[color:var(--accent)] px-8 py-3 text-sm uppercase tracking-[0.24em] text-[color:var(--bg)] transition-colors hover:bg-[color:var(--accent)]/90"
                 >
-                  {apply.email}
-                </a>
-                <div className="mt-6 space-y-2 border-t border-[color:var(--line)] pt-6 text-sm text-[color:var(--muted)]">
-                  <div>{apply.hours}</div>
-                  <div>{apply.office}</div>
-                </div>
-                <div className="mt-8">
-                  <CircleButton href={applyMailto} variant="filled">
-                    {apply.buttonLabel}
-                  </CircleButton>
-                </div>
-              </div>
+                  Submit Application
+                </button>
+              </form>
             </div>
           </div>
         </section>

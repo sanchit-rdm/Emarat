@@ -10,6 +10,7 @@ type Props = {
   bgImage?: string;
   /** breadcrumb-style trailing text shown on the right */
   trailing?: string;
+  hideFooterStrip?: boolean;
 };
 
 /**
@@ -24,6 +25,7 @@ export default function PageHero({
   subtitle,
   bgImage,
   trailing,
+  hideFooterStrip,
 }: Props) {
   return (
     <section className="relative isolate flex min-h-[70svh] flex-col justify-between overflow-hidden px-6 pb-12 pt-32 lg:px-10 lg:pb-16 lg:pt-40">
@@ -82,14 +84,16 @@ export default function PageHero({
         )}
       </div>
 
-      <Reveal
-        as="div"
-        delay={0.5}
-        className="flex flex-wrap items-end justify-between gap-6 border-t border-[color:var(--line)] pt-6 text-xs uppercase tracking-[0.2em] text-[color:var(--muted)]"
-      >
-        <span>Emarat Realty · Gurugram</span>
-        {trailing && <span className="hidden md:inline">{trailing}</span>}
-      </Reveal>
+      {!hideFooterStrip ? (
+        <Reveal
+          as="div"
+          delay={0.5}
+          className="flex flex-wrap items-end justify-between gap-6 border-t border-[color:var(--line)] pt-6 text-xs uppercase tracking-[0.2em] text-[color:var(--muted)]"
+        >
+          <span>Emarat Realty · Gurugram</span>
+          {trailing && <span className="hidden md:inline">{trailing}</span>}
+        </Reveal>
+      ) : null}
     </section>
   );
 }
