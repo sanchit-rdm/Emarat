@@ -56,7 +56,9 @@ export default function SplitReveal({
   }, [start, stagger, delay]);
 
   const Tag = as as React.ElementType;
-  const tokens = children.split(/(\s+)/);
+  const ZW_CHARS = /[\u200B\u200C\u200D\uFEFF]/g;
+  const normalized = children.replace(ZW_CHARS, "").replace(/\s+/g, " ").trim();
+  const tokens = normalized.split(/(\s+)/);
 
   return (
     <Tag ref={ref as React.Ref<HTMLElement>} className={className} {...rest}>

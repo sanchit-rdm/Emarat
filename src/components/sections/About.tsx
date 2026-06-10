@@ -13,8 +13,13 @@ interface AboutData {
 }
 interface Props { data?: AboutData }
 
+const ZW_CHARS = /[\u200B\u200C\u200D\uFEFF]/g;
+const normalize = (s?: string | null) =>
+  typeof s === "string"
+    ? s.replace(ZW_CHARS, "").replace(/\s+/g, " ").trim()
+    : undefined;
+
 export default function About({ data }: Props) {
-  const normalize = (s?: string | null) => (typeof s === "string" ? s.replace(/\s+/g, " ").trim() : undefined);
   const heading1 = normalize(data?.heading1) ?? "A distinguished leader";
   const heading2 = normalize(data?.heading2) ?? "in luxury real estate.";
   const description = normalize(data?.description) ?? "Emarat Realty specialises in exquisite residences and high-end commercial spaces across Gurugram. We deliver homes built on quality, elegance and innovation where every detail reflects our unwavering commitment to excellence.";

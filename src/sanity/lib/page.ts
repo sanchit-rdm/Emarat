@@ -33,8 +33,9 @@ export async function getPageContent(type: string): Promise<PageContent> {
 }
 
 /* Merge a hero from Sanity over the in-code defaults — empty fields fall back. */
+const ZW_CHARS = /[\u200B\u200C\u200D\uFEFF]/g;
 export function mergeHero(sanity: HeroData | undefined, fallback: Required<Omit<HeroData, "bgImage">> & { bgImage?: string }) {
-  const normalize = (s: string) => s.replace(/\s+/g, " ").trim();
+  const normalize = (s: string) => s.replace(ZW_CHARS, "").replace(/\s+/g, " ").trim();
   const pick = (v: string | null | undefined, fb: string | undefined) =>
     typeof v === "string" && normalize(v) !== "" ? normalize(v) : fb;
   return {

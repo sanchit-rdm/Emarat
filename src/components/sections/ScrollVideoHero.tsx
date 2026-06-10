@@ -73,10 +73,13 @@ type SanityBlock = { _key?: string; heading?: string };
 // designed slots are ignored; missing ones keep their default heading.
 function resolveBlocks(blocks?: SanityBlock[]): TextBlock[] {
   if (!blocks?.length) return TEXT_BLOCKS;
+  const ZW_CHARS = /[\u200B\u200C\u200D\uFEFF]/g;
+  const normalize = (heading: string) => heading.replace(ZW_CHARS, "").replace(/\s+/g, " ").trim();
+
   return TEXT_BLOCKS.map((base, i) => {
     const b = blocks[i];
     if (!b || !b.heading) return base;
-    const heading = b.heading.replace(/\s+/g, " ").trim();
+    const heading = normalize(b.heading);
     return { ...base, heading: heading || base.heading };
   });
 }
