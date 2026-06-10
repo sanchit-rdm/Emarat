@@ -21,31 +21,6 @@ export const aboutPageType = pageSingletonWithContent("aboutPage", "About Page",
     ],
   }),
   defineField({
-    name: "argo",
-    title: "Argo Group Section",
-    type: "object",
-    fields: [
-      defineField({ name: "heading1", title: "Heading Line 1", type: "string" }),
-      defineField({ name: "heading2", title: "Heading Line 2 (muted)", type: "string" }),
-      defineField({ name: "body", title: "Body", type: "text", rows: 4 }),
-      defineField({
-        name: "industries",
-        title: "Industries",
-        type: "array",
-        of: [
-          defineArrayMember({
-            type: "object",
-            fields: [
-              defineField({ name: "name", title: "Name", type: "string" }),
-              defineField({ name: "note", title: "Note", type: "string" }),
-            ],
-            preview: { select: { title: "name", subtitle: "note" } },
-          }),
-        ],
-      }),
-    ],
-  }),
-  defineField({
     name: "community",
     title: "Community / Social Section",
     type: "object",

@@ -132,10 +132,6 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
     intro {
       heading1, heading2, paragraph, highlights
     },
-    argo {
-      heading1, heading2, body,
-      "industries": industries[]{ _key, name, note }
-    },
     community {
       heading1, heading2, blurb,
       "initiatives": initiatives[]{ _key, name, body }
@@ -160,17 +156,6 @@ export const DIRECTORS_DESK_PAGE_QUERY = defineQuery(`
   }
 `);
 
-export const TEAM_PAGE_QUERY = defineQuery(`
-  *[_type == "teamPage"][0] {
-    ${HERO_FIELDS},
-    "values": values[]{ _key, label, body },
-    intro { heading1, heading2, blurb },
-    "members": members[]{ _key, name, role, bio, "image": image.asset->url },
-    cta { heading1, heading2, body, buttonLabel, buttonHref },
-    ${SEO_FIELDS}
-  }
-`);
-
 export const CAREERS_PAGE_QUERY = defineQuery(`
   *[_type == "careersPage"][0] {
     ${HERO_FIELDS},
@@ -186,10 +171,9 @@ export const CAREERS_PAGE_QUERY = defineQuery(`
 export const CONTACT_PAGE_QUERY = defineQuery(`
   *[_type == "contactPage"][0] {
     ${HERO_FIELDS},
-    "methods": methods[]{ _key, label, primary, href, sub },
     form {
       heading1, heading2, nameLabel, namePlaceholder, phoneLabel, phonePlaceholder,
-      emailLabel, emailPlaceholder, categoryLabel, categoryPlaceholder, categoryOptions,
+      emailLabel, emailPlaceholder, subjectLabel, subjectPlaceholder,
       messageLabel, messagePlaceholder, consent, privacy, submitLabel
     },
     office {

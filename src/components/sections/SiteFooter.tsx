@@ -25,7 +25,7 @@ type FooterSettings = {
 const DEFAULT_FOOTER_IMAGE = "/images/E11/building.jpg";
 
 const DEFAULT_TAGLINE =
-  "Redefining the standard of luxury living. An Argo Group company building transformative real estate in Gurugram, Haryana.";
+  "Redefining the standard of luxury living and building transformative real estate in Gurugram, Haryana.";
 const DEFAULT_ADDRESS = [
   "Emarat Realty, 2nd Floor, Sector-15,",
   "Civil Lines, Gurugram (Haryana) 122001",
@@ -97,7 +97,7 @@ export default async function SiteFooter() {
     : DEFAULT_SOCIALS;
   const copyright =
     f?.copyright?.trim() ||
-    `© ${year} Emarat Realty. An Argo Group company. All rights reserved.`;
+    `© ${year} Emarat Realty. All rights reserved.`;
   const legalNote = f?.legalNote?.trim() || "RERA registered · Gurugram, Haryana";
   const contactHeading = f?.contactHeading?.trim() || "Get in Touch";
 
@@ -182,7 +182,15 @@ export default async function SiteFooter() {
       <div className="mx-auto mt-16 flex max-w-[1440px] flex-wrap items-center justify-between gap-4 border-t border-[color:var(--line)] pt-6 text-xs text-[color:var(--muted)]">
         <span>{copyright}</span>
         <span>{legalNote}</span>
-        <div className="flex gap-6">
+        <div className="flex flex-wrap items-center gap-4">
+          <Link
+            href="https://www.reddashmedia.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[color:var(--fg)]"
+          >
+            Designed by Red Dash Media
+          </Link>
           <Link href="#" className="hover:text-[color:var(--fg)]">Privacy Policy</Link>
           <Link href="#" className="hover:text-[color:var(--fg)]">Terms of Use</Link>
         </div>

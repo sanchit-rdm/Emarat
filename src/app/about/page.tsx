@@ -18,7 +18,7 @@ const HERO_FALLBACK = {
   titleBottom: "of luxury living.",
   subtitle:
     "At Emarat, we're passionate about creating exquisite spaces that elevate the art of living. Our mission is to redefine the standards of living one breath-taking space at a time.",
-  trailing: "An Argo Group company",
+  trailing: "",
   bgImage: "/images/alameda-entrance.webp",
 };
 
@@ -27,7 +27,7 @@ const FB = {
     heading1: "Crafting spaces that",
     heading2: "inspire and endure.",
     paragraph:
-      "With a vision to transform the luxury real estate landscape, Argo Group presents Emarat a testament to opulence and sophistication. Our goal is to craft spaces that inspire, delight, and leave a lasting impression.",
+      "With a vision to transform the luxury real estate landscape, Emarat is a testament to opulence and sophistication. Our goal is to craft spaces that inspire, delight, and leave a lasting impression.",
     highlights: [
       "Luxurious living spaces, designed to perfection",
       "Unparalleled attention to detail and craftsmanship",
@@ -71,7 +71,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata(page?.seo, {
     title: "About Emarat Realty",
     description:
-      "Emarat an Argo Group company redefining luxury living in Gurugram. Vision, mission, and a 15-year legacy across real estate, hospitality, manufacturing and trading.",
+      "Emarat redefining luxury living in Gurugram. Vision, mission, and a 15-year legacy across real estate, hospitality, manufacturing and trading.",
   });
 }
 

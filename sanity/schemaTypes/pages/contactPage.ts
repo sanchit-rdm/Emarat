@@ -3,23 +3,6 @@ import { pageSingletonWithContent } from "./pageSingleton";
 
 export const contactPageType = pageSingletonWithContent("contactPage", "Contact Page", [
   defineField({
-    name: "methods",
-    title: "Contact Methods (3 cards)",
-    type: "array",
-    of: [
-      defineArrayMember({
-        type: "object",
-        fields: [
-          defineField({ name: "label", title: "Label", type: "string" }),
-          defineField({ name: "primary", title: "Primary (phone/email)", type: "string" }),
-          defineField({ name: "href", title: "Link (tel:/mailto:/https:)", type: "string" }),
-          defineField({ name: "sub", title: "Sub-text", type: "string" }),
-        ],
-        preview: { select: { title: "label", subtitle: "primary" } },
-      }),
-    ],
-  }),
-  defineField({
     name: "form",
     title: "Enquiry Form",
     type: "object",
@@ -32,14 +15,8 @@ export const contactPageType = pageSingletonWithContent("contactPage", "Contact 
       defineField({ name: "phonePlaceholder", title: "Phone Placeholder", type: "string" }),
       defineField({ name: "emailLabel", title: "Email Label", type: "string" }),
       defineField({ name: "emailPlaceholder", title: "Email Placeholder", type: "string" }),
-      defineField({ name: "categoryLabel", title: "Category Label", type: "string" }),
-      defineField({ name: "categoryPlaceholder", title: "Category Placeholder", type: "string" }),
-      defineField({
-        name: "categoryOptions",
-        title: "Category Options",
-        type: "array",
-        of: [defineArrayMember({ type: "string" })],
-      }),
+      defineField({ name: "subjectLabel", title: "Subject Label", type: "string" }),
+      defineField({ name: "subjectPlaceholder", title: "Subject Placeholder", type: "string" }),
       defineField({ name: "messageLabel", title: "Message Label", type: "string" }),
       defineField({ name: "messagePlaceholder", title: "Message Placeholder", type: "string" }),
       defineField({ name: "consent", title: "Consent Checkbox Text", type: "text", rows: 2 }),

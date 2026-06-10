@@ -20,11 +20,6 @@ const HERO_FALLBACK = {
 };
 
 const FB = {
-  methods: [
-    { label: "Call us", primary: "+91 84509 84509", href: "tel:+918450984509", sub: "Mon – Fri · 9am – 6pm" },
-    { label: "Email us", primary: "info@emaratrealty.com", href: "mailto:info@emaratrealty.com", sub: "We respond within one business day" },
-    { label: "WhatsApp", primary: "+91 84509 84509", href: "https://wa.me/918450984509", sub: "Tap to chat with sales" },
-  ],
   form: {
     heading1: "Leave your details.",
     heading2: "We'll be in touch.",
@@ -34,9 +29,8 @@ const FB = {
     phonePlaceholder: "+91 00000 00000",
     emailLabel: "Email",
     emailPlaceholder: "your@email.com",
-    categoryLabel: "Category",
-    categoryPlaceholder: "Select a category",
-    categoryOptions: ["Residential enquiry", "Commercial enquiry", "Plot purchase", "Press / Media", "Other"],
+    subjectLabel: "Subject",
+    subjectPlaceholder: "Subject of your enquiry",
     messageLabel: "Message",
     messagePlaceholder: "Tell us how we can help…",
     consent: "I authorise Emarat Realty to contact me via Email, SMS, WhatsApp or Call regarding my enquiry.",
@@ -80,7 +74,6 @@ export default async function ContactPage() {
   const c = (data as any) ?? {};
   const hero = mergeHero(c?.hero, HERO_FALLBACK);
 
-  const methods = pickArr(c?.methods, FB.methods);
   const f = c?.form ?? {};
   const form = {
     heading1: pickStr(f.heading1, FB.form.heading1),
@@ -91,9 +84,8 @@ export default async function ContactPage() {
     phonePlaceholder: pickStr(f.phonePlaceholder, FB.form.phonePlaceholder),
     emailLabel: pickStr(f.emailLabel, FB.form.emailLabel),
     emailPlaceholder: pickStr(f.emailPlaceholder, FB.form.emailPlaceholder),
-    categoryLabel: pickStr(f.categoryLabel, FB.form.categoryLabel),
-    categoryPlaceholder: pickStr(f.categoryPlaceholder, FB.form.categoryPlaceholder),
-    categoryOptions: pickArr<string>(f.categoryOptions, FB.form.categoryOptions),
+    subjectLabel: pickStr(f.subjectLabel, FB.form.subjectLabel),
+    subjectPlaceholder: pickStr(f.subjectPlaceholder, FB.form.subjectPlaceholder),
     messageLabel: pickStr(f.messageLabel, FB.form.messageLabel),
     messagePlaceholder: pickStr(f.messagePlaceholder, FB.form.messagePlaceholder),
     consent: pickStr(f.consent, FB.form.consent),
@@ -123,32 +115,6 @@ export default async function ContactPage() {
       <SiteNav />
       <main>
         <PageHero {...hero} />
-
-        {/* Contact methods */}
-        <section className="border-b border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-16 lg:px-10 lg:py-24">
-          <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
-            {methods.map((m, i) => (
-              <Reveal
-                key={m.label ?? i}
-                delay={i * 0.07}
-                className="group rounded-md border border-[color:var(--line)] p-8 transition-colors hover:border-[color:var(--accent)]/40"
-              >
-                <div className="text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
-                  {m.label}
-                </div>
-                <a
-                  href={m.href}
-                  className="mt-5 block font-display-alt text-2xl transition-colors hover:text-[color:var(--accent)] lg:text-3xl"
-                >
-                  {m.primary}
-                </a>
-                <p className="mt-3 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
-                  {m.sub}
-                </p>
-              </Reveal>
-            ))}
-          </div>
-        </section>
 
         {/* Form + Office card */}
         <section className="px-6 py-28 lg:px-10 lg:py-40">
@@ -201,18 +167,13 @@ export default async function ContactPage() {
                   </div>
                   <div className="border-b border-[color:var(--line)] pb-3 transition-colors focus-within:border-[color:var(--accent)]">
                     <label className="block text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                      {form.categoryLabel}
+                      {form.subjectLabel}
                     </label>
-                    <select className="mt-2 w-full bg-transparent text-sm outline-none" defaultValue="">
-                      <option value="" disabled className="bg-[color:var(--bg)]">
-                        {form.categoryPlaceholder}
-                      </option>
-                      {form.categoryOptions.map((opt) => (
-                        <option key={opt} value={opt} className="bg-[color:var(--bg)]">
-                          {opt}
-                        </option>
-                      ))}
-                    </select>
+                    <input
+                      type="text"
+                      placeholder={form.subjectPlaceholder}
+                      className="mt-2 w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]/60"
+                    />
                   </div>
                 </div>
 

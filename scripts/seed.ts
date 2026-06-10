@@ -57,7 +57,6 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
           dropdown: wk([
             { href: "/about", label: "About Us" },
             { href: "/directors-desk", label: "Director's Desk" },
-            { href: "/team", label: "Our Team" },
           ]),
         },
         {
@@ -76,7 +75,7 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
       footer: {
         headline: "",
         tagline:
-          "Redefining the standard of luxury living. An Argo Group company building transformative real estate in Gurugram, Haryana.",
+          "Redefining the standard of luxury living and building transformative real estate in Gurugram, Haryana.",
         addressLines: ["Emarat Realty, 2nd Floor, Sector-15,", "Civil Lines, Gurugram (Haryana) 122001"],
         columns: wk([
           {
@@ -84,7 +83,6 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
             links: wk([
               { label: "About Us", href: "/about" },
               { label: "Director's Desk", href: "/directors-desk" },
-              { label: "Our Team", href: "/team" },
               { label: "Careers", href: "/careers" },
             ]),
           },
@@ -107,7 +105,7 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
         ]),
         contactHeading: "Get in Touch",
         officeHours: "Mon Fri · 9am – 6pm",
-        copyright: "© 2026 Emarat Realty. An Argo Group company. All rights reserved.",
+        copyright: "© 2026 Emarat Realty. All rights reserved.",
         legalNote: "RERA registered · Gurugram, Haryana",
       },
     },
@@ -237,31 +235,19 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
         titleBottom: "of luxury living.",
         subtitle:
           "At Emarat, we're passionate about creating exquisite spaces that elevate the art of living. Our mission is to redefine the standards of living one breath-taking space at a time.",
-        trailing: "An Argo Group company",
+        trailing: "",
       },
       intro: {
         heading1: "Crafting spaces that",
         heading2: "inspire and endure.",
         paragraph:
-          "With a vision to transform the luxury real estate landscape, Argo Group presents Emarat a testament to opulence and sophistication. Our goal is to craft spaces that inspire, delight, and leave a lasting impression.",
+          "With a vision to transform the luxury real estate landscape, Emarat is a testament to opulence and sophistication. Our goal is to craft spaces that inspire, delight, and leave a lasting impression.",
         highlights: [
           "Luxurious living spaces, designed to perfection",
           "Unparalleled attention to detail and craftsmanship",
           "Prime locations with access to every amenity",
           "An unwavering commitment to excellence and customer satisfaction",
         ],
-      },
-      argo: {
-        heading1: "Argo Group",
-        heading2: "a legacy of excellence.",
-        body:
-          "Argo Group is a driving force across industries shaping businesses with vision, integrity, and excellence. Emarat's luxurious developments, rooted in innovation and meticulous planning, align seamlessly with the Group's vision of redefining modern real estate.",
-        industries: wk([
-          { name: "Real Estate", note: "Luxury residential & commercial" },
-          { name: "Hospitality", note: "Hotels & guest experiences" },
-          { name: "Manufacturing & Trading", note: "Industrial portfolio" },
-          { name: "Import & Export", note: "Global trade operations" },
-        ]),
       },
       community: {
         heading1: "Building more",
@@ -286,8 +272,8 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
         personInitials: "RG",
         primaryCtaLabel: "Read the full message",
         primaryCtaHref: "/directors-desk",
-        secondaryCtaLabel: "Meet our team →",
-        secondaryCtaHref: "/team",
+        secondaryCtaLabel: "",
+        secondaryCtaHref: "",
       },
     },
   },
@@ -333,38 +319,6 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
     },
   },
 
-  /* -------------------------------- Team Page ------------------------------- */
-  {
-    _id: "teamPage",
-    _type: "teamPage",
-    fields: {
-      hero: {
-        titleTop: "Leaders in innovation,",
-        titleBottom: "architects of change.",
-        subtitle:
-          "Emarat is driven by a team of visionary leaders, expert architects and dedicated professionals who share a passion for excellence collaborating to create spaces that inspire and endure.",
-        trailing: "A small team. Long horizons.",
-      },
-      values: wk([
-        { label: "Integrity", body: "Every transaction. Every promise. Every time." },
-        { label: "Quality", body: "From first sketch to final handover no compromises." },
-        { label: "Customer-first", body: "The people we build for shape every decision." },
-      ]),
-      intro: {
-        heading1: "The people",
-        heading2: "behind every project.",
-        blurb:
-          "Decisions are made by the same people who sign the drawings that's how we keep quality consistent across every Emarat residence.",
-      },
-      cta: {
-        heading1: "Architecture, engineering,",
-        heading2: "sales and beyond.",
-        body: "We're always looking for passionate, innovative and driven individuals to join the Emarat team.",
-        buttonLabel: "Explore Careers",
-        buttonHref: "/careers",
-      },
-    },
-  },
 
   /* ------------------------------- Careers Page ----------------------------- */
   {

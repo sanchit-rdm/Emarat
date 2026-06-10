@@ -33,26 +33,6 @@ export const directorsDeskPageType = pageSingletonWithContent(
     }),
     defineField({ name: "signatureName", title: "Signature Name", type: "string" }),
     defineField({
-      name: "mission",
-      title: "Mission Card",
-      type: "object",
-      fields: [
-        defineField({ name: "label", title: "Label", type: "string" }),
-        defineField({ name: "heading", title: "Heading", type: "string" }),
-        defineField({ name: "body", title: "Body", type: "text", rows: 4 }),
-      ],
-    }),
-    defineField({
-      name: "vision",
-      title: "Vision Card",
-      type: "object",
-      fields: [
-        defineField({ name: "label", title: "Label", type: "string" }),
-        defineField({ name: "heading", title: "Heading", type: "string" }),
-        defineField({ name: "body", title: "Body", type: "text", rows: 4 }),
-      ],
-    }),
-    defineField({
       name: "cta",
       title: "Closing CTA",
       type: "object",
