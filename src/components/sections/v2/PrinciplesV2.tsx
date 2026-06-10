@@ -13,12 +13,28 @@ const DEFAULT_IMAGES: string[] = [
   "/images/alameda-dining.webp",
 ];
 
+interface PortableTextSpan {
+  _type?: string;
+  text?: string;
+  marks?: string[];
+}
+interface PortableTextBlock {
+  _type?: string;
+  style?: string;
+  children?: PortableTextSpan[];
+  markDefs?: Array<{ _key?: string; _type?: string; href?: string }>;
+}
 interface ApproachData {
-  heading1?: string;
-  heading2?: string;
+  heading1?: string | PortableTextBlock[];
+  heading2?: string | PortableTextBlock[];
+  heading3?: string | PortableTextBlock[];
   values?: Array<{ _key?: string; img?: string }>;
 }
-interface PrinciplesLabels { heading3?: string; heading1?: string; heading2?: string }
+interface PrinciplesLabels {
+  heading1?: string | PortableTextBlock[];
+  heading2?: string | PortableTextBlock[];
+  heading3?: string | PortableTextBlock[];
+}
 interface Props { data?: ApproachData; labels?: PrinciplesLabels }
 
 /**
@@ -30,9 +46,9 @@ interface Props { data?: ApproachData; labels?: PrinciplesLabels }
  * before the news grid.
  */
 export default function PrinciplesV2({ data, labels }: Props) {
-  const heading3 = labels?.heading3?.trim() || "Interior";
-  const heading1 = labels?.heading1?.trim() || data?.heading1 || "Building with Ethics,";
-  const heading2 = labels?.heading2?.trim() || data?.heading2 || "Excellence & Efficiency.";
+  const heading1 = labels?.heading1 ?? data?.heading1 ?? "Building with Ethics,";
+  const heading2 = labels?.heading2 ?? data?.heading2 ?? "INTERIOR";
+  const heading3 = labels?.heading3 ?? data?.heading3 ?? "";
   const images: string[] = data?.values?.length
     ? data.values.map((v) => v.img).filter((s): s is string => !!s)
     : DEFAULT_IMAGES;
@@ -40,6 +56,53 @@ export default function PrinciplesV2({ data, labels }: Props) {
 
   const sectionRef = useRef<HTMLElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
+
+  const renderInline = (value: string | PortableTextBlock[] | undefined) => {
+    if (!value) return null;
+    if (typeof value === "string") return value;
+
+    return value.flatMap((block, blockIndex) => {
+      if (!block || block._type !== "block" || !Array.isArray(block.children)) {
+        return null;
+      }
+
+      const children = block.children.map((child, childIndex) => {
+        const text = child.text || "";
+        const marks = child.marks || [];
+        const hrefMark = marks.find((mark) => mark !== "strong" && mark !== "em" && mark !== "code");
+
+        let node: React.ReactNode = text;
+        if (marks.includes("code")) node = <code key={`code-${blockIndex}-${childIndex}`}>{node}</code>;
+        if (marks.includes("em")) node = <em key={`em-${blockIndex}-${childIndex}`}>{node}</em>;
+        if (marks.includes("strong")) node = <strong key={`strong-${blockIndex}-${childIndex}`}>{node}</strong>;
+
+        if (hrefMark && Array.isArray(block.markDefs)) {
+          const linkDef = block.markDefs.find((def) => def._key === hrefMark);
+          if (linkDef?.href) {
+            node = (
+              <a
+                key={`link-${blockIndex}-${childIndex}`}
+                href={linkDef.href}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="underline"
+              >
+                {node}
+              </a>
+            );
+          }
+        }
+
+        return <span key={`span-${blockIndex}-${childIndex}`}>{node}</span>;
+      });
+
+      if (blockIndex < value.length - 1) {
+        return [children, <br key={`br-${blockIndex}`} />];
+      }
+
+      return children;
+    });
+  };
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -103,12 +166,12 @@ export default function PrinciplesV2({ data, labels }: Props) {
 
         {/* Fixed centre overlay — section heading, white, no button. */}
         <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-6 text-center">
-          <div className="text-sm uppercase tracking-[0.4em] text-white/70 md:text-base">
-            {heading3}
-          </div>
           <h2 className="font-script max-w-5xl text-[clamp(2.5rem,7vw,6.5rem)] leading-[1.02] text-white drop-shadow-[0_4px_40px_rgba(0,0,0,0.6)]">
-            <span className="block">{heading1}</span>
-            <span className="block">{heading2}</span>
+            <span className="block">{renderInline(heading1)}</span>
+            <span className="block text-[color:#E2A724] uppercase font-bold italic tracking-[0.2em]">
+              {renderInline(heading2)}
+            </span>
+            {heading3 ? <span className="block">{renderInline(heading3)}</span> : null}
           </h2>
         </div>
       </div>

@@ -202,7 +202,35 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
           configLabel: "Configuration",
           viewLabel: "View Residence",
         },
-        principles: { heading3: "Interior", heading1: "Building with Ethics,", heading2: "Excellence & Efficiency." },
+        principles: {
+          heading1: [
+            {
+              _type: "block",
+              style: "normal",
+              children: [{ _type: "span", text: "Building with Ethics," }],
+            },
+          ],
+          heading2: [
+            {
+              _type: "block",
+              style: "normal",
+              children: [
+                {
+                  _type: "span",
+                  text: "INTERIOR",
+                  marks: ["strong", "em"],
+                },
+              ],
+            },
+          ],
+          heading3: [
+            {
+              _type: "block",
+              style: "normal",
+              children: [{ _type: "span", text: "In Your Way" }],
+            },
+          ],
+        },
         news: { eyebrow: "News & Offers", heading1: "Latest from", heading2: "Emarat Realty.", allLabel: "All articles", allHref: "/news" },
         contact: {
           eyebrow: "Make Your Enquiry",
