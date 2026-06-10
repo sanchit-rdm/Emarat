@@ -84,7 +84,18 @@ export const HOME_PAGE_QUERY = defineQuery(`
       phoneHours,
       email,
       emailNote,
-      address
+      address,
+      lead,
+      namePlaceholder,
+      phonePlaceholder,
+      emailPlaceholder,
+      categoryPlaceholder,
+      categoryOptions,
+      privacy,
+      submitLabel,
+      callLabel,
+      emailLabel,
+      visitLabel
     },
     location {
       eyebrow,
@@ -97,6 +108,8 @@ export const HOME_PAGE_QUERY = defineQuery(`
       eyebrow, lead, rest, body, ctaHref,
       "image": image.asset->url
     },
+    gallerySection { heading1, heading2, scrollHint, swipeHint },
+    newsSection { heading1, heading2, allLabel, allHref },
     projectsSection { heading1, heading2, allLabel, allHref },
     designTwo {
       introEyebrow,
@@ -210,7 +223,11 @@ export const PROJECTS_PAGE_QUERY = defineQuery(`
       overviewHeading1, overviewHeading2, amenitiesHeading, amenitiesBlurb,
       floorPlansHeading, floorPlansBlurb, floorPlansRequestLabel, galleryHeading,
       connectivityHeading1, connectivityHeading2, connectivityBlurb,
-      enquiryHeading, enquiryBlurb, enquiryPhone, enquiryEmail, enquirySubmitLabel
+      enquiryHeading, enquiryBlurb, enquiryPhone, enquiryEmail, enquirySubmitLabel,
+      enquiryInterestedLabel, enquiryNameLabel, enquiryNamePlaceholder,
+      enquiryPhoneLabel, enquiryPhonePlaceholder, enquiryEmailLabel, enquiryEmailPlaceholder,
+      enquiryConfigLabel, enquiryConfigPlaceholder, enquiryConfigOptions,
+      enquiryMessageLabel, enquiryMessagePlaceholder, enquiryPrivacy
     },
     ${SEO_FIELDS}
   }

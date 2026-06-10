@@ -43,7 +43,7 @@ export default async function Home() {
       <SiteNav />
       <main>
         <ScrollVideoHero blocks={homePage?.heroBlocks} />
-        <Gallery images={homePage?.gallery} />
+        <Gallery images={homePage?.gallery} section={homePage?.gallerySection} />
         <div className="theme-light">
           <Projects data={homePage?.projectsSection} projects={projects} />
         </div>
@@ -53,7 +53,7 @@ export default async function Home() {
           <Approach data={homePage?.approach} />
         </div>
         <div className="theme-light">
-          <News posts={posts} />
+          <News posts={posts} labels={homePage?.newsSection} />
         </div>
         <Contact data={homePage?.contact} />
       </main>

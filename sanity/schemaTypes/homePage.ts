@@ -114,6 +114,23 @@ export const homePageType = defineType({
         defineField({ name: "email", title: "Email Address", type: "string" }),
         defineField({ name: "emailNote", title: "Email Note", type: "string" }),
         defineField({ name: "address", title: "Address", type: "text", rows: 4 }),
+        /* Callback form + column labels (Home Design 1 contact section) */
+        defineField({ name: "lead", title: "Form Lead Paragraph", type: "text", rows: 2 }),
+        defineField({ name: "namePlaceholder", title: "Form — Name Placeholder", type: "string" }),
+        defineField({ name: "phonePlaceholder", title: "Form — Phone Placeholder", type: "string" }),
+        defineField({ name: "emailPlaceholder", title: "Form — Email Placeholder", type: "string" }),
+        defineField({ name: "categoryPlaceholder", title: "Form — Category Placeholder", type: "string" }),
+        defineField({
+          name: "categoryOptions",
+          title: "Form — Category Options",
+          type: "array",
+          of: [defineArrayMember({ type: "string" })],
+        }),
+        defineField({ name: "privacy", title: "Form — Privacy Note", type: "string" }),
+        defineField({ name: "submitLabel", title: "Form — Submit Button", type: "string" }),
+        defineField({ name: "callLabel", title: "Column — Call Label", type: "string" }),
+        defineField({ name: "emailLabel", title: "Column — Email Label", type: "string" }),
+        defineField({ name: "visitLabel", title: "Column — Visit Label", type: "string" }),
       ],
     }),
 
@@ -172,6 +189,32 @@ export const homePageType = defineType({
         defineField({ name: "body", title: "Body", type: "text", rows: 4 }),
         defineField({ name: "image", title: "Background Image", type: "image", options: { hotspot: true } }),
         defineField({ name: "ctaHref", title: "Button Link", type: "string", description: "e.g. /projects" }),
+      ],
+    }),
+
+    /* ---- Gallery section heading (Home Design 1) ---- */
+    defineField({
+      name: "gallerySection",
+      title: "Gallery Section Heading (Design 1)",
+      type: "object",
+      fields: [
+        defineField({ name: "heading1", title: "Heading Line 1", type: "string" }),
+        defineField({ name: "heading2", title: "Heading Line 2 (muted)", type: "string" }),
+        defineField({ name: "scrollHint", title: "Scroll Hint (desktop)", type: "string" }),
+        defineField({ name: "swipeHint", title: "Swipe Hint (mobile)", type: "string" }),
+      ],
+    }),
+
+    /* ---- News section heading (Home Design 1) ---- */
+    defineField({
+      name: "newsSection",
+      title: "News Section Heading (Design 1)",
+      type: "object",
+      fields: [
+        defineField({ name: "heading1", title: "Heading Line 1", type: "string" }),
+        defineField({ name: "heading2", title: "Heading Line 2 (muted)", type: "string" }),
+        defineField({ name: "allLabel", title: "“All Articles” Link Label", type: "string" }),
+        defineField({ name: "allHref", title: "“All Articles” Link", type: "string" }),
       ],
     }),
 

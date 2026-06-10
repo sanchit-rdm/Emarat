@@ -17,7 +17,7 @@ import { getProject, projectSlugs } from "@/lib/projects";
 import { getSanityProject, getSanityProjectSlugs, getSanityProjectSeo } from "@/lib/sanity.projects";
 import { sanityFetch } from "@/sanity/lib/live";
 import { PROJECTS_PAGE_QUERY } from "@/sanity/lib/queries";
-import { buildMetadata, pickStr } from "@/sanity/lib/page";
+import { buildMetadata, pickStr, pickArr } from "@/sanity/lib/page";
 
 export async function generateStaticParams() {
   const sanitySlugs = await getSanityProjectSlugs();
@@ -87,6 +87,19 @@ export default async function ProjectPage({
     phone: pickStr(d.enquiryPhone, "+91 84509 84509"),
     email: pickStr(d.enquiryEmail, "info@emaratrealty.com"),
     submitLabel: pickStr(d.enquirySubmitLabel, "Send Enquiry"),
+    interestedLabel: pickStr(d.enquiryInterestedLabel, "Interested in"),
+    nameLabel: pickStr(d.enquiryNameLabel, "Full Name"),
+    namePlaceholder: pickStr(d.enquiryNamePlaceholder, "Your name"),
+    phoneLabel: pickStr(d.enquiryPhoneLabel, "Phone"),
+    phonePlaceholder: pickStr(d.enquiryPhonePlaceholder, "+91 00000 00000"),
+    emailLabel: pickStr(d.enquiryEmailLabel, "Email"),
+    emailPlaceholder: pickStr(d.enquiryEmailPlaceholder, "your@email.com"),
+    configLabel: pickStr(d.enquiryConfigLabel, "Configuration"),
+    configPlaceholder: pickStr(d.enquiryConfigPlaceholder, "Preferred type"),
+    configOptions: pickArr<string>(d.enquiryConfigOptions, ["Site visit", "Investment / NRI"]),
+    messageLabel: pickStr(d.enquiryMessageLabel, "Message"),
+    messagePlaceholder: pickStr(d.enquiryMessagePlaceholder, "Tell us what you're looking for…"),
+    privacy: pickStr(d.enquiryPrivacy, "By submitting you agree to our privacy policy."),
   };
 
   return (

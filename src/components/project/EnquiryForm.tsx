@@ -12,7 +12,26 @@ export default function EnquiryForm({
 }: {
   projectTitle: string;
   config: string;
-  labels?: { heading?: string; blurb?: string; phone?: string; email?: string; submitLabel?: string };
+  labels?: {
+    heading?: string;
+    blurb?: string;
+    phone?: string;
+    email?: string;
+    submitLabel?: string;
+    interestedLabel?: string;
+    nameLabel?: string;
+    namePlaceholder?: string;
+    phoneLabel?: string;
+    phonePlaceholder?: string;
+    emailLabel?: string;
+    emailPlaceholder?: string;
+    configLabel?: string;
+    configPlaceholder?: string;
+    configOptions?: string[];
+    messageLabel?: string;
+    messagePlaceholder?: string;
+    privacy?: string;
+  };
 }) {
   const [sent, setSent] = useState(false);
   const heading = labels?.heading?.trim() || "Enquire about";
@@ -20,6 +39,19 @@ export default function EnquiryForm({
   const phone = labels?.phone?.trim() || "+91 84509 84509";
   const email = labels?.email?.trim() || "info@emaratrealty.com";
   const submitLabel = labels?.submitLabel?.trim() || "Send Enquiry";
+  const interestedLabel = labels?.interestedLabel?.trim() || "Interested in";
+  const nameLabel = labels?.nameLabel?.trim() || "Full Name";
+  const namePlaceholder = labels?.namePlaceholder?.trim() || "Your name";
+  const phoneLabel = labels?.phoneLabel?.trim() || "Phone";
+  const phonePlaceholder = labels?.phonePlaceholder?.trim() || "+91 00000 00000";
+  const emailLabel = labels?.emailLabel?.trim() || "Email";
+  const emailPlaceholder = labels?.emailPlaceholder?.trim() || "your@email.com";
+  const configLabel = labels?.configLabel?.trim() || "Configuration";
+  const configPlaceholder = labels?.configPlaceholder?.trim() || "Preferred type";
+  const configOptions = labels?.configOptions?.length ? labels.configOptions : ["Site visit", "Investment / NRI"];
+  const messageLabel = labels?.messageLabel?.trim() || "Message";
+  const messagePlaceholder = labels?.messagePlaceholder?.trim() || "Tell us what you're looking for…";
+  const privacy = labels?.privacy?.trim() || "By submitting you agree to our privacy policy.";
 
   return (
     <section
@@ -61,41 +93,42 @@ export default function EnquiryForm({
               className="flex flex-col gap-5"
             >
               <div className="text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
-                Interested in · {projectTitle}
+                {interestedLabel} · {projectTitle}
               </div>
 
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                <Field label="Full Name" name="name" placeholder="Your name" required />
-                <Field label="Phone" name="phone" type="tel" placeholder="+91 00000 00000" required />
+                <Field label={nameLabel} name="name" placeholder={namePlaceholder} required />
+                <Field label={phoneLabel} name="phone" type="tel" placeholder={phonePlaceholder} required />
               </div>
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                <Field label="Email" name="email" type="email" placeholder="your@email.com" />
+                <Field label={emailLabel} name="email" type="email" placeholder={emailPlaceholder} />
                 <div className="border-b border-[color:var(--line)] pb-3 transition-colors focus-within:border-[color:var(--accent)]">
                   <label className="block text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                    Configuration
+                    {configLabel}
                   </label>
                   <select className="mt-2 w-full bg-transparent text-sm outline-none" defaultValue="">
-                    <option value="" disabled className="bg-[color:var(--bg)]">Preferred type</option>
+                    <option value="" disabled className="bg-[color:var(--bg)]">{configPlaceholder}</option>
                     <option className="bg-[color:var(--bg)]">{config}</option>
-                    <option className="bg-[color:var(--bg)]">Site visit</option>
-                    <option className="bg-[color:var(--bg)]">Investment / NRI</option>
+                    {configOptions.map((opt) => (
+                      <option key={opt} className="bg-[color:var(--bg)]">{opt}</option>
+                    ))}
                   </select>
                 </div>
               </div>
               <div className="border-b border-[color:var(--line)] pb-3 transition-colors focus-within:border-[color:var(--accent)]">
                 <label className="block text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                  Message
+                  {messageLabel}
                 </label>
                 <textarea
                   rows={3}
-                  placeholder="Tell us what you're looking for…"
+                  placeholder={messagePlaceholder}
                   className="mt-2 w-full resize-none bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]/60"
                 />
               </div>
 
               <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
                 <p className="text-[10px] uppercase tracking-[0.16em] text-[color:var(--muted)]">
-                  {sent ? "Thank you — we'll be in touch shortly." : "By submitting you agree to our privacy policy."}
+                  {sent ? "Thank you — we'll be in touch shortly." : privacy}
                 </p>
                 <CircleButton type="submit" variant="filled">
                   {sent ? "Sent" : submitLabel}

@@ -44,8 +44,21 @@ function formatDate(d?: string) {
   });
 }
 
-export default function News({ posts }: { posts: Post[] }) {
+interface NewsLabels {
+  heading1?: string;
+  heading2?: string;
+  allLabel?: string;
+  allHref?: string;
+  authorFallback?: string;
+}
+
+export default function News({ posts, labels }: { posts: Post[]; labels?: NewsLabels }) {
   const items = (posts && posts.length > 0 ? posts : placeholders).slice(0, 3);
+  const heading1 = labels?.heading1?.trim() || "Latest from";
+  const heading2 = labels?.heading2?.trim() || "Emarat Realty.";
+  const allLabel = labels?.allLabel?.trim() || "All articles";
+  const allHref = labels?.allHref?.trim() || "/news";
+  const authorFallback = labels?.authorFallback?.trim() || "Emarat Realty";
 
   return (
     <section id="news" className="px-6 py-28 lg:px-10 lg:py-40">
@@ -56,20 +69,20 @@ export default function News({ posts }: { posts: Post[] }) {
               as="h2"
               className="font-display h-section"
             >
-              Latest from
+              {heading1}
             </SplitReveal>
             <SplitReveal
               as="h2"
               delay={0.1}
               className="font-display h-section text-[color:var(--muted)]"
             >
-              Emarat Realty.
+              {heading2}
             </SplitReveal>
           </div>
           <Reveal delay={0.2} className="self-end">
-            <a href="/news" className="group inline-flex items-center gap-3 text-sm">
+            <a href={allHref} className="group inline-flex items-center gap-3 text-sm">
               <span className="border-b border-[color:var(--line)] pb-1 transition-colors group-hover:border-[color:var(--fg)]">
-                All articles
+                {allLabel}
               </span>
               <span aria-hidden>→</span>
             </a>
@@ -98,7 +111,7 @@ export default function News({ posts }: { posts: Post[] }) {
                   )}
                 </div>
                 <div className="flex items-center gap-3 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
-                  <span>{post.author?.name ?? "Emarat Realty"}</span>
+                  <span>{post.author?.name ?? authorFallback}</span>
                   <span>·</span>
                   <span>{formatDate(post.publishedAt)}</span>
                 </div>

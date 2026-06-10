@@ -18,10 +18,17 @@ const DEFAULT_IMAGES: GalleryImg[] = [
   { src: "/images/EA4/ea-4-lounge-diningjpg.jpg", label: "EA 04 · Lounge & Dining" },
 ];
 
-interface Props { images?: GalleryImg[] }
+interface Props {
+  images?: GalleryImg[];
+  section?: { heading1?: string; heading2?: string; scrollHint?: string; swipeHint?: string };
+}
 
-export default function Gallery({ images: rawImages }: Props) {
+export default function Gallery({ images: rawImages, section }: Props) {
   const images = rawImages?.length ? rawImages : DEFAULT_IMAGES;
+  const heading1 = section?.heading1?.trim() || "Crafted for";
+  const heading2 = section?.heading2?.trim() || "luxury living.";
+  const scrollHint = section?.scrollHint?.trim() || "Scroll to explore spaces and residences.";
+  const swipeHint = section?.swipeHint?.trim() || "Swipe to explore spaces and residences.";
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
@@ -70,13 +77,13 @@ export default function Gallery({ images: rawImages }: Props) {
       <div className="lg:hidden">
         <div className="px-6 pt-20 pb-8">
           <SplitReveal as="h2" className="font-display h-sub">
-            Crafted for
+            {heading1}
           </SplitReveal>
           <SplitReveal as="h2" delay={0.1} className="font-display h-sub text-[color:var(--muted)]">
-            luxury living.
+            {heading2}
           </SplitReveal>
           <Reveal delay={0.25} className="mt-4 max-w-xs text-xs leading-relaxed text-[color:var(--muted)]">
-            Swipe to explore spaces and residences.
+            {swipeHint}
           </Reveal>
         </div>
         <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-20 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -113,13 +120,13 @@ export default function Gallery({ images: rawImages }: Props) {
           {/* Floating heading — stays fixed while images scroll past */}
           <div className="pointer-events-none absolute left-10 top-1/2 z-10 -translate-y-1/2">
             <SplitReveal as="h2" className="font-display h-sub">
-              Crafted for
+              {heading1}
             </SplitReveal>
             <SplitReveal as="h2" delay={0.1} className="font-display h-sub text-[color:var(--muted)]">
-              luxury living.
+              {heading2}
             </SplitReveal>
             <Reveal delay={0.25} className="mt-4 max-w-[200px] text-xs leading-relaxed text-[color:var(--muted)]">
-              Scroll to explore spaces and residences.
+              {scrollHint}
             </Reveal>
             <Reveal delay={0.35} className="mt-6">
               <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--accent)]">

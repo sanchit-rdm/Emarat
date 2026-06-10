@@ -12,6 +12,17 @@ interface ContactData {
   email?: string;
   emailNote?: string;
   address?: string;
+  lead?: string;
+  namePlaceholder?: string;
+  phonePlaceholder?: string;
+  emailPlaceholder?: string;
+  categoryPlaceholder?: string;
+  categoryOptions?: string[];
+  privacy?: string;
+  submitLabel?: string;
+  callLabel?: string;
+  emailLabel?: string;
+  visitLabel?: string;
 }
 interface Props { data?: ContactData }
 
@@ -24,6 +35,19 @@ export default function Contact({ data }: Props) {
   const email = data?.email ?? "info@emaratrealty.com";
   const emailNote = data?.emailNote ?? "We respond within one working day.";
   const address = data?.address ?? "Emarat Realty\n2nd Floor, Sector-15\nCivil Lines, Gurugram\nHaryana 122001";
+  const lead = data?.lead ?? "Leave your details and our team will get back to you within one business day.";
+  const namePlaceholder = data?.namePlaceholder ?? "Your name";
+  const phonePlaceholder = data?.phonePlaceholder ?? "+91 00000 00000";
+  const emailPlaceholder = data?.emailPlaceholder ?? "Email address (optional)";
+  const categoryPlaceholder = data?.categoryPlaceholder ?? "Interested in…";
+  const categoryOptions = data?.categoryOptions?.length
+    ? data.categoryOptions
+    : ["C2 at DLF Garden City", "C5 at DLF Garden City", "E11 at DLF Garden City", "EA 04 at Almeda", "Residential Plots", "Independent Floors"];
+  const privacy = data?.privacy ?? "By submitting you agree to our privacy policy.";
+  const submitLabel = data?.submitLabel ?? "Request Callback";
+  const callLabel = data?.callLabel ?? "Call Us";
+  const emailLabel = data?.emailLabel ?? "Email Us";
+  const visitLabel = data?.visitLabel ?? "Visit Us";
   return (
     <section
       id="contact"
@@ -54,14 +78,14 @@ export default function Contact({ data }: Props) {
           {/* Callback form */}
           <Reveal as="div" delay={0.2} className="mt-16 max-w-xl">
             <p className="mb-6 text-sm text-[color:var(--muted)]">
-              Leave your details and our team will get back to you within one business day.
+              {lead}
             </p>
             <form className="flex flex-col gap-4">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="border-b border-[color:var(--line)] pb-3">
                   <input
                     type="text"
-                    placeholder="Your name"
+                    placeholder={namePlaceholder}
                     className="w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
                     aria-label="Name"
                   />
@@ -69,7 +93,7 @@ export default function Contact({ data }: Props) {
                 <div className="border-b border-[color:var(--line)] pb-3">
                   <input
                     type="tel"
-                    placeholder="+91 00000 00000"
+                    placeholder={phonePlaceholder}
                     className="w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
                     aria-label="Phone"
                   />
@@ -78,7 +102,7 @@ export default function Contact({ data }: Props) {
               <div className="border-b border-[color:var(--line)] pb-3">
                 <input
                   type="email"
-                  placeholder="Email address (optional)"
+                  placeholder={emailPlaceholder}
                   className="w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
                   aria-label="Email"
                 />
@@ -89,21 +113,18 @@ export default function Contact({ data }: Props) {
                   aria-label="Project interest"
                   defaultValue=""
                 >
-                  <option value="" disabled>Interested in…</option>
-                  <option value="c2">C2 at DLF Garden City</option>
-                  <option value="c5">C5 at DLF Garden City</option>
-                  <option value="e11">E11 at DLF Garden City</option>
-                  <option value="ea04">EA 04 at Almeda</option>
-                  <option value="plots">Residential Plots</option>
-                  <option value="floors">Independent Floors</option>
+                  <option value="" disabled>{categoryPlaceholder}</option>
+                  {categoryOptions.map((opt) => (
+                    <option key={opt} value={opt}>{opt}</option>
+                  ))}
                 </select>
               </div>
               <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
                 <p className="text-[10px] uppercase tracking-[0.16em] text-[color:var(--muted)]">
-                  By submitting you agree to our privacy policy.
+                  {privacy}
                 </p>
                 <CircleButton type="submit" variant="filled">
-                  Request Callback
+                  {submitLabel}
                 </CircleButton>
               </div>
             </form>
@@ -112,7 +133,7 @@ export default function Contact({ data }: Props) {
           <div className="mt-16 grid grid-cols-1 gap-12 md:grid-cols-3">
             <Reveal as="div" delay={0.1} className="space-y-3">
               <div className="text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
-                Call Us
+                {callLabel}
               </div>
               <a
                 href={phoneHref}
@@ -125,7 +146,7 @@ export default function Contact({ data }: Props) {
 
             <Reveal as="div" delay={0.15} className="space-y-3">
               <div className="text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
-                Email Us
+                {emailLabel}
               </div>
               <a
                 href={`mailto:${email}`}
@@ -138,7 +159,7 @@ export default function Contact({ data }: Props) {
 
             <Reveal as="div" delay={0.2} className="space-y-3">
               <div className="text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
-                Visit Us
+                {visitLabel}
               </div>
               <p className="font-display-alt text-base leading-relaxed" style={{ whiteSpace: "pre-line" }}>
                 {address}

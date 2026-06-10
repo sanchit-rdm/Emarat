@@ -5,7 +5,8 @@ import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
-import { SanityLive } from "@/sanity/lib/live";
+import { SanityLive, sanityFetch } from "@/sanity/lib/live";
+import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 
 // Body text — Montserrat. Drives --font-sans-pri.
 const montserrat = Montserrat({
@@ -34,11 +35,20 @@ const bizantheum = localFont({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Emarat Realty Luxury Real Estate in Gurugram",
-  description:
-    "A distinguished leader in luxury real estate, specialising in exquisite residences and high-end commercial spaces at DLF Garden City, Sector 93, Gurugram.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  let title = "Emarat Realty Luxury Real Estate in Gurugram";
+  let description =
+    "A distinguished leader in luxury real estate, specialising in exquisite residences and high-end commercial spaces at DLF Garden City, Sector 93, Gurugram.";
+  try {
+    const { data } = await sanityFetch({ query: SITE_SETTINGS_QUERY, tags: ["siteSettings"] });
+    const s = data as { siteTitle?: string; siteDescription?: string } | null;
+    if (s?.siteTitle?.trim()) title = s.siteTitle;
+    if (s?.siteDescription?.trim()) description = s.siteDescription;
+  } catch {
+    /* fall back to the in-code defaults */
+  }
+  return { title, description };
+}
 
 export default async function RootLayout({
   children,
