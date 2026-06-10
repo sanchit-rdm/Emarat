@@ -14,9 +14,10 @@ interface AboutData {
 interface Props { data?: AboutData }
 
 export default function About({ data }: Props) {
-  const heading1 = data?.heading1 ?? "A distinguished leader";
-  const heading2 = data?.heading2 ?? "in luxury real estate.";
-  const description = data?.description ?? "Emarat Realty specialises in exquisite residences and high-end commercial spaces across Gurugram. We deliver homes built on quality, elegance and innovation where every detail reflects our unwavering commitment to excellence.";
+  const normalize = (s?: string | null) => (typeof s === "string" ? s.replace(/\s+/g, " ").trim() : undefined);
+  const heading1 = normalize(data?.heading1) ?? "A distinguished leader";
+  const heading2 = normalize(data?.heading2) ?? "in luxury real estate.";
+  const description = normalize(data?.description) ?? "Emarat Realty specialises in exquisite residences and high-end commercial spaces across Gurugram. We deliver homes built on quality, elegance and innovation where every detail reflects our unwavering commitment to excellence.";
   const services = data?.services ?? [
     { title: "Luxury Residential", subtitle: "3 & 4 BHK apartments" },
     { title: "Commercial Spaces", subtitle: "High-end retail & offices" },
