@@ -202,7 +202,7 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
           configLabel: "Configuration",
           viewLabel: "View Residence",
         },
-        principles: { heading1: "Building with Ethics,", heading2: "Excellence & Efficiency." },
+        principles: { heading3: "Interior", heading1: "Building with Ethics,", heading2: "Excellence & Efficiency." },
         news: { eyebrow: "News & Offers", heading1: "Latest from", heading2: "Emarat Realty.", allLabel: "All articles", allHref: "/news" },
         contact: {
           eyebrow: "Make Your Enquiry",

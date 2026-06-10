@@ -18,7 +18,7 @@ interface ApproachData {
   heading2?: string;
   values?: Array<{ _key?: string; img?: string }>;
 }
-interface PrinciplesLabels { heading1?: string; heading2?: string }
+interface PrinciplesLabels { heading3?: string; heading1?: string; heading2?: string }
 interface Props { data?: ApproachData; labels?: PrinciplesLabels }
 
 /**
@@ -30,6 +30,7 @@ interface Props { data?: ApproachData; labels?: PrinciplesLabels }
  * before the news grid.
  */
 export default function PrinciplesV2({ data, labels }: Props) {
+  const heading3 = labels?.heading3?.trim() || "Interior";
   const heading1 = labels?.heading1?.trim() || data?.heading1 || "Building with Ethics,";
   const heading2 = labels?.heading2?.trim() || data?.heading2 || "Excellence & Efficiency.";
   const images: string[] = data?.values?.length
@@ -102,6 +103,9 @@ export default function PrinciplesV2({ data, labels }: Props) {
 
         {/* Fixed centre overlay — section heading, white, no button. */}
         <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-6 text-center">
+          <div className="text-sm uppercase tracking-[0.4em] text-white/70 md:text-base">
+            {heading3}
+          </div>
           <h2 className="font-script max-w-5xl text-[clamp(2.5rem,7vw,6.5rem)] leading-[1.02] text-white drop-shadow-[0_4px_40px_rgba(0,0,0,0.6)]">
             <span className="block">{heading1}</span>
             <span className="block">{heading2}</span>

@@ -118,7 +118,7 @@ export const HOME_PAGE_QUERY = defineQuery(`
       elegant { title, buttonLabel, buttonHref },
       iconic { line1, line2, watermark, ctaLabel, ctaHref },
       residences { eyebrow, heading1, heading2, allLabel, allHref, locationLabel, configLabel, viewLabel },
-      principles { heading1, heading2 },
+      principles { heading3, heading1, heading2 },
       news { eyebrow, heading1, heading2, allLabel, allHref },
       contact { eyebrow, lead, namePlaceholder, phonePlaceholder, categoryPlaceholder, categoryOptions, submitLabel, privacy }
     },
