@@ -75,8 +75,9 @@ function resolveBlocks(blocks?: SanityBlock[]): TextBlock[] {
   if (!blocks?.length) return TEXT_BLOCKS;
   return TEXT_BLOCKS.map((base, i) => {
     const b = blocks[i];
-    if (!b) return base;
-    return { ...base, heading: b.heading?.trim() || base.heading };
+    if (!b || !b.heading) return base;
+    const heading = b.heading.replace(/\s+/g, " ").trim();
+    return { ...base, heading: heading || base.heading };
   });
 }
 

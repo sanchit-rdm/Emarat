@@ -34,8 +34,9 @@ export async function getPageContent(type: string): Promise<PageContent> {
 
 /* Merge a hero from Sanity over the in-code defaults — empty fields fall back. */
 export function mergeHero(sanity: HeroData | undefined, fallback: Required<Omit<HeroData, "bgImage">> & { bgImage?: string }) {
+  const normalize = (s: string) => s.replace(/\s+/g, " ").trim();
   const pick = (v: string | null | undefined, fb: string | undefined) =>
-    v && v.trim() !== "" ? v : fb;
+    typeof v === "string" && normalize(v) !== "" ? normalize(v) : fb;
   return {
     eyebrow: pick(sanity?.eyebrow, fallback.eyebrow),
     titleTop: pick(sanity?.titleTop, fallback.titleTop) ?? fallback.titleTop,
@@ -48,7 +49,11 @@ export function mergeHero(sanity: HeroData | undefined, fallback: Required<Omit<
 
 /* Use a Sanity string if present & non-empty, else the in-code fallback. */
 export function pickStr(v: string | null | undefined, fb: string): string {
-  return typeof v === "string" && v.trim() !== "" ? v : fb;
+  if (typeof v === "string") {
+    const norm = v.replace(/\s+/g, " ").trim();
+    return norm !== "" ? norm : fb;
+  }
+  return fb;
 }
 
 /* Use a Sanity array if present & non-empty, else the in-code fallback. */
