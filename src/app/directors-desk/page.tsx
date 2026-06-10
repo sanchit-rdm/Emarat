@@ -91,13 +91,6 @@ export default async function DirectorsDeskPage() {
     secondaryLabel: pickStr(c?.cta?.secondaryLabel, FB.cta.secondaryLabel),
     secondaryHref: pickStr(c?.cta?.secondaryHref, FB.cta.secondaryHref),
   };
-    heading: pickStr(c?.cta?.heading, FB.cta.heading),
-    body: pickStr(c?.cta?.body, FB.cta.body),
-    primaryLabel: pickStr(c?.cta?.primaryLabel, FB.cta.primaryLabel),
-    primaryHref: pickStr(c?.cta?.primaryHref, FB.cta.primaryHref),
-    secondaryLabel: pickStr(c?.cta?.secondaryLabel, FB.cta.secondaryLabel),
-    secondaryHref: pickStr(c?.cta?.secondaryHref, FB.cta.secondaryHref),
-  };
 
   return (
     <>
