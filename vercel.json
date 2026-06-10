@@ -4,7 +4,7 @@
   "devCommand": "npm run dev",
   "framework": "nextjs",
   "env": {
-    "NEXT_PUBLIC_SANITY_PROJECT_ID": "23u9r74m",
+    "NEXT_PUBLIC_SANITY_PROJECT_ID": "k6lgt7ii",
     "NEXT_PUBLIC_SANITY_DATASET": "production",
     "NEXT_PUBLIC_SANITY_API_VERSION": "2024-05-25"
   }
