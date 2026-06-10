@@ -23,7 +23,7 @@ const FB = {
     heading2: "the drawing table.",
     placeholder: "your@email.com",
     buttonLabel: "Subscribe →",
-    note: "Monthly. New work, market notes and essays. No marketing.",
+    note: "",
   },
 };
 

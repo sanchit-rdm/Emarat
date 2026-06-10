@@ -126,7 +126,7 @@ export default async function AboutPage() {
         <PageHero {...hero} />
 
         {/* Opening statement + highlights (light cream) */}
-        <section className="theme-light px-6 py-28 lg:px-10 lg:py-40">
+        <section className="theme-light px-6 py-20 lg:px-10 lg:py-28">
           <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
             <div className="col-span-12 lg:col-span-10">
               <SplitReveal as="h2" className="font-display h-section">
@@ -163,22 +163,8 @@ export default async function AboutPage() {
 
 
         {/* Community / Social (light cream) */}
-        <section className="theme-light px-6 py-28 lg:px-10 lg:py-40">
+        <section className="theme-light px-6 py-20 lg:px-10 lg:py-28">
           <div className="mx-auto max-w-[1440px]">
-            <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
-              <div>
-                <SplitReveal as="h2" className="font-display h-section">
-                  {community.heading1}
-                </SplitReveal>
-                <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
-                  {community.heading2}
-                </SplitReveal>
-              </div>
-              <Reveal as="p" delay={0.2} className="max-w-sm text-sm text-[color:var(--muted)]">
-                {community.blurb}
-              </Reveal>
-            </div>
-
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
               {[mission, vision].map((item, i) => (
                 <Reveal
@@ -200,7 +186,7 @@ export default async function AboutPage() {
         </section>
 
         {/* Leadership teaser */}
-        <section className="relative isolate overflow-hidden border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-28 lg:px-10 lg:py-40">
+        <section className="relative isolate overflow-hidden border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-20 lg:px-10 lg:py-28">
           <div className="pointer-events-none absolute -right-32 top-1/4 h-[440px] w-[440px] rounded-full bg-[color:var(--accent)]/10 blur-[200px]" />
 
           <div className="mx-auto grid max-w-[1440px] grid-cols-12 items-center gap-12">

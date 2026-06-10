@@ -28,7 +28,7 @@ export default function PageHero({
   hideFooterStrip,
 }: Props) {
   return (
-    <section className="relative isolate flex min-h-[70svh] flex-col justify-between overflow-hidden px-6 pb-12 pt-32 lg:px-10 lg:pb-16 lg:pt-40">
+    <section className="relative isolate flex min-h-[70svh] flex-col justify-between overflow-hidden px-6 pb-6 pt-32 lg:px-10 lg:pb-10 lg:pt-40">
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 -z-20">
         {bgImage && (
@@ -84,16 +84,7 @@ export default function PageHero({
         )}
       </div>
 
-      {!hideFooterStrip ? (
-        <Reveal
-          as="div"
-          delay={0.5}
-          className="flex flex-wrap items-end justify-between gap-6 border-t border-[color:var(--line)] pt-6 text-xs uppercase tracking-[0.2em] text-[color:var(--muted)]"
-        >
-          <span>Emarat Realty · Gurugram</span>
-          {trailing && <span className="hidden md:inline">{trailing}</span>}
-        </Reveal>
-      ) : null}
+      {/* Bottom strip removed globally per request */}
     </section>
   );
 }
