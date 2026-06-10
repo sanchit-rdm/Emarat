@@ -22,7 +22,7 @@ interface Props { data?: AboutData; eyebrow?: string }
  * the spacious, image-led "statement" sections of the reference design.
  */
 export default function IntroV2({ data, eyebrow }: Props) {
-  const eyebrowText = eyebrow?.trim() || "Emarat Realty — Est. Gurugram";
+  const eyebrowText = eyebrow?.trim() || "Emarat Realty";
   const heading1 = data?.heading1 ?? "A distinguished leader";
   const heading2 = data?.heading2 ?? "in luxury real estate.";
   const description =
@@ -81,14 +81,14 @@ export default function IntroV2({ data, eyebrow }: Props) {
       </div>
 
       {/* Thin services row. */}
-      <div className="mx-auto mt-16 grid max-w-[1440px] grid-cols-2 gap-x-10 gap-y-10 lg:mt-24 lg:grid-cols-4">
+      <div className="mx-auto mt-16 grid max-w-[1440px] grid-cols-2 justify-items-center gap-x-10 gap-y-10 lg:mt-24 lg:grid-cols-4">
         {services.map((svc, i) => (
           <Reveal
             key={svc._key ?? svc.title}
             delay={0.05 * i}
-            className="border-t border-[color:var(--line)] pt-5"
+            className="border-t border-[color:var(--line)] pt-5 text-center"
           >
-            <div className="h-px w-6 bg-[color:var(--accent)]" />
+            <div className="h-px w-6 bg-[color:var(--accent)] mx-auto" />
             <div className="mt-4 font-display-alt text-lg">{svc.title}</div>
             <div className="mt-1 text-xs text-[color:var(--muted)]">{svc.subtitle}</div>
           </Reveal>

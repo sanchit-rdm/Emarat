@@ -83,17 +83,14 @@ export default async function DirectorsDeskPage() {
   };
   const message = pickArr<string>(c?.message, FB.message);
   const signatureName = pickStr(c?.signatureName, FB.signatureName);
-  const mission = {
-    label: pickStr(c?.mission?.label, FB.mission.label),
-    heading: pickStr(c?.mission?.heading, FB.mission.heading),
-    body: pickStr(c?.mission?.body, FB.mission.body),
-  };
-  const vision = {
-    label: pickStr(c?.vision?.label, FB.vision.label),
-    heading: pickStr(c?.vision?.heading, FB.vision.heading),
-    body: pickStr(c?.vision?.body, FB.vision.body),
-  };
   const cta = {
+    heading: pickStr(c?.cta?.heading, FB.cta.heading),
+    body: pickStr(c?.cta?.body, FB.cta.body),
+    primaryLabel: pickStr(c?.cta?.primaryLabel, FB.cta.primaryLabel),
+    primaryHref: pickStr(c?.cta?.primaryHref, FB.cta.primaryHref),
+    secondaryLabel: pickStr(c?.cta?.secondaryLabel, FB.cta.secondaryLabel),
+    secondaryHref: pickStr(c?.cta?.secondaryHref, FB.cta.secondaryHref),
+  };
     heading: pickStr(c?.cta?.heading, FB.cta.heading),
     body: pickStr(c?.cta?.body, FB.cta.body),
     primaryLabel: pickStr(c?.cta?.primaryLabel, FB.cta.primaryLabel),
@@ -163,36 +160,6 @@ export default async function DirectorsDeskPage() {
           </div>
         </section>
 
-        {/* Mission + Vision cards (light cream) */}
-        <section className="theme-light px-6 py-28 lg:px-10 lg:py-40">
-          <div className="mx-auto max-w-[1440px]">
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
-              <Reveal className="group relative overflow-hidden rounded-md border border-[color:var(--line)] p-8 transition-colors hover:border-[color:var(--accent)]/40 lg:p-12">
-                <div className="font-mono text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
-                  {mission.label}
-                </div>
-                <h3 className="mt-6 font-display-alt text-3xl leading-tight lg:text-4xl">
-                  {mission.heading}
-                </h3>
-                <p className="mt-6 text-base leading-relaxed text-[color:var(--muted)]">
-                  {mission.body}
-                </p>
-              </Reveal>
-
-              <Reveal delay={0.1} className="group relative overflow-hidden rounded-md border border-[color:var(--line)] p-8 transition-colors hover:border-[color:var(--accent)]/40 lg:p-12">
-                <div className="font-mono text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
-                  {vision.label}
-                </div>
-                <h3 className="mt-6 font-display-alt text-3xl leading-tight lg:text-4xl">
-                  {vision.heading}
-                </h3>
-                <p className="mt-6 text-base leading-relaxed text-[color:var(--muted)]">
-                  {vision.body}
-                </p>
-              </Reveal>
-            </div>
-          </div>
-        </section>
 
         {/* CTA */}
         <section className="border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-24 lg:px-10 lg:py-32">

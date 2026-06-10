@@ -155,8 +155,6 @@ export const DIRECTORS_DESK_PAGE_QUERY = defineQuery(`
     quote { line1, line2 },
     message,
     signatureName,
-    mission { label, heading, body },
-    vision { label, heading, body },
     cta { heading, body, primaryLabel, primaryHref, secondaryLabel, secondaryHref },
     ${SEO_FIELDS}
   }

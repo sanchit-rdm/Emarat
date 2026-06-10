@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { ensureGsap, scheduleScrollRefresh } from "@/lib/gsap";
 import Reveal from "@/components/motion/Reveal";
-import CircleButton from "@/components/CircleButton";
 
 type SanityPlace = { _key?: string; image?: string | null };
 interface LocationData {
@@ -35,8 +34,6 @@ export default function IconicIntroV2({ data, labels }: Props) {
   const line1 = labels?.line1?.trim() || "Life within reach";
   const line2 = labels?.line2?.trim() || "of every iconic landmark";
   const watermark = labels?.watermark?.trim() || "Iconic";
-  const ctaLabel = labels?.ctaLabel?.trim() || "Go to Location";
-  const ctaHref = labels?.ctaHref?.trim() || "#location";
 
   const sectionRef = useRef<HTMLElement | null>(null);
   const imgRef = useRef<HTMLDivElement | null>(null);
@@ -130,11 +127,6 @@ export default function IconicIntroV2({ data, labels }: Props) {
           <span className="block">{line1}</span>
           <span className="block text-[color:var(--accent)]">{line2}</span>
         </h2>
-        <div className="mt-12 flex justify-center">
-          <CircleButton href={ctaHref} variant="outline">
-            {ctaLabel}
-          </CircleButton>
-        </div>
       </Reveal>
     </section>
   );

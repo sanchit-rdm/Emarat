@@ -16,7 +16,6 @@ const DEFAULT_NAV: NavItem[] = [
     dropdown: [
       { href: "/about", label: "About Us" },
       { href: "/directors-desk", label: "Director's Desk" },
-      { href: "/team", label: "Our Team" },
     ],
   },
   {

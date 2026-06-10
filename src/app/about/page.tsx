@@ -35,18 +35,6 @@ const FB = {
       "An unwavering commitment to excellence and customer satisfaction",
     ],
   },
-  argo: {
-    heading1: "Argo Group",
-    heading2: "a legacy of excellence.",
-    body:
-      "Argo Group is a driving force across industries shaping businesses with vision, integrity, and excellence. Emarat's luxurious developments, rooted in innovation and meticulous planning, align seamlessly with the Group's vision of redefining modern real estate.",
-    industries: [
-      { name: "Real Estate", note: "Luxury residential & commercial" },
-      { name: "Hospitality", note: "Hotels & guest experiences" },
-      { name: "Manufacturing & Trading", note: "Industrial portfolio" },
-      { name: "Import & Export", note: "Global trade operations" },
-    ],
-  },
   community: {
     heading1: "Building more",
     heading2: "than just buildings.",
@@ -73,8 +61,8 @@ const FB = {
     personInitials: "RG",
     primaryCtaLabel: "Read the full message",
     primaryCtaHref: "/directors-desk",
-    secondaryCtaLabel: "Meet our team →",
-    secondaryCtaHref: "/team",
+    secondaryCtaLabel: "",
+    secondaryCtaHref: "",
   },
 };
 
@@ -99,18 +87,24 @@ export default async function AboutPage() {
     paragraph: pickStr(c?.intro?.paragraph, FB.intro.paragraph),
     highlights: pickArr<string>(c?.intro?.highlights, FB.intro.highlights),
   };
-  const argo = {
-    heading1: pickStr(c?.argo?.heading1, FB.argo.heading1),
-    heading2: pickStr(c?.argo?.heading2, FB.argo.heading2),
-    body: pickStr(c?.argo?.body, FB.argo.body),
-    industries: pickArr(c?.argo?.industries, FB.argo.industries),
-  };
   const community = {
     heading1: pickStr(c?.community?.heading1, FB.community.heading1),
     heading2: pickStr(c?.community?.heading2, FB.community.heading2),
     blurb: pickStr(c?.community?.blurb, FB.community.blurb),
-    initiatives: pickArr(c?.community?.initiatives, FB.community.initiatives),
   };
+  const mission = {
+    label: "Our Mission",
+    heading: "Transformative real estate that sets new standards.",
+    body:
+      "To develop transformative real estate that establishes new standards of quality and sustainability. We prioritise exceptional spaces that foster growth, elevated lifestyles, and meaningful contributions to urban life through innovation and a customer-centric approach in everything we do.",
+  };
+  const vision = {
+    label: "Our Vision",
+    heading: "Leading through excellence, sustainability and design.",
+    body:
+      "To lead the real estate sector through excellence, sustainability and forward-thinking design. We aspire to create landmark developments that reshape skylines while enhancing how people live, work, and experience their built environment.",
+  };
+  const secondaryCtaHref = pickStr(c?.leadership?.secondaryCtaHref, FB.leadership.secondaryCtaHref);
   const lead = {
     quote: pickStr(c?.leadership?.quote, FB.leadership.quote),
     body: pickStr(c?.leadership?.body, FB.leadership.body),
@@ -119,8 +113,10 @@ export default async function AboutPage() {
     personInitials: pickStr(c?.leadership?.personInitials, FB.leadership.personInitials),
     primaryCtaLabel: pickStr(c?.leadership?.primaryCtaLabel, FB.leadership.primaryCtaLabel),
     primaryCtaHref: pickStr(c?.leadership?.primaryCtaHref, FB.leadership.primaryCtaHref),
-    secondaryCtaLabel: pickStr(c?.leadership?.secondaryCtaLabel, FB.leadership.secondaryCtaLabel),
-    secondaryCtaHref: pickStr(c?.leadership?.secondaryCtaHref, FB.leadership.secondaryCtaHref),
+    secondaryCtaLabel: secondaryCtaHref
+      ? pickStr(c?.leadership?.secondaryCtaLabel, FB.leadership.secondaryCtaLabel)
+      : undefined,
+    secondaryCtaHref: secondaryCtaHref || undefined,
   };
 
   return (
@@ -165,62 +161,6 @@ export default async function AboutPage() {
           </div>
         </section>
 
-        {/* Argo Group section */}
-        <section className="relative isolate overflow-hidden bg-[color:var(--bg-alt)] px-6 py-28 lg:px-10 lg:py-40">
-          <div className="pointer-events-none absolute inset-0 -z-10">
-            <Image
-              src="/images/alameda-lounge.webp"
-              alt=""
-              fill
-              sizes="100vw"
-              className="object-cover opacity-[0.06]"
-              style={{ filter: "sepia(0.3) saturate(0.5) brightness(0.6)" }}
-            />
-          </div>
-
-          <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
-            <div className="col-span-12 lg:col-span-7">
-              <SplitReveal as="h2" className="font-display h-section">
-                {argo.heading1}
-              </SplitReveal>
-              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
-                {argo.heading2}
-              </SplitReveal>
-
-              <Reveal as="p" delay={0.2} className="mt-10 max-w-xl text-base leading-relaxed text-[color:var(--muted)] lg:text-lg">
-                {argo.body}
-              </Reveal>
-
-              <div className="mt-12 grid grid-cols-1 gap-x-10 gap-y-6 sm:grid-cols-2">
-                {argo.industries.map((ind, i) => (
-                  <Reveal
-                    key={ind.name ?? i}
-                    delay={i * 0.06}
-                    className="border-t border-[color:var(--line)] pt-4"
-                  >
-                    <div className="font-display-alt text-xl">{ind.name}</div>
-                    <div className="mt-1 text-xs uppercase tracking-[0.16em] text-[color:var(--muted)]">
-                      {ind.note}
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
-
-            <div className="col-span-12 lg:col-span-3">
-              <Parallax speed={0.2} className="relative aspect-[3/4] overflow-hidden rounded-md">
-                <Image
-                  src="/images/alameda-dining.webp"
-                  alt="Argo Group portfolio"
-                  fill
-                  sizes="(min-width: 1024px) 25vw, 100vw"
-                  className="object-cover"
-                  style={{ filter: "sepia(0.16) saturate(0.9) brightness(0.85)" }}
-                />
-              </Parallax>
-            </div>
-          </div>
-        </section>
 
         {/* Community / Social (light cream) */}
         <section className="theme-light px-6 py-28 lg:px-10 lg:py-40">
@@ -240,19 +180,19 @@ export default async function AboutPage() {
             </div>
 
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-              {community.initiatives.map((ci, i) => (
+              {[mission, vision].map((item, i) => (
                 <Reveal
-                  key={ci.name ?? i}
+                  key={item.label}
                   delay={i * 0.08}
                   className="rounded-md border border-[color:var(--line)] p-8 transition-colors hover:border-[color:var(--accent)]/40 lg:p-12"
                 >
                   <div className="text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
-                    Initiative {String(i + 1).padStart(2, "0")}
+                    {item.label}
                   </div>
                   <h3 className="mt-6 font-display-alt text-2xl leading-tight lg:text-3xl">
-                    {ci.name}
+                    {item.heading}
                   </h3>
-                  <p className="mt-5 text-[color:var(--muted)]">{ci.body}</p>
+                  <p className="mt-5 text-[color:var(--muted)]">{item.body}</p>
                 </Reveal>
               ))}
             </div>
@@ -290,12 +230,14 @@ export default async function AboutPage() {
               <CircleButton href={lead.primaryCtaHref} variant="outline">
                 {lead.primaryCtaLabel}
               </CircleButton>
-              <Link
-                href={lead.secondaryCtaHref}
-                className="text-xs uppercase tracking-[0.18em] text-[color:var(--muted)] transition-colors hover:text-[color:var(--accent)]"
-              >
-                {lead.secondaryCtaLabel}
-              </Link>
+              {lead.secondaryCtaHref ? (
+                <Link
+                  href={lead.secondaryCtaHref}
+                  className="text-xs uppercase tracking-[0.18em] text-[color:var(--muted)] transition-colors hover:text-[color:var(--accent)]"
+                >
+                  {lead.secondaryCtaLabel}
+                </Link>
+              ) : null}
             </div>
           </div>
         </section>
