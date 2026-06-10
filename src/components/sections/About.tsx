@@ -35,10 +35,10 @@ export default function About({ data }: Props) {
     >
       <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-7">
-          <SplitReveal as="h2" className="font-display h-section">
+          <SplitReveal as="h2" className="font-display h-section" data-heading={heading1}>
             {heading1}
           </SplitReveal>
-          <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
+          <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]" data-heading={heading2}>
             {heading2}
           </SplitReveal>
 

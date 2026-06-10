@@ -10,7 +10,7 @@ type Props = {
   start?: string;
   stagger?: number;
   delay?: number;
-};
+} & React.HTMLAttributes<HTMLElement>;
 
 export default function SplitReveal({
   children,
@@ -19,6 +19,7 @@ export default function SplitReveal({
   start = "top 80%",
   stagger = 0.05,
   delay = 0,
+  ...rest
 }: Props) {
   const ref = useRef<HTMLElement | null>(null);
 
@@ -58,7 +59,7 @@ export default function SplitReveal({
   const tokens = children.split(/(\s+)/);
 
   return (
-    <Tag ref={ref as React.Ref<HTMLElement>} className={className}>
+    <Tag ref={ref as React.Ref<HTMLElement>} className={className} {...rest}>
       {tokens.map((token, i) =>
         /^\s+$/.test(token) ? (
           <span key={i}> </span>
