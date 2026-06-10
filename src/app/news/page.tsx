@@ -206,7 +206,7 @@ export default async function NewsPage() {
 
             {rest.length === 0 ? (
               <Reveal className="rounded-md border border-[color:var(--line)] py-20 text-center">
-                <div className="font-display-alt text-3xl text-[color:var(--muted)]">{emptyTitle}</div>
+                <div className="font-display-alt text-3xl text-[color:var(--accent)]">{emptyTitle}</div>
                 <p className="mt-3 text-sm text-[color:var(--muted)]">
                   {emptyBody}
                 </p>
@@ -267,7 +267,7 @@ export default async function NewsPage() {
               <SplitReveal
                 as="h2"
                 delay={0.1}
-                className="font-display h-section text-[color:var(--muted)]"
+                className="font-display h-section text-[color:var(--accent)]"
               >
                 {nl.heading2}
               </SplitReveal>

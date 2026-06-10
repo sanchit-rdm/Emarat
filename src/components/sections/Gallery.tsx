@@ -79,7 +79,7 @@ export default function Gallery({ images: rawImages, section }: Props) {
           <SplitReveal as="h2" className="font-display h-sub">
             {heading1}
           </SplitReveal>
-          <SplitReveal as="h2" delay={0.1} className="font-display h-sub text-[color:var(--muted)]">
+          <SplitReveal as="h2" delay={0.1} className="font-display h-sub text-[color:var(--accent)]">
             {heading2}
           </SplitReveal>
           <Reveal delay={0.25} className="mt-4 max-w-xs text-xs leading-relaxed text-[color:var(--muted)]">
@@ -122,7 +122,7 @@ export default function Gallery({ images: rawImages, section }: Props) {
             <SplitReveal as="h2" className="font-display h-sub">
               {heading1}
             </SplitReveal>
-            <SplitReveal as="h2" delay={0.1} className="font-display h-sub text-[color:var(--muted)]">
+            <SplitReveal as="h2" delay={0.1} className="font-display h-sub text-[color:var(--accent)]">
               {heading2}
             </SplitReveal>
             <Reveal delay={0.25} className="mt-4 max-w-[200px] text-xs leading-relaxed text-[color:var(--muted)]">

@@ -39,6 +39,8 @@ export const projectsPageType = pageSingletonWithContent(
       fields: [
         defineField({ name: "viewLabel", title: "View Button Label", type: "string" }),
         defineField({ name: "enquireLabel", title: "Enquire Button Label", type: "string" }),
+        defineField({ name: "configLabel", title: "Spec — Configuration Label", type: "string" }),
+        defineField({ name: "sizesLabel", title: "Spec — Sizes Label", type: "string" }),
       ],
     }),
     defineField({ name: "additionalHeading", title: "Additional Offerings — Heading", type: "string" }),
@@ -93,6 +95,7 @@ export const projectsPageType = pageSingletonWithContent(
         defineField({ name: "floorPlansHeading", title: "Floor Plans — Heading", type: "string" }),
         defineField({ name: "floorPlansBlurb", title: "Floor Plans — Blurb", type: "string" }),
         defineField({ name: "floorPlansRequestLabel", title: "Floor Plans — Request Link", type: "string" }),
+        defineField({ name: "floorPlansBadge", title: "Floor Plans — Image Badge", type: "string" }),
         defineField({ name: "galleryHeading", title: "Gallery — Heading", type: "string" }),
         defineField({ name: "connectivityHeading1", title: "Connectivity — Heading 1", type: "string" }),
         defineField({ name: "connectivityHeading2", title: "Connectivity — Heading 2", type: "string" }),

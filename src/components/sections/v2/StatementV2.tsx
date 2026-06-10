@@ -9,6 +9,7 @@ interface StatementData {
   lead?: string;
   rest?: string;
   body?: string;
+  ctaLabel?: string;
   ctaHref?: string;
 }
 interface Props { data?: StatementData }
@@ -30,6 +31,7 @@ export default function StatementV2({ data }: Props) {
     data?.body ||
     "Far from the noise yet minutes from everything that matters. At DLF Garden City, Sector 93, Emarat Realty shapes homes around care, generosity and an unhurried sense of space — a project that turns true, lasting values into everyday living.";
   const href = data?.ctaHref || "/projects";
+  const ctaLabel = data?.ctaLabel || "Read More";
   return (
     <section className="relative isolate flex min-h-screen flex-col justify-between overflow-hidden px-6 py-24 lg:px-10 lg:py-28">
       {/* Full-bleed background image with gentle, warm grading */}
@@ -71,7 +73,7 @@ export default function StatementV2({ data }: Props) {
             href={href}
             className="inline-flex items-center justify-center rounded-full border border-[color:var(--fg)]/40 px-10 py-4 text-[11px] uppercase tracking-[0.28em] text-[color:var(--fg)] backdrop-blur-sm transition-all duration-500 hover:border-[color:var(--accent)] hover:bg-[color:var(--accent)] hover:text-[color:var(--bg)]"
           >
-            Read More
+            {ctaLabel}
           </Link>
         </Reveal>
       </div>

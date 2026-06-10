@@ -162,6 +162,8 @@ export default async function ProjectsPage() {
   const cardButtons = {
     viewLabel: pickStr(pc?.cardButtons?.viewLabel, "View Project"),
     enquireLabel: pickStr(pc?.cardButtons?.enquireLabel, "Enquire"),
+    configLabel: pickStr(pc?.cardButtons?.configLabel, "Configuration"),
+    sizesLabel: pickStr(pc?.cardButtons?.sizesLabel, "Sizes"),
   };
   const additionalHeading = pickStr(pc?.additionalHeading, "Plots and independent floors.");
   const additionalItems = pickArr(pc?.additional, additional);
@@ -248,13 +250,13 @@ export default async function ProjectsPage() {
                   <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 border-y border-[color:var(--line)] py-6">
                     <Reveal delay={0.25}>
                       <div className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--muted)]">
-                        Configuration
+                        {cardButtons.configLabel}
                       </div>
                       <div className="mt-1 text-sm">{p.config}</div>
                     </Reveal>
                     <Reveal delay={0.3}>
                       <div className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--muted)]">
-                        Sizes
+                        {cardButtons.sizesLabel}
                       </div>
                       <div className="mt-1 text-sm">{p.size}</div>
                     </Reveal>

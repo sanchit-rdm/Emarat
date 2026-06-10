@@ -15,6 +15,7 @@ type FooterSettings = {
     tagline?: string;
     addressLines?: string[] | null;
     columns?: FooterColumn[] | null;
+    contactHeading?: string;
     officeHours?: string;
     copyright?: string;
     legalNote?: string;
@@ -99,6 +100,7 @@ export default async function SiteFooter() {
     f?.copyright?.trim() ||
     `© ${year} Emarat Realty. An Argo Group company. All rights reserved.`;
   const legalNote = f?.legalNote?.trim() || "RERA registered · Gurugram, Haryana";
+  const contactHeading = f?.contactHeading?.trim() || "Get in Touch";
 
   return (
     <footer className="theme-green relative">
@@ -153,7 +155,7 @@ export default async function SiteFooter() {
 
         <div className="col-span-6 lg:col-span-2">
           <div className="mb-4 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
-            Get in Touch
+            {contactHeading}
           </div>
           <a href={telHref(phone)} className="block text-sm transition-colors hover:text-[color:var(--accent)]">
             {phone}

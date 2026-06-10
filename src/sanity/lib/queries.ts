@@ -22,6 +22,7 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
         heading,
         links[] { label, href }
       },
+      contactHeading,
       officeHours,
       copyright,
       legalNote
@@ -51,6 +52,7 @@ export function pageQuery(type: string) {
 export const HOME_PAGE_QUERY = defineQuery(`
   *[_type == "homePage"][0] {
     "heroBlocks": heroBlocks[]{ _key, heading },
+    scrollCue,
     "gallery": gallery[]{
       _key,
       "src": image.asset->url,
@@ -105,7 +107,7 @@ export const HOME_PAGE_QUERY = defineQuery(`
       }
     },
     statement {
-      eyebrow, lead, rest, body, ctaHref,
+      eyebrow, lead, rest, body, ctaLabel, ctaHref,
       "image": image.asset->url
     },
     gallerySection { heading1, heading2, scrollHint, swipeHint },
@@ -114,8 +116,9 @@ export const HOME_PAGE_QUERY = defineQuery(`
     designTwo {
       introEyebrow,
       elegant { title, buttonLabel, buttonHref },
-      iconic { line1, line2, line3, watermark, ctaLabel, ctaHref },
+      iconic { line1, line2, watermark, ctaLabel, ctaHref },
       residences { eyebrow, heading1, heading2, allLabel, allHref, locationLabel, configLabel, viewLabel },
+      principles { heading1, heading2 },
       news { eyebrow, heading1, heading2, allLabel, allHref },
       contact { eyebrow, lead, namePlaceholder, phonePlaceholder, categoryPlaceholder, categoryOptions, submitLabel, privacy }
     },
@@ -213,7 +216,7 @@ export const PROJECTS_PAGE_QUERY = defineQuery(`
   *[_type == "projectsPage"][0] {
     ${HERO_FIELDS},
     filter { allLabel, "links": links[]{ _key, label, href }, trailing },
-    cardButtons { viewLabel, enquireLabel },
+    cardButtons { viewLabel, enquireLabel, configLabel, sizesLabel },
     additionalHeading,
     "additional": additional[]{ _key, name, location, type },
     cta { heading, body, buttonLabel, buttonHref },
@@ -221,7 +224,7 @@ export const PROJECTS_PAGE_QUERY = defineQuery(`
       breadcrumbHome, breadcrumbProjects, heroEnquireLabel, heroFloorPlansLabel,
       navOverview, navAmenities, navFloorPlans, navGallery, navLocation, navEnquire,
       overviewHeading1, overviewHeading2, amenitiesHeading, amenitiesBlurb,
-      floorPlansHeading, floorPlansBlurb, floorPlansRequestLabel, galleryHeading,
+      floorPlansHeading, floorPlansBlurb, floorPlansRequestLabel, floorPlansBadge, galleryHeading,
       connectivityHeading1, connectivityHeading2, connectivityBlurb,
       enquiryHeading, enquiryBlurb, enquiryPhone, enquiryEmail, enquirySubmitLabel,
       enquiryInterestedLabel, enquiryNameLabel, enquiryNamePlaceholder,

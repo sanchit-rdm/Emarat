@@ -183,7 +183,7 @@ export default async function AboutPage() {
               <SplitReveal as="h2" className="font-display h-section">
                 {argo.heading1}
               </SplitReveal>
-              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--muted)]">
+              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
                 {argo.heading2}
               </SplitReveal>
 
@@ -230,7 +230,7 @@ export default async function AboutPage() {
                 <SplitReveal as="h2" className="font-display h-section">
                   {community.heading1}
                 </SplitReveal>
-                <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--muted)]">
+                <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
                   {community.heading2}
                 </SplitReveal>
               </div>

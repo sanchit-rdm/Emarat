@@ -70,7 +70,7 @@ export default function Approach({ data }: Props) {
             <SplitReveal as="h2" className="font-display h-section">
               {heading1}
             </SplitReveal>
-            <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--muted)]">
+            <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
               {heading2}
             </SplitReveal>
           </div>

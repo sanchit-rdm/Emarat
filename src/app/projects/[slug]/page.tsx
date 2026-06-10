@@ -74,6 +74,7 @@ export default async function ProjectPage({
     heading: pickStr(d.floorPlansHeading, "Floor Plans"),
     blurb: pickStr(d.floorPlansBlurb, "Indicative layouts. Select a floor to view its plan and key finishes."),
     requestLabel: pickStr(d.floorPlansRequestLabel, "Request detailed plan"),
+    badge: pickStr(d.floorPlansBadge, "Indicative"),
   };
   const galleryLabels = { heading: pickStr(d.galleryHeading, "Gallery") };
   const connectivityLabels = {
@@ -182,7 +183,7 @@ export default async function ProjectPage({
               <SplitReveal as="h2" className="font-display h-section">
                 {dl.overviewHeading1}
               </SplitReveal>
-              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--muted)]">
+              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
                 {dl.overviewHeading2}
               </SplitReveal>
               {project.overview.map((para, i) => (

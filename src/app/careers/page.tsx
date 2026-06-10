@@ -109,7 +109,7 @@ export default async function CareersPage() {
                 <SplitReveal as="h2" className="font-display h-section">
                   {pillarsHeading.heading1}
                 </SplitReveal>
-                <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--muted)]">
+                <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
                   {pillarsHeading.heading2}
                 </SplitReveal>
               </div>
@@ -156,7 +156,7 @@ export default async function CareersPage() {
               <SplitReveal as="h2" className="font-display h-section">
                 {areasHeading.heading1}
               </SplitReveal>
-              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--muted)]">
+              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
                 {areasHeading.heading2}
               </SplitReveal>
 
@@ -186,7 +186,7 @@ export default async function CareersPage() {
               <SplitReveal as="h2" className="font-display h-section">
                 {apply.heading1}
               </SplitReveal>
-              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--muted)]">
+              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
                 {apply.heading2}
               </SplitReveal>
 

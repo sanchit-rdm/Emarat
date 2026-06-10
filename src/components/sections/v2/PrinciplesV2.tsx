@@ -18,7 +18,8 @@ interface ApproachData {
   heading2?: string;
   values?: Array<{ _key?: string; img?: string }>;
 }
-interface Props { data?: ApproachData }
+interface PrinciplesLabels { heading1?: string; heading2?: string }
+interface Props { data?: ApproachData; labels?: PrinciplesLabels }
 
 /**
  * Design Option 2 — "Our Principles" band.
@@ -28,9 +29,9 @@ interface Props { data?: ApproachData }
  * the imagery — no button, no captions, no listed values. A calm, gallery pause
  * before the news grid.
  */
-export default function PrinciplesV2({ data }: Props) {
-  const heading1 = data?.heading1 ?? "Building with Ethics,";
-  const heading2 = data?.heading2 ?? "Excellence & Efficiency.";
+export default function PrinciplesV2({ data, labels }: Props) {
+  const heading1 = labels?.heading1?.trim() || data?.heading1 || "Building with Ethics,";
+  const heading2 = labels?.heading2?.trim() || data?.heading2 || "Excellence & Efficiency.";
   const images: string[] = data?.values?.length
     ? data.values.map((v) => v.img).filter((s): s is string => !!s)
     : DEFAULT_IMAGES;

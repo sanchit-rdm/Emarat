@@ -65,7 +65,7 @@ export default function PageHero({
           <SplitReveal
             as="h1"
             delay={0.1}
-            className="font-display h-page text-[color:var(--muted)]"
+            className="font-display h-page text-[color:var(--accent)]"
           >
             {titleBottom}
           </SplitReveal>

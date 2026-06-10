@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Reveal from "@/components/motion/Reveal";
-import SplitReveal from "@/components/motion/SplitReveal";
-import RevealImage from "@/components/motion/RevealImage";
+import StrokeHover from "@/components/StrokeHover";
 
 type Post = {
   _id: string;
@@ -15,40 +14,29 @@ type Post = {
 const placeholders: Post[] = [
   {
     _id: "p1",
-    title: "E11 at DLF Garden City: Why it is Gurugram's most anticipated launch",
+    title: "E11 at DLF Garden City: Gurugram's most anticipated launch",
     author: { name: "Project Update" },
-    publishedAt: "2026-04-18",
-    mainImage: { asset: { url: "/images/alameda-lounge.webp" } },
+    publishedAt: "2026-11-03",
   },
   {
     _id: "p2",
-    title: "Investing in Gurugram real estate in 2026 what the numbers say",
-    author: { name: "Market Note" },
-    publishedAt: "2026-03-07",
-    mainImage: { asset: { url: "/images/alameda-dining.webp" } },
-  },
-  {
-    _id: "p3",
-    title: "Why DLF Garden City remains Sector 93's most sought-after address",
-    author: { name: "Feature" },
-    publishedAt: "2026-02-14",
-    mainImage: { asset: { url: "/images/alameda-kitchen.webp" } },
+    title: "Non-standard glazing on the facades of E11 Residences",
+    author: { name: "News" },
+    publishedAt: "2026-08-14",
+    mainImage: { asset: { url: "/images/E11/building.jpg" } },
   },
 ];
 
-function formatDate(d?: string) {
-  if (!d) return "";
-  return new Date(d).toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
+function dateParts(d?: string) {
+  if (!d) return { day: "", month: "" };
+  const dt = new Date(d);
+  if (Number.isNaN(dt.getTime())) return { day: "", month: "" };
+  return {
+    day: String(dt.getDate()).padStart(2, "0"),
+    month: dt.toLocaleDateString("en-GB", { month: "short" }).toUpperCase(),
+  };
 }
 
-/**
- * Design Option 2 — "News & Offers" grid on a cream surface. Same posts as the
- * primary page, styled to match the lighter, airier reference layout.
- */
 interface NewsLabels {
   eyebrow?: string;
   heading1?: string;
@@ -57,69 +45,93 @@ interface NewsLabels {
   allHref?: string;
 }
 
+/**
+ * Design Option 2 — "News & Offers". A large vertical title and a round
+ * view-all button on the left; two feature cards on the right (one outlined,
+ * one image-led). The cards and the round button all share the same
+ * stroke-draws-around-the-border hover as the Enquire Now button (StrokeHover).
+ */
 export default function NewsV2({ posts, labels }: { posts: Post[]; labels?: NewsLabels }) {
-  const items = (posts && posts.length > 0 ? posts : placeholders).slice(0, 3);
+  const items = (posts && posts.length > 0 ? posts : placeholders).slice(0, 2);
   const eyebrow = labels?.eyebrow?.trim() || "News & Offers";
-  const heading1 = labels?.heading1?.trim() || "Latest from";
-  const heading2 = labels?.heading2?.trim() || "Emarat Realty.";
   const allLabel = labels?.allLabel?.trim() || "All articles";
   const allHref = labels?.allHref?.trim() || "/news";
 
   return (
     <section id="news" className="theme-light px-6 py-24 lg:px-10 lg:py-36">
-      <div className="mx-auto max-w-[1440px]">
-        <div className="mb-14 flex flex-wrap items-end justify-between gap-6 lg:mb-20">
-          <div>
-            <Reveal className="eyebrow mb-4 flex items-center font-script text-2xl text-[color:var(--accent)]">
-              <span>{eyebrow}</span>
-            </Reveal>
-            <SplitReveal as="h2" className="font-display h-section">
-              {heading1}
-            </SplitReveal>
-            <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--muted)]">
-              {heading2}
-            </SplitReveal>
-          </div>
-          <Reveal delay={0.2} className="self-end">
-            <a href={allHref} className="group inline-flex items-center gap-3 text-sm">
-              <span className="border-b border-[color:var(--line)] pb-1 transition-colors group-hover:border-[color:var(--fg)]">
-                {allLabel}
-              </span>
-              <span aria-hidden>→</span>
-            </a>
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-12 lg:flex-row lg:items-center lg:gap-20">
+        {/* Left — vertical title + round view-all button */}
+        <div className="flex items-center justify-between gap-8 lg:w-[26%] lg:flex-col lg:items-start lg:justify-center lg:gap-14">
+          <Reveal>
+            <h2 className="font-display uppercase leading-[1.04] tracking-[0.06em] text-[color:var(--accent)] text-4xl sm:text-5xl lg:max-h-[460px] lg:text-[clamp(2.5rem,3.4vw,4rem)] lg:[writing-mode:vertical-rl] lg:rotate-180">
+              {eyebrow}
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <StrokeHover
+              href={allHref}
+              ariaLabel={allLabel}
+              className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full border border-[color:var(--accent)]/40 text-[color:var(--fg)] transition-colors hover:text-[color:var(--accent)] lg:h-32 lg:w-32"
+            >
+              <span aria-hidden className="relative z-10 text-2xl">→</span>
+            </StrokeHover>
           </Reveal>
         </div>
 
-        <ul className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-3">
-          {items.map((post, i) => (
-            <Reveal key={post._id} as="li" delay={i * 0.08} className="group flex flex-col">
-              <a href="/news" className="block">
-                <RevealImage
-                  className="relative mb-6 aspect-[4/5] rounded-md bg-[color:var(--bg-alt)]"
-                  parallax={5}
+        {/* Right — two feature cards */}
+        <div className="grid flex-1 grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8">
+          {items.map((post, i) => {
+            const { day, month } = dateParts(post.publishedAt);
+            const category = (post.author?.name || "News").toUpperCase();
+            const img = post.mainImage?.asset?.url;
+            const withImage = i === 1 && !!img;
+
+            return (
+              <Reveal key={post._id} delay={i * 0.1}>
+                <StrokeHover
+                  href={allHref}
+                  ariaLabel={post.title}
+                  className={`flex aspect-[5/6] flex-col justify-between rounded-md p-7 lg:p-9 ${
+                    withImage
+                      ? "text-white"
+                      : "border border-[color:var(--accent)]/30 bg-[color:var(--bg)] text-[color:var(--fg)]"
+                  }`}
                 >
-                  {post.mainImage?.asset?.url && (
-                    <Image
-                      src={post.mainImage.asset.url}
-                      alt={post.title ?? ""}
-                      fill
-                      sizes="(min-width: 768px) 33vw, 100vw"
-                      className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
-                    />
+                  {withImage && (
+                    <div className="absolute inset-0 -z-10">
+                      <Image
+                        src={img as string}
+                        alt={post.title ?? ""}
+                        fill
+                        sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
+                        className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/35" />
+                    </div>
                   )}
-                </RevealImage>
-                <div className="flex items-center gap-3 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
-                  <span>{post.author?.name ?? "Emarat Realty"}</span>
-                  <span>·</span>
-                  <span>{formatDate(post.publishedAt)}</span>
-                </div>
-                <h3 className="mt-3 font-display-alt text-2xl leading-tight transition-colors group-hover:text-[color:var(--accent)]">
-                  {post.title}
-                </h3>
-              </a>
-            </Reveal>
-          ))}
-        </ul>
+
+                  <div className="relative z-10">
+                    <div className={`font-mono text-[10px] uppercase tracking-[0.26em] ${withImage ? "text-white/80" : "text-[color:var(--accent)]"}`}>
+                      {category}
+                    </div>
+                    <h3 className="mt-6 max-w-[18ch] text-sm font-medium uppercase leading-relaxed tracking-[0.1em]">
+                      {post.title}
+                    </h3>
+                  </div>
+
+                  <div className="relative z-10 flex items-end gap-3">
+                    <span className={`font-display text-6xl leading-none lg:text-7xl ${withImage ? "text-white" : "text-[color:var(--accent)]"}`}>
+                      {day}
+                    </span>
+                    <span className={`mb-2 text-[10px] uppercase tracking-[0.22em] ${withImage ? "text-white/80" : "text-[color:var(--muted)]"}`}>
+                      {month}
+                    </span>
+                  </div>
+                </StrokeHover>
+              </Reveal>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

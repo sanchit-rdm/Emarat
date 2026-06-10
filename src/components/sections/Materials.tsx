@@ -63,7 +63,7 @@ export default function Materials() {
             <SplitReveal
               as="h2"
               delay={0.1}
-              className="font-display h-section text-[color:var(--muted)]"
+              className="font-display h-section text-[color:var(--accent)]"
             >
               and the spaces between.
             </SplitReveal>

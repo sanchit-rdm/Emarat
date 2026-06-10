@@ -105,6 +105,7 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
             ]),
           },
         ]),
+        contactHeading: "Get in Touch",
         officeHours: "Mon Fri · 9am – 6pm",
         copyright: "© 2026 Emarat Realty. An Argo Group company. All rights reserved.",
         legalNote: "RERA registered · Gurugram, Haryana",
@@ -122,6 +123,7 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
         { heading: "Crafted in stone, light and silence." },
         { heading: "An address that appreciates." },
       ]),
+      scrollCue: "Scroll",
       gallerySection: {
         heading1: "Crafted for",
         heading2: "luxury living.",
@@ -177,6 +179,7 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
         lead: "Garden City Residences",
         rest: "— here freedom begins",
         body: "Far from the noise yet minutes from everything that matters. At DLF Garden City, Sector 93, Emarat Realty shapes homes around care, generosity and an unhurried sense of space — a project that turns true, lasting values into everyday living.",
+        ctaLabel: "Read More",
         ctaHref: "/projects",
       },
       newsSection: { heading1: "Latest from", heading2: "Emarat Realty.", allLabel: "All articles", allHref: "/news" },
@@ -186,8 +189,7 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
         elegant: { title: "Elegant Design", buttonLabel: "Learn More", buttonHref: "/projects" },
         iconic: {
           line1: "Life within reach",
-          line2: "of every iconic",
-          line3: "Gurugram landmark",
+          line2: "of every iconic landmark",
           watermark: "Iconic",
           ctaLabel: "Go to Location",
           ctaHref: "#location",
@@ -202,6 +204,7 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
           configLabel: "Configuration",
           viewLabel: "View Residence",
         },
+        principles: { heading1: "Building with Ethics,", heading2: "Excellence & Efficiency." },
         news: { eyebrow: "News & Offers", heading1: "Latest from", heading2: "Emarat Realty.", allLabel: "All articles", allHref: "/news" },
         contact: {
           eyebrow: "Make Your Enquiry",
@@ -504,7 +507,7 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
         ]),
         trailing: "Independent & Private Floors",
       },
-      cardButtons: { viewLabel: "View Project", enquireLabel: "Enquire" },
+      cardButtons: { viewLabel: "View Project", enquireLabel: "Enquire", configLabel: "Configuration", sizesLabel: "Sizes" },
       additionalHeading: "Plots and independent floors.",
       additional: wk([
         { name: "DLF Garden City Plots", location: "Sector 93, Gurugram", type: "Freehold residential plots" },
@@ -534,6 +537,7 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
         floorPlansHeading: "Floor Plans",
         floorPlansBlurb: "Indicative layouts. Select a floor to view its plan and key finishes.",
         floorPlansRequestLabel: "Request detailed plan",
+        floorPlansBadge: "Indicative",
         galleryHeading: "Gallery",
         connectivityHeading1: "Location &",
         connectivityHeading2: "Connectivity.",

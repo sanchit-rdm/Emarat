@@ -74,7 +74,7 @@ export default function News({ posts, labels }: { posts: Post[]; labels?: NewsLa
             <SplitReveal
               as="h2"
               delay={0.1}
-              className="font-display h-section text-[color:var(--muted)]"
+              className="font-display h-section text-[color:var(--accent)]"
             >
               {heading2}
             </SplitReveal>

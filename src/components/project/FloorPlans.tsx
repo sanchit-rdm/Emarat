@@ -11,7 +11,7 @@ export default function FloorPlans({
   labels,
 }: {
   plans: FloorPlan[];
-  labels?: { heading?: string; blurb?: string; requestLabel?: string };
+  labels?: { heading?: string; blurb?: string; requestLabel?: string; badge?: string };
 }) {
   const [active, setActive] = useState(0);
   if (!plans?.length) return null;
@@ -19,6 +19,7 @@ export default function FloorPlans({
   const heading = labels?.heading?.trim() || "Floor Plans";
   const blurb = labels?.blurb?.trim() || "Indicative layouts. Select a floor to view its plan and key finishes.";
   const requestLabel = labels?.requestLabel?.trim() || "Request detailed plan";
+  const badge = labels?.badge?.trim() || "Indicative";
 
   return (
     <section id="floor-plans" className="scroll-mt-44 px-6 py-24 lg:px-10 lg:py-32">
@@ -67,7 +68,7 @@ export default function FloorPlans({
                 style={{ filter: "sepia(0.12) saturate(0.9) brightness(0.9)" }}
               />
               <span className="absolute left-4 top-4 rounded bg-[color:var(--bg)]/70 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--accent)] backdrop-blur">
-                Indicative
+                {badge}
               </span>
             </div>
           </div>

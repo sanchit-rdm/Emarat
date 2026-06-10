@@ -54,7 +54,7 @@ export default function ContactV2({ data, labels }: Props) {
         <SplitReveal as="h2" className="font-display h-page">
           {heading1}
         </SplitReveal>
-        <SplitReveal as="h2" delay={0.1} className="font-display h-page text-[color:var(--muted)]">
+        <SplitReveal as="h2" delay={0.1} className="font-display h-page text-[color:var(--accent)]">
           {heading2}
         </SplitReveal>
 

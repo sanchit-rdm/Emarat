@@ -65,7 +65,7 @@ export default function EnquiryForm({
           <SplitReveal as="h2" className="font-display h-section">
             {heading}
           </SplitReveal>
-          <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--muted)]">
+          <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
             {`${projectTitle.replace(/ at .*/, "")}.`}
           </SplitReveal>
           <Reveal as="p" delay={0.2} className="mt-6 max-w-md text-base leading-relaxed text-[color:var(--muted)]">

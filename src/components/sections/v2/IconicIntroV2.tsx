@@ -14,7 +14,6 @@ interface LocationData {
 interface IconicLabels {
   line1?: string;
   line2?: string;
-  line3?: string;
   watermark?: string;
   ctaLabel?: string;
   ctaHref?: string;
@@ -34,8 +33,7 @@ export default function IconicIntroV2({ data, labels }: Props) {
   const bgImage = data?.places?.[0]?.image || "/images/dwarka-expressway.jpg";
   const eyebrow = data?.eyebrow?.trim() || "Location & Connectivity";
   const line1 = labels?.line1?.trim() || "Life within reach";
-  const line2 = labels?.line2?.trim() || "of every iconic";
-  const line3 = labels?.line3?.trim() || "Gurugram landmark";
+  const line2 = labels?.line2?.trim() || "of every iconic landmark";
   const watermark = labels?.watermark?.trim() || "Iconic";
   const ctaLabel = labels?.ctaLabel?.trim() || "Go to Location";
   const ctaHref = labels?.ctaHref?.trim() || "#location";
@@ -131,7 +129,6 @@ export default function IconicIntroV2({ data, labels }: Props) {
         <h2 className="font-display mx-auto max-w-4xl text-[clamp(2.25rem,6.5vw,5.5rem)] uppercase leading-[1.08] tracking-[1px]">
           <span className="block">{line1}</span>
           <span className="block text-[color:var(--accent)]">{line2}</span>
-          <span className="block">{line3}</span>
         </h2>
         <div className="mt-12 flex justify-center">
           <CircleButton href={ctaHref} variant="outline">

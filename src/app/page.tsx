@@ -42,7 +42,7 @@ export default async function Home() {
     <>
       <SiteNav />
       <main>
-        <ScrollVideoHero blocks={homePage?.heroBlocks} />
+        <ScrollVideoHero blocks={homePage?.heroBlocks} scrollLabel={homePage?.scrollCue} />
         <Gallery images={homePage?.gallery} section={homePage?.gallerySection} />
         <div className="theme-light">
           <Projects data={homePage?.projectsSection} projects={projects} />

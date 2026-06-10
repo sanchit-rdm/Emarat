@@ -125,6 +125,7 @@ export const siteSettingsType = defineType({
             }),
           ],
         }),
+        defineField({ name: "contactHeading", title: "“Get in Touch” Column Heading", type: "string" }),
         defineField({ name: "officeHours", title: "Office Hours", type: "string" }),
         defineField({ name: "copyright", title: "Copyright Line", type: "string" }),
         defineField({ name: "legalNote", title: "Legal Note (e.g. RERA)", type: "string" }),

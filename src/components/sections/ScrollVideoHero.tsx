@@ -80,7 +80,7 @@ function resolveBlocks(blocks?: SanityBlock[]): TextBlock[] {
   });
 }
 
-export default function ScrollVideoHero({ blocks, videoSrc, posterSrc }: { blocks?: SanityBlock[]; videoSrc?: string; posterSrc?: string }) {
+export default function ScrollVideoHero({ blocks, videoSrc, posterSrc, scrollLabel }: { blocks?: SanityBlock[]; videoSrc?: string; posterSrc?: string; scrollLabel?: string }) {
   const TEXT_BLOCKS = resolveBlocks(blocks);
   const sectionRef = useRef<HTMLElement | null>(null);
   const pinRef = useRef<HTMLDivElement | null>(null);
@@ -271,7 +271,7 @@ export default function ScrollVideoHero({ blocks, videoSrc, posterSrc }: { block
           ref={cueRef}
           className="pointer-events-none absolute inset-x-0 bottom-8 z-10 flex items-center justify-center gap-3 text-[10px] uppercase tracking-[0.3em] text-[color:var(--muted)]"
         >
-          <span>Scroll</span>
+          <span>{scrollLabel?.trim() || "Scroll"}</span>
           <span className="h-8 w-px bg-gradient-to-b from-[color:var(--accent)]/60 to-transparent" />
         </div>
       </div>

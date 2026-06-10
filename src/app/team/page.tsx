@@ -130,7 +130,7 @@ export default async function TeamPage() {
                 <SplitReveal as="h2" className="font-display h-section">
                   {intro.heading1}
                 </SplitReveal>
-                <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--muted)]">
+                <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
                   {intro.heading2}
                 </SplitReveal>
               </div>
@@ -180,7 +180,7 @@ export default async function TeamPage() {
               <SplitReveal as="h2" className="font-display h-section">
                 {cta.heading1}
               </SplitReveal>
-              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--muted)]">
+              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
                 {cta.heading2}
               </SplitReveal>
               <Reveal as="p" delay={0.2} className="mt-6 max-w-xl text-base text-[color:var(--muted)] lg:text-lg">

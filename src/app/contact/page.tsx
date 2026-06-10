@@ -158,7 +158,7 @@ export default async function ContactPage() {
               <SplitReveal as="h2" className="font-display h-section">
                 {form.heading1}
               </SplitReveal>
-              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--muted)]">
+              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
                 {form.heading2}
               </SplitReveal>
 

@@ -24,6 +24,13 @@ export const homePageType = defineType({
       validation: (r) => r.max(4).warning("The hero is designed for up to 3–4 headings"),
     }),
 
+    defineField({
+      name: "scrollCue",
+      title: "Hero Scroll Cue Label",
+      type: "string",
+      description: "Small label under the hero video (e.g. “Scroll”).",
+    }),
+
     /* ---- Gallery ---- */
     defineField({
       name: "gallery",
@@ -188,6 +195,7 @@ export const homePageType = defineType({
         defineField({ name: "rest", title: "Headline Line 2", type: "string" }),
         defineField({ name: "body", title: "Body", type: "text", rows: 4 }),
         defineField({ name: "image", title: "Background Image", type: "image", options: { hotspot: true } }),
+        defineField({ name: "ctaLabel", title: "Button Label", type: "string" }),
         defineField({ name: "ctaHref", title: "Button Link", type: "string", description: "e.g. /projects" }),
       ],
     }),
@@ -258,7 +266,6 @@ export const homePageType = defineType({
           fields: [
             defineField({ name: "line1", title: "Heading Line 1", type: "string" }),
             defineField({ name: "line2", title: "Heading Line 2 (accent)", type: "string" }),
-            defineField({ name: "line3", title: "Heading Line 3", type: "string" }),
             defineField({ name: "watermark", title: "Watermark Word", type: "string" }),
             defineField({ name: "ctaLabel", title: "Button Label", type: "string" }),
             defineField({ name: "ctaHref", title: "Button Link", type: "string" }),
@@ -277,6 +284,15 @@ export const homePageType = defineType({
             defineField({ name: "locationLabel", title: "Detail — Location Label", type: "string" }),
             defineField({ name: "configLabel", title: "Detail — Configuration Label", type: "string" }),
             defineField({ name: "viewLabel", title: "View Button Label", type: "string" }),
+          ],
+        }),
+        defineField({
+          name: "principles",
+          title: "Principles Band (Building with Ethics…)",
+          type: "object",
+          fields: [
+            defineField({ name: "heading1", title: "Heading Line 1", type: "string" }),
+            defineField({ name: "heading2", title: "Heading Line 2", type: "string" }),
           ],
         }),
         defineField({
