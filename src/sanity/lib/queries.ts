@@ -69,6 +69,7 @@ export const HOME_PAGE_QUERY = defineQuery(`
     approach {
       heading1,
       heading2,
+      heading3,
       "values": values[]{
         _key,
         no,

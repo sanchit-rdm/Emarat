@@ -18,6 +18,7 @@ const DEFAULT_VALUES: Value[] = [
 interface ApproachData {
   heading1?: string;
   heading2?: string;
+  heading3?: string;
   values?: Array<{ _key?: string; no: string; title: string; body: string; img?: string; alt?: string }>;
 }
 interface Props { data?: ApproachData }
@@ -25,6 +26,7 @@ interface Props { data?: ApproachData }
 export default function Approach({ data }: Props) {
   const heading1 = data?.heading1 ?? "Building with Ethics,";
   const heading2 = data?.heading2 ?? "Excellence & Efficiency.";
+  const heading3 = data?.heading3 ?? "";
   const values: Value[] = data?.values?.length
     ? data.values.map((v) => ({ ...v, img: v.img ?? "/images/alameda-entrance.webp", alt: v.alt ?? v.title }))
     : DEFAULT_VALUES;
@@ -73,6 +75,11 @@ export default function Approach({ data }: Props) {
             <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
               {heading2}
             </SplitReveal>
+            {heading3 ? (
+              <SplitReveal as="h2" delay={0.2} className="font-display h-section">
+                {heading3}
+              </SplitReveal>
+            ) : null}
           </div>
         </div>
 

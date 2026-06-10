@@ -86,6 +86,7 @@ export const homePageType = defineType({
       fields: [
         defineField({ name: "heading1", title: "Heading Line 1", type: "string" }),
         defineField({ name: "heading2", title: "Heading Line 2 (muted)", type: "string" }),
+        defineField({ name: "heading3", title: "Heading Line 3", type: "string" }),
         defineField({
           name: "values",
           title: "Values",

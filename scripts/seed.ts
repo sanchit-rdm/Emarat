@@ -141,7 +141,7 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
         ]),
         imageCaption: "C5 Residences, DLF Garden City",
       },
-      approach: { heading1: "Building with Ethics,", heading2: "Excellence & Efficiency." },
+      approach: { heading1: "Building with Ethics,", heading2: "Excellence & Efficiency.", heading3: "Designed to endure." },
       contact: {
         heading1: "Ready to find",
         heading2: "your perfect home?",
