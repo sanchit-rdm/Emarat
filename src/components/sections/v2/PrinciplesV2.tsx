@@ -5,10 +5,10 @@ import Image from "next/image";
 import { ensureGsap, scheduleScrollRefresh } from "@/lib/gsap";
 
 const DEFAULT_IMAGES: string[] = [
-  "/images/Design Customized - 1.jfif",
-  "/images/Design Customized - 2.jfif",
-  "/images/Design Customized - 3.jfif",
-  "/images/Design Customised - 4.jfif",
+  "/images/design-customized-1.jpg",
+  "/images/design-customized-2.jpg",
+  "/images/design-customized-3.jpg",
+  "/images/design-customized-4.jpg",
 ];
 
 interface PortableTextSpan {
