@@ -114,7 +114,6 @@ export default async function SiteFooter() {
             className="object-cover"
             style={{ filter: "sepia(0.12) saturate(0.9) brightness(0.8)" }}
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[color:var(--bg)] via-[color:var(--bg)]/20 to-transparent" />
         </div>
       )}
 

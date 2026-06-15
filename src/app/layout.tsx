@@ -5,6 +5,7 @@ import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import ScrollRail from "@/components/ScrollRail";
 import { SanityLive, sanityFetch } from "@/sanity/lib/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 
@@ -63,8 +64,8 @@ export default async function RootLayout({
       className={`${montserrat.variable} ${adelora.variable} ${bizantheum.variable} antialiased`}
     >
       <body className="min-h-screen">
-        {/* Brand-green vertical rail — present on every page as a quiet brand signature */}
-        <div className="brand-rail" aria-hidden />
+        {/* Brand rail — green track with gold thumb that tracks page scroll progress */}
+        <ScrollRail />
         <SmoothScroll>{children}</SmoothScroll>
         <SanityLive />
         {isDraftMode && <VisualEditing />}

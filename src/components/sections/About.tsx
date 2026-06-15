@@ -37,7 +37,6 @@ export default function About({ data }: Props) {
     { title: "Development", subtitle: "End-to-end delivery" },
   ];
   const image = data?.image ?? "/images/alameda-kitchen.webp";
-  const imageCaption = data?.imageCaption ?? "C5 Residences, DLF Garden City";
   return (
     <section
       id="about"
@@ -61,7 +60,7 @@ export default function About({ data }: Props) {
               <Reveal
                 key={svc._key ?? svc.title}
                 delay={0.05 * i}
-                className="border-t border-[color:var(--line)] pt-4"
+                className="border-t border-[color:var(--line)] pt-4 text-center"
               >
                 <div className="text-sm">{svc.title}</div>
                 <div className="text-xs text-[color:var(--muted)]">{svc.subtitle}</div>
@@ -81,13 +80,6 @@ export default function About({ data }: Props) {
               style={{ filter: "sepia(0.12) saturate(0.9) brightness(0.9)" }}
             />
           </Parallax>
-          <Reveal
-            as="p"
-            delay={0.2}
-            className="mt-4 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]"
-          >
-            {imageCaption}
-          </Reveal>
         </div>
       </div>
     </section>

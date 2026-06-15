@@ -48,9 +48,6 @@ export default function ElegantDesignV2({ images: rawImages, labels }: Props) {
     const { gsap } = ensureGsap();
 
     const ctx = gsap.context(() => {
-      // Horizontal drift tied to the section's vertical scroll progress. No pin
-      // — the track simply translates from a little right to a little left as
-      // the section travels from the bottom of the viewport to the top.
       gsap.fromTo(
         track,
         { xPercent: 8 },
@@ -103,6 +100,9 @@ export default function ElegantDesignV2({ images: rawImages, labels }: Props) {
           </div>
         </div>
 
+        {/* Subtle radial gradient behind text */}
+        <div className="pointer-events-none absolute inset-0 z-[5] bg-[radial-gradient(ellipse_55%_50%_at_50%_50%,rgba(0,0,0,0.38)_0%,transparent_100%)]" />
+
         {/* Fixed centre overlay — cursive title + circular call to action. */}
         <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center">
           <h2 className="font-script whitespace-nowrap text-[clamp(2.75rem,9vw,8rem)] leading-none text-[color:var(--fg)] drop-shadow-[0_4px_40px_rgba(0,0,0,0.55)]">
@@ -117,6 +117,7 @@ export default function ElegantDesignV2({ images: rawImages, labels }: Props) {
           </Link>
         </div>
       </div>
+
     </section>
   );
 }

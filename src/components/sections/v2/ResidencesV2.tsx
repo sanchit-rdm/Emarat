@@ -148,19 +148,12 @@ export default function ResidencesV2({ projects, labels }: Props) {
         </div>
 
         {/* Slider */}
-        <div className="grid grid-cols-12 items-center gap-8 lg:gap-12">
+        <div className="mx-auto flex w-full max-w-[1400px] flex-col items-center gap-8 lg:flex-row lg:gap-12">
           {/* Image stage — clip-reveal + parallax, crossfading per residence */}
-          <div className="col-span-12 lg:col-span-7">
+          <div className="w-full shrink-0 lg:w-[600px]">
             <RevealImage
-              className="relative aspect-[4/3] w-full rounded-lg lg:aspect-[16/11]"
-              parallax={6}
-              overlay={
-                <div className="pointer-events-none absolute left-5 top-5">
-                  <span className="rounded-full bg-black/40 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em] text-white backdrop-blur-sm">
-                    {current.status}
-                  </span>
-                </div>
-              }
+              className="relative aspect-square w-full rounded-lg"
+              parallax={0}
             >
               {list.map((r, i) => (
                 <Image
@@ -168,7 +161,7 @@ export default function ResidencesV2({ projects, labels }: Props) {
                   src={r.img}
                   alt={r.title}
                   fill
-                  sizes="(min-width: 1024px) 58vw, 100vw"
+                  sizes="600px"
                   priority={i === 0}
                   className="object-cover transition-opacity duration-700 ease-out"
                   style={{ opacity: i === active ? 1 : 0 }}
@@ -178,12 +171,9 @@ export default function ResidencesV2({ projects, labels }: Props) {
           </div>
 
           {/* Detail panel */}
-          <div className="col-span-12 lg:col-span-5">
+          <div className="w-full lg:flex-1">
             <div key={active} className="places-fade">
-              <div className="font-mono text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
-                {current.status}
-              </div>
-              <h3 className="mt-4 font-display text-4xl leading-tight lg:text-5xl">
+              <h3 className="font-display text-4xl leading-tight lg:text-5xl">
                 {current.title}
               </h3>
 

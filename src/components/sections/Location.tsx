@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Reveal from "@/components/motion/Reveal";
+import { toPlainText, type PortableTextBlock } from "@/lib/portableText";
 
 /**
  * Interactive connectivity section — hovering/clicking a landmark crossfades
@@ -75,9 +76,9 @@ const DEFAULT_PLACES: Place[] = [
 type SanityPlace = {
   _key?: string;
   name?: string;
-  headingLine1?: string;
-  headingLine2?: string;
-  feature?: string;
+  headingLine1?: string | PortableTextBlock[];
+  headingLine2?: string | PortableTextBlock[];
+  feature?: string | PortableTextBlock[];
   icon?: string;
   body?: string;
   image?: string | null;
@@ -94,9 +95,9 @@ export default function Location({ data }: { data?: LocationData }) {
     ? data.places.map((p, i) => ({
         id: p._key ?? `place-${i}`,
         name: p.name ?? "",
-        heading: [p.headingLine1 ?? p.name ?? "", p.headingLine2 ?? ""],
+        heading: [toPlainText(p.headingLine1 ?? p.name ?? ""), toPlainText(p.headingLine2 ?? "")],
         body: p.body ?? "",
-        feature: p.feature ?? "",
+        feature: toPlainText(p.feature ?? ""),
         icon: (["connectivity", "access", "travel"].includes(p.icon ?? "")
           ? p.icon
           : "connectivity") as IconKey,

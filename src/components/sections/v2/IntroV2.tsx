@@ -37,7 +37,6 @@ export default function IntroV2({ data, eyebrow }: Props) {
     { title: "Independent Floors", subtitle: "Phase 3, DLF" },
   ];
   const image = data?.image ?? "/images/alameda-kitchen.webp";
-  const imageCaption = data?.imageCaption ?? "C5 Residences, DLF Garden City";
 
   return (
     <section id="intro" className="theme-light px-6 py-24 lg:px-10 lg:py-40">
@@ -77,9 +76,6 @@ export default function IntroV2({ data, eyebrow }: Props) {
             className="object-cover"
           />
         </RevealImage>
-        <Reveal as="p" delay={0.15} className="mt-4 text-center text-xs uppercase tracking-[0.2em] text-[color:var(--muted)]">
-          {imageCaption}
-        </Reveal>
       </div>
 
       {/* Thin services row. */}

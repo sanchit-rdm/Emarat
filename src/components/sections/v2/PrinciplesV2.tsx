@@ -5,12 +5,10 @@ import Image from "next/image";
 import { ensureGsap, scheduleScrollRefresh } from "@/lib/gsap";
 
 const DEFAULT_IMAGES: string[] = [
-  "/images/alameda-entrance.webp",
-  "/images/alameda-lounge.webp",
-  "/images/alameda-bedroom-1.webp",
-  "/images/alameda-kitchen.webp",
-  "/images/alameda-bedroom-2.webp",
-  "/images/alameda-dining.webp",
+  "/images/Design Customized - 1.jfif",
+  "/images/Design Customized - 2.jfif",
+  "/images/Design Customized - 3.jfif",
+  "/images/Design Customised - 4.jfif",
 ];
 
 interface PortableTextSpan {
@@ -163,6 +161,9 @@ export default function PrinciplesV2({ data, labels }: Props) {
             ))}
           </div>
         </div>
+
+        {/* Subtle radial gradient behind text */}
+        <div className="pointer-events-none absolute inset-0 z-[5] bg-[radial-gradient(ellipse_55%_50%_at_50%_50%,rgba(0,0,0,0.38)_0%,transparent_100%)]" />
 
         {/* Fixed centre overlay — section heading, white, no button. */}
         <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-6 text-center">

@@ -29,21 +29,18 @@ interface Props { data?: LocationData; labels?: IconicLabels }
  * reference design. Flows straight into the full-screen connectivity section.
  */
 export default function IconicIntroV2({ data, labels }: Props) {
-  const bgImage = data?.places?.[0]?.image || "/images/dwarka-expressway.jpg";
+  const bgImage = data?.places?.[0]?.image || "/images/C-5/c5-right-side-2026-03-06-at-2-44-11-pm-1.jpg";
   const eyebrow = data?.eyebrow?.trim() || "Location & Connectivity";
   const line1 = labels?.line1?.trim() || "Life within reach";
   const line2 = labels?.line2?.trim() || "of every iconic landmark";
-  const watermark = labels?.watermark?.trim() || "Iconic";
 
   const sectionRef = useRef<HTMLElement | null>(null);
   const imgRef = useRef<HTMLDivElement | null>(null);
-  const wordRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
     const img = imgRef.current;
-    const word = wordRef.current;
-    if (!section || !img || !word) return;
+    if (!section || !img) return;
 
     const { gsap } = ensureGsap();
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -51,7 +48,6 @@ export default function IconicIntroV2({ data, labels }: Props) {
     const ctx = gsap.context(() => {
       if (reduced) {
         gsap.set(img, { autoAlpha: 0.28 });
-        gsap.set(word, { autoAlpha: 0.1 });
         return;
       }
 
@@ -68,17 +64,6 @@ export default function IconicIntroV2({ data, labels }: Props) {
         }
       );
 
-      // Oversized cursive watermark rises faintly into view.
-      gsap.fromTo(
-        word,
-        { autoAlpha: 0, yPercent: 30 },
-        {
-          autoAlpha: 0.12,
-          yPercent: -6,
-          ease: "none",
-          scrollTrigger: { trigger: section, start: "top center", end: "bottom top", scrub: true },
-        }
-      );
     }, section);
 
     scheduleScrollRefresh();
@@ -105,17 +90,6 @@ export default function IconicIntroV2({ data, labels }: Props) {
           style={{ filter: "brightness(0.55) saturate(0.85)" }}
         />
         <div className="absolute inset-0 bg-[color:var(--bg)]/40" />
-      </div>
-
-      {/* Oversized cursive watermark, faint, anchored to the bottom */}
-      <div
-        ref={wordRef}
-        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 flex justify-center overflow-hidden"
-        style={{ opacity: 0, visibility: "hidden" }}
-      >
-        <span className="font-script select-none text-[28vw] leading-[0.8] text-[color:var(--fg)]" style={{ marginBottom: "-0.12em" }}>
-          {watermark}
-        </span>
       </div>
 
       {/* Headline + CTA */}

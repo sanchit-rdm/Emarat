@@ -328,14 +328,10 @@ html {
   bottom: 0;
   left: 0;
   width: 3px;
-  background: linear-gradient(
-    180deg,
-    var(--brand-green) 0%,
-    var(--brand-green) 70%,
-    var(--accent) 100%
-  );
+  background: var(--brand-green);
   z-index: 40;
   pointer-events: none;
+  overflow: hidden;
 }
 @media (max-width: 1023px) {
   .brand-rail { display: none; }
