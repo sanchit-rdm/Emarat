@@ -1,5 +1,5 @@
 import type { PortableTextBlock } from "@/lib/portableText";
-import { renderPortableText } from "@/lib/portableText";
+import { renderPortableText, toPlainText } from "@/lib/portableText";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
@@ -54,10 +54,10 @@ export default function ContactV2({ data, labels }: Props) {
           <span>{renderPortableText(eyebrow)}</span>
         </Reveal>
         <SplitReveal as="h2" className="font-display h-page">
-          {renderPortableText(heading1)}
+          {toPlainText(heading1)}
         </SplitReveal>
         <SplitReveal as="h2" delay={0.1} className="font-display h-page text-[color:var(--accent)]">
-          {renderPortableText(heading2)}
+          {toPlainText(heading2)}
         </SplitReveal>
 
         <Reveal as="p" delay={0.1} className="mx-auto mt-8 max-w-md text-sm text-[color:var(--muted)]">

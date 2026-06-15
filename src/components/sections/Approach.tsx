@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { ensureGsap } from "@/lib/gsap";
 import type { PortableTextBlock } from "@/lib/portableText";
-import { renderPortableText } from "@/lib/portableText";
+import { renderPortableText, toPlainText } from "@/lib/portableText";
 import SplitReveal from "@/components/motion/SplitReveal";
 
 type Value = { _key?: string; no: string; title: string | PortableTextBlock[]; body: string | PortableTextBlock[]; img: string; alt: string };
@@ -30,7 +30,7 @@ export default function Approach({ data }: Props) {
   const heading2 = data?.heading2 ?? "Excellence & Efficiency.";
   const heading3 = data?.heading3 ?? "";
   const values: Value[] = data?.values?.length
-    ? data.values.map((v) => ({ ...v, img: v.img ?? "/images/alameda-entrance.webp", alt: v.alt ?? v.title }))
+    ? data.values.map((v) => ({ ...v, img: v.img ?? "/images/alameda-entrance.webp", alt: v.alt ?? toPlainText(v.title) }))
     : DEFAULT_VALUES;
   const sectionRef = useRef<HTMLElement | null>(null);
 
@@ -72,14 +72,14 @@ export default function Approach({ data }: Props) {
         <div className="col-span-12 lg:col-span-4">
           <div className="lg:sticky lg:top-32">
             <SplitReveal as="h2" className="font-display h-section">
-              {renderPortableText(heading1)}
+              {toPlainText(heading1)}
             </SplitReveal>
             <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
-              {renderPortableText(heading2)}
+              {toPlainText(heading2)}
             </SplitReveal>
             {heading3 ? (
               <SplitReveal as="h2" delay={0.2} className="font-display h-section">
-                {renderPortableText(heading3)}
+                {toPlainText(heading3)}
               </SplitReveal>
             ) : null}
           </div>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { PortableTextBlock } from "@/lib/portableText";
-import { renderPortableText } from "@/lib/portableText";
+import { renderPortableText, toPlainText } from "@/lib/portableText";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import Parallax from "@/components/motion/Parallax";
@@ -45,11 +45,11 @@ export default function About({ data }: Props) {
     >
       <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-7">
-          <SplitReveal as="h2" className="font-display h-section" data-heading={heading1Value}>
-            {renderPortableText(heading1Value)}
+          <SplitReveal as="h2" className="font-display h-section" data-heading={toPlainText(heading1Value)}>
+            {toPlainText(heading1Value)}
           </SplitReveal>
-          <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]" data-heading={heading2Value}>
-            {renderPortableText(heading2Value)}
+          <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]" data-heading={toPlainText(heading2Value)}>
+            {toPlainText(heading2Value)}
           </SplitReveal>
 
           <Reveal as="p" delay={0.2} className="mt-10 max-w-xl text-base leading-relaxed text-[color:var(--muted)] lg:text-lg">

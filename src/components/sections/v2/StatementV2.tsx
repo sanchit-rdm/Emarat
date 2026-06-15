@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { PortableTextBlock } from "@/lib/portableText";
-import { renderPortableText } from "@/lib/portableText";
+import { renderPortableText, toPlainText } from "@/lib/portableText";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 
@@ -57,10 +57,10 @@ export default function StatementV2({ data }: Props) {
         </Reveal>
         <h2 className="max-w-5xl">
           <SplitReveal as="span" className="font-display h-page block text-[color:var(--accent)]">
-            {renderPortableText(lead)}
+            {toPlainText(lead)}
           </SplitReveal>
           <SplitReveal as="span" delay={0.1} className="font-display h-page block text-white">
-            {renderPortableText(rest)}
+            {toPlainText(rest)}
           </SplitReveal>
         </h2>
       </div>

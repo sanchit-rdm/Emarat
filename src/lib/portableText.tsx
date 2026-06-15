@@ -13,6 +13,26 @@ export interface PortableTextBlock {
   markDefs?: Array<{ _key?: string; _type?: string; href?: string }>;
 }
 
+/**
+ * Flatten Portable Text (or a plain string) to a plain string. Used for the
+ * animated display headings (SplitReveal), which split text word-by-word and
+ * therefore need a string, not formatted nodes.
+ */
+export function toPlainText(
+  value: string | PortableTextBlock[] | undefined
+): string {
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  return value
+    .map((block) =>
+      block && block._type === "block" && Array.isArray(block.children)
+        ? block.children.map((child) => child.text || "").join("")
+        : ""
+    )
+    .join("\n")
+    .trim();
+}
+
 export function renderPortableText(
   value: string | PortableTextBlock[] | undefined
 ): ReactNode {

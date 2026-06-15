@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { PortableTextBlock } from "@/lib/portableText";
-import { renderPortableText } from "@/lib/portableText";
+import { renderPortableText, toPlainText } from "@/lib/portableText";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import RevealImage from "@/components/motion/RevealImage";
@@ -47,10 +47,10 @@ export default function IntroV2({ data, eyebrow }: Props) {
         </Reveal>
 
         <SplitReveal as="h2" className="font-display h-page">
-          {renderPortableText(heading1)}
+          {toPlainText(heading1)}
         </SplitReveal>
         <SplitReveal as="h2" delay={0.1} className="font-display h-page text-[color:var(--accent)]">
-          {renderPortableText(heading2)}
+          {toPlainText(heading2)}
         </SplitReveal>
 
         <Reveal

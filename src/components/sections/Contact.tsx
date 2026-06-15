@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { PortableTextBlock } from "@/lib/portableText";
-import { renderPortableText } from "@/lib/portableText";
+import { renderPortableText, toPlainText } from "@/lib/portableText";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
@@ -71,10 +71,10 @@ export default function Contact({ data }: Props) {
       <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-10">
           <SplitReveal as="h2" className="font-display h-page">
-            {renderPortableText(heading1)}
+            {toPlainText(heading1)}
           </SplitReveal>
           <SplitReveal as="h2" delay={0.1} className="font-display h-page text-[color:var(--accent)]">
-            {renderPortableText(heading2)}
+            {toPlainText(heading2)}
           </SplitReveal>
 
           {/* Callback form */}
