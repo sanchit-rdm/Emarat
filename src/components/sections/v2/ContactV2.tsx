@@ -1,10 +1,12 @@
+import type { PortableTextBlock } from "@/lib/portableText";
+import { renderPortableText } from "@/lib/portableText";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
 
 interface ContactData {
-  heading1?: string;
-  heading2?: string;
+  heading1?: string | PortableTextBlock[];
+  heading2?: string | PortableTextBlock[];
   phone?: string;
   phoneHref?: string;
   phoneHours?: string;
@@ -13,8 +15,8 @@ interface ContactData {
   address?: string;
 }
 interface ContactLabels {
-  eyebrow?: string;
-  lead?: string;
+  eyebrow?: string | PortableTextBlock[];
+  lead?: string | PortableTextBlock[];
   namePlaceholder?: string;
   phonePlaceholder?: string;
   categoryPlaceholder?: string;
@@ -34,8 +36,8 @@ interface Props { data?: ContactData; labels?: ContactLabels }
 export default function ContactV2({ data, labels }: Props) {
   const heading1 = data?.heading1 ?? "Ready to find";
   const heading2 = data?.heading2 ?? "your perfect home?";
-  const eyebrow = labels?.eyebrow?.trim() || "Make Your Enquiry";
-  const lead = labels?.lead?.trim() || "Leave your details and our team will get back to you within one business day.";
+  const eyebrow = labels?.eyebrow ?? "Make Your Enquiry";
+  const lead = labels?.lead ?? "Leave your details and our team will get back to you within one business day.";
   const namePlaceholder = labels?.namePlaceholder?.trim() || "Your name";
   const phonePlaceholder = labels?.phonePlaceholder?.trim() || "+91 00000 00000";
   const categoryPlaceholder = labels?.categoryPlaceholder?.trim() || "Interested in…";
@@ -49,17 +51,17 @@ export default function ContactV2({ data, labels }: Props) {
     <section id="contact" className="theme-light px-6 py-24 lg:px-10 lg:py-40">
       <div className="mx-auto max-w-2xl text-center">
         <Reveal className="eyebrow mb-4 flex items-center justify-center font-script text-2xl text-[color:var(--accent)]">
-          <span>{eyebrow}</span>
+          <span>{renderPortableText(eyebrow)}</span>
         </Reveal>
         <SplitReveal as="h2" className="font-display h-page">
-          {heading1}
+          {renderPortableText(heading1)}
         </SplitReveal>
         <SplitReveal as="h2" delay={0.1} className="font-display h-page text-[color:var(--accent)]">
-          {heading2}
+          {renderPortableText(heading2)}
         </SplitReveal>
 
         <Reveal as="p" delay={0.1} className="mx-auto mt-8 max-w-md text-sm text-[color:var(--muted)]">
-          {lead}
+          {renderPortableText(lead)}
         </Reveal>
 
         <Reveal as="div" delay={0.15} className="mt-12">

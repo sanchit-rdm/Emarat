@@ -1,18 +1,20 @@
 import Image from "next/image";
+import type { PortableTextBlock } from "@/lib/portableText";
+import { renderPortableText } from "@/lib/portableText";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
 
 interface ContactData {
-  heading1?: string;
-  heading2?: string;
+  heading1?: string | PortableTextBlock[];
+  heading2?: string | PortableTextBlock[];
   phone?: string;
   phoneHref?: string;
   phoneHours?: string;
   email?: string;
   emailNote?: string;
-  address?: string;
-  lead?: string;
+  address?: string | PortableTextBlock[];
+  lead?: string | PortableTextBlock[];
   namePlaceholder?: string;
   phonePlaceholder?: string;
   emailPlaceholder?: string;
@@ -69,16 +71,16 @@ export default function Contact({ data }: Props) {
       <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-10">
           <SplitReveal as="h2" className="font-display h-page">
-            {heading1}
+            {renderPortableText(heading1)}
           </SplitReveal>
           <SplitReveal as="h2" delay={0.1} className="font-display h-page text-[color:var(--accent)]">
-            {heading2}
+            {renderPortableText(heading2)}
           </SplitReveal>
 
           {/* Callback form */}
           <Reveal as="div" delay={0.2} className="mt-16 max-w-xl">
             <p className="mb-6 text-sm text-[color:var(--muted)]">
-              {lead}
+              {renderPortableText(lead)}
             </p>
             <form className="flex flex-col gap-4">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -162,7 +164,7 @@ export default function Contact({ data }: Props) {
                 {visitLabel}
               </div>
               <p className="font-display-alt text-base leading-relaxed" style={{ whiteSpace: "pre-line" }}>
-                {address}
+                {renderPortableText(address)}
               </p>
             </Reveal>
           </div>

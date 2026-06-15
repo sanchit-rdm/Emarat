@@ -1,12 +1,14 @@
 import Image from "next/image";
+import type { PortableTextBlock } from "@/lib/portableText";
+import { renderPortableText } from "@/lib/portableText";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import Parallax from "@/components/motion/Parallax";
 
 interface AboutData {
-  heading1?: string;
-  heading2?: string;
-  description?: string;
+  heading1?: string | PortableTextBlock[];
+  heading2?: string | PortableTextBlock[];
+  description?: string | PortableTextBlock[];
   services?: Array<{ _key?: string; title: string; subtitle: string }>;
   image?: string | null;
   imageCaption?: string;
@@ -20,9 +22,12 @@ const normalize = (s?: string | null) =>
     : undefined;
 
 export default function About({ data }: Props) {
-  const heading1 = normalize(data?.heading1) ?? "A distinguished leader";
-  const heading2 = normalize(data?.heading2) ?? "in luxury real estate.";
-  const description = normalize(data?.description) ?? "Emarat Realty specialises in exquisite residences and high-end commercial spaces across Gurugram. We deliver homes built on quality, elegance and innovation where every detail reflects our unwavering commitment to excellence.";
+  const heading1 = typeof data?.heading1 === "string" ? normalize(data.heading1) : data?.heading1;
+  const heading2 = typeof data?.heading2 === "string" ? normalize(data.heading2) : data?.heading2;
+  const description = typeof data?.description === "string" ? normalize(data.description) : data?.description;
+  const heading1Value = heading1 ?? "A distinguished leader";
+  const heading2Value = heading2 ?? "in luxury real estate.";
+  const descriptionValue = description ?? "Emarat Realty specialises in exquisite residences and high-end commercial spaces across Gurugram. We deliver homes built on quality, elegance and innovation where every detail reflects our unwavering commitment to excellence.";
   const services = data?.services ?? [
     { title: "Luxury Residential", subtitle: "3 & 4 BHK apartments" },
     { title: "Commercial Spaces", subtitle: "High-end retail & offices" },
@@ -40,15 +45,15 @@ export default function About({ data }: Props) {
     >
       <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-7">
-          <SplitReveal as="h2" className="font-display h-section" data-heading={heading1}>
-            {heading1}
+          <SplitReveal as="h2" className="font-display h-section" data-heading={heading1Value}>
+            {renderPortableText(heading1Value)}
           </SplitReveal>
-          <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]" data-heading={heading2}>
-            {heading2}
+          <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]" data-heading={heading2Value}>
+            {renderPortableText(heading2Value)}
           </SplitReveal>
 
           <Reveal as="p" delay={0.2} className="mt-10 max-w-xl text-base leading-relaxed text-[color:var(--muted)] lg:text-lg">
-            {description}
+            {renderPortableText(descriptionValue)}
           </Reveal>
 
           <div className="mt-12 grid grid-cols-2 gap-x-10 gap-y-8 lg:grid-cols-3">

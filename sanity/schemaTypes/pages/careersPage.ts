@@ -7,8 +7,8 @@ export const careersPageType = pageSingletonWithContent("careersPage", "Careers 
     title: "Pillars Heading",
     type: "object",
     fields: [
-      defineField({ name: "heading1", title: "Heading Line 1", type: "string" }),
-      defineField({ name: "heading2", title: "Heading Line 2 (muted)", type: "string" }),
+      defineField({ name: "heading1", title: "Heading Line 1", type: "blockContent" }),
+      defineField({ name: "heading2", title: "Heading Line 2 (muted)", type: "blockContent" }),
     ],
   }),
   defineField({
@@ -20,8 +20,8 @@ export const careersPageType = pageSingletonWithContent("careersPage", "Careers 
         type: "object",
         fields: [
           defineField({ name: "n", title: "Numeral (e.g. I.)", type: "string" }),
-          defineField({ name: "title", title: "Title", type: "string" }),
-          defineField({ name: "body", title: "Body", type: "text", rows: 3 }),
+          defineField({ name: "title", title: "Title", type: "blockContent" }),
+          defineField({ name: "body", title: "Body", type: "blockContent" }),
         ],
         preview: { select: { title: "title", subtitle: "n" } },
       }),
@@ -32,8 +32,8 @@ export const careersPageType = pageSingletonWithContent("careersPage", "Careers 
     title: "Areas Heading",
     type: "object",
     fields: [
-      defineField({ name: "heading1", title: "Heading Line 1", type: "string" }),
-      defineField({ name: "heading2", title: "Heading Line 2 (muted)", type: "string" }),
+      defineField({ name: "heading1", title: "Heading Line 1", type: "blockContent" }),
+      defineField({ name: "heading2", title: "Heading Line 2 (muted)", type: "blockContent" }),
     ],
   }),
   defineField({
@@ -47,9 +47,9 @@ export const careersPageType = pageSingletonWithContent("careersPage", "Careers 
     title: "How To Apply",
     type: "object",
     fields: [
-      defineField({ name: "heading1", title: "Heading Line 1", type: "string" }),
-      defineField({ name: "heading2", title: "Heading Line 2 (muted)", type: "string" }),
-      defineField({ name: "body", title: "Body", type: "text", rows: 3 }),
+      defineField({ name: "heading1", title: "Heading Line 1", type: "blockContent" }),
+      defineField({ name: "heading2", title: "Heading Line 2 (muted)", type: "blockContent" }),
+      defineField({ name: "body", title: "Body", type: "blockContent" }),
       defineField({ name: "cardLabel", title: "Card Label", type: "string" }),
       defineField({ name: "email", title: "Application Email", type: "string" }),
       defineField({ name: "hours", title: "Hours Line", type: "string" }),

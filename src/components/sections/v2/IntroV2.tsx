@@ -1,12 +1,14 @@
 import Image from "next/image";
+import type { PortableTextBlock } from "@/lib/portableText";
+import { renderPortableText } from "@/lib/portableText";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import RevealImage from "@/components/motion/RevealImage";
 
 interface AboutData {
-  heading1?: string;
-  heading2?: string;
-  description?: string;
+  heading1?: string | PortableTextBlock[];
+  heading2?: string | PortableTextBlock[];
+  description?: string | PortableTextBlock[];
   services?: Array<{ _key?: string; title: string; subtitle: string }>;
   image?: string | null;
   imageCaption?: string;
@@ -45,10 +47,10 @@ export default function IntroV2({ data, eyebrow }: Props) {
         </Reveal>
 
         <SplitReveal as="h2" className="font-display h-page">
-          {heading1}
+          {renderPortableText(heading1)}
         </SplitReveal>
         <SplitReveal as="h2" delay={0.1} className="font-display h-page text-[color:var(--accent)]">
-          {heading2}
+          {renderPortableText(heading2)}
         </SplitReveal>
 
         <Reveal
@@ -56,7 +58,7 @@ export default function IntroV2({ data, eyebrow }: Props) {
           delay={0.2}
           className="mx-auto mt-10 max-w-2xl text-base leading-relaxed text-[color:var(--muted)] lg:text-lg"
         >
-          {description}
+          {renderPortableText(description)}
         </Reveal>
       </div>
 

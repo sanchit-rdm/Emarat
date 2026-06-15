@@ -1,14 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { PortableTextBlock } from "@/lib/portableText";
+import { renderPortableText } from "@/lib/portableText";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 
 interface StatementData {
   image?: string | null;
-  eyebrow?: string;
-  lead?: string;
-  rest?: string;
-  body?: string;
+  eyebrow?: string | PortableTextBlock[];
+  lead?: string | PortableTextBlock[];
+  rest?: string | PortableTextBlock[];
+  body?: string | PortableTextBlock[];
   ctaLabel?: string;
   ctaHref?: string;
 }
@@ -51,14 +53,14 @@ export default function StatementV2({ data }: Props) {
       {/* Headline — upper area */}
       <div className="mx-auto w-full max-w-[1440px]">
         <Reveal className="eyebrow mb-6 flex items-center font-script text-2xl text-[color:var(--fg)]/85">
-          <span>{eyebrow}</span>
+          <span>{renderPortableText(eyebrow)}</span>
         </Reveal>
         <h2 className="max-w-5xl">
           <SplitReveal as="span" className="font-display h-page block text-[color:var(--accent)]">
-            {lead}
+            {renderPortableText(lead)}
           </SplitReveal>
           <SplitReveal as="span" delay={0.1} className="font-display h-page block text-white">
-            {rest}
+            {renderPortableText(rest)}
           </SplitReveal>
         </h2>
       </div>
@@ -66,7 +68,7 @@ export default function StatementV2({ data }: Props) {
       {/* Lead paragraph + Read More — lower-left */}
       <div className="mx-auto mt-16 w-full max-w-[1440px]">
         <Reveal as="p" delay={0.15} className="max-w-md text-sm uppercase leading-relaxed tracking-[0.04em] text-[color:var(--fg)]/85">
-          {body}
+          {renderPortableText(body)}
         </Reveal>
         <Reveal delay={0.25} className="mt-10">
           <Link

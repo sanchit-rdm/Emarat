@@ -3,9 +3,11 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { ensureGsap } from "@/lib/gsap";
+import type { PortableTextBlock } from "@/lib/portableText";
+import { renderPortableText } from "@/lib/portableText";
 import SplitReveal from "@/components/motion/SplitReveal";
 
-type Value = { _key?: string; no: string; title: string; body: string; img: string; alt: string };
+type Value = { _key?: string; no: string; title: string | PortableTextBlock[]; body: string | PortableTextBlock[]; img: string; alt: string };
 
 const DEFAULT_VALUES: Value[] = [
   { no: "I.", title: "Built on Trust", body: "We believe in transparency, accountability and delivering on our commitments. Every decision we make is guided by integrity and a responsibility to create homes our customers can trust.", img: "/images/alameda-entrance.webp", alt: "Emarat Realty entrance — trust and transparency" },
@@ -16,10 +18,10 @@ const DEFAULT_VALUES: Value[] = [
 ];
 
 interface ApproachData {
-  heading1?: string;
-  heading2?: string;
-  heading3?: string;
-  values?: Array<{ _key?: string; no: string; title: string; body: string; img?: string; alt?: string }>;
+  heading1?: string | PortableTextBlock[];
+  heading2?: string | PortableTextBlock[];
+  heading3?: string | PortableTextBlock[];
+  values?: Array<{ _key?: string; no: string; title: string | PortableTextBlock[]; body: string | PortableTextBlock[]; img?: string; alt?: string }>;
 }
 interface Props { data?: ApproachData }
 
@@ -70,14 +72,14 @@ export default function Approach({ data }: Props) {
         <div className="col-span-12 lg:col-span-4">
           <div className="lg:sticky lg:top-32">
             <SplitReveal as="h2" className="font-display h-section">
-              {heading1}
+              {renderPortableText(heading1)}
             </SplitReveal>
             <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
-              {heading2}
+              {renderPortableText(heading2)}
             </SplitReveal>
             {heading3 ? (
               <SplitReveal as="h2" delay={0.2} className="font-display h-section">
-                {heading3}
+                {renderPortableText(heading3)}
               </SplitReveal>
             ) : null}
           </div>
@@ -96,8 +98,8 @@ export default function Approach({ data }: Props) {
               </span>
               <div className="col-span-12 lg:col-span-7">
                 {/* Point titles use Adelora (subheading font) */}
-                <h3 className="font-display-alt text-2xl lg:text-3xl">{v.title}</h3>
-                <p className="mt-4 max-w-xl text-[color:var(--muted)]">{v.body}</p>
+                <h3 className="font-display-alt text-2xl lg:text-3xl">{renderPortableText(v.title)}</h3>
+                <p className="mt-4 max-w-xl text-[color:var(--muted)]">{renderPortableText(v.body)}</p>
               </div>
               <div className="col-span-12 lg:col-span-4">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-[color:var(--bg)]">
