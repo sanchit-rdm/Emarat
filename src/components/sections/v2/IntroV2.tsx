@@ -84,11 +84,11 @@ export default function IntroV2({ data, eyebrow }: Props) {
           <Reveal
             key={svc._key ?? svc.title}
             delay={0.05 * i}
-            className="w-[180px] border-t border-[color:var(--line)] pt-5 text-center"
+            className="w-[240px] border-t border-[color:var(--line)] pt-6 text-center"
           >
-            <div className="h-px w-6 bg-[color:var(--accent)] mx-auto" />
-            <div className="mt-4 font-display-alt text-lg">{svc.title}</div>
-            <div className="mt-1 text-xs text-[color:var(--muted)]">{svc.subtitle}</div>
+            <div className="h-px w-8 bg-[color:var(--accent)] mx-auto" />
+            <div className="mt-5 font-display-alt text-2xl">{svc.title}</div>
+            <div className="mt-2 text-sm text-[color:var(--muted)]">{svc.subtitle}</div>
           </Reveal>
         ))}
       </div>

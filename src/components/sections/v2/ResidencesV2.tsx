@@ -33,7 +33,7 @@ const RESIDENCES: Residence[] = [
     title: "C2 at DLF Garden City",
     place: "Sector 93, Gurugram",
     status: "Now Selling",
-    type: "5 BHK Independent Floors",
+    type: "S + 4",
     img: "/images/C-2/building.jpg",
     href: "/projects/c2",
   },
@@ -42,7 +42,7 @@ const RESIDENCES: Residence[] = [
     title: "C5 at DLF Garden City",
     place: "Sector 93, Gurugram",
     status: "Now Selling",
-    type: "Independent Floors",
+    type: "S + 4",
     img: "/images/C-5/building.jpg",
     href: "/projects/c5",
   },
@@ -51,7 +51,7 @@ const RESIDENCES: Residence[] = [
     title: "E11 at DLF Garden City",
     place: "Sector 93, Gurugram",
     status: "New Launch",
-    type: "Three-Side Open Floors",
+    type: "S + 4",
     img: "/images/E11/building.jpg",
     href: "/projects/e11",
   },
@@ -60,7 +60,7 @@ const RESIDENCES: Residence[] = [
     title: "EA 04 at Alameda",
     place: "Sector 73, Gurugram",
     status: "Now Selling",
-    type: "Boutique Private Floors",
+    type: "S + 3",
     img: "/images/EA4/building.jpg",
     href: "/projects/ea04",
   },
@@ -115,7 +115,7 @@ export default function ResidencesV2({ projects, labels }: Props) {
   const allLabel = labels?.allLabel?.trim() || "All residences";
   const allHref = labels?.allHref?.trim() || "/projects";
   const locationLabel = labels?.locationLabel?.trim() || "Location";
-  const configLabel = labels?.configLabel?.trim() || "Configuration";
+  const configLabel = labels?.configLabel?.trim() || "Built Form";
   const viewLabel = labels?.viewLabel?.trim() || "View Residence";
   const [active, setActive] = useState(0);
   const count = list.length;

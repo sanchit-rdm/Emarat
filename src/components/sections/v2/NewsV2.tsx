@@ -84,12 +84,13 @@ export default function NewsV2({ posts, labels }: { posts: Post[]; labels?: News
             const { day, month } = dateParts(post.publishedAt);
             const category = (post.author?.name || "News").toUpperCase();
             const img = post.mainImage?.asset?.url;
-            const withImage = i === 1 && !!img;
+            const withImage = !!img;
+            const postHref = post.slug?.current ? `/news/${post.slug.current}` : allHref;
 
             return (
               <Reveal key={post._id} delay={i * 0.1}>
                 <StrokeHover
-                  href={allHref}
+                  href={postHref}
                   ariaLabel={post.title}
                   className={`flex aspect-[5/6] flex-col justify-between rounded-md p-7 lg:p-9 ${
                     withImage

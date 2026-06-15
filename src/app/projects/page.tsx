@@ -40,7 +40,7 @@ const projects = [
     status: "Now Selling",
     config: "5 BHK Independent Floors",
     size: "G+4 · 5 BHK",
-    img: "/images/C-2/c2-living-dining-interior-view-01-approved-r0-20240122.jpg",
+    img: "/images/C-2/building.jpg",
     body: "Thoughtfully designed 5 BHK independent floors within the prestigious DLF gated community — spacious layouts, modern architecture and everyday comfort for contemporary luxury living.",
     highlights: ["5BHK Independent Floors", "DLF Gated Community", "24x7 Security", "S+4 Built Form"],
   },
@@ -52,7 +52,7 @@ const projects = [
     status: "Now Selling",
     config: "Independent Floors",
     size: "G+4 Independent Floors",
-    img: "/images/C-5/c-5-11-double-height.jpg",
+    img: "/images/C-5/building.jpg",
     body: "Independent floors designed to invite light in and open life out — the Red Diamond of Gurugram. Double-height living and a Garden in the Sky terrace.",
     highlights: ["The Red Diamond of Gurugram", "Garden in the Sky terrace", "Double-height living", "Italian marble flooring"],
   },
@@ -64,7 +64,7 @@ const projects = [
     status: "New Launch",
     config: "Independent Floors · Three-Side Open",
     size: "G+4 · Three-Side Open",
-    img: "/images/E11/e11-14-living-room-interior-view-r1-20250412.jpg",
+    img: "/images/E11/building.jpg",
     body: "Three-side-open independent floors where imagination meets form — volume, light and architectural drama, with a private sky-garden terrace.",
     highlights: ["Three-side open floors", "Volume, light & drama", "Sky-garden terrace", "Premium modular kitchen"],
   },
@@ -76,8 +76,8 @@ const projects = [
     status: "Now Selling",
     config: "Boutique Private Floors",
     size: "Two-Side Open Private Floors",
-    img: "/images/EA4/ea-4-lounge-diningjpg.jpg",
-    body: "A boutique luxury residence in Sector 73 — private, two-side-open floors in a palette of deep emerald stone and 24k-gold accents. Architecture that commands.",
+    img: "/images/EA4/building.jpg",
+    body: "A boutique luxury residence — private, two-side-open floors in a palette of deep emerald stone and 24k-gold accents. Architecture that commands.",
     highlights: ["Boutique private floors", "Two-side open homes", "Dual high-speed elevators", "Emerald & 24k-gold palette"],
   },
 ];
@@ -96,9 +96,10 @@ const additional = [
 ];
 
 const FILTER_LINKS = [
-  { label: "DLF Garden City", href: "#c2" },
-  { label: "Alameda", href: "#ea04" },
-  { label: "Plots & Floors", href: "#additional" },
+  { label: "C2 at DLF Garden City", href: "#c2" },
+  { label: "C5 at DLF Garden City", href: "#c5" },
+  { label: "E11 at DLF Garden City", href: "#e11" },
+  { label: "EA 04 at Alameda", href: "#ea04" },
 ];
 
 export default async function ProjectsPage() {
@@ -186,13 +187,11 @@ export default async function ProjectsPage() {
         {/* Project filter strip */}
         <section className="border-b border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-8 lg:px-10">
           <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-x-8 gap-y-3 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-            <span className="text-[color:var(--accent)]">{filter.allLabel}</span>
             {filter.links.map((l) => (
-              <a key={l.href ?? l.label} href={l.href} className="transition-colors hover:text-[color:var(--fg)]">
+              <a key={l.href ?? l.label} href={l.href} className="transition-colors hover:text-[color:var(--accent)]">
                 {l.label}
               </a>
             ))}
-            <span className="ml-auto hidden text-[color:var(--accent)] md:inline">{filter.trailing}</span>
           </div>
         </section>
 
@@ -223,24 +222,14 @@ export default async function ProjectsPage() {
 
                 {/* Details */}
                 <div className={`col-span-12 lg:col-span-5 ${i % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <Reveal as="div" className="flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                    <span className="font-mono text-[color:var(--accent)]">{p.no}</span>
-                    <span className="h-px flex-1 max-w-[60px] bg-[color:var(--accent)]/40" />
-                    <span className="text-[color:var(--accent)]">{p.status}</span>
-                  </Reveal>
-
                   <Link href={`/projects/${p.id}`} className="transition-colors hover:text-[color:var(--accent)]">
                     <SplitReveal
                       as="h2"
-                      className="mt-6 font-display h-sub"
+                      className="font-display h-sub"
                     >
                       {p.title}
                     </SplitReveal>
                   </Link>
-
-                  <Reveal as="p" delay={0.1} className="mt-3 text-sm text-[color:var(--muted)]">
-                    {p.location}
-                  </Reveal>
 
                   <Reveal as="p" delay={0.2} className="mt-6 max-w-md text-base leading-relaxed text-[color:var(--muted)]">
                     {p.body}
@@ -250,9 +239,9 @@ export default async function ProjectsPage() {
                   <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 border-y border-[color:var(--line)] py-6">
                     <Reveal delay={0.25}>
                       <div className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--muted)]">
-                        {cardButtons.configLabel}
+                        Location
                       </div>
-                      <div className="mt-1 text-sm">{p.config}</div>
+                      <div className="mt-1 text-sm">{p.location}</div>
                     </Reveal>
                     <Reveal delay={0.3}>
                       <div className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--muted)]">
@@ -264,7 +253,7 @@ export default async function ProjectsPage() {
 
                   {/* Highlights */}
                   <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs text-[color:var(--muted)]">
-                    {p.highlights.map((h) => (
+                    {p.highlights.filter(h => !/s\+\d|built[\s-]?form/i.test(h)).slice(0, 3).map((h) => (
                       <li key={h} className="flex items-center gap-2">
                         <span className="inline-block h-1 w-1 rounded-full bg-[color:var(--accent)]" />
                         {h}
@@ -283,38 +272,6 @@ export default async function ProjectsPage() {
                 </div>
               </article>
             ))}
-          </div>
-        </section>
-
-        {/* Additional offerings */}
-        <section id="additional" className="border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-28 lg:px-10 lg:py-40">
-          <div className="mx-auto max-w-[1440px]">
-            <SplitReveal
-              as="h2"
-              className="font-display h-section"
-            >
-              {additionalHeading}
-            </SplitReveal>
-
-            <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
-              {additionalItems.map((a, i) => (
-                <Reveal
-                  key={a.name}
-                  delay={i * 0.07}
-                  className="group flex items-center justify-between rounded-md border border-[color:var(--line)] p-8 transition-colors hover:border-[color:var(--accent)]/40 lg:p-10"
-                >
-                  <div>
-                    <h3 className="font-display-alt text-2xl lg:text-3xl">{a.name}</h3>
-                    <div className="mt-2 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
-                      {a.location} · {a.type}
-                    </div>
-                  </div>
-                  <span aria-hidden className="text-2xl text-[color:var(--muted)] transition-transform group-hover:translate-x-1 group-hover:text-[color:var(--accent)]">
-                    →
-                  </span>
-                </Reveal>
-              ))}
-            </div>
           </div>
         </section>
 

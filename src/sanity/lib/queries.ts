@@ -264,6 +264,6 @@ export const PROJECT_BY_SLUG_QUERY = defineQuery(`
 
 export const POSTS_QUERY = defineQuery(`
   *[_type == "post"] | order(publishedAt desc) {
-    _id, title, slug, author->, mainImage, publishedAt, body
+    _id, title, slug, author->, mainImage { asset->{ url } }, publishedAt, body
   }
 `);

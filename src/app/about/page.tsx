@@ -93,16 +93,14 @@ export default async function AboutPage() {
     blurb: pickStr(c?.community?.blurb, FB.community.blurb),
   };
   const mission = {
-    label: "Our Mission",
-    heading: "Transformative real estate that sets new standards.",
+    heading: "Our Mission",
     body:
-      "To develop transformative real estate that establishes new standards of quality and sustainability. We prioritise exceptional spaces that foster growth, elevated lifestyles, and meaningful contributions to urban life through innovation and a customer-centric approach in everything we do.",
+      "At Emarat, our mission is simple: to build residences that families are proud to live in, in locations worth investing in, to a standard that never wavers. Every project we undertake is guided by quality, integrity and a long-term commitment to the families and communities we build for.",
   };
   const vision = {
-    label: "Our Vision",
-    heading: "Leading through excellence, sustainability and design.",
+    heading: "Our Vision",
     body:
-      "To lead the real estate sector through excellence, sustainability and forward-thinking design. We aspire to create landmark developments that reshape skylines while enhancing how people live, work, and experience their built environment.",
+      "Our vision is to be Gurugram's most trusted name in luxury residential development, recognised not for the volume of homes we build but for the standard every single one of them is held to. We exist to raise what families expect from a home and to consistently deliver on that expectation.",
   };
   const secondaryCtaHref = pickStr(c?.leadership?.secondaryCtaHref, FB.leadership.secondaryCtaHref);
   const lead = {
@@ -168,14 +166,11 @@ export default async function AboutPage() {
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
               {[mission, vision].map((item, i) => (
                 <Reveal
-                  key={item.label}
+                  key={item.heading}
                   delay={i * 0.08}
                   className="rounded-md border border-[color:var(--line)] p-8 transition-colors hover:border-[color:var(--accent)]/40 lg:p-12"
                 >
-                  <div className="text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
-                    {item.label}
-                  </div>
-                  <h3 className="mt-6 font-display-alt text-2xl leading-tight lg:text-3xl">
+                  <h3 className="font-display-alt text-2xl leading-tight lg:text-3xl">
                     {item.heading}
                   </h3>
                   <p className="mt-5 text-[color:var(--muted)]">{item.body}</p>

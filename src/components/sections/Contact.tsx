@@ -44,9 +44,9 @@ export default function Contact({ data }: Props) {
   const categoryPlaceholder = data?.categoryPlaceholder ?? "Interested in…";
   const categoryOptions = data?.categoryOptions?.length
     ? data.categoryOptions
-    : ["C2 at DLF Garden City", "C5 at DLF Garden City", "E11 at DLF Garden City", "EA 04 at Almeda", "Residential Plots", "Independent Floors"];
+    : ["C2 at DLF Garden City", "C5 at DLF Garden City", "E11 at DLF Garden City", "EA 04 at Alameda"];
   const privacy = data?.privacy ?? "By submitting you agree to our privacy policy.";
-  const submitLabel = data?.submitLabel ?? "Request Callback";
+  const submitLabel = data?.submitLabel ?? "Request a Callback";
   const callLabel = data?.callLabel ?? "Call Us";
   const emailLabel = data?.emailLabel ?? "Email Us";
   const visitLabel = data?.visitLabel ?? "Visit Us";

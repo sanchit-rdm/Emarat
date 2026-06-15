@@ -28,7 +28,7 @@ export async function getAllPosts() {
         title,
         slug,
         author->,
-        mainImage,
+        mainImage { asset->{ url } },
         publishedAt,
         body
       }`,
@@ -52,7 +52,7 @@ export async function getPostBySlug(slug: string) {
         title,
         slug,
         author->,
-        mainImage,
+        mainImage { asset->{ url } },
         publishedAt,
         body
       }`,

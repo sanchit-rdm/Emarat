@@ -190,8 +190,6 @@ export default async function SiteFooter() {
           >
             Designed by Red Dash Media
           </Link>
-          <Link href="#" className="hover:text-[color:var(--fg)]">Privacy Policy</Link>
-          <Link href="#" className="hover:text-[color:var(--fg)]">Terms of Use</Link>
         </div>
       </div>
       </div>
