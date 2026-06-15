@@ -74,6 +74,7 @@ export type Project = {
   connectivity: LandmarkGroup[];
   mapQuery: string;
   highlights: string[];
+  brochure?: string;
 };
 
 /* Shared, brochure-accurate floor finishes. The three floor types (Stilt /

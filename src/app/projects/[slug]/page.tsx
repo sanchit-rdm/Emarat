@@ -141,10 +141,6 @@ export default async function ProjectPage({
 
           <div className="max-w-4xl">
             <Reveal as="div" y={20} className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.22em] text-white">
-              <span className="brand-pill">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[color:var(--accent)]" />
-                {project.status}
-              </span>
               <span>{project.location}</span>
             </Reveal>
 
@@ -163,8 +159,8 @@ export default async function ProjectPage({
           </div>
         </section>
 
-        {/* Sticky section nav — sits just below the fixed site header (h-28) */}
-        <nav className="sticky top-28 z-40 border-y border-[color:var(--line)] bg-[color:var(--bg)]/85 backdrop-blur-md">
+        {/* Sticky section nav */}
+        <nav className="sticky top-0 z-40 border-y border-[color:var(--line)] bg-[color:var(--bg)]/90 backdrop-blur-md">
           <div className="mx-auto flex max-w-[1440px] items-center gap-x-6 gap-y-2 overflow-x-auto px-6 py-4 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)] lg:px-10 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <span className="hidden font-mono text-[color:var(--accent)] md:inline">{project.no}</span>
             {sectionLinks.map((s) => (
@@ -172,7 +168,16 @@ export default async function ProjectPage({
                 {s.label}
               </a>
             ))}
-            <span className="ml-auto hidden whitespace-nowrap text-[color:var(--accent)] lg:inline">{project.config}</span>
+            <a
+              href={project.brochure ?? "#enquiry"}
+              download={project.brochure ? true : undefined}
+              className="ml-auto flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-[color:var(--accent)]/50 px-4 py-1.5 text-[10px] uppercase tracking-[0.2em] text-[color:var(--accent)] transition-colors hover:bg-[color:var(--accent)]/10"
+            >
+              <svg viewBox="0 0 16 16" className="h-3 w-3 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M8 2v8M5 7l3 3 3-3M3 13h10" />
+              </svg>
+              Download Brochure
+            </a>
           </div>
         </nav>
 
