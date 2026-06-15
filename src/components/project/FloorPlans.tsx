@@ -67,16 +67,12 @@ export default function FloorPlans({
                 className="object-cover"
                 style={{ filter: "sepia(0.12) saturate(0.9) brightness(0.9)" }}
               />
-              <span className="absolute left-4 top-4 rounded bg-[color:var(--bg)]/70 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--accent)] backdrop-blur">
-                {badge}
-              </span>
             </div>
           </div>
 
           {/* Plan specs */}
           <div key={`spec-${plan.id}`} className="places-fade col-span-12 lg:col-span-5">
             <div className="font-display-alt text-3xl lg:text-4xl">{plan.label}</div>
-            <p className="mt-2 text-sm text-[color:var(--muted)]">{plan.config}</p>
 
             <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-[color:var(--line)] pt-8">
               {plan.specs.map((s) => (

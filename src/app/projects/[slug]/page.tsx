@@ -60,7 +60,7 @@ export default async function ProjectPage({
     overviewHeading1: pickStr(d.overviewHeading1, "Project"),
     overviewHeading2: pickStr(d.overviewHeading2, "Overview."),
     amenitiesHeading: pickStr(d.amenitiesHeading, "Amenities"),
-    amenitiesBlurb: pickStr(d.amenitiesBlurb, "Everything within the gates — designed to make everyday living effortless."),
+    amenitiesBlurb: project.amenitiesBlurb ?? pickStr(d.amenitiesBlurb, "Designed to make everyday living as effortless as possible."),
   };
   const sectionLinks = [
     { href: "#overview", label: pickStr(d.navOverview, "Overview") },
@@ -72,7 +72,7 @@ export default async function ProjectPage({
   ];
   const floorPlansLabels = {
     heading: pickStr(d.floorPlansHeading, "Floor Plans"),
-    blurb: pickStr(d.floorPlansBlurb, "Indicative layouts. Select a floor to view its plan and key finishes."),
+    blurb: project.floorPlansBlurb ?? pickStr(d.floorPlansBlurb, "Each floor has been planned with the same attention to detail that goes into every other aspect of the residence."),
     requestLabel: pickStr(d.floorPlansRequestLabel, "Request detailed plan"),
     badge: pickStr(d.floorPlansBadge, "Indicative"),
   };
@@ -80,7 +80,7 @@ export default async function ProjectPage({
   const connectivityLabels = {
     heading1: pickStr(d.connectivityHeading1, "Location &"),
     heading2: pickStr(d.connectivityHeading2, "Connectivity."),
-    blurb: pickStr(d.connectivityBlurb, "anchored among the corridors, retail and institutions that connect the whole of the NCR."),
+    blurb: project.connectivityBlurb ?? pickStr(d.connectivityBlurb, "Positioned in one of Gurugram's most well-connected corridors, placing everything the city has to offer within easy reach."),
   };
   const enquiryLabels = {
     heading: pickStr(d.enquiryHeading, "Enquire about"),

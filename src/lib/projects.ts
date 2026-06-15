@@ -75,6 +75,9 @@ export type Project = {
   mapQuery: string;
   highlights: string[];
   brochure?: string;
+  amenitiesBlurb?: string;
+  connectivityBlurb?: string;
+  floorPlansBlurb?: string;
 };
 
 /* Shared, brochure-accurate floor finishes. The three floor types (Stilt /
@@ -189,6 +192,9 @@ export const projects: Project[] = [
     connectivity: dlfGardenCityConnectivity,
     mapQuery: "DLF Garden City Sector 93 Gurugram",
     highlights: [],
+    amenitiesBlurb: "Designed to make everyday living as effortless as possible.",
+    connectivityBlurb: "Positioned in one of Gurugram's most well-connected corridors, placing everything the city has to offer within easy reach.",
+    floorPlansBlurb: "Each floor has been planned with the same attention to detail that goes into every other aspect of the residence.",
   },
   {
     slug: "c5",
@@ -244,6 +250,9 @@ export const projects: Project[] = [
     connectivity: dlfGardenCityConnectivity,
     mapQuery: "DLF Garden City Sector 93 Gurugram",
     highlights: ["The Red Diamond of Gurugram", "Garden in the Sky terrace", "Double-height living", "Italian marble flooring"],
+    amenitiesBlurb: "Designed to ensure that every day feels as comfortable and convenient as it should.",
+    connectivityBlurb: "Everything you need — schools, hospitals, retail and connectivity — all within reach.",
+    floorPlansBlurb: "Take a look at how every floor has been laid out — the space, the rooms and how it all comes together.",
   },
   {
     slug: "e11",
@@ -299,6 +308,9 @@ export const projects: Project[] = [
     connectivity: dlfGardenCityConnectivity,
     mapQuery: "DLF Garden City Sector 93 Gurugram",
     highlights: ["Three-side open floors", "Volume, light & drama", "Sky-garden terrace", "Premium modular kitchen"],
+    amenitiesBlurb: "Everything you need, all in one place.",
+    connectivityBlurb: "Well placed within Gurugram, with the city's best schools, healthcare and retail all nearby.",
+    floorPlansBlurb: "See how the rooms and spaces have been planned across the property.",
   },
   {
     slug: "ea04",
@@ -361,6 +373,9 @@ export const projects: Project[] = [
     ],
     mapQuery: "Sector 73 Gurugram Haryana",
     highlights: ["Boutique private floors", "Two-side open homes", "Dual high-speed elevators", "Emerald & 24k-gold palette"],
+    amenitiesBlurb: "Designed to complement the way you live every day.",
+    connectivityBlurb: "A location that puts Gurugram's finest schools, hospitals and retail within easy everyday reach.",
+    floorPlansBlurb: "A detailed view of how the space has been planned.",
   },
 ];
 
