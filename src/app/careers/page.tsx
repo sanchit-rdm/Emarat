@@ -9,6 +9,7 @@ import CircleButton from "@/components/CircleButton";
 import { sanityFetch } from "@/sanity/lib/live";
 import { CAREERS_PAGE_QUERY } from "@/sanity/lib/queries";
 import { getPageContent, mergeHero, buildMetadata, pickStr, pickArr } from "@/sanity/lib/page";
+import { toPlainText } from "@/lib/portableText";
 
 const HERO_FALLBACK = {
   eyebrow: "",
@@ -77,7 +78,12 @@ export default async function CareersPage() {
     heading1: pickStr(c?.pillarsHeading?.heading1, FB.pillarsHeading.heading1),
     heading2: pickStr(c?.pillarsHeading?.heading2, FB.pillarsHeading.heading2),
   };
-  const pillars = pickArr(c?.pillars, FB.pillars);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const pillars = pickArr(c?.pillars, FB.pillars).map((p: any) => ({
+    ...p,
+    title: toPlainText(p.title) || p.title,
+    body: toPlainText(p.body) || p.body,
+  }));
   const apply = {
     heading1: pickStr(c?.apply?.heading1, FB.apply.heading1),
     heading2: pickStr(c?.apply?.heading2, FB.apply.heading2),

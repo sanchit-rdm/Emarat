@@ -79,12 +79,12 @@ export default function IntroV2({ data, eyebrow }: Props) {
       </div>
 
       {/* Thin services row. */}
-      <div className="mx-auto mt-16 grid max-w-[1440px] grid-cols-2 justify-items-center gap-x-10 gap-y-10 lg:mt-24 lg:grid-cols-4">
+      <div className="mx-auto mt-16 flex max-w-[1440px] flex-wrap justify-center gap-x-16 gap-y-10 lg:mt-24">
         {services.map((svc, i) => (
           <Reveal
             key={svc._key ?? svc.title}
             delay={0.05 * i}
-            className="border-t border-[color:var(--line)] pt-5 text-center"
+            className="w-[180px] border-t border-[color:var(--line)] pt-5 text-center"
           >
             <div className="h-px w-6 bg-[color:var(--accent)] mx-auto" />
             <div className="mt-4 font-display-alt text-lg">{svc.title}</div>

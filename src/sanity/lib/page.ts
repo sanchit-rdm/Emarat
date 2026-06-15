@@ -48,13 +48,28 @@ export function mergeHero(sanity: HeroData | undefined, fallback: Required<Omit<
   };
 }
 
-/* Use a Sanity string if present & non-empty, else the in-code fallback. */
-export function pickStr(v: string | null | undefined, fb: string): string {
-  if (typeof v === "string") {
-    const norm = v.replace(/\s+/g, " ").trim();
-    return norm !== "" ? norm : fb;
+/* Extract plain text from a string or Portable Text block array. */
+function blockToStr(v: unknown): string {
+  if (!v) return "";
+  if (typeof v === "string") return v.replace(/\s+/g, " ").trim();
+  if (Array.isArray(v)) {
+    return (v as Array<{ _type?: string; children?: Array<{ text?: string }> }>)
+      .map((block) =>
+        block._type === "block" && Array.isArray(block.children)
+          ? block.children.map((c) => c.text ?? "").join("")
+          : ""
+      )
+      .join(" ")
+      .replace(/\s+/g, " ")
+      .trim();
   }
-  return fb;
+  return "";
+}
+
+/* Use a Sanity string/blockContent if present & non-empty, else the in-code fallback. */
+export function pickStr(v: unknown, fb: string): string {
+  const str = blockToStr(v);
+  return str !== "" ? str : fb;
 }
 
 /* Use a Sanity array if present & non-empty, else the in-code fallback. */
