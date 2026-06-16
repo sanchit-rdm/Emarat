@@ -103,8 +103,11 @@ const socialIcons: Record<string, ReactNode> = {
   ),
 };
 
+const SOCIAL_ALIASES: Record<string, string> = { twitter: "x" };
+
 function getSocialIcon(label: string): ReactNode {
-  const key = label.toLowerCase().replace(/\s/g, "");
+  const raw = label.toLowerCase().replace(/\s/g, "");
+  const key = SOCIAL_ALIASES[raw] ?? raw;
   return socialIcons[key] ?? <span className="text-xs uppercase tracking-[0.14em]">{label}</span>;
 }
 
