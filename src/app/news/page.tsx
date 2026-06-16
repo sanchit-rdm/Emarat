@@ -172,7 +172,7 @@ export default async function NewsPage() {
                   </div>
                   <SplitReveal
                     as="h2"
-                    className="mt-5 font-display h-sub"
+                    className="mt-5 font-display text-2xl leading-tight lg:text-4xl"
                   >
                     {featured.title ?? ""}
                   </SplitReveal>
