@@ -8,7 +8,6 @@ import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import Parallax from "@/components/motion/Parallax";
 import CircleButton from "@/components/CircleButton";
-import EnquiryForm from "@/components/project/EnquiryForm";
 import { sanityFetch } from "@/sanity/lib/live";
 import { UPCOMING_PROJECTS_PAGE_QUERY } from "@/sanity/lib/queries";
 import { buildMetadata, pickStr } from "@/sanity/lib/page";
@@ -83,27 +82,6 @@ export default async function UpcomingProjectDetailPage({
   const project = resolveProject(sanityProjects, slug);
   if (!project) notFound();
 
-  const enquiryLabels = {
-    heading: "Enquire about",
-    blurb: "Register your interest and our sales team will get back to you within one business day with launch details, pricing and early access.",
-    phone: "+91 84509 84509",
-    email: "info@emaratrealty.com",
-    submitLabel: "Register Interest",
-    interestedLabel: "Interested in",
-    nameLabel: "Full Name",
-    namePlaceholder: "Your name",
-    phoneLabel: "Phone",
-    phonePlaceholder: "+91 00000 00000",
-    emailLabel: "Email",
-    emailPlaceholder: "your@email.com",
-    configLabel: "Type",
-    configPlaceholder: "What are you looking for?",
-    configOptions: ["Residential", "Investment / NRI", "Site visit"],
-    messageLabel: "Message",
-    messagePlaceholder: "Tell us what you're looking for…",
-    privacy: "By submitting you agree to our privacy policy.",
-  };
-
   const cta = {
     heading: pickStr(pc?.cta?.heading, "Interested in upcoming projects?"),
     body: pickStr(pc?.cta?.body, "Register your interest and our team will keep you informed on launch dates, pricing and availability."),
@@ -164,7 +142,7 @@ export default async function UpcomingProjectDetailPage({
             )}
 
             <Reveal as="div" delay={0.45} className="mt-10 flex flex-wrap items-center gap-4">
-              <CircleButton href="#enquiry" variant="filled">Register Interest</CircleButton>
+              <CircleButton href="#newsletter" variant="filled">Stay Informed</CircleButton>
               {project.status && (
                 <span className="rounded-full border border-white/30 px-4 py-2 text-[11px] uppercase tracking-[0.2em] text-white/70">
                   {project.status}
@@ -206,12 +184,43 @@ export default async function UpcomingProjectDetailPage({
           </div>
         </section>
 
-        {/* Enquiry Form */}
-        <EnquiryForm
-          projectTitle={project.title}
-          config={project.location ?? ""}
-          labels={enquiryLabels}
-        />
+        {/* Newsletter */}
+        <section id="newsletter" className="theme-green px-6 py-24 lg:px-10 lg:py-32">
+          <div className="mx-auto max-w-[860px] text-center">
+            <Reveal className="mb-3 text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
+              Stay Informed
+            </Reveal>
+            <SplitReveal as="h2" className="font-display h-section">
+              Interested in upcoming
+            </SplitReveal>
+            <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
+              projects?
+            </SplitReveal>
+            <Reveal as="p" delay={0.2} className="mx-auto mt-6 max-w-md text-sm text-[color:var(--muted)]">
+              Be the first to know about launch dates, pricing and early access for {project.title} and other upcoming Emarat developments.
+            </Reveal>
+            <Reveal delay={0.3} className="mx-auto mt-10 max-w-sm">
+              <form className="flex items-center gap-3 border-b border-[color:var(--line)] pb-3">
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  required
+                  className="flex-1 bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
+                  aria-label="Email address"
+                />
+                <button
+                  type="submit"
+                  className="shrink-0 text-xs uppercase tracking-[0.18em] text-[color:var(--accent)] transition-colors hover:text-[color:var(--fg)]"
+                >
+                  Subscribe →
+                </button>
+              </form>
+              <p className="mt-3 text-xs text-[color:var(--muted)]">
+                By subscribing you agree to our privacy policy. No spam, ever.
+              </p>
+            </Reveal>
+          </div>
+        </section>
 
         {/* Footer CTA */}
         <section className="px-6 py-24 lg:px-10 lg:py-32">
