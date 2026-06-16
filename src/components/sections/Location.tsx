@@ -30,9 +30,12 @@ const icons = {
   travel: (
     <svg viewBox="0 0 24 24" {...stroke}><path d="M3 13l8-2 4-7 2 1-2 7 6 2v2l-7-1-2 4-2-1 .5-3.5L4 16z" /></svg>
   ),
+  peaceful: (
+    <svg viewBox="0 0 24 24" {...stroke}><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /><path d="M15 10l-3 3-2-2" /></svg>
+  ),
 };
 
-type IconKey = "connectivity" | "access" | "travel";
+type IconKey = "connectivity" | "access" | "travel" | "peaceful";
 type Place = {
   id: string;
   name: string;
@@ -67,8 +70,8 @@ const DEFAULT_PLACES: Place[] = [
     name: "IGI Airport",
     heading: ["Indira Gandhi", "Airport"],
     body: "Benefit from convenient access to Indira Gandhi International Airport, ensuring smoother travel and better connectivity.",
-    feature: "Convenient Travel",
-    icon: "travel",
+    feature: "Peaceful Living",
+    icon: "peaceful",
     bg: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1920&q=75&auto=format&fit=crop",
   },
 ];
@@ -98,7 +101,7 @@ export default function Location({ data }: { data?: LocationData }) {
         heading: [toPlainText(p.headingLine1 ?? p.name ?? ""), toPlainText(p.headingLine2 ?? "")],
         body: p.body ?? "",
         feature: toPlainText(p.feature ?? ""),
-        icon: (["connectivity", "access", "travel"].includes(p.icon ?? "")
+        icon: (["connectivity", "access", "travel", "peaceful"].includes(p.icon ?? "")
           ? p.icon
           : "connectivity") as IconKey,
         bg: p.image || "/images/dwarka-expressway.jpg",
