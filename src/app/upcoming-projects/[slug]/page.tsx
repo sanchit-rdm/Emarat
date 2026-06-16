@@ -185,40 +185,36 @@ export default async function UpcomingProjectDetailPage({
         </section>
 
         {/* Newsletter */}
-        <section id="newsletter" className="theme-green px-6 py-24 lg:px-10 lg:py-32">
-          <div className="mx-auto max-w-[860px] text-center">
-            <Reveal className="mb-3 text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
-              Stay Informed
-            </Reveal>
-            <SplitReveal as="h2" className="font-display h-section">
-              Interested in upcoming
-            </SplitReveal>
-            <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
-              projects?
-            </SplitReveal>
-            <Reveal as="p" delay={0.2} className="mx-auto mt-6 max-w-md text-sm text-[color:var(--muted)]">
-              Be the first to know about launch dates, pricing and early access for {project.title} and other upcoming Emarat developments.
-            </Reveal>
-            <Reveal delay={0.3} className="mx-auto mt-10 max-w-sm">
-              <form className="flex items-center gap-3 border-b border-[color:var(--line)] pb-3">
+        <section id="newsletter" className="border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-24 lg:px-10 lg:py-32">
+          <div className="mx-auto grid max-w-[1280px] grid-cols-12 items-end gap-8">
+            <div className="col-span-12 lg:col-span-7">
+              <SplitReveal as="h2" className="font-display h-section">
+                Interested in upcoming
+              </SplitReveal>
+              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
+                projects?
+              </SplitReveal>
+            </div>
+            <div className="col-span-12 lg:col-span-5">
+              <form className="flex items-center border-b border-[color:var(--line)] py-2">
                 <input
                   type="email"
                   placeholder="your@email.com"
                   required
                   className="flex-1 bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
-                  aria-label="Email address"
+                  aria-label="Email"
                 />
                 <button
                   type="submit"
-                  className="shrink-0 text-xs uppercase tracking-[0.18em] text-[color:var(--accent)] transition-colors hover:text-[color:var(--fg)]"
+                  className="text-xs uppercase tracking-[0.18em] text-[color:var(--accent)] transition-colors hover:text-[color:var(--fg)]"
                 >
                   Subscribe →
                 </button>
               </form>
               <p className="mt-3 text-xs text-[color:var(--muted)]">
-                By subscribing you agree to our privacy policy. No spam, ever.
+                Be the first to know about launch dates, pricing and early access.
               </p>
-            </Reveal>
+            </div>
           </div>
         </section>
 
