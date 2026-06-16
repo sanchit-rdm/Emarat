@@ -62,7 +62,7 @@ export default function Projects({ data, projects: sanityProjects }: Props) {
   const allHref = data?.allHref?.trim() || "/projects";
 
   return (
-    <section id="projects" className="px-6 py-28 lg:px-10 lg:py-40">
+    <section id="projects" className="px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-40">
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
           <div>

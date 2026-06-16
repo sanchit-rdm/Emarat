@@ -144,7 +144,7 @@ export default async function NewsPage() {
 
         {/* Featured article */}
         {featured && (
-          <section className="border-y border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-20 lg:px-10 lg:py-28">
+          <section className="border-y border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-28">
             <div className="mx-auto max-w-[1440px]">
               <Reveal as="div" className="mb-8 text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
                 <span>{featuredLabel}</span>
@@ -193,7 +193,7 @@ export default async function NewsPage() {
         )}
 
         {/* Rest of articles grid (light cream) */}
-        <section className="theme-light px-6 py-24 lg:px-10 lg:py-32">
+        <section className="theme-light px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
           <div className="mx-auto max-w-[1440px]">
             <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
               <SplitReveal
@@ -258,7 +258,7 @@ export default async function NewsPage() {
         </section>
 
         {/* Newsletter */}
-        <section className="border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-24 lg:px-10 lg:py-32">
+        <section className="border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
           <div className="mx-auto grid max-w-[1280px] grid-cols-12 items-end gap-8">
             <div className="col-span-12 lg:col-span-7">
               <SplitReveal

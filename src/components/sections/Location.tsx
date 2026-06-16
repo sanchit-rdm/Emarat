@@ -257,7 +257,7 @@ export default function Location({ data }: { data?: LocationData }) {
   return (
     <section
       id="location"
-      className="relative isolate overflow-hidden px-6 py-24 lg:px-10 lg:py-32"
+      className="relative isolate overflow-hidden px-4 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-32"
     >
       {/* Crossfading full-bleed background images */}
       <div className="pointer-events-none absolute inset-0 -z-20">
@@ -285,7 +285,7 @@ export default function Location({ data }: { data?: LocationData }) {
         </Reveal>
 
         {/* Fixed-height content area */}
-        <div className="min-h-[20rem] sm:min-h-[19rem] lg:min-h-[24rem]">
+        <div className="min-h-[20rem] sm:min-h-[22rem] lg:min-h-[24rem]">
           <div key={`feature-${active}`} className="places-fade mb-4 flex items-center gap-3 text-[color:var(--accent)]">
             <span className="h-6 w-6">{icons[current.icon]}</span>
             <span className="text-xs uppercase tracking-[0.22em]">{current.feature}</span>

@@ -112,7 +112,7 @@ export default async function ProjectPage({
         {/* ---------------- 1 · Hero Banner ---------------- */}
         <section
           id="top"
-          className="relative isolate flex min-h-[92svh] flex-col justify-end overflow-hidden px-6 pb-14 pt-32 lg:px-10 lg:pb-20 lg:pt-40"
+          className="relative isolate flex min-h-[88svh] flex-col justify-end overflow-hidden px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:min-h-[92svh] lg:px-10 lg:pb-20 lg:pt-40"
         >
           <div className="pointer-events-none absolute inset-0 -z-20">
             <Parallax speed={0.3} className="h-full w-full">
@@ -183,7 +183,7 @@ export default async function ProjectPage({
         </nav>
 
         {/* ---------------- 2 · Project Overview ---------------- */}
-        <section id="overview" className="scroll-mt-44 px-6 py-24 lg:px-10 lg:py-32">
+        <section id="overview" className="scroll-mt-44 px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
           <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-10 lg:gap-16">
             <div className="col-span-12 lg:col-span-6">
               <SplitReveal as="h2" className="font-display h-section">
@@ -230,7 +230,7 @@ export default async function ProjectPage({
         </section>
 
         {/* ---------------- 3 · Amenities ---------------- */}
-        <section id="amenities" className="scroll-mt-44 border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-24 lg:px-10 lg:py-32">
+        <section id="amenities" className="scroll-mt-44 border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
           <div className="mx-auto max-w-[1440px]">
             <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
               <SplitReveal as="h2" className="font-display h-section">

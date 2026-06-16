@@ -159,7 +159,7 @@ export default async function SiteFooter() {
 
         <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-4">
-          <Image src={logo} alt="Emarat Realty" className="h-auto w-[200px]" sizes="200px" />
+          <Image src={logo} alt="Emarat Realty" className="h-auto w-36 lg:w-[200px]" sizes="(min-width: 1024px) 200px, 144px" />
           <p className="mt-6 max-w-md text-sm text-[color:var(--muted)]">{tagline}</p>
           <p className="mt-4 max-w-md text-xs leading-relaxed text-[color:var(--muted)]/70">
             {addressLines.map((line, i) => (

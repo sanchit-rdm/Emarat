@@ -28,7 +28,7 @@ export default function PageHero({
   hideFooterStrip,
 }: Props) {
   return (
-    <section className="relative isolate flex min-h-[70svh] flex-col justify-between overflow-hidden px-6 pb-6 pt-32 lg:px-10 lg:pb-10 lg:pt-40">
+    <section className="relative isolate flex min-h-[65svh] flex-col justify-between overflow-hidden px-4 pb-6 pt-24 sm:min-h-[70svh] sm:px-6 sm:pt-28 lg:px-10 lg:pb-10 lg:pt-40">
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 -z-20">
         {bgImage && (
@@ -56,7 +56,7 @@ export default function PageHero({
         </Reveal>
       )}
 
-      <div className="my-12 max-w-6xl lg:my-20">
+      <div className="my-8 max-w-6xl lg:my-20">
         <SplitReveal
           as="h1"
           className="font-display h-page"
@@ -77,7 +77,7 @@ export default function PageHero({
           <Reveal
             as="p"
             delay={0.4}
-            className="mt-10 max-w-xl text-base leading-relaxed text-[color:var(--muted)] lg:text-lg"
+            className="mt-6 max-w-xl text-base leading-relaxed text-[color:var(--muted)] lg:mt-10 lg:text-lg"
           >
             {subtitle}
           </Reveal>

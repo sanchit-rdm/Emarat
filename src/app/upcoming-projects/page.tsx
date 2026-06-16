@@ -125,7 +125,7 @@ export default async function UpcomingProjectsPage() {
         <PageHero {...hero} />
 
         {/* Project entries */}
-        <section className="theme-light px-6 py-24 lg:px-10 lg:py-32">
+        <section className="theme-light px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
           <div className="mx-auto max-w-[1440px]">
             {projects.map((project, i) => (
               <Reveal

@@ -119,7 +119,7 @@ export default async function ContactPage() {
         <PageHero {...hero} />
 
         {/* Form + Office card */}
-        <section className="px-6 py-28 lg:px-10 lg:py-40">
+        <section className="px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-40">
           <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8 lg:gap-16">
             {/* Form */}
             <div className="col-span-12 lg:col-span-7">

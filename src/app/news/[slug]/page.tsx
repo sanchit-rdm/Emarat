@@ -56,7 +56,7 @@ export default async function PostPage({ params }: Props) {
           </div>
         )}
 
-        <article className="mx-auto max-w-[740px] px-6 py-16 lg:py-24">
+        <article className="mx-auto max-w-[740px] px-4 py-12 sm:px-6 sm:py-16 lg:py-24">
           {/* Meta */}
           <div className="mb-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-[color:var(--muted)]">
             {post.author?.name && <span>{post.author.name}</span>}

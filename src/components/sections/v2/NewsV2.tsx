@@ -58,7 +58,7 @@ export default function NewsV2({ posts, labels }: { posts: Post[]; labels?: News
   const allHref = labels?.allHref?.trim() || "/news";
 
   return (
-    <section id="news" className="theme-light px-6 py-24 lg:px-10 lg:py-36">
+    <section id="news" className="theme-light px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-36">
       <div className="mx-auto flex max-w-[1440px] flex-col gap-12 lg:flex-row lg:items-center lg:gap-20">
         {/* Left — vertical title + round view-all button */}
         <div className="flex items-center justify-between gap-8 lg:w-[26%] lg:flex-col lg:items-start lg:justify-center lg:gap-14">

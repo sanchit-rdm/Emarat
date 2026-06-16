@@ -51,7 +51,7 @@ export default function SiteNavClient({
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-28 max-w-[1440px] items-center justify-between px-6 lg:px-10">
+      <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:h-28 lg:px-10">
         <Link href="/" className="flex items-center" aria-label="Emarat Realty home">
           <Image src={logo} alt="Emarat Realty" priority className="h-auto w-[130px]" sizes="130px" />
         </Link>
@@ -111,7 +111,7 @@ export default function SiteNavClient({
             type="button"
             aria-label="Toggle menu"
             onClick={() => setMenuOpen((v) => !v)}
-            className="flex flex-col gap-1.5 p-1 md:hidden"
+            className="flex flex-col gap-1.5 p-3 -mr-2 md:hidden"
           >
             <span className={`block h-px w-6 bg-[color:var(--fg)] transition-transform duration-300 ${menuOpen ? "translate-y-2.5 rotate-45" : ""}`} />
             <span className={`block h-px w-6 bg-[color:var(--fg)] transition-opacity duration-300 ${menuOpen ? "opacity-0" : ""}`} />

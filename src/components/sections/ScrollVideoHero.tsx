@@ -255,7 +255,7 @@ export default function ScrollVideoHero({ blocks, videoSrc, posterSrc, scrollLab
               ref={(el) => {
                 blockRefs.current[i] = el;
               }}
-              className={`pointer-events-none absolute inset-0 z-10 flex px-6 pb-20 pt-32 lg:px-14 lg:pb-24 lg:pt-36 ${ANCHOR_CLASSES[b.anchor]}`}
+              className={`pointer-events-none absolute inset-0 z-10 flex px-4 pb-16 pt-20 sm:px-6 sm:pb-20 sm:pt-28 lg:px-14 lg:pb-24 lg:pt-36 ${ANCHOR_CLASSES[b.anchor]}`}
               style={i === 0 ? undefined : { opacity: 0, visibility: "hidden" }}
             >
               <div

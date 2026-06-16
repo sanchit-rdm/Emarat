@@ -40,7 +40,7 @@ export default function About({ data }: Props) {
   return (
     <section
       id="about"
-      className="px-6 py-28 lg:px-10 lg:py-40"
+      className="px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-40"
     >
       <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-7">
@@ -55,7 +55,7 @@ export default function About({ data }: Props) {
             {renderPortableText(descriptionValue)}
           </Reveal>
 
-          <div className="mt-12 grid grid-cols-2 gap-x-10 gap-y-8 lg:grid-cols-3">
+          <div className="mt-12 grid grid-cols-2 gap-x-5 gap-y-6 lg:grid-cols-3 lg:gap-x-10 lg:gap-y-8">
             {services.map((svc, i) => (
               <Reveal
                 key={svc._key ?? svc.title}

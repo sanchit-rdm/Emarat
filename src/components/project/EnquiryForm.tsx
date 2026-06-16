@@ -50,7 +50,7 @@ export default function EnquiryForm({
   return (
     <section
       id="enquiry"
-      className="relative isolate scroll-mt-44 overflow-hidden border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-28 lg:px-10 lg:py-40"
+      className="relative isolate scroll-mt-44 overflow-hidden border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-40"
     >
       <div className="pointer-events-none absolute -right-32 top-1/4 h-[440px] w-[440px] rounded-full bg-[color:var(--accent)]/10 blur-[200px]" />
 
@@ -77,7 +77,7 @@ export default function EnquiryForm({
         </div>
 
         <div className="col-span-12 lg:col-span-7">
-          <Reveal className="rounded-md border border-[color:var(--line)] bg-[color:var(--bg)]/40 p-8 lg:p-10">
+          <Reveal className="rounded-md border border-[color:var(--line)] bg-[color:var(--bg)]/40 p-5 sm:p-8 lg:p-10">
             {/* Static, presentational form — wire to a backend / CRM later. */}
             <form
               onSubmit={(e) => {

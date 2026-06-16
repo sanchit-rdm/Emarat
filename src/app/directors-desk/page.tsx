@@ -101,7 +101,7 @@ export default async function DirectorsDeskPage() {
         <PageHero {...hero} />
 
         {/* Director portrait + intro */}
-        <section className="px-6 py-24 lg:px-10 lg:py-32">
+        <section className="px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
           <div className="mx-auto grid max-w-[1280px] grid-cols-12 items-end gap-8 lg:gap-12">
             <div className="col-span-12 lg:col-span-5">
               <Parallax speed={0.2} className="relative aspect-[4/5] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
@@ -134,7 +134,7 @@ export default async function DirectorsDeskPage() {
         </section>
 
         {/* Full message body */}
-        <section className="border-y border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-24 lg:px-10 lg:py-32">
+        <section className="border-y border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
           <div className="mx-auto max-w-3xl">
             {message.map((para, i) => (
               <Reveal
@@ -157,7 +157,7 @@ export default async function DirectorsDeskPage() {
 
 
         {/* CTA */}
-        <section className="border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-24 lg:px-10 lg:py-32">
+        <section className="border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
           <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-8">
             <div>
               <SplitReveal as="h2" className="font-display h-sub">

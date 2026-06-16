@@ -39,7 +39,7 @@ export default function IntroV2({ data, eyebrow }: Props) {
   const image = data?.image ?? "/images/alameda-kitchen.webp";
 
   return (
-    <section id="intro" className="theme-light px-6 py-24 lg:px-10 lg:py-40">
+    <section id="intro" className="theme-light px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-40">
       <div className="mx-auto max-w-[1100px] text-center">
         <Reveal className="eyebrow mb-6 flex items-center justify-center font-script text-2xl text-[color:var(--muted)]">
           <span>{eyebrowText}</span>
@@ -79,12 +79,12 @@ export default function IntroV2({ data, eyebrow }: Props) {
       </div>
 
       {/* Thin services row. */}
-      <div className="mx-auto mt-16 flex max-w-[1440px] flex-wrap justify-center gap-x-16 gap-y-10 lg:mt-24">
+      <div className="mx-auto mt-16 flex max-w-[1440px] flex-wrap justify-center gap-x-6 gap-y-6 sm:gap-x-10 lg:mt-24 lg:gap-x-16 lg:gap-y-10">
         {services.map((svc, i) => (
           <Reveal
             key={svc._key ?? svc.title}
             delay={0.05 * i}
-            className="w-[240px] border-t border-[color:var(--line)] pt-6 text-center"
+            className="w-full border-t border-[color:var(--line)] pt-6 text-center sm:w-[200px] lg:w-[240px]"
           >
             <div className="h-px w-8 bg-[color:var(--accent)] mx-auto" />
             <div className="mt-5 font-display-alt text-2xl">{svc.title}</div>

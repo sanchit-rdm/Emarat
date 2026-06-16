@@ -138,7 +138,7 @@ export default function PrinciplesV2({ data, labels }: Props) {
       id="principles"
       className="theme-light relative overflow-hidden py-16 lg:py-24"
     >
-      <div className="relative h-[58vh] min-h-[380px] overflow-hidden lg:h-[80vh]">
+      <div className="relative h-[45vh] min-h-[260px] overflow-hidden sm:h-[58vh] sm:min-h-[380px] lg:h-[80vh]">
         {/* Drifting image track — wider than the viewport, centred at rest. */}
         <div className="flex h-full items-center justify-center">
           <div

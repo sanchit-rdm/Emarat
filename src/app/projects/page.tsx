@@ -187,7 +187,7 @@ export default async function ProjectsPage() {
         <PageHero {...hero} />
 
         {/* Project filter strip */}
-        <section className="border-b border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-8 lg:px-10">
+        <section className="border-b border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-6 sm:px-6 sm:py-8 lg:px-10">
           <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-x-8 gap-y-3 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
             {filter.links.map((l) => (
               <a key={l.href ?? l.label} href={l.href} className="transition-colors hover:text-[color:var(--accent)]">
@@ -198,7 +198,7 @@ export default async function ProjectsPage() {
         </section>
 
         {/* Detailed project cards — alternating image side (light cream) */}
-        <section className="theme-light px-6 py-24 lg:px-10 lg:py-32">
+        <section className="theme-light px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
           <div className="mx-auto max-w-[1440px] space-y-24 lg:space-y-32">
             {(sanityProjects ?? projects).map((p, i) => (
               <article
@@ -278,7 +278,7 @@ export default async function ProjectsPage() {
         </section>
 
         {/* Closing CTA */}
-        <section className="px-6 py-24 lg:px-10 lg:py-32">
+        <section className="px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
           <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-8">
             <div>
               <SplitReveal

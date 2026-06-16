@@ -126,7 +126,7 @@ export default async function AboutPage() {
         <PageHero {...hero} />
 
         {/* Opening statement + highlights (light cream) */}
-        <section className="theme-light px-6 py-20 lg:px-10 lg:py-28">
+        <section className="theme-light px-4 py-12 sm:px-6 sm:py-16 lg:px-10 lg:py-28">
           <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
             <div className="col-span-12 lg:col-span-10">
               <SplitReveal as="h2" className="font-display h-section">
@@ -163,7 +163,7 @@ export default async function AboutPage() {
 
 
         {/* Community / Social (light cream) */}
-        <section className="theme-light px-6 py-20 lg:px-10 lg:py-28">
+        <section className="theme-light px-4 py-12 sm:px-6 sm:py-16 lg:px-10 lg:py-28">
           <div className="mx-auto max-w-[1440px]">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
               {[mission, vision].map((item, i) => (
@@ -183,7 +183,7 @@ export default async function AboutPage() {
         </section>
 
         {/* Leadership teaser */}
-        <section className="relative isolate overflow-hidden border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-6 py-20 lg:px-10 lg:py-28">
+        <section className="relative isolate overflow-hidden border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-12 sm:px-6 sm:py-16 lg:px-10 lg:py-28">
           <div className="pointer-events-none absolute -right-32 top-1/4 h-[440px] w-[440px] rounded-full bg-[color:var(--accent)]/10 blur-[200px]" />
 
           <div className="mx-auto grid max-w-[1440px] grid-cols-12 items-center gap-12">

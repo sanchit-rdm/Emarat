@@ -61,7 +61,7 @@ export default function News({ posts, labels }: { posts: Post[]; labels?: NewsLa
   const authorFallback = labels?.authorFallback?.trim() || "Emarat Realty";
 
   return (
-    <section id="news" className="px-6 py-28 lg:px-10 lg:py-40">
+    <section id="news" className="px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-40">
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
           <div>

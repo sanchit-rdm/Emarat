@@ -35,7 +35,7 @@ export default function StatementV2({ data }: Props) {
   const href = data?.ctaHref || "/projects";
   const ctaLabel = data?.ctaLabel || "Read More";
   return (
-    <section className="relative isolate flex min-h-screen flex-col justify-between overflow-hidden px-6 py-24 lg:px-10 lg:py-28">
+    <section className="relative isolate flex min-h-screen flex-col justify-between overflow-hidden px-4 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-28">
       {/* Full-bleed background image with gentle, warm grading */}
       <div className="pointer-events-none absolute inset-0 -z-20">
         <Image

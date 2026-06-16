@@ -124,7 +124,7 @@ export default function ResidencesV2({ projects, labels }: Props) {
   const current = list[active];
 
   return (
-    <section id="residences" className="theme-green px-6 py-24 lg:px-10 lg:py-36">
+    <section id="residences" className="theme-green px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-36">
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-6 lg:mb-16">
           <div>
@@ -174,7 +174,7 @@ export default function ResidencesV2({ projects, labels }: Props) {
           {/* Detail panel */}
           <div className="w-full lg:flex-1">
             <div key={active} className="places-fade">
-              <h3 className="font-display text-4xl leading-tight lg:text-5xl">
+              <h3 className="font-display text-3xl leading-tight sm:text-4xl lg:text-5xl">
                 {current.title}
               </h3>
 

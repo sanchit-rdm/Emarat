@@ -24,7 +24,7 @@ export default function Connectivity({
   return (
     <section
       id="location"
-      className="relative isolate scroll-mt-44 overflow-hidden border-t border-[color:var(--line)] px-6 py-24 lg:px-10 lg:py-32"
+      className="relative isolate scroll-mt-44 overflow-hidden border-t border-[color:var(--line)] px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32"
     >
       <div className="pointer-events-none absolute -left-40 top-1/4 h-[420px] w-[420px] rounded-full bg-[color:var(--brand-green)]/15 blur-[160px]" />
 
@@ -83,7 +83,7 @@ export default function Connectivity({
 
         {/* Right: live map */}
         <div className="col-span-12 lg:col-span-7">
-          <Reveal className="relative aspect-square overflow-hidden rounded-md border border-[color:var(--line)] bg-[color:var(--bg-alt)] lg:aspect-auto lg:h-full lg:min-h-[460px]">
+          <Reveal className="relative aspect-[4/3] overflow-hidden rounded-md border border-[color:var(--line)] bg-[color:var(--bg-alt)] sm:aspect-square lg:aspect-auto lg:h-full lg:min-h-[460px]">
             <iframe
               title={`Map — ${location}`}
               src={`https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`}

@@ -50,7 +50,7 @@ const propertyTypes = [
 
 export default function Materials() {
   return (
-    <section id="properties" className="px-6 py-28 lg:px-10 lg:py-40">
+    <section id="properties" className="px-4 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-40">
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
           <div>
@@ -112,7 +112,7 @@ export default function Materials() {
         </div>
 
         <Reveal as="div" delay={0.2} className="mt-12 lg:mt-16">
-          <div className="relative aspect-[21/9] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-[color:var(--bg-alt)] sm:aspect-[16/9] lg:aspect-[21/9]">
             <Image
               src="/images/alameda-entrance.webp"
               alt="Luxury living room DLF Garden City"
@@ -122,7 +122,7 @@ export default function Materials() {
               style={{ filter: "sepia(0.15) saturate(0.9) brightness(0.8)" }}
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[color:var(--bg)]/85 via-[color:var(--bg)]/20 to-transparent" />
-            <div className="absolute inset-y-0 left-0 flex max-w-md flex-col justify-end p-8 lg:p-12">
+            <div className="absolute inset-y-0 left-0 flex max-w-md flex-col justify-end p-5 sm:p-8 lg:p-12">
               <div className="mb-2 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
                 Inside / C5 Residences
               </div>

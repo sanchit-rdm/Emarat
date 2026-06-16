@@ -73,7 +73,7 @@ export default function IconicIntroV2({ data, labels }: Props) {
   return (
     <section
       ref={sectionRef}
-      className="relative isolate flex min-h-screen items-center justify-center overflow-hidden bg-[color:var(--bg)] px-6 py-32"
+      className="relative isolate flex min-h-screen items-center justify-center overflow-hidden bg-[color:var(--bg)] px-4 py-20 sm:px-6 sm:py-28 lg:py-32"
     >
       {/* Faint image that appears on scroll */}
       <div

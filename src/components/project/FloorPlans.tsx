@@ -22,7 +22,7 @@ export default function FloorPlans({
   const badge = labels?.badge?.trim() || "Indicative";
 
   return (
-    <section id="floor-plans" className="scroll-mt-44 px-6 py-24 lg:px-10 lg:py-32">
+    <section id="floor-plans" className="scroll-mt-44 px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
           <SplitReveal as="h2" className="font-display h-section">
@@ -72,9 +72,9 @@ export default function FloorPlans({
 
           {/* Plan specs */}
           <div key={`spec-${plan.id}`} className="places-fade col-span-12 lg:col-span-5">
-            <div className="font-display-alt text-3xl lg:text-4xl">{plan.label}</div>
+            <div className="font-display-alt text-2xl sm:text-3xl lg:text-4xl">{plan.label}</div>
 
-            <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-[color:var(--line)] pt-8">
+            <dl className="mt-8 grid grid-cols-1 gap-x-6 gap-y-4 border-t border-[color:var(--line)] pt-8 sm:grid-cols-2 sm:gap-y-6">
               {plan.specs.map((s) => (
                 <div key={s.label}>
                   <dt className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--muted)]">{s.label}</dt>
