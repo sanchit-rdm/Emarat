@@ -10,7 +10,7 @@ import Parallax from "@/components/motion/Parallax";
 import CircleButton from "@/components/CircleButton";
 import { sanityFetch } from "@/sanity/lib/live";
 import { UPCOMING_PROJECTS_PAGE_QUERY } from "@/sanity/lib/queries";
-import { buildMetadata, pickStr } from "@/sanity/lib/page";
+import { buildMetadata } from "@/sanity/lib/page";
 import { renderPortableText } from "@/lib/portableText";
 import type { PortableTextBlock } from "@/lib/portableText";
 import { UPCOMING_PROJECTS_FALLBACK, type UpcomingProject } from "../page";
@@ -82,13 +82,6 @@ export default async function UpcomingProjectDetailPage({
   const project = resolveProject(sanityProjects, slug);
   if (!project) notFound();
 
-  const cta = {
-    heading: pickStr(pc?.cta?.heading, "Interested in upcoming projects?"),
-    body: pickStr(pc?.cta?.body, "Register your interest and our team will keep you informed on launch dates, pricing and availability."),
-    buttonLabel: pickStr(pc?.cta?.buttonLabel, "View All Upcoming"),
-    buttonHref: "/upcoming-projects",
-  };
-
   return (
     <>
       <SiteNav />
@@ -125,12 +118,6 @@ export default async function UpcomingProjectDetailPage({
           </Reveal>
 
           <div className="max-w-4xl">
-            {project.location && (
-              <Reveal as="div" y={20} className="mb-4 text-xs uppercase tracking-[0.22em] text-white/70">
-                {project.location}
-              </Reveal>
-            )}
-
             <SplitReveal as="h1" className="font-display h-page text-[color:var(--fg)]">
               {project.title}
             </SplitReveal>
@@ -218,22 +205,6 @@ export default async function UpcomingProjectDetailPage({
           </div>
         </section>
 
-        {/* Footer CTA */}
-        <section className="px-6 py-24 lg:px-10 lg:py-32">
-          <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-8">
-            <div>
-              <SplitReveal as="h2" className="font-display h-sub">
-                {cta.heading}
-              </SplitReveal>
-              <Reveal as="p" delay={0.15} className="mt-4 max-w-md text-sm text-[color:var(--muted)]">
-                {cta.body}
-              </Reveal>
-            </div>
-            <CircleButton href={cta.buttonHref} variant="outline">
-              {cta.buttonLabel}
-            </CircleButton>
-          </div>
-        </section>
       </main>
       <SiteFooter />
     </>
