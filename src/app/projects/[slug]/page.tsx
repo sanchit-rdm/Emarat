@@ -164,7 +164,6 @@ export default async function ProjectPage({
         {/* Sticky section nav */}
         <nav className="sticky top-0 z-40 border-y border-[color:var(--line)] bg-[color:var(--bg)]/90 backdrop-blur-md">
           <div className="mx-auto flex max-w-[1440px] items-center gap-x-6 gap-y-2 overflow-x-auto px-6 py-4 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)] lg:px-10 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <span className="hidden font-mono text-[color:var(--accent)] md:inline">{project.no}</span>
             {sectionLinks.map((s) => (
               <a key={s.href} href={s.href} className="whitespace-nowrap transition-colors hover:text-[color:var(--fg)]">
                 {s.label}
