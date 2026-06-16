@@ -32,7 +32,7 @@ export const siteSettingsType = defineType({
               title: "Platform",
               type: "string",
               options: {
-                list: ["Instagram", "Facebook", "LinkedIn", "YouTube", "Twitter / X"],
+                list: ["Instagram", "Facebook", "LinkedIn", "YouTube", "X"],
               },
             }),
             defineField({ name: "url", title: "URL", type: "url" }),

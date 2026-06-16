@@ -103,7 +103,7 @@ const socialIcons: Record<string, ReactNode> = {
   ),
 };
 
-const SOCIAL_ALIASES: Record<string, string> = { twitter: "x" };
+const SOCIAL_ALIASES: Record<string, string> = { twitter: "x", "twitter/x": "x" };
 
 function getSocialIcon(label: string): ReactNode {
   const raw = label.toLowerCase().replace(/\s/g, "");
