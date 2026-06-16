@@ -189,10 +189,10 @@ export default async function UpcomingProjectDetailPage({
           <div className="mx-auto grid max-w-[1280px] grid-cols-12 items-end gap-8">
             <div className="col-span-12 lg:col-span-7">
               <SplitReveal as="h2" className="font-display h-section">
-                Monthly notes from
+                Interested in upcoming
               </SplitReveal>
               <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
-                the drawing table.
+                projects?
               </SplitReveal>
             </div>
             <div className="col-span-12 lg:col-span-5">
@@ -212,6 +212,7 @@ export default async function UpcomingProjectDetailPage({
                 </button>
               </form>
               <p className="mt-3 text-xs text-[color:var(--muted)]">
+                Be the first to know about launch dates, pricing and more.
               </p>
             </div>
           </div>
