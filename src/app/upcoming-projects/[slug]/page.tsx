@@ -23,7 +23,7 @@ function resolveProject(
   const sanity = sanityProjects.find((p) => (p.slug || p._key) === slug);
   const fallback = UPCOMING_PROJECTS_FALLBACK.find((p) => p.slug === slug);
   if (!sanity && !fallback) return undefined;
-  return { ...fallback, ...sanity, slug };
+  return { ...fallback, ...sanity, slug, _key: (sanity?._key ?? fallback?._key ?? slug) } as UpcomingProject;
 }
 
 export async function generateStaticParams() {

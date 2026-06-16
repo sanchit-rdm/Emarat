@@ -6,9 +6,8 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
-import { getAllPosts } from "@/lib/sanity.client";
 import { sanityFetch } from "@/sanity/lib/live";
-import { NEWS_PAGE_QUERY } from "@/sanity/lib/queries";
+import { NEWS_PAGE_QUERY, POSTS_QUERY } from "@/sanity/lib/queries";
 import { getPageContent, mergeHero, buildMetadata, pickStr } from "@/sanity/lib/page";
 
 const FB = {
@@ -109,10 +108,12 @@ function formatDate(d?: string) {
 }
 
 export default async function NewsPage() {
-  const [posts, { data }] = await Promise.all([
-    getAllPosts(),
+  const [{ data: postsRaw }, { data }] = await Promise.all([
+    sanityFetch({ query: POSTS_QUERY, tags: ["post"] }),
     sanityFetch({ query: NEWS_PAGE_QUERY, tags: ["newsPage"] }),
   ]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const posts = (postsRaw as any[]) ?? [];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const c = (data as any) ?? {};
   const items: Post[] = posts && posts.length > 0 ? posts : placeholders;
