@@ -156,6 +156,24 @@ function pick<T>(sanityVal: T | undefined | null, fallback: T): T {
   return sanityVal;
 }
 
+// Merges Sanity floor plans with the static fallback by id so that floors not
+// yet added in Sanity are still shown from the static data.
+function mergeFloorPlans(
+  sanity: Project["floorPlans"] | undefined | null,
+  fallback: Project["floorPlans"]
+): Project["floorPlans"] {
+  if (!sanity || sanity.length === 0) return fallback;
+  const sanityById = new Map(sanity.map((p) => [p.id, p]));
+  // Overlay Sanity onto each fallback floor; preserve fallback order
+  const merged = fallback.map((fp) => sanityById.get(fp.id) ?? fp);
+  // Append any Sanity-only floors not present in the static data
+  const fallbackIds = new Set(fallback.map((fp) => fp.id));
+  for (const sp of sanity) {
+    if (!fallbackIds.has(sp.id)) merged.push(sp);
+  }
+  return merged;
+}
+
 // Converts raw Sanity response to the Project type, overlaying it on the static
 // brochure data so any field left empty in Sanity falls back gracefully.
 function normalize(raw: Record<string, unknown>, fallback: Project | null): Project {
@@ -178,7 +196,7 @@ function normalize(raw: Record<string, unknown>, fallback: Project | null): Proj
     mapQuery: pick(raw.mapQuery as string, f.mapQuery),
     stats: pick(raw.stats as Project["stats"], f.stats),
     amenities: pick(raw.amenities as Project["amenities"], f.amenities),
-    floorPlans: pick(raw.floorPlans as Project["floorPlans"], f.floorPlans),
+    floorPlans: mergeFloorPlans(raw.floorPlans as Project["floorPlans"], f.floorPlans),
     gallery: pick(raw.gallery as Project["gallery"], f.gallery),
     connectivity: pick(raw.connectivity as Project["connectivity"], f.connectivity),
     highlights: (raw.highlights as string[]) ?? f.highlights,
