@@ -1,10 +1,6 @@
 import { client } from "./sanity.client";
 import { getProject, type Project } from "./projects";
 
-const hasValidConfig =
-  !!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID &&
-  !!process.env.NEXT_PUBLIC_SANITY_DATASET;
-
 // Resolves all image references to CDN URLs inside the GROQ query so the
 // frontend components can keep using plain string <img src> / Next Image src.
 const PROJECT_FIELDS = /* groq */ `
@@ -63,7 +59,6 @@ export type SanityProjectListing = {
 
 export async function getSanityProject(slug: string): Promise<Project | null> {
   const staticProject = getProject(slug) ?? null;
-  if (!hasValidConfig) return staticProject;
   try {
     const raw = await client.fetch(
       `*[_type == "project" && slug.current == $slug][0]{ ${PROJECT_FIELDS} }`,
@@ -79,7 +74,6 @@ export async function getSanityProject(slug: string): Promise<Project | null> {
 }
 
 export async function getSanityProjects(): Promise<Project[]> {
-  if (!hasValidConfig) return [];
   try {
     const rows = await client.fetch(
       `*[_type == "project"] | order(no asc){ ${PROJECT_FIELDS} }`,
@@ -99,7 +93,6 @@ export async function getSanityProjectSeo(slug: string): Promise<{
   metaDescription?: string;
   ogImage?: string | null;
 } | null> {
-  if (!hasValidConfig) return null;
   try {
     return await client.fetch(
       `*[_type == "project" && slug.current == $slug][0].seo{
@@ -114,7 +107,6 @@ export async function getSanityProjectSeo(slug: string): Promise<{
 }
 
 export async function getSanityProjectSlugs(): Promise<string[]> {
-  if (!hasValidConfig) return [];
   try {
     const slugs = await client.fetch(
       `*[_type == "project"].slug.current`,
@@ -128,7 +120,6 @@ export async function getSanityProjectSlugs(): Promise<string[]> {
 }
 
 export async function getSanityProjectListings(): Promise<SanityProjectListing[]> {
-  if (!hasValidConfig) return [];
   try {
     return await client.fetch(
       `*[_type == "project"] | order(no asc){

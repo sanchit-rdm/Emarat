@@ -4,8 +4,6 @@ const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "k6lgt7ii";
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2024-05-25";
 
-const hasValidConfig = !!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID && !!process.env.NEXT_PUBLIC_SANITY_DATASET;
-
 export const client = createClient({
   projectId,
   dataset,
@@ -15,12 +13,6 @@ export const client = createClient({
 });
 
 export async function getAllPosts() {
-  if (!hasValidConfig) {
-    console.warn(
-      "Sanity is not configured. Please set NEXT_PUBLIC_SANITY_PROJECT_ID and NEXT_PUBLIC_SANITY_DATASET"
-    );
-    return [];
-  }
   try {
     return await client.fetch(
       `*[_type == "post"] | order(publishedAt desc) {
@@ -42,9 +34,6 @@ export async function getAllPosts() {
 }
 
 export async function getPostBySlug(slug: string) {
-  if (!hasValidConfig) {
-    return null;
-  }
   try {
     return await client.fetch(
       `*[_type == "post" && slug.current == $slug][0] {
@@ -66,9 +55,6 @@ export async function getPostBySlug(slug: string) {
 }
 
 export async function getAllAuthors() {
-  if (!hasValidConfig) {
-    return [];
-  }
   try {
     return await client.fetch(
       `*[_type == "author"] {
