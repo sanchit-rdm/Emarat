@@ -74,6 +74,7 @@ type SanityProject = {
   location?: string;
   status?: string;
   config?: string;
+  size?: string;
   heroImage?: string | null;
 };
 
@@ -100,7 +101,7 @@ function toResidences(projects?: SanityProject[]): Residence[] {
       title: p.title ?? "",
       place: p.location ?? "",
       status: p.status ?? "",
-      type: p.config ?? "",
+      type: p.size ?? p.config ?? "",
       img: p.heroImage as string,
       href: p.slug ? `/projects/${p.slug}` : "/projects",
     }));
