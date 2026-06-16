@@ -25,9 +25,6 @@ export default function EnquiryForm({
     phonePlaceholder?: string;
     emailLabel?: string;
     emailPlaceholder?: string;
-    configLabel?: string;
-    configPlaceholder?: string;
-    configOptions?: string[];
     messageLabel?: string;
     messagePlaceholder?: string;
     privacy?: string;
@@ -35,7 +32,7 @@ export default function EnquiryForm({
 }) {
   const [sent, setSent] = useState(false);
   const heading = labels?.heading?.trim() || "Enquire about";
-  const blurb = labels?.blurb?.trim() || "Share your details and our sales team will get back to you within one business day with availability, pricing and a private site visit.";
+  const blurb = labels?.blurb?.trim() || "Share your details and our team will get back to you shortly for the next steps.";
   const phone = labels?.phone?.trim() || "+91 84509 84509";
   const email = labels?.email?.trim() || "info@emaratrealty.com";
   const submitLabel = labels?.submitLabel?.trim() || "Send Enquiry";
@@ -46,9 +43,6 @@ export default function EnquiryForm({
   const phonePlaceholder = labels?.phonePlaceholder?.trim() || "+91 00000 00000";
   const emailLabel = labels?.emailLabel?.trim() || "Email";
   const emailPlaceholder = labels?.emailPlaceholder?.trim() || "your@email.com";
-  const configLabel = labels?.configLabel?.trim() || "Configuration";
-  const configPlaceholder = labels?.configPlaceholder?.trim() || "Preferred type";
-  const configOptions = labels?.configOptions?.length ? labels.configOptions : ["Site visit", "Investment / NRI"];
   const messageLabel = labels?.messageLabel?.trim() || "Message";
   const messagePlaceholder = labels?.messagePlaceholder?.trim() || "Tell us what you're looking for…";
   const privacy = labels?.privacy?.trim() || "By submitting you agree to our privacy policy.";
@@ -100,21 +94,7 @@ export default function EnquiryForm({
                 <Field label={nameLabel} name="name" placeholder={namePlaceholder} required />
                 <Field label={phoneLabel} name="phone" type="tel" placeholder={phonePlaceholder} required />
               </div>
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                <Field label={emailLabel} name="email" type="email" placeholder={emailPlaceholder} />
-                <div className="border-b border-[color:var(--line)] pb-3 transition-colors focus-within:border-[color:var(--accent)]">
-                  <label className="block text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                    {configLabel}
-                  </label>
-                  <select className="mt-2 w-full bg-transparent text-sm outline-none" defaultValue="">
-                    <option value="" disabled className="bg-[color:var(--bg)]">{configPlaceholder}</option>
-                    <option className="bg-[color:var(--bg)]">{config}</option>
-                    {configOptions.map((opt) => (
-                      <option key={opt} className="bg-[color:var(--bg)]">{opt}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
+              <Field label={emailLabel} name="email" type="email" placeholder={emailPlaceholder} />
               <div className="border-b border-[color:var(--line)] pb-3 transition-colors focus-within:border-[color:var(--accent)]">
                 <label className="block text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
                   {messageLabel}

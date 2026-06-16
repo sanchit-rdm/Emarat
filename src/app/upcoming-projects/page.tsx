@@ -18,6 +18,7 @@ const HERO_FALLBACK = {
   titleTop: "Upcoming",
   titleBottom: "Projects",
   subtitle: "Stay informed on everything that is coming next.",
+  trailing: "",
   bgImage: "/images/alameda-bedroom-3.webp",
 };
 

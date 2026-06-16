@@ -84,7 +84,7 @@ export default async function ProjectPage({
   };
   const enquiryLabels = {
     heading: pickStr(d.enquiryHeading, "Enquire about"),
-    blurb: pickStr(d.enquiryBlurb, "Share your details and our sales team will get back to you within one business day with availability, pricing and a private site visit."),
+    blurb: pickStr(d.enquiryBlurb, "Share your details and our team will get back to you shortly for the next steps."),
     phone: pickStr(d.enquiryPhone, "+91 84509 84509"),
     email: pickStr(d.enquiryEmail, "info@emaratrealty.com"),
     submitLabel: pickStr(d.enquirySubmitLabel, "Send Enquiry"),
