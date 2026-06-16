@@ -168,8 +168,9 @@ export const homePageType = defineType({
                   options: {
                     list: [
                       { title: "Connectivity (signal)", value: "connectivity" },
-                      { title: "Access (road)", value: "access" },
+                      { title: "Access (road / pillars)", value: "access" },
                       { title: "Travel (plane)", value: "travel" },
+                      { title: "Peaceful Living (moon)", value: "peaceful" },
                     ],
                   },
                 }),
