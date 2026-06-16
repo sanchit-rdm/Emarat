@@ -6,6 +6,8 @@ import SiteFooter from "@/components/sections/SiteFooter";
 import { getPostBySlug } from "@/lib/sanity.client";
 import { renderPortableText } from "@/lib/portableText";
 
+export const dynamic = 'force-dynamic';
+
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

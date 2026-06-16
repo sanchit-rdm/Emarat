@@ -15,6 +15,8 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { HOME_PAGE_QUERY, POSTS_QUERY, PROJECTS_LISTING_QUERY } from "@/sanity/lib/queries";
 import { buildMetadata } from "@/sanity/lib/page";
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata(): Promise<Metadata> {
   const { data } = await sanityFetch({ query: HOME_PAGE_QUERY, tags: ["homePage"] });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

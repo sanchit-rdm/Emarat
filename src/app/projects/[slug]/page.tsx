@@ -19,6 +19,8 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { PROJECTS_PAGE_QUERY } from "@/sanity/lib/queries";
 import { buildMetadata, pickStr, pickArr } from "@/sanity/lib/page";
 
+export const dynamic = 'force-dynamic';
+
 export async function generateStaticParams() {
   const sanitySlugs = await getSanityProjectSlugs();
   const allSlugs = [...new Set([...sanitySlugs, ...projectSlugs])];

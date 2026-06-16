@@ -16,6 +16,8 @@ import { renderPortableText } from "@/lib/portableText";
 import type { PortableTextBlock } from "@/lib/portableText";
 import { UPCOMING_PROJECTS_FALLBACK, type UpcomingProject } from "../page";
 
+export const dynamic = 'force-dynamic';
+
 function resolveProject(
   sanityProjects: UpcomingProject[],
   slug: string

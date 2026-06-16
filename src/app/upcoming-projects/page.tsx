@@ -13,6 +13,8 @@ import { buildMetadata, mergeHero, pickArr } from "@/sanity/lib/page";
 import { renderPortableText } from "@/lib/portableText";
 import type { PortableTextBlock } from "@/lib/portableText";
 
+export const dynamic = 'force-dynamic';
+
 const HERO_FALLBACK = {
   eyebrow: "Coming Soon",
   titleTop: "Upcoming",

@@ -10,6 +10,8 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { NEWS_PAGE_QUERY, POSTS_QUERY } from "@/sanity/lib/queries";
 import { getPageContent, mergeHero, buildMetadata, pickStr } from "@/sanity/lib/page";
 
+export const dynamic = 'force-dynamic';
+
 const FB = {
   featuredLabel: "★ Featured",
   readArticleLabel: "Read article",

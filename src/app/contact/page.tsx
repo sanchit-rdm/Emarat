@@ -9,6 +9,8 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { CONTACT_PAGE_QUERY } from "@/sanity/lib/queries";
 import { getPageContent, mergeHero, buildMetadata, pickStr, pickArr } from "@/sanity/lib/page";
 
+export const dynamic = 'force-dynamic';
+
 const HERO_FALLBACK = {
   eyebrow: "",
   titleTop: "Speak to our",

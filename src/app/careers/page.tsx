@@ -11,6 +11,8 @@ import { CAREERS_PAGE_QUERY } from "@/sanity/lib/queries";
 import { getPageContent, mergeHero, buildMetadata, pickStr, pickArr } from "@/sanity/lib/page";
 import { toPlainText } from "@/lib/portableText";
 
+export const dynamic = 'force-dynamic';
+
 const HERO_FALLBACK = {
   eyebrow: "",
   titleTop: "Build your career,",
