@@ -21,7 +21,6 @@ const DEFAULT_NAV: NavItem[] = [
   {
     label: "Projects",
     dropdown: [
-      { href: "/projects", label: "All Projects" },
       { href: "/projects/c2", label: "C2 at DLF Garden City" },
       { href: "/projects/c5", label: "C5 at DLF Garden City" },
       { href: "/projects/e11", label: "E11 at DLF Garden City" },
@@ -31,7 +30,6 @@ const DEFAULT_NAV: NavItem[] = [
   {
     label: "Upcoming Projects",
     dropdown: [
-      { href: "/upcoming-projects", label: "All Upcoming Projects" },
       { href: "/upcoming-projects/goa", label: "Goa" },
       { href: "/upcoming-projects/bhimtal", label: "Bhimtal" },
       { href: "/upcoming-projects/lakefarms", label: "Lakefarms" },
