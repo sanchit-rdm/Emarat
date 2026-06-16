@@ -177,9 +177,9 @@ export const projects: Project[] = [
       { name: "VRV / VRF Air Conditioning", icon: "ac" },
     ],
     floorPlans: [
-      stiltFloor("/images/C-2/dlfgc-rear-3d-view-initial-design-20250307.jpg"),
       typicalFloor("Spanish-inspired 5 BHK residence per floor.", "/images/C-2/c2-living-dining-interior-view-01-approved-r0-20240122.jpg"),
       terraceFloor("/images/C-2/c2-master-bedroom-interior-view-02-20250201.jpg"),
+      stiltFloor("/images/C-2/dlfgc-rear-3d-view-initial-design-20250307.jpg"),
     ],
     gallery: [
       { src: "/images/C-2/c2-living-interior-view-approved-r0-20240122.jpg", label: "Living Room" },
@@ -235,9 +235,9 @@ export const projects: Project[] = [
       { name: "Vastu Compliant", icon: "vastu" },
     ],
     floorPlans: [
-      stiltFloor("/images/C-5/c-5-11-stilt.jpg"),
       typicalFloor("Full-floor independent residence.", "/images/C-5/c-5-11-double-height.jpg"),
       terraceFloor("/images/C-5/c5-left-side-image-2026-03-06-at-2-44-10-pm.jpg"),
+      stiltFloor("/images/C-5/c-5-11-stilt.jpg"),
     ],
     gallery: [
       { src: "/images/C-5/c-5-11-double-height.jpg", label: "Double Height Living" },
@@ -293,9 +293,9 @@ export const projects: Project[] = [
       { name: "Vastu Compliant", icon: "vastu" },
     ],
     floorPlans: [
-      stiltFloor("/images/E11/e11-14-lobby-interior-view-r0-20250313.jpg"),
       typicalFloor("Three-side-open independent residence.", "/images/E11/e11-14-living-room-interior-view-r1-20250412.jpg"),
       terraceFloor("/images/E11/building-night.jpg"),
+      stiltFloor("/images/E11/e11-14-lobby-interior-view-r0-20250313.jpg"),
     ],
     gallery: [
       { src: "/images/E11/e11-14-living-dining-interior-view-r0-20250313.jpg", label: "Living & Dining" },
@@ -351,9 +351,9 @@ export const projects: Project[] = [
       { name: "Vastu Compliant", icon: "vastu" },
     ],
     floorPlans: [
-      stiltFloor("/images/EA4/ea-4-stilt-floor.jpg"),
       typicalFloor("Two-side-open boutique private floor.", "/images/EA4/ea-4-lounge-diningjpg.jpg"),
       terraceFloor("/images/EA4/e-a-4-elevation-view.jpg"),
+      stiltFloor("/images/EA4/ea-4-stilt-floor.jpg"),
     ],
     gallery: [
       { src: "/images/EA4/ea-4-ent-lobbyjpg.jpg", label: "Entry Lobby" },
