@@ -170,7 +170,7 @@ export const homePageType = defineType({
                       { title: "Connectivity (signal)", value: "connectivity" },
                       { title: "Access (road / pillars)", value: "access" },
                       { title: "Travel (plane)", value: "travel" },
-                      { title: "Peaceful Living (moon)", value: "peaceful" },
+                      { title: "Peaceful Living (person in chair)", value: "peaceful" },
                     ],
                   },
                 }),

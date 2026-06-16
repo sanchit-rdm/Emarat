@@ -31,7 +31,28 @@ const icons = {
     <svg viewBox="0 0 24 24" {...stroke}><path d="M3 13l8-2 4-7 2 1-2 7 6 2v2l-7-1-2 4-2-1 .5-3.5L4 16z" /></svg>
   ),
   peaceful: (
-    <svg viewBox="0 0 24 24" {...stroke}><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /><path d="M15 10l-3 3-2-2" /></svg>
+    <svg viewBox="0 0 24 24" {...stroke}>
+      {/* head */}
+      <circle cx="9" cy="5" r="2" />
+      {/* torso leaning into chair back */}
+      <path d="M9 7l-1 4" />
+      {/* chair back */}
+      <path d="M5 3v11" />
+      {/* chair seat */}
+      <path d="M5 11h8" />
+      {/* chair right side */}
+      <path d="M13 8v3" />
+      {/* chair front legs */}
+      <path d="M5 14v4M11 14v4" />
+      {/* person's legs resting */}
+      <path d="M8 11l4 3" />
+      {/* side table top */}
+      <path d="M16 10h4" />
+      {/* table leg */}
+      <path d="M18 10v5" />
+      {/* cup on table */}
+      <path d="M16.5 7h2.5l-.5 3h-1.5z" />
+    </svg>
   ),
 };
 
