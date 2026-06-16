@@ -37,7 +37,7 @@ export default function ContactV2({ data, labels }: Props) {
   const heading1 = data?.heading1 ?? "Ready to find";
   const heading2 = data?.heading2 ?? "your perfect home?";
   const eyebrow = labels?.eyebrow ?? "Make Your Enquiry";
-  const lead = labels?.lead ?? "Leave your details and our team will get back to you within one business day.";
+  const lead = labels?.lead ?? "Submit your details and we'll get back to you to assist you with the next steps.";
   const namePlaceholder = labels?.namePlaceholder?.trim() || "Your name";
   const phonePlaceholder = labels?.phonePlaceholder?.trim() || "+91 00000 00000";
   const categoryPlaceholder = labels?.categoryPlaceholder?.trim() || "Interested in…";

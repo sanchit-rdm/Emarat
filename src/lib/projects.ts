@@ -149,7 +149,7 @@ export const projects: Project[] = [
     config: "5 BHK Independent Floors",
     size: "G+4 · 5 BHK",
     possession: "On Request",
-    rera: "HARERA Registered",
+    rera: "HRERA Registered",
     heroImage: "/images/C-2/building.jpg",
     overviewImage: "/images/C-2/c2-living-dining-interior-view-02-approved-r0-20240122.jpg",
     overview: [
@@ -207,7 +207,7 @@ export const projects: Project[] = [
     config: "Independent Floors",
     size: "G+4 Independent Floors",
     possession: "On Request",
-    rera: "HARERA Registered",
+    rera: "HRERA Registered",
     heroImage: "/images/C-5/building.jpg",
     overviewImage: "/images/C-5/c-5-11-double-height.jpg",
     overview: [
@@ -265,7 +265,7 @@ export const projects: Project[] = [
     config: "Independent Floors · Three-Side Open",
     size: "G+4 · Three-Side Open",
     possession: "On Request",
-    rera: "HARERA Registered",
+    rera: "HRERA Registered",
     heroImage: "/images/E11/building.jpg",
     overviewImage: "/images/E11/e11-14-living-dining-interior-view-r0-20250313.jpg",
     overview: [
@@ -323,7 +323,7 @@ export const projects: Project[] = [
     config: "Boutique Private Floors",
     size: "Two-Side Open Private Floors",
     possession: "On Request",
-    rera: "HARERA Registered",
+    rera: "HRERA Registered",
     heroImage: "/images/EA4/building.jpg",
     overviewImage: "/images/EA4/ea-4-lounge-diningjpg.jpg",
     overview: [

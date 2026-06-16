@@ -37,7 +37,7 @@ export default function Contact({ data }: Props) {
   const email = data?.email ?? "info@emaratrealty.com";
   const emailNote = data?.emailNote ?? "We respond within one working day.";
   const address = data?.address ?? "Emarat Realty\n2nd Floor, Sector-15\nCivil Lines, Gurugram\nHaryana 122001";
-  const lead = data?.lead ?? "Leave your details and our team will get back to you within one business day.";
+  const lead = data?.lead ?? "Submit your details and we'll get back to you to assist you with the next steps.";
   const namePlaceholder = data?.namePlaceholder ?? "Your name";
   const phonePlaceholder = data?.phonePlaceholder ?? "+91 00000 00000";
   const emailPlaceholder = data?.emailPlaceholder ?? "Email address (optional)";

@@ -186,6 +186,15 @@ export const CONTACT_PAGE_QUERY = defineQuery(`
   }
 `);
 
+export const UPCOMING_PROJECTS_PAGE_QUERY = defineQuery(`
+  *[_type == "upcomingProjectsPage"][0] {
+    ${HERO_FIELDS},
+    "projects": projects[]{ _key, slug, title, tagline, location, status, body, "heroImage": heroImage.asset->url },
+    cta { heading, body, buttonLabel, buttonHref },
+    ${SEO_FIELDS}
+  }
+`);
+
 export const NEWS_PAGE_QUERY = defineQuery(`
   *[_type == "newsPage"][0] {
     ${HERO_FIELDS},

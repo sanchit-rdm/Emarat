@@ -21,18 +21,21 @@ const DEFAULT_NAV: NavItem[] = [
   {
     label: "Projects",
     dropdown: [
+      { href: "/projects", label: "All Projects" },
       { href: "/projects/c2", label: "C2 at DLF Garden City" },
       { href: "/projects/c5", label: "C5 at DLF Garden City" },
       { href: "/projects/e11", label: "E11 at DLF Garden City" },
-      { href: "/projects/ea04", label: "EA 04 at Almeda" },
+      { href: "/projects/ea04", label: "EA 04 at Alameda" },
     ],
   },
   {
     label: "Upcoming Projects",
     dropdown: [
-      { href: "/upcoming-projects#dlf-garden-city-plots", label: "DLF Garden City Plots In Sector 93 Gurgaon" },
-      { href: "/upcoming-projects#dlf-residential", label: "DLF Residential Projects In Gurgaon Sector 93" },
-      { href: "/upcoming-projects#dlf-independent-floors", label: "DLF Independent Floors In Gurgaon Phase 3" },
+      { href: "/upcoming-projects", label: "All Upcoming Projects" },
+      { href: "/upcoming-projects/goa", label: "Goa" },
+      { href: "/upcoming-projects/bhimtal", label: "Bhimtal" },
+      { href: "/upcoming-projects/lakefarms", label: "Lakefarms" },
+      { href: "/upcoming-projects/lansdowne", label: "Lansdowne" },
     ],
   },
   { href: "/careers", label: "Careers" },
