@@ -96,11 +96,8 @@ export default function Materials() {
                     </div>
                   </Parallax>
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[color:var(--bg)]/80 via-[color:var(--bg)]/10 to-transparent" />
-                  <div className="absolute inset-x-5 bottom-5 flex items-end justify-between">
+                  <div className="absolute inset-x-5 bottom-5">
                     <span className="font-display-alt text-2xl">{s.label}</span>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
                   </div>
                 </div>
                 <figcaption className="mt-3 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">

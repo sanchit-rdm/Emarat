@@ -25,9 +25,6 @@ export default function ProjectGallery({
           <SplitReveal as="h2" className="font-display h-section">
             {heading}
           </SplitReveal>
-          <Reveal as="p" delay={0.15} className="text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-            {String(active + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
-          </Reveal>
         </div>
 
         {/* Main viewer */}

@@ -6,6 +6,7 @@ import { VisualEditing } from "next-sanity/visual-editing";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import ScrollRail from "@/components/ScrollRail";
+import BrochureButton from "@/components/BrochureButton";
 import { SanityLive, sanityFetch } from "@/sanity/lib/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 
@@ -66,6 +67,7 @@ export default async function RootLayout({
       <body className="min-h-screen">
         {/* Brand rail — green track with gold thumb that tracks page scroll progress */}
         <ScrollRail />
+        <BrochureButton />
         <SmoothScroll>{children}</SmoothScroll>
         <SanityLive />
         {isDraftMode && <VisualEditing />}

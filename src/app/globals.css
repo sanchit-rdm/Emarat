@@ -8,7 +8,7 @@
   --bg: #011f14;             /* deep brand green — a darker shade of #01472E */
   --bg-alt: #032619;         /* slightly lifted green for elevation */
   --fg: #f5efe1;             /* warm cream */
-  --muted: #8a8378;
+  --muted: #ffffff;
   --line: rgba(245, 239, 225, 0.10);
 
   /* Emarat brand colors */
@@ -28,7 +28,7 @@
   --bg: #01472E;             /* brand green */
   --bg-alt: #013a26;         /* deeper green for elevation */
   --fg: #f5efe1;             /* warm cream */
-  --muted: #c4bda3;          /* lightened so labels stay legible on green */
+  --muted: #ffffff;          /* white for legibility on green */
   --line: rgba(245, 239, 225, 0.18);
   --accent: #F6E07A;         /* brighter gold pops against the green */
   --accent-2: #E2A724;
@@ -47,7 +47,7 @@
   --bg: #f4eedf;             /* warm cream */
   --bg-alt: #e9e2cf;         /* deeper cream */
   --fg: #0d1611;             /* deep ink, slight green undertone */
-  --muted: #6b6356;
+  --muted: #000000;
   --line: rgba(13, 22, 17, 0.10);
   --accent: var(--brand-green);   /* green — accent text on cream */
   --accent-2: #03613f;

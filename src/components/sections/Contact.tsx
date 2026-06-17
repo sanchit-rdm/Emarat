@@ -8,12 +8,6 @@ import CircleButton from "@/components/CircleButton";
 interface ContactData {
   heading1?: string | PortableTextBlock[];
   heading2?: string | PortableTextBlock[];
-  phone?: string;
-  phoneHref?: string;
-  phoneHours?: string;
-  email?: string;
-  emailNote?: string;
-  address?: string | PortableTextBlock[];
   lead?: string | PortableTextBlock[];
   namePlaceholder?: string;
   phonePlaceholder?: string;
@@ -22,21 +16,12 @@ interface ContactData {
   categoryOptions?: string[];
   privacy?: string;
   submitLabel?: string;
-  callLabel?: string;
-  emailLabel?: string;
-  visitLabel?: string;
 }
 interface Props { data?: ContactData }
 
 export default function Contact({ data }: Props) {
   const heading1 = data?.heading1 ?? "Ready to find";
   const heading2 = data?.heading2 ?? "your perfect home?";
-  const phone = data?.phone ?? "+91 84509 84509";
-  const phoneHref = data?.phoneHref ?? "tel:+918450984509";
-  const phoneHours = data?.phoneHours ?? "Mon – Sat, 10am – 7pm IST";
-  const email = data?.email ?? "info@emaratrealty.com";
-  const emailNote = data?.emailNote ?? "We respond within one working day.";
-  const address = data?.address ?? "Emarat Realty\n2nd Floor, Sector-15\nCivil Lines, Gurugram\nHaryana 122001";
   const lead = data?.lead ?? "Submit your details and we'll get back to you to assist you with the next steps.";
   const namePlaceholder = data?.namePlaceholder ?? "Your name";
   const phonePlaceholder = data?.phonePlaceholder ?? "+91 00000 00000";
@@ -47,9 +32,6 @@ export default function Contact({ data }: Props) {
     : ["C2 at DLF Garden City", "C5 at DLF Garden City", "E11 at DLF Garden City", "EA 04 at Alameda"];
   const privacy = data?.privacy ?? "By submitting you agree to our privacy policy.";
   const submitLabel = data?.submitLabel ?? "Request a Callback";
-  const callLabel = data?.callLabel ?? "Call Us";
-  const emailLabel = data?.emailLabel ?? "Email Us";
-  const visitLabel = data?.visitLabel ?? "Visit Us";
   return (
     <section
       id="contact"
@@ -132,42 +114,6 @@ export default function Contact({ data }: Props) {
             </form>
           </Reveal>
 
-          <div className="mt-16 grid grid-cols-1 gap-12 md:grid-cols-3">
-            <Reveal as="div" delay={0.1} className="space-y-3">
-              <div className="text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
-                {callLabel}
-              </div>
-              <a
-                href={phoneHref}
-                className="block font-display-alt text-2xl transition-colors hover:text-[color:var(--accent)]"
-              >
-                {phone}
-              </a>
-              <p className="text-sm text-[color:var(--muted)]">{phoneHours}</p>
-            </Reveal>
-
-            <Reveal as="div" delay={0.15} className="space-y-3">
-              <div className="text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
-                {emailLabel}
-              </div>
-              <a
-                href={`mailto:${email}`}
-                className="block font-display-alt text-xl transition-colors hover:text-[color:var(--accent)]"
-              >
-                {email}
-              </a>
-              <p className="text-sm text-[color:var(--muted)]">{emailNote}</p>
-            </Reveal>
-
-            <Reveal as="div" delay={0.2} className="space-y-3">
-              <div className="text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
-                {visitLabel}
-              </div>
-              <p className="font-display-alt text-base leading-relaxed" style={{ whiteSpace: "pre-line" }}>
-                {renderPortableText(address)}
-              </p>
-            </Reveal>
-          </div>
         </div>
       </div>
     </section>

@@ -1,0 +1,195 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import CircleButton from "@/components/CircleButton";
+
+export default function BrochureButton() {
+  const [open, setOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const btnRef = useRef<HTMLButtonElement | null>(null);
+  const rectRef = useRef<SVGRectElement | null>(null);
+
+  useEffect(() => {
+    const btn = btnRef.current;
+    const rect = rectRef.current;
+    if (!btn || !rect) return;
+    const sync = () => {
+      const { width, height } = btn.getBoundingClientRect();
+      if (!width || !height) return;
+      const cssRadius = parseFloat(getComputedStyle(btn).borderRadius) || 0;
+      const maxRadius = Math.min(width, height) / 2;
+      const r = Math.min(cssRadius, maxRadius);
+      const inset = 0.5;
+      const w = Math.max(0, width - inset * 2);
+      const h = Math.max(0, height - inset * 2);
+      rect.setAttribute("x", String(inset));
+      rect.setAttribute("y", String(inset));
+      rect.setAttribute("width", String(w));
+      rect.setAttribute("height", String(h));
+      rect.setAttribute("rx", String(Math.max(0, r - inset)));
+      rect.setAttribute("ry", String(Math.max(0, r - inset)));
+      requestAnimationFrame(() => {
+        try {
+          const len = rect.getTotalLength();
+          if (len > 0) btn.style.setProperty("--len", String(len));
+        } catch {}
+      });
+    };
+    sync();
+    const ro = new ResizeObserver(sync);
+    ro.observe(btn);
+    return () => ro.disconnect();
+  }, []);
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSubmitted(true);
+  }
+
+  function handleClose() {
+    setOpen(false);
+    setTimeout(() => setSubmitted(false), 300);
+  }
+
+  return (
+    <>
+      {/* Sticky vertical button */}
+      <div className="fixed right-0 top-1/2 z-40 -translate-y-1/2">
+        <button
+          ref={btnRef}
+          type="button"
+          onClick={() => setOpen(true)}
+          aria-label="Download Brochure"
+          className="link-hover relative flex cursor-pointer flex-col items-center gap-3 bg-[#01472E] px-3 py-5 text-white"
+        >
+          <svg className="link-hover__circle" aria-hidden="true">
+            <rect ref={rectRef} fill="none" />
+          </svg>
+          <span
+            className="relative z-10 text-[9px] font-semibold uppercase tracking-[0.22em]"
+            style={{ writingMode: "vertical-rl" }}
+          >
+            Download Brochure
+          </span>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="relative z-10 h-5 w-5 shrink-0"
+          >
+            <path d="M12 3v12M8 11l4 4 4-4M3 17v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Modal overlay */}
+      {open && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+          <div
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            onClick={handleClose}
+            aria-hidden
+          />
+          <div className="relative z-10 w-full max-w-md rounded-lg bg-[#011f14] p-8 shadow-2xl">
+            {/* Close */}
+            <button
+              type="button"
+              onClick={handleClose}
+              aria-label="Close"
+              className="absolute right-4 top-4 cursor-pointer text-white/60 transition-colors hover:text-white"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5">
+                <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            </button>
+
+            {submitted ? (
+              <div className="py-8 text-center">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#01472E]">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-7 w-7 text-[#E2A724]">
+                    <path d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 className="font-display text-2xl text-white">Thank you!</h3>
+                <p className="mt-3 text-sm text-white/70">
+                  Our team will send the brochure to you shortly.
+                </p>
+                <button
+                  type="button"
+                  onClick={handleClose}
+                  className="mt-6 cursor-pointer text-xs uppercase tracking-[0.18em] text-[#E2A724] transition-colors hover:text-white"
+                >
+                  Close
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className="mb-6">
+                  <p className="text-xs uppercase tracking-[0.22em] text-[#E2A724]">Emarat Realty</p>
+                  <h3 className="mt-2 font-display text-2xl text-white">Download Brochure</h3>
+                  <p className="mt-2 text-sm text-white/60">
+                    Share your details and we&apos;ll send the brochure straight to you.
+                  </p>
+                </div>
+
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                  <div className="border-b border-white/15 pb-3">
+                    <input
+                      type="text"
+                      placeholder="Your name"
+                      required
+                      className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/40"
+                      aria-label="Name"
+                    />
+                  </div>
+                  <div className="border-b border-white/15 pb-3">
+                    <input
+                      type="tel"
+                      placeholder="+91 00000 00000"
+                      required
+                      className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/40"
+                      aria-label="Phone"
+                    />
+                  </div>
+                  <div className="border-b border-white/15 pb-3">
+                    <input
+                      type="email"
+                      placeholder="Email address"
+                      className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/40"
+                      aria-label="Email"
+                    />
+                  </div>
+                  <div className="border-b border-white/15 pb-3">
+                    <select
+                      className="w-full cursor-pointer bg-transparent text-sm text-white/60 outline-none"
+                      defaultValue=""
+                      aria-label="Project interest"
+                    >
+                      <option value="" disabled className="bg-[#011f14]">Interested in…</option>
+                      <option value="c2" className="bg-[#011f14]">C2 at DLF Garden City</option>
+                      <option value="c5" className="bg-[#011f14]">C5 at DLF Garden City</option>
+                      <option value="e11" className="bg-[#011f14]">E11 at DLF Garden City</option>
+                      <option value="ea04" className="bg-[#011f14]">EA 04 at Alameda</option>
+                    </select>
+                  </div>
+
+                  <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
+                    <p className="text-[10px] uppercase tracking-[0.14em] text-white/40">
+                      By submitting you agree to our privacy policy.
+                    </p>
+                    <CircleButton type="submit" variant="filled" size="sm">
+                      Send Brochure
+                    </CircleButton>
+                  </div>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

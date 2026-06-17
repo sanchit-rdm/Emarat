@@ -67,7 +67,7 @@ export default function SiteNavClient({
               >
                 <button
                   type="button"
-                  className="nav-link flex items-center gap-1 text-white transition-colors hover:text-[color:var(--accent)]"
+                  className="nav-link flex items-center gap-1 font-semibold text-white transition-colors hover:text-[color:var(--accent)]"
                   aria-expanded={openDropdown === item.label}
                 >
                   {item.label}
@@ -93,7 +93,7 @@ export default function SiteNavClient({
               <Link
                 key={item.label}
                 href={item.href ?? "#"}
-                className="nav-link text-white transition-colors hover:text-[color:var(--accent)]"
+                className="nav-link font-semibold text-white transition-colors hover:text-[color:var(--accent)]"
               >
                 {item.label}
               </Link>
@@ -127,7 +127,7 @@ export default function SiteNavClient({
             {items.map((item) =>
               item.dropdown && item.dropdown.length ? (
                 <details key={item.label} className="border-b border-[color:var(--line)]">
-                  <summary className="flex cursor-pointer items-center justify-between py-4 text-sm text-white">
+                  <summary className="flex cursor-pointer items-center justify-between py-4 text-sm font-semibold text-white">
                     <span>{item.label}</span>
                     <span aria-hidden className="text-[0.6rem]">▾</span>
                   </summary>
@@ -149,7 +149,7 @@ export default function SiteNavClient({
                   key={item.label}
                   href={item.href ?? "#"}
                   onClick={() => setMenuOpen(false)}
-                  className="border-b border-[color:var(--line)] py-4 text-sm text-white transition-colors hover:text-[color:var(--accent)]"
+                  className="border-b border-[color:var(--line)] py-4 text-sm font-semibold text-white transition-colors hover:text-[color:var(--accent)]"
                 >
                   {item.label}
                 </Link>

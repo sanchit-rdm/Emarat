@@ -276,3 +276,9 @@ export const POSTS_QUERY = defineQuery(`
     _id, title, slug, excerpt, author->, mainImage { asset->{ url } }, publishedAt, body
   }
 `);
+
+export const NEWS_ARTICLES_QUERY = defineQuery(`
+  *[_type == "newsArticle"] | order(publishedAt desc) {
+    _id, title, slug, excerpt, source, sourceUrl, mainImage { asset->{ url } }, publishedAt, body
+  }
+`);

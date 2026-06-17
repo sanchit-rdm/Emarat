@@ -1,5 +1,6 @@
 import { blockContentType } from "./blockContentType";
 import { postType } from "./postType";
+import { newsArticleType } from "./newsArticleType";
 import { authorType } from "./authorType";
 import { projectType } from "./projectType";
 import { siteSettingsType } from "./siteSettings";
@@ -19,6 +20,7 @@ export const schemaTypes = [
   // Collections
   projectType,
   postType,
+  newsArticleType,
   authorType,
   blockContentType,
 ];

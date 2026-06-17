@@ -86,7 +86,7 @@ export default function Projects({ data, projects: sanityProjects }: Props) {
         <ul className="flex flex-col">
           {projects.map((p, i) => (
             <li
-              key={p.no}
+              key={p.title}
               className="group relative border-t border-[color:var(--line)] last:border-b"
             >
               <Reveal as="div" delay={i * 0.04}>
@@ -94,10 +94,7 @@ export default function Projects({ data, projects: sanityProjects }: Props) {
                   href={p.href}
                   className="grid cursor-pointer grid-cols-12 items-center gap-4 py-8 transition-colors hover:bg-[color:var(--bg-alt)]/40 lg:py-10"
                 >
-                  <span className="col-span-2 font-mono text-xs text-[color:var(--muted)] lg:col-span-1">
-                    {p.no}
-                  </span>
-                  <span className="col-span-10 font-display-alt text-2xl transition-transform duration-500 group-hover:translate-x-2 lg:col-span-4 lg:text-4xl">
+                  <span className="col-span-12 font-display-alt text-2xl transition-transform duration-500 group-hover:translate-x-2 lg:col-span-5 lg:text-4xl">
                     {p.title}
                   </span>
                   <span className="hidden text-sm text-[color:var(--muted)] lg:col-span-3 lg:block">

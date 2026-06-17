@@ -97,7 +97,7 @@ export default function IconicIntroV2({ data, labels }: Props) {
         <div className="mb-6 font-script text-2xl tracking-[5px] text-[color:var(--accent)]">
           {eyebrow}
         </div>
-        <h2 className="font-display mx-auto max-w-4xl text-[clamp(2.25rem,6.5vw,5.5rem)] uppercase leading-[1.08] tracking-[1px]">
+        <h2 className="font-display mx-auto max-w-4xl text-[clamp(2.25rem,6.5vw,5.5rem)] leading-[1.08] tracking-[1px]">
           <span className="block">{line1}</span>
           <span className="block text-[color:var(--accent)]">{line2}</span>
         </h2>

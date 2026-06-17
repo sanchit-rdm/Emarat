@@ -286,11 +286,6 @@ export default function Location({ data }: { data?: LocationData }) {
 
         {/* Fixed-height content area */}
         <div className="min-h-[20rem] sm:min-h-[22rem] lg:min-h-[24rem]">
-          <div key={`feature-${active}`} className="places-fade mb-4 flex items-center gap-3 text-[color:var(--accent)]">
-            <span className="h-6 w-6">{icons[current.icon]}</span>
-            <span className="text-xs uppercase tracking-[0.22em]">{current.feature}</span>
-          </div>
-
           <div key={`heading-${active}`} className="places-fade">
             <h2 className="font-display h-page">{current.heading[0]}</h2>
             <h2 className="font-display h-page text-[color:var(--accent)]">{current.heading[1]}</h2>

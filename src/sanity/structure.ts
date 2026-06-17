@@ -27,5 +27,6 @@ export const structure: StructureResolver = (S) =>
       // Collections
       S.listItem().title("Projects").child(S.documentTypeList("project").title("Projects")),
       S.listItem().title("Blog Posts").child(S.documentTypeList("post").title("Blog Posts")),
+      S.listItem().title("News Articles").child(S.documentTypeList("newsArticle").title("News Articles")),
       S.listItem().title("Authors").child(S.documentTypeList("author").title("Authors")),
     ]);

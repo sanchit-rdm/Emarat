@@ -37,7 +37,13 @@ const DEFAULT_NAV: NavItem[] = [
     ],
   },
   { href: "/careers", label: "Careers" },
-  { href: "/news", label: "Blog" },
+  {
+    label: "Media",
+    dropdown: [
+      { href: "/news", label: "Blog" },
+      { href: "/media", label: "News" },
+    ],
+  },
   { href: "/contact", label: "Contact" },
 ];
 

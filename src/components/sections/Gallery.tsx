@@ -101,10 +101,7 @@ export default function Gallery({ images: rawImages, section }: Props) {
                 style={{ filter: "sepia(0.12) saturate(0.92) brightness(0.85)" }}
               />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[color:var(--bg)]/70 via-[color:var(--bg)]/5 to-transparent" />
-              <figcaption className="absolute bottom-5 left-5 flex items-center gap-3">
-                <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+              <figcaption className="absolute bottom-5 left-5">
                 <span className="text-xs uppercase tracking-[0.14em] text-[color:var(--fg)]/70">
                   {img.label}
                 </span>
@@ -127,11 +124,6 @@ export default function Gallery({ images: rawImages, section }: Props) {
             </SplitReveal>
             <Reveal delay={0.25} className="mt-4 max-w-[200px] text-xs leading-relaxed text-[color:var(--muted)]">
               {scrollHint}
-            </Reveal>
-            <Reveal delay={0.35} className="mt-6">
-              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--accent)]">
-                01 {String(images.length).padStart(2, "0")}
-              </span>
             </Reveal>
           </div>
 
@@ -156,10 +148,7 @@ export default function Gallery({ images: rawImages, section }: Props) {
                   style={{ filter: "sepia(0.12) saturate(0.92) brightness(0.85)" }}
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[color:var(--bg)]/70 via-[color:var(--bg)]/5 to-transparent" />
-                <figcaption className="absolute bottom-5 left-5 flex items-center gap-3">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                <figcaption className="absolute bottom-5 left-5">
                   <span className="text-xs uppercase tracking-[0.14em] text-[color:var(--fg)]/70">
                     {img.label}
                   </span>

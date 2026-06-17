@@ -146,11 +146,8 @@ export default async function AboutPage() {
                     key={h}
                     as="li"
                     delay={i * 0.07}
-                    className="flex items-start gap-4 border-t border-[color:var(--line)] pt-6"
+                    className="border-t border-[color:var(--line)] pt-6"
                   >
-                    <span className="font-mono text-xs text-[color:var(--accent)]">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
                     <span className="font-display-alt text-xl leading-snug lg:text-2xl">
                       {h}
                     </span>

@@ -41,10 +41,6 @@ export default function IntroV2({ data, eyebrow }: Props) {
   return (
     <section id="intro" className="theme-light px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-40">
       <div className="mx-auto max-w-[1100px] text-center">
-        <Reveal className="eyebrow mb-6 flex items-center justify-center font-script text-2xl text-[color:var(--muted)]">
-          <span>{eyebrowText}</span>
-        </Reveal>
-
         <SplitReveal as="h2" className="font-display h-page">
           {toPlainText(heading1)}
         </SplitReveal>

@@ -124,7 +124,7 @@ export default function ResidencesV2({ projects, labels }: Props) {
   const current = list[active];
 
   return (
-    <section id="residences" className="theme-green px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-36">
+    <section id="residences" className="theme-light px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-36">
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-6 lg:mb-16">
           <div>
@@ -202,7 +202,7 @@ export default function ResidencesV2({ projects, labels }: Props) {
                 type="button"
                 aria-label="Previous residence"
                 onClick={() => go(-1)}
-                className="flex h-12 w-12 items-center justify-center rounded-full border border-[color:var(--line)] transition-colors hover:border-[color:var(--accent)] hover:text-[color:var(--accent)]"
+                className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-[color:var(--line)] transition-colors hover:border-[color:var(--accent)] hover:text-[color:var(--accent)]"
               >
                 <span aria-hidden>‹</span>
               </button>
@@ -210,7 +210,7 @@ export default function ResidencesV2({ projects, labels }: Props) {
                 type="button"
                 aria-label="Next residence"
                 onClick={() => go(1)}
-                className="flex h-12 w-12 items-center justify-center rounded-full border border-[color:var(--line)] transition-colors hover:border-[color:var(--accent)] hover:text-[color:var(--accent)]"
+                className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-[color:var(--line)] transition-colors hover:border-[color:var(--accent)] hover:text-[color:var(--accent)]"
               >
                 <span aria-hidden>›</span>
               </button>
@@ -226,7 +226,7 @@ export default function ResidencesV2({ projects, labels }: Props) {
               type="button"
               onClick={() => setActive(i)}
               aria-pressed={i === active}
-              className={`flex flex-col items-start gap-1 px-4 py-5 text-left transition-colors ${
+              className={`flex cursor-pointer flex-col items-start gap-1 px-4 py-5 text-left transition-colors ${
                 i === active
                   ? "bg-[color:var(--accent)] text-[color:var(--bg)]"
                   : "bg-[color:var(--bg-alt)] text-[color:var(--fg)] hover:bg-[color:var(--bg-alt)]/70"
