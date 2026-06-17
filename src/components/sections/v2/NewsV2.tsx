@@ -46,14 +46,14 @@ interface NewsLabels {
 }
 
 /**
- * Design Option 2 — "News & Offers". A large vertical title and a round
+ * Design Option 2 — "Insights & updates". A large vertical title and a round
  * view-all button on the left; two feature cards on the right (one outlined,
  * one image-led). The cards and the round button all share the same
  * stroke-draws-around-the-border hover as the Enquire Now button (StrokeHover).
  */
 export default function NewsV2({ posts, labels }: { posts: Post[]; labels?: NewsLabels }) {
   const items = (posts && posts.length > 0 ? posts : placeholders).slice(0, 2);
-  const eyebrow = labels?.eyebrow?.trim() || "News & Offers";
+  const eyebrow = labels?.eyebrow?.trim() || "Insights & updates";
   const allLabel = labels?.allLabel?.trim() || "All articles";
   const allHref = labels?.allHref?.trim() || "/news";
 
@@ -112,7 +112,7 @@ export default function NewsV2({ posts, labels }: { posts: Post[]; labels?: News
                   )}
 
                   <div className="relative z-10">
-                    <div className={`font-mono text-[10px] uppercase tracking-[0.26em] ${withImage ? "text-white/80" : "text-[color:var(--accent)]"}`}>
+                    <div className={`font-mono text-[0.625rem] uppercase tracking-[0.26em] ${withImage ? "text-white/80" : "text-[color:var(--accent)]"}`}>
                       {category}
                     </div>
                     <h3 className="mt-6 max-w-[18ch] text-sm font-medium uppercase leading-relaxed tracking-[0.1em]">
@@ -124,7 +124,7 @@ export default function NewsV2({ posts, labels }: { posts: Post[]; labels?: News
                     <span className={`font-display text-6xl leading-none lg:text-7xl ${withImage ? "text-white" : "text-[color:var(--accent)]"}`}>
                       {day}
                     </span>
-                    <span className={`mb-2 text-[10px] uppercase tracking-[0.22em] ${withImage ? "text-white/80" : "text-[color:var(--muted)]"}`}>
+                    <span className={`mb-2 text-[0.625rem] uppercase tracking-[0.22em] ${withImage ? "text-white/80" : "text-[color:var(--muted)]"}`}>
                       {month}
                     </span>
                   </div>

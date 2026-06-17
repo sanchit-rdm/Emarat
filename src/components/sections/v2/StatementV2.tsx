@@ -73,7 +73,7 @@ export default function StatementV2({ data }: Props) {
         <Reveal delay={0.25} className="mt-10">
           <Link
             href={href}
-            className="inline-flex items-center justify-center rounded-full border border-[color:var(--fg)]/40 px-10 py-4 text-[11px] uppercase tracking-[0.28em] text-[color:var(--fg)] backdrop-blur-sm transition-all duration-500 hover:border-[color:var(--accent)] hover:bg-[color:var(--accent)] hover:text-[color:var(--bg)]"
+            className="inline-flex items-center justify-center rounded-full border border-[color:var(--fg)]/40 px-10 py-4 text-[0.6875rem] uppercase tracking-[0.28em] text-[color:var(--fg)] backdrop-blur-sm transition-all duration-500 hover:border-[color:var(--accent)] hover:bg-[color:var(--accent)] hover:text-[color:var(--bg)]"
           >
             {ctaLabel}
           </Link>

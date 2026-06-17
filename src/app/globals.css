@@ -185,6 +185,22 @@ html {
   scroll-padding-top: 7rem;
 }
 
+/* On viewports wider than 1920 px, scale the root font-size proportionally so
+   that every rem-based value (headings, buttons, spacing) grows with the canvas.
+   At exactly 1920 px the formula yields 16 px — no jump at the breakpoint.
+   Screens ≤ 1920 px are unaffected (the rule only fires above that width). */
+@media (min-width: 1921px) {
+  html {
+    font-size: calc(100vw / 120);
+  }
+  /* Scale fixed-pixel content columns so they occupy the same share of the
+     canvas above 1920 px as they do at 1920 px. Values = px / 1920 × 100. */
+  .max-w-\[1440px\] { max-width: 75vw; }
+  .max-w-\[1400px\] { max-width: 72.9vw; }
+  .max-w-\[1280px\] { max-width: 66.67vw; }
+  .max-w-\[1100px\] { max-width: 57.3vw; }
+}
+
 /* ----------------------------------------------------------------------------
    Link-hover button — SVG stroke that traces the button's exact border.
 

@@ -83,7 +83,7 @@ export default function CircleButton({
 
   const sizeCls =
     size === "sm"
-      ? "h-10 px-5 text-[11px] tracking-[0.18em]"
+      ? "h-10 px-5 text-[0.6875rem] tracking-[0.18em]"
       : "h-12 px-7 text-xs tracking-[0.2em]";
 
   const variantCls =

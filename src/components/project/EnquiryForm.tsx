@@ -96,7 +96,7 @@ export default function EnquiryForm({
               </div>
               <Field label={emailLabel} name="email" type="email" placeholder={emailPlaceholder} />
               <div className="border-b border-[color:var(--line)] pb-3 transition-colors focus-within:border-[color:var(--accent)]">
-                <label className="block text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
+                <label className="block text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">
                   {messageLabel}
                 </label>
                 <textarea
@@ -107,7 +107,7 @@ export default function EnquiryForm({
               </div>
 
               <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
-                <p className="text-[10px] uppercase tracking-[0.16em] text-[color:var(--muted)]">
+                <p className="text-[0.625rem] uppercase tracking-[0.16em] text-[color:var(--muted)]">
                   {sent ? "Thank you — we'll be in touch shortly." : privacy}
                 </p>
                 <CircleButton type="submit" variant="filled">
@@ -137,7 +137,7 @@ function Field({
 }) {
   return (
     <div className="border-b border-[color:var(--line)] pb-3 transition-colors focus-within:border-[color:var(--accent)]">
-      <label className="block text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">{label}</label>
+      <label className="block text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">{label}</label>
       <input
         type={type}
         name={name}

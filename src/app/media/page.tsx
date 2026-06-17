@@ -200,7 +200,7 @@ function ArticleCard({ article }: { article: NewsArticle }) {
           />
         )}
       </div>
-      <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-[color:var(--muted)]">
+      <div className="flex items-center gap-3 text-[0.6875rem] uppercase tracking-[0.18em] text-[color:var(--muted)]">
         {article.source && <span>{article.source}</span>}
         {article.source && <span>·</span>}
         <span>{formatDate(article.publishedAt)}</span>

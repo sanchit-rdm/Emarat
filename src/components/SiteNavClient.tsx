@@ -53,10 +53,10 @@ export default function SiteNavClient({
     >
       <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:h-28 lg:px-10">
         <Link href="/" className="flex items-center" aria-label="Emarat Realty home">
-          <Image src={logo} alt="Emarat Realty" priority className="h-auto w-[130px]" sizes="130px" />
+          <Image src={logo} alt="Emarat Realty" priority className="h-auto w-[90px] sm:w-[100px] lg:w-[130px]" sizes="(min-width: 1024px) 130px, (min-width: 640px) 100px, 90px" />
         </Link>
 
-        <nav className="hidden gap-7 text-sm md:flex">
+        <nav className="hidden gap-7 text-sm lg:flex">
           {items.map((item) =>
             item.dropdown && item.dropdown.length ? (
               <div
@@ -102,7 +102,7 @@ export default function SiteNavClient({
         </nav>
 
         <div className="flex items-center gap-4">
-          <div className="hidden md:inline-flex">
+          <div className="hidden lg:inline-flex">
             <CircleButton href={enquireHref} size="sm" variant="outline" className="enquire-btn">
               {enquireLabel}
             </CircleButton>
@@ -111,7 +111,7 @@ export default function SiteNavClient({
             type="button"
             aria-label="Toggle menu"
             onClick={() => setMenuOpen((v) => !v)}
-            className="flex flex-col gap-1.5 p-3 -mr-2 md:hidden"
+            className="flex flex-col gap-1.5 p-3 -mr-2 lg:hidden"
           >
             <span className={`block h-px w-6 bg-[color:var(--fg)] transition-transform duration-300 ${menuOpen ? "translate-y-2.5 rotate-45" : ""}`} />
             <span className={`block h-px w-6 bg-[color:var(--fg)] transition-opacity duration-300 ${menuOpen ? "opacity-0" : ""}`} />
@@ -122,7 +122,7 @@ export default function SiteNavClient({
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="max-h-[80vh] overflow-y-auto border-t border-[color:var(--line)] bg-[color:var(--bg)]/95 backdrop-blur-md md:hidden">
+        <div className="max-h-[80vh] overflow-y-auto border-t border-[color:var(--line)] bg-[color:var(--bg)]/95 backdrop-blur-md lg:hidden">
           <nav className="flex flex-col px-6 py-4">
             {items.map((item) =>
               item.dropdown && item.dropdown.length ? (

@@ -156,7 +156,7 @@ export default async function UpcomingProjectsPage() {
                 <div className={`col-span-12 ${project.heroImage ? "lg:col-span-7" : "lg:col-span-12"} ${i % 2 === 1 ? "lg:order-1" : ""}`}>
                   {project.status && (
                     <div className="mb-4">
-                      <span className="rounded-full border border-[color:var(--accent)]/40 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-[color:var(--accent)]">
+                      <span className="rounded-full border border-[color:var(--accent)]/40 px-3 py-1 text-[0.625rem] uppercase tracking-[0.18em] text-[color:var(--accent)]">
                         {project.status}
                       </span>
                     </div>

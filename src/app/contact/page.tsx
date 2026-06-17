@@ -133,7 +133,7 @@ export default async function ContactPage() {
               <Reveal as="form" delay={0.2} className="mt-12 flex flex-col gap-5">
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <div className="border-b border-[color:var(--line)] pb-3 transition-colors focus-within:border-[color:var(--accent)]">
-                    <label className="block text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
+                    <label className="block text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">
                       {form.nameLabel}
                     </label>
                     <input
@@ -144,7 +144,7 @@ export default async function ContactPage() {
                     />
                   </div>
                   <div className="border-b border-[color:var(--line)] pb-3 transition-colors focus-within:border-[color:var(--accent)]">
-                    <label className="block text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
+                    <label className="block text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">
                       {form.phoneLabel}
                     </label>
                     <input
@@ -158,7 +158,7 @@ export default async function ContactPage() {
 
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <div className="border-b border-[color:var(--line)] pb-3 transition-colors focus-within:border-[color:var(--accent)]">
-                    <label className="block text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
+                    <label className="block text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">
                       {form.emailLabel}
                     </label>
                     <input
@@ -168,7 +168,7 @@ export default async function ContactPage() {
                     />
                   </div>
                   <div className="border-b border-[color:var(--line)] pb-3 transition-colors focus-within:border-[color:var(--accent)]">
-                    <label className="block text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
+                    <label className="block text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">
                       {form.subjectLabel}
                     </label>
                     <input
@@ -180,7 +180,7 @@ export default async function ContactPage() {
                 </div>
 
                 <div className="border-b border-[color:var(--line)] pb-3 transition-colors focus-within:border-[color:var(--accent)]">
-                  <label className="block text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
+                  <label className="block text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">
                     {form.messageLabel}
                   </label>
                   <textarea
@@ -200,7 +200,7 @@ export default async function ContactPage() {
                 </label>
 
                 <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
-                  <p className="text-[10px] uppercase tracking-[0.16em] text-[color:var(--muted)]">
+                  <p className="text-[0.625rem] uppercase tracking-[0.16em] text-[color:var(--muted)]">
                     {form.privacy}
                   </p>
                   <CircleButton type="submit" variant="filled">
@@ -227,7 +227,7 @@ export default async function ContactPage() {
 
                 <div className="mt-8 grid grid-cols-2 gap-4 border-t border-[color:var(--line)] pt-6">
                   <div>
-                    <div className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--muted)]">
+                    <div className="text-[0.625rem] uppercase tracking-[0.2em] text-[color:var(--muted)]">
                       {office.phoneLabel}
                     </div>
                     <a href={telHref} className="mt-1 block text-sm transition-colors hover:text-[color:var(--accent)]">
@@ -235,7 +235,7 @@ export default async function ContactPage() {
                     </a>
                   </div>
                   <div>
-                    <div className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--muted)]">
+                    <div className="text-[0.625rem] uppercase tracking-[0.2em] text-[color:var(--muted)]">
                       {office.emailLabel}
                     </div>
                     <a href={`mailto:${office.email}`} className="mt-1 block break-all text-sm transition-colors hover:text-[color:var(--accent)]">
@@ -245,7 +245,7 @@ export default async function ContactPage() {
                 </div>
 
                 <div className="mt-6 border-t border-[color:var(--line)] pt-6">
-                  <div className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--muted)]">
+                  <div className="text-[0.625rem] uppercase tracking-[0.2em] text-[color:var(--muted)]">
                     {office.hoursLabel}
                   </div>
                   <div className="mt-1 text-sm">{office.hours}</div>

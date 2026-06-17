@@ -240,13 +240,13 @@ export default async function ProjectsPage() {
                   {/* Spec table */}
                   <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 border-y border-[color:var(--line)] py-6">
                     <Reveal delay={0.25}>
-                      <div className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--muted)]">
+                      <div className="text-[0.625rem] uppercase tracking-[0.2em] text-[color:var(--muted)]">
                         Location
                       </div>
                       <div className="mt-1 text-sm">{p.location}</div>
                     </Reveal>
                     <Reveal delay={0.3}>
-                      <div className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--muted)]">
+                      <div className="text-[0.625rem] uppercase tracking-[0.2em] text-[color:var(--muted)]">
                         {cardButtons.sizesLabel}
                       </div>
                       <div className="mt-1 text-sm">{p.size}</div>

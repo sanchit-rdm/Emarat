@@ -233,7 +233,7 @@ export default function ResidencesV2({ projects, labels }: Props) {
               }`}
             >
               <span className="font-display-alt text-base leading-tight">{r.title}</span>
-              <span className="text-[10px] uppercase tracking-[0.18em] opacity-60">{r.place}</span>
+              <span className="text-[0.625rem] uppercase tracking-[0.18em] opacity-60">{r.place}</span>
             </button>
           ))}
         </div>

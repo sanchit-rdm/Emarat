@@ -61,7 +61,7 @@ export default function Connectivity({
                         i === active ? "bg-[color:var(--accent)]" : "bg-[color:var(--line)]"
                       }`}
                     />
-                    <span className="text-[10px] uppercase tracking-[0.22em] text-[color:var(--muted)]">
+                    <span className="text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">
                       {g.category}
                     </span>
                   </div>

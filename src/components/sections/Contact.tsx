@@ -104,7 +104,7 @@ export default function Contact({ data }: Props) {
                 </select>
               </div>
               <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
-                <p className="text-[10px] uppercase tracking-[0.16em] text-[color:var(--muted)]">
+                <p className="text-[0.625rem] uppercase tracking-[0.16em] text-[color:var(--muted)]">
                   {privacy}
                 </p>
                 <CircleButton type="submit" variant="filled">

@@ -100,7 +100,7 @@ export default function ContactV2({ data, labels }: Props) {
               <CircleButton type="submit" variant="filled">
                 {submitLabel}
               </CircleButton>
-              <p className="text-[10px] uppercase tracking-[0.16em] text-[color:var(--muted)]">
+              <p className="text-[0.625rem] uppercase tracking-[0.16em] text-[color:var(--muted)]">
                 {privacy}
               </p>
             </div>

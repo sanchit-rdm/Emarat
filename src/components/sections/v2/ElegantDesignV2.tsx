@@ -111,7 +111,7 @@ export default function ElegantDesignV2({ images: rawImages, labels }: Props) {
 
           <Link
             href={buttonHref}
-            className="pointer-events-auto mt-8 flex h-28 w-28 items-center justify-center rounded-full border border-[color:var(--accent)]/70 text-[10px] uppercase tracking-[0.24em] text-[color:var(--fg)] backdrop-blur-sm transition-all duration-500 hover:border-[color:var(--accent)] hover:bg-[color:var(--accent)] hover:text-[color:var(--bg)] lg:h-32 lg:w-32"
+            className="pointer-events-auto mt-8 flex h-28 w-28 items-center justify-center rounded-full border border-[color:var(--accent)]/70 text-[0.625rem] uppercase tracking-[0.24em] text-[color:var(--fg)] backdrop-blur-sm transition-all duration-500 hover:border-[color:var(--accent)] hover:bg-[color:var(--accent)] hover:text-[color:var(--bg)] lg:h-32 lg:w-32"
           >
             <span className="text-center leading-[1.5]">{buttonLabel}</span>
           </Link>

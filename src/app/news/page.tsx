@@ -236,7 +236,7 @@ export default async function NewsPage() {
                           />
                         )}
                       </div>
-                      <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-[color:var(--muted)]">
+                      <div className="flex items-center gap-3 text-[0.6875rem] uppercase tracking-[0.18em] text-[color:var(--muted)]">
                         <span>{post.author?.name ?? authorFallback}</span>
                         <span>·</span>
                         <span>{formatDate(post.publishedAt)}</span>

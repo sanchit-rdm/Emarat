@@ -273,7 +273,7 @@ export default function ScrollVideoHero({ blocks, videoSrc, posterSrc, scrollLab
         {/* Scroll affordance — signals that scrolling drives the footage. */}
         <div
           ref={cueRef}
-          className="pointer-events-none absolute inset-x-0 bottom-8 z-10 flex items-center justify-center gap-3 text-[10px] uppercase tracking-[0.3em] text-[color:var(--muted)]"
+          className="pointer-events-none absolute inset-x-0 bottom-8 z-10 flex items-center justify-center gap-3 text-[0.625rem] uppercase tracking-[0.3em] text-[color:var(--muted)]"
         >
           <span>{scrollLabel?.trim() || "Scroll"}</span>
           <span className="h-8 w-px bg-gradient-to-b from-[color:var(--accent)]/60 to-transparent" />
