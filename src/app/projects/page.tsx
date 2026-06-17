@@ -198,7 +198,7 @@ export default async function ProjectsPage() {
         </section>
 
         {/* Detailed project cards — alternating image side (light cream) */}
-        <section className="theme-light px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
+        <section className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
           <div className="mx-auto max-w-[1440px] space-y-24 lg:space-y-32">
             {(sanityProjects ?? projects).map((p, i) => (
               <article
@@ -278,7 +278,7 @@ export default async function ProjectsPage() {
         </section>
 
         {/* Closing CTA */}
-        <section className="px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
+        <section className="px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
           <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-8">
             <div>
               <SplitReveal

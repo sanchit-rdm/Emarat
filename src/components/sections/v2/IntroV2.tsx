@@ -39,7 +39,7 @@ export default function IntroV2({ data, eyebrow }: Props) {
   const image = data?.image ?? "/images/alameda-kitchen.webp";
 
   return (
-    <section id="intro" className="theme-light px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-40">
+    <section id="intro" className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
       <div className="mx-auto max-w-[1100px] text-center">
         <SplitReveal as="h2" className="font-display h-page">
           {toPlainText(heading1)}

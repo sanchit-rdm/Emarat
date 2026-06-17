@@ -55,10 +55,10 @@ export default function NewsV2({ posts, labels }: { posts: Post[]; labels?: News
   const items = (posts && posts.length > 0 ? posts : placeholders).slice(0, 2);
   const eyebrow = labels?.eyebrow?.trim() || "Insights & updates";
   const allLabel = labels?.allLabel?.trim() || "All articles";
-  const allHref = labels?.allHref?.trim() || "/news";
+  const allHref = labels?.allHref?.trim() || "/blog";
 
   return (
-    <section id="news" className="theme-light px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-36">
+    <section id="news" className="px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
       <div className="mx-auto flex max-w-[1440px] flex-col gap-12 lg:flex-row lg:items-center lg:gap-20">
         {/* Left — vertical title + round view-all button */}
         <div className="flex items-center justify-between gap-8 lg:w-[26%] lg:flex-col lg:items-start lg:justify-center lg:gap-14">
@@ -85,7 +85,7 @@ export default function NewsV2({ posts, labels }: { posts: Post[]; labels?: News
             const category = (post.author?.name || "News").toUpperCase();
             const img = post.mainImage?.asset?.url;
             const withImage = !!img;
-            const postHref = post.slug?.current ? `/news/${post.slug.current}` : allHref;
+            const postHref = post.slug?.current ? `/blog/${post.slug.current}` : allHref;
 
             return (
               <Reveal key={post._id} delay={i * 0.1} className="h-full">

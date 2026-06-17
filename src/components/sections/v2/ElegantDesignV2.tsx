@@ -73,7 +73,7 @@ export default function ElegantDesignV2({ images: rawImages, labels }: Props) {
     <section
       ref={sectionRef}
       id="elegant-design"
-      className="relative overflow-hidden bg-[color:var(--bg)] py-16 lg:py-24"
+      className="relative overflow-hidden bg-[color:var(--bg)] py-10 lg:py-[100px]"
     >
       <div className="relative h-[45vh] min-h-[260px] overflow-hidden sm:h-[58vh] sm:min-h-[380px] lg:h-[80vh]">
         {/* Drifting image track — wider than the viewport, centred at rest. */}

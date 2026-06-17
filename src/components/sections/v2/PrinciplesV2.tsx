@@ -136,7 +136,7 @@ export default function PrinciplesV2({ data, labels }: Props) {
     <section
       ref={sectionRef}
       id="principles"
-      className="theme-light relative overflow-hidden py-16 lg:py-24"
+      className="theme-light relative overflow-hidden py-10 lg:py-[100px]"
     >
       <div className="relative h-[45vh] min-h-[260px] overflow-hidden sm:h-[58vh] sm:min-h-[380px] lg:h-[80vh]">
         {/* Drifting image track — wider than the viewport, centred at rest. */}

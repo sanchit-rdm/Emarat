@@ -24,7 +24,7 @@ export default function Connectivity({
   return (
     <section
       id="location"
-      className="relative isolate scroll-mt-44 overflow-hidden border-t border-[color:var(--line)] px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32"
+      className="relative isolate scroll-mt-44 overflow-hidden border-t border-[color:var(--line)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]"
     >
       <div className="pointer-events-none absolute -left-40 top-1/4 h-[420px] w-[420px] rounded-full bg-[color:var(--brand-green)]/15 blur-[160px]" />
 

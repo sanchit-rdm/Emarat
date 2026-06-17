@@ -40,7 +40,7 @@ export default function About({ data }: Props) {
   return (
     <section
       id="about"
-      className="px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-40"
+      className="px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]"
     >
       <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-7">

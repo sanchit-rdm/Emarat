@@ -54,7 +54,7 @@ const DEFAULT_COLUMNS: FooterColumn[] = [
     links: [
       { label: "Projects", href: "/projects" },
       { label: "Upcoming Projects", href: "/upcoming-projects" },
-      { label: "News", href: "/news" },
+      { label: "News", href: "/blog" },
       { label: "Contact", href: "/contact" },
     ],
   },

@@ -28,7 +28,7 @@ export default function SmoothScroll({
     if (reduced) return;
 
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: 0.5,
       easing: (t: number) => 1 - Math.pow(1 - t, 3),
       smoothWheel: true,
       wheelMultiplier: 1,

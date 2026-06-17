@@ -66,7 +66,7 @@ export default function Approach({ data }: Props) {
     <section
       id="values"
       ref={sectionRef}
-      className="bg-[color:var(--bg-alt)] px-6 py-28 lg:px-10 lg:py-40"
+      className="bg-[color:var(--bg-alt)] px-6 py-28 lg:px-10 lg:py-[100px]"
     >
       <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-4">
@@ -90,7 +90,7 @@ export default function Approach({ data }: Props) {
             <li
               key={v._key ?? v.no}
               data-value
-              className="grid grid-cols-12 gap-6 border-t border-[color:var(--line)] py-12 last:border-b lg:py-16"
+              className="grid grid-cols-12 gap-6 border-t border-[color:var(--line)] py-10 last:border-b lg:py-10"
               style={{ willChange: "transform, opacity" }}
             >
               <span className="col-span-12 font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--accent)] lg:col-span-1">

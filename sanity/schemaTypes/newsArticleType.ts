@@ -31,18 +31,6 @@ export const newsArticleType = defineType({
       initialValue: () => new Date().toISOString(),
     }),
     defineField({
-      name: "source",
-      title: "Source",
-      type: "string",
-      description: "Publication or channel where the news appeared (e.g. Times of India).",
-    }),
-    defineField({
-      name: "sourceUrl",
-      title: "Source URL",
-      type: "url",
-      description: "Link to the original article (optional).",
-    }),
-    defineField({
       name: "excerpt",
       title: "Excerpt",
       type: "text",

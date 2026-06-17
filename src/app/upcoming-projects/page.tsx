@@ -125,14 +125,14 @@ export default async function UpcomingProjectsPage() {
         <PageHero {...hero} />
 
         {/* Project entries */}
-        <section className="theme-light px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
+        <section className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
           <div className="mx-auto max-w-[1440px]">
             {projects.map((project, i) => (
               <Reveal
                 key={project._key}
                 as="article"
                 delay={0.05 * i}
-                className="grid grid-cols-12 items-center gap-8 border-t border-[color:var(--line)] py-16 lg:gap-12 lg:py-20"
+                className="grid grid-cols-12 items-center gap-8 border-t border-[color:var(--line)] py-10 lg:gap-12 lg:py-10"
               >
                 {/* Image */}
                 {project.heroImage && (

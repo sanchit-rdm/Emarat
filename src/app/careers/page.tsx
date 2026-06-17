@@ -104,7 +104,7 @@ export default async function CareersPage() {
         <PageHero {...hero} hideFooterStrip />
 
         {/* Why work with us — pillars (light cream) */}
-        <section className="theme-light px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-40">
+        <section className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
           <div className="mx-auto max-w-[1440px]">
             <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
               <div>
@@ -141,7 +141,7 @@ export default async function CareersPage() {
         </section>
 
         {/* How to apply */}
-        <section className="px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-40">
+        <section className="px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
           <div className="mx-auto max-w-[900px] text-center">
             <div>
               <SplitReveal as="h2" className="font-display h-section">

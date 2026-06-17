@@ -124,7 +124,7 @@ export default function ResidencesV2({ projects, labels }: Props) {
   const current = list[active];
 
   return (
-    <section id="residences" className="theme-light px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-36">
+    <section id="residences" className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-6 lg:mb-16">
           <div>

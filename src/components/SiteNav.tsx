@@ -40,8 +40,8 @@ const DEFAULT_NAV: NavItem[] = [
   {
     label: "Media",
     dropdown: [
-      { href: "/news", label: "Blog" },
-      { href: "/media", label: "News" },
+      { href: "/blog", label: "Blog" },
+      { href: "/news", label: "News" },
     ],
   },
   { href: "/contact", label: "Contact" },

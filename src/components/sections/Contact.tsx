@@ -35,7 +35,7 @@ export default function Contact({ data }: Props) {
   return (
     <section
       id="contact"
-      className="relative isolate overflow-hidden border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-16 sm:px-6 sm:py-24 lg:px-10 lg:py-48"
+      className="relative isolate overflow-hidden border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]"
     >
       <div className="pointer-events-none absolute inset-0 -z-20">
         <Image

@@ -140,7 +140,7 @@ export default async function UpcomingProjectDetailPage({
         </section>
 
         {/* Description */}
-        <section className="theme-light px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
+        <section className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
           <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-10 lg:gap-16">
             <div className="col-span-12 lg:col-span-4">
               <SplitReveal as="h2" className="font-display h-section">
@@ -172,7 +172,7 @@ export default async function UpcomingProjectDetailPage({
         </section>
 
         {/* Newsletter */}
-        <section id="newsletter" className="border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
+        <section id="newsletter" className="border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
           <div className="mx-auto grid max-w-[1280px] grid-cols-12 items-end gap-8">
             <div className="col-span-12 lg:col-span-7">
               <SplitReveal as="h2" className="font-display h-section">

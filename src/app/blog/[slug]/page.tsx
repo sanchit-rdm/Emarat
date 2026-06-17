@@ -56,16 +56,10 @@ export default async function PostPage({ params }: Props) {
           </div>
         )}
 
-        <article className="mx-auto max-w-[740px] px-4 py-12 sm:px-6 sm:py-16 lg:py-24">
+        <article className="mx-auto max-w-[740px] px-4 py-10 sm:px-6 sm:py-[50px] lg:py-[100px]">
           {/* Meta */}
           <div className="mb-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-[color:var(--muted)]">
-            {post.author?.name && <span>{post.author.name}</span>}
-            {publishedAt && (
-              <>
-                <span className="opacity-40">·</span>
-                <span>{publishedAt}</span>
-              </>
-            )}
+            {publishedAt && <span>{publishedAt}</span>}
           </div>
 
           <h1 className="font-display text-3xl leading-tight lg:text-5xl">
@@ -80,7 +74,7 @@ export default async function PostPage({ params }: Props) {
 
           <div className="mt-16 border-t border-[color:var(--line)] pt-8">
             <a
-              href="/news"
+              href="/blog"
               className="text-sm uppercase tracking-[0.2em] text-[color:var(--accent)] hover:underline"
             >
               ← Back to News

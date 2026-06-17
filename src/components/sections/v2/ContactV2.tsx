@@ -48,7 +48,7 @@ export default function ContactV2({ data, labels }: Props) {
   const privacy = labels?.privacy?.trim() || "By submitting you agree to our privacy policy.";
 
   return (
-    <section id="contact" className="theme-light px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-40">
+    <section id="contact" className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
       <div className="mx-auto max-w-2xl text-center">
         <Reveal className="eyebrow mb-4 flex items-center justify-center font-script text-2xl text-[color:var(--accent)]">
           <span>{renderPortableText(eyebrow)}</span>

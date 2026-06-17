@@ -19,7 +19,7 @@ export default function ProjectGallery({
   const heading = labels?.heading?.trim() || "Gallery";
 
   return (
-    <section id="gallery" className="scroll-mt-44 border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
+    <section id="gallery" className="scroll-mt-44 border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
           <SplitReveal as="h2" className="font-display h-section">
