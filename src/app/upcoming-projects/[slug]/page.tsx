@@ -1,82 +1,52 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/sections/SiteFooter";
-import PageHero from "@/components/PageHero";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
+import Parallax from "@/components/motion/Parallax";
 import CircleButton from "@/components/CircleButton";
 import { sanityFetch } from "@/sanity/lib/live";
 import { UPCOMING_PROJECTS_PAGE_QUERY } from "@/sanity/lib/queries";
-import { buildMetadata, mergeHero, pickArr } from "@/sanity/lib/page";
+import { buildMetadata } from "@/sanity/lib/page";
 import { renderPortableText } from "@/lib/portableText";
 import type { PortableTextBlock } from "@/lib/portableText";
+import { UPCOMING_PROJECTS_FALLBACK, type UpcomingProject } from "../page";
 
 export const dynamic = 'force-dynamic';
 
-const HERO_FALLBACK = {
-  eyebrow: "Coming Soon",
-  titleTop: "Upcoming",
-  titleBottom: "Projects",
-  subtitle: "Stay informed on everything that is coming next.",
-  trailing: "",
-  bgImage: "/images/alameda-bedroom-3.webp",
-};
+function resolveProject(
+  sanityProjects: UpcomingProject[],
+  slug: string
+): UpcomingProject | undefined {
+  const sanity = sanityProjects.find((p) => (p.slug || p._key) === slug);
+  const fallback = UPCOMING_PROJECTS_FALLBACK.find((p) => p.slug === slug);
+  if (!sanity && !fallback) return undefined;
+  return { ...fallback, ...sanity, slug, _key: (sanity?._key ?? fallback?._key ?? slug) } as UpcomingProject;
+}
 
-export type UpcomingProject = {
-  _key: string;
-  slug: string;
-  title: string;
-  tagline?: string;
-  location?: string;
-  status?: string;
-  body?: string | PortableTextBlock[];
-  heroImage?: string;
-};
+export async function generateStaticParams() {
+  return UPCOMING_PROJECTS_FALLBACK.map((p) => ({ slug: p.slug }));
+}
 
-export const UPCOMING_PROJECTS_FALLBACK: UpcomingProject[] = [
-  {
-    _key: "goa",
-    slug: "goa",
-    title: "Goa",
-    tagline: "Contemporary living in one of India's most desirable destinations.",
-    location: "Goa",
-    status: "Coming Soon",
-    heroImage: "/images/Goa.jpeg",
-    body: "Emarat Realty presents a thoughtfully designed residential project in Goa, India's premier lifestyle and investment destination. Merging modern architecture with functional layouts, the development promises contemporary comfort, superior construction quality, and lasting value. From concept to completion, Emarat ensures meticulous planning, timely delivery, and unmatched craftsmanship, reflecting the brand's commitment to creating high-quality, investment-worthy real estate. This project exemplifies Emarat's vision of delivering residences that balance aesthetics, functionality, and long-term growth.",
-  },
-  {
-    _key: "bhimtal",
-    slug: "bhimtal",
-    title: "Bhimtal",
-    tagline: "Luxury wooden cottages in the hills of Bhimtal.",
-    location: "Bhimtal, Uttarakhand",
-    status: "Coming Soon",
-    heroImage: "/images/Bhimtal.jpeg",
-    body: "Discover an exclusive collection of luxury wooden cottages set amidst Bhimtal's serene hills. Perched between lush forests and the tranquil lake, each home offers breathtaking valley and lake views.\n\nCrafted with premium natural materials, warm wooden finishes, and expansive decks, these residences seamlessly blend contemporary comfort with the timeless charm of mountain living.\n\nWake to misty mornings, unwind by shimmering waters, and embrace a lifestyle defined by peace, privacy, and nature.",
-  },
-  {
-    _key: "lakefarms",
-    slug: "lakefarms",
-    title: "Lakefarms",
-    tagline: "A luxury farmland retreat near Jewar, where open skies, serene lakes and future growth come together.",
-    location: "Jewar, Uttar Pradesh",
-    status: "Coming Soon",
-    heroImage: "/images/LakeFarms.jpeg",
-    body: "Discover Emarat Lakefarms, a luxury countryside retreat set amidst lush greenery, serene lakes, and the evolving Jewar region. Strategically located near the upcoming Noida International Airport and Yamuna Expressway corridor, it offers unmatched access to future growth while preserving the tranquility of nature.\n\nDesigned for luxury farm living, the project features expansive plots, tree-lined avenues, water features, curated green zones, and exclusive recreational spaces. Whether as a weekend escape, family estate, or investment, residents enjoy panoramic views, open skies, and a lifestyle where privacy, wellness, and leisure coexist.\n\nEmarat Lakefarms is more than land — it's a destination, a retreat, and a future-ready investment, blending natural serenity with exceptional growth potential.",
-  },
-  {
-    _key: "lansdowne",
-    slug: "lansdowne",
-    title: "Lansdowne",
-    tagline: "An exclusive hilltop retreat in Lansdowne — 70 private residences across 30 acres of natural mountain landscape.",
-    location: "Lansdowne, Uttarakhand",
-    status: "Coming Soon",
-    heroImage: "/images/Lansdown.jpeg",
-    body: "Lansdowne is an exclusive hilltop retreat in Uttarakhand, envisioned across 30 acres of pristine mountain landscape with only 70 carefully planned resort residences and independent cottages. Surrounded by forests, valley views, and uninterrupted natural serenity, the project offers rare privacy, low-density living, operational lifestyle amenities, and improved connectivity from Delhi — creating a secluded destination where nature, exclusivity, and elevated ownership come together.",
-  },
-];
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const { data: pageRaw } = await sanityFetch({ query: UPCOMING_PROJECTS_PAGE_QUERY, tags: ["upcomingProjectsPage"] });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const sanityProjects: UpcomingProject[] = (pageRaw as any)?.projects ?? [];
+  const project = resolveProject(sanityProjects, slug);
+  if (!project) return { title: "Project Not Found · Emarat Realty" };
+  return buildMetadata(undefined, {
+    title: `${project.title} · Emarat Realty`,
+    description: project.tagline ?? `An upcoming Emarat Realty development in ${project.location}.`,
+  });
+}
 
 function ProjectBody({ body }: { body?: string | PortableTextBlock[] }) {
   if (!body) return null;
@@ -84,107 +54,154 @@ function ProjectBody({ body }: { body?: string | PortableTextBlock[] }) {
     return (
       <>
         {body.split("\n\n").map((para, i) => (
-          <p key={i} className="text-base leading-relaxed text-[color:var(--muted)]">
+          <p key={i} className="text-base leading-relaxed text-[color:var(--muted)] lg:text-lg">
             {para}
           </p>
         ))}
       </>
     );
   }
-  return <div className="space-y-4 text-base leading-relaxed text-[color:var(--muted)]">{renderPortableText(body)}</div>;
+  return (
+    <div className="space-y-5 text-base leading-relaxed text-[color:var(--muted)] lg:text-lg">
+      {renderPortableText(body)}
+    </div>
+  );
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const { data } = await sanityFetch({ query: UPCOMING_PROJECTS_PAGE_QUERY, tags: ["upcomingProjectsPage"] });
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const pc = (data as any) ?? {};
-  return buildMetadata(pc?.seo, {
-    title: "Upcoming Projects — Emarat Realty",
-    description:
-      "Explore Emarat Realty's upcoming residential projects in Goa, Bhimtal, Lansdowne and Jewar — luxury living across India's most sought-after destinations.",
-  });
-}
-
-export default async function UpcomingProjectsPage() {
+export default async function UpcomingProjectDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
   const { data: pageRaw } = await sanityFetch({ query: UPCOMING_PROJECTS_PAGE_QUERY, tags: ["upcomingProjectsPage"] });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pc = (pageRaw as any) ?? {};
+  const sanityProjects: UpcomingProject[] = pc?.projects ?? [];
 
-  const hero = mergeHero(pc?.hero, HERO_FALLBACK);
-  const projects: UpcomingProject[] = pickArr(pc?.projects, UPCOMING_PROJECTS_FALLBACK)
-    .map((p: UpcomingProject, i: number) => ({
-      ...UPCOMING_PROJECTS_FALLBACK[i] ?? {},
-      ...p,
-      slug: p.slug || p._key || UPCOMING_PROJECTS_FALLBACK[i]?.slug,
-      heroImage: p.heroImage || UPCOMING_PROJECTS_FALLBACK[i]?.heroImage,
-    }));
+  const project = resolveProject(sanityProjects, slug);
+  if (!project) notFound();
+
   return (
     <>
       <SiteNav />
       <main>
-        <PageHero {...hero} />
+        {/* Hero */}
+        <section
+          id="top"
+          className="relative isolate flex min-h-[88svh] flex-col justify-end overflow-hidden px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:px-10 lg:pb-20 lg:pt-40"
+        >
+          <div className="pointer-events-none absolute inset-0 -z-20">
+            <Parallax speed={0.3} className="h-full w-full">
+              <Image
+                src={project.heroImage ?? "/images/alameda-bedroom-3.webp"}
+                alt={project.title}
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover"
+                style={{ filter: "sepia(0.18) saturate(0.85) brightness(0.5) contrast(1.05)" }}
+              />
+            </Parallax>
+          </div>
+          <div className="pointer-events-none absolute inset-0 -z-10">
+            <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--bg)] via-[color:var(--bg)]/40 to-[color:var(--bg)]/20" />
+          </div>
 
-        {/* Project entries */}
-        <section className="theme-light px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
-          <div className="mx-auto max-w-[1440px]">
-            {projects.map((project, i) => (
-              <Reveal
-                key={project._key}
-                as="article"
-                delay={0.05 * i}
-                className="grid grid-cols-12 items-center gap-8 border-t border-[color:var(--line)] py-16 lg:gap-12 lg:py-20"
-              >
-                {/* Image */}
-                {project.heroImage && (
-                  <div className={`col-span-12 lg:col-span-5 ${i % 2 === 1 ? "lg:order-2" : ""}`}>
-                    <Link href={`/upcoming-projects/${project.slug}`} className="group block">
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
-                        <Image
-                          src={project.heroImage}
-                          alt={project.title}
-                          fill
-                          sizes="(min-width: 1024px) 40vw, 100vw"
-                          className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105"
-                          style={{ filter: "sepia(0.1) saturate(0.9) brightness(0.9)" }}
-                        />
-                      </div>
-                    </Link>
-                  </div>
-                )}
+          {/* Breadcrumb */}
+          <Reveal as="div" y={16} className="mb-auto flex items-center gap-2 text-[0.6875rem] uppercase tracking-[0.2em] text-[color:var(--muted)]">
+            <Link href="/" className="transition-colors hover:text-[color:var(--fg)]">Home</Link>
+            <span aria-hidden>/</span>
+            <Link href="/upcoming-projects" className="transition-colors hover:text-[color:var(--fg)]">Upcoming Projects</Link>
+            <span aria-hidden>/</span>
+            <span className="text-[color:var(--accent)]">{project.location}</span>
+          </Reveal>
 
-                {/* Text */}
-                <div className={`col-span-12 ${project.heroImage ? "lg:col-span-7" : "lg:col-span-12"} ${i % 2 === 1 ? "lg:order-1" : ""}`}>
-                  {project.status && (
-                    <div className="mb-4">
-                      <span className="rounded-full border border-[color:var(--accent)]/40 px-3 py-1 text-[0.625rem] uppercase tracking-[0.18em] text-[color:var(--accent)]">
-                        {project.status}
-                      </span>
-                    </div>
-                  )}
-                  <Link href={`/upcoming-projects/${project.slug}`} className="group">
-                    <SplitReveal as="h2" className="font-display h-sub mb-4 transition-colors group-hover:text-[color:var(--accent)]">
-                      {project.title}
-                    </SplitReveal>
-                  </Link>
-                  {project.location && (
-                    <p className="mb-6 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                      {project.location}
-                    </p>
-                  )}
-                  <div className="max-w-xl space-y-4">
-                    <ProjectBody body={project.body} />
-                  </div>
-                  <div className="mt-8">
-                    <CircleButton href={`/upcoming-projects/${project.slug}`} size="sm" variant="outline">
-                      Learn More
-                    </CircleButton>
-                  </div>
-                </div>
+          <div className="max-w-4xl">
+            <SplitReveal as="h1" className="font-display h-page text-[color:var(--fg)]">
+              {project.title}
+            </SplitReveal>
+
+            {project.tagline && (
+              <Reveal as="p" delay={0.3} className="mt-5 max-w-xl font-display-alt text-2xl text-white/80 lg:text-3xl">
+                {project.tagline}
               </Reveal>
-            ))}
+            )}
 
-            {/* Bottom border */}
-            <div className="border-t border-[color:var(--line)]" />
+            <Reveal as="div" delay={0.45} className="mt-10 flex flex-wrap items-center gap-4">
+              <CircleButton href="#newsletter" variant="filled">Stay Informed</CircleButton>
+              {project.status && (
+                <span className="rounded-full border border-white/30 px-4 py-2 text-[0.6875rem] uppercase tracking-[0.2em] text-white/70">
+                  {project.status}
+                </span>
+              )}
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Description */}
+        <section className="theme-light px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
+          <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-10 lg:gap-16">
+            <div className="col-span-12 lg:col-span-4">
+              <SplitReveal as="h2" className="font-display h-section">
+                About the
+              </SplitReveal>
+              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
+                Project.
+              </SplitReveal>
+              {project.location && (
+                <Reveal delay={0.2} className="mt-8 border-t border-[color:var(--line)] pt-6">
+                  <div className="text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">Location</div>
+                  <div className="mt-2 font-display-alt text-lg">{project.location}</div>
+                </Reveal>
+              )}
+              {project.status && (
+                <Reveal delay={0.25} className="mt-6">
+                  <div className="text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">Status</div>
+                  <div className="mt-2 inline-block rounded-full border border-[color:var(--accent)]/40 px-3 py-1 text-[0.6875rem] uppercase tracking-[0.18em] text-[color:var(--accent)]">
+                    {project.status}
+                  </div>
+                </Reveal>
+              )}
+            </div>
+
+            <div className="col-span-12 space-y-5 lg:col-span-8">
+              <ProjectBody body={project.body} />
+            </div>
+          </div>
+        </section>
+
+        {/* Newsletter */}
+        <section id="newsletter" className="border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
+          <div className="mx-auto grid max-w-[1280px] grid-cols-12 items-end gap-8">
+            <div className="col-span-12 lg:col-span-7">
+              <SplitReveal as="h2" className="font-display h-section">
+                Interested in upcoming
+              </SplitReveal>
+              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
+                projects?
+              </SplitReveal>
+            </div>
+            <div className="col-span-12 lg:col-span-5">
+              <form className="flex items-center border-b border-[color:var(--line)] py-2">
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  required
+                  className="flex-1 bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
+                  aria-label="Email"
+                />
+                <button
+                  type="submit"
+                  className="text-xs uppercase tracking-[0.18em] text-[color:var(--accent)] transition-colors hover:text-[color:var(--fg)]"
+                >
+                  Subscribe →
+                </button>
+              </form>
+              <p className="mt-3 text-xs text-[color:var(--muted)]">
+                Be the first to know about launch dates, pricing and more.
+              </p>
+            </div>
           </div>
         </section>
 

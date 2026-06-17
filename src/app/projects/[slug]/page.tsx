@@ -1,301 +1,275 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/sections/SiteFooter";
-import PageHero from "@/components/PageHero";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
+import Parallax from "@/components/motion/Parallax";
 import CircleButton from "@/components/CircleButton";
-import { getSanityProjectListings } from "@/lib/sanity.projects";
+import FloorPlans from "@/components/project/FloorPlans";
+import ProjectGallery from "@/components/project/ProjectGallery";
+import Connectivity from "@/components/project/Connectivity";
+import EnquiryForm from "@/components/project/EnquiryForm";
+import { amenityIcons } from "@/components/project/amenityIcons";
+import { getProject, projectSlugs } from "@/lib/projects";
+import { getSanityProject, getSanityProjectSlugs, getSanityProjectSeo } from "@/lib/sanity.projects";
 import { sanityFetch } from "@/sanity/lib/live";
 import { PROJECTS_PAGE_QUERY } from "@/sanity/lib/queries";
-import { getPageContent, mergeHero, buildMetadata, pickStr, pickArr } from "@/sanity/lib/page";
+import { buildMetadata, pickStr, pickArr } from "@/sanity/lib/page";
 
 export const dynamic = 'force-dynamic';
 
-const HERO_FALLBACK = {
-  eyebrow: "",
-  titleTop: "Selected works",
-  titleBottom: "across Gurugram.",
-  subtitle:
-    "A portfolio of Spanish-inspired independent and boutique private floors at DLF Garden City and Alameda every Emarat home built on the same principles of quality, elegance and innovation.",
-  trailing: "DLF Garden City · Alameda",
-  bgImage: "/images/alameda-bedroom-3.webp",
-};
+export async function generateStaticParams() {
+  const sanitySlugs = await getSanityProjectSlugs();
+  const allSlugs = [...new Set([...sanitySlugs, ...projectSlugs])];
+  return allSlugs.map((slug) => ({ slug }));
+}
 
-export async function generateMetadata(): Promise<Metadata> {
-  const page = await getPageContent("projectsPage");
-  return buildMetadata(page?.seo, {
-    title: "Projects Emarat Realty",
-    description:
-      "Selected projects by Emarat Realty C2, C5 and E11 independent floors at DLF Garden City; EA 04 boutique private floors at Alameda, Sector 73 Gurugram.",
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const project = (await getSanityProject(slug)) ?? getProject(slug);
+  if (!project) return { title: "Project Not Found · Emarat Realty" };
+  const seo = await getSanityProjectSeo(slug);
+  return buildMetadata(seo ?? undefined, {
+    title: `${project.title} · Emarat Realty`,
+    description: `${project.tagline} ${project.config}, ${project.size}, at ${project.location}. ${project.status}.`,
   });
 }
 
-const projects = [
-  {
-    id: "c2",
-    no: "01",
-    title: "C2 at DLF Garden City",
-    location: "DLF Garden City, Sector 93, Gurugram",
-    status: "Now Selling",
-    config: "5 BHK Independent Floors",
-    size: "G+4 · 5 BHK",
-    img: "/images/C-2/building.jpg",
-    body: "Thoughtfully designed 5 BHK independent floors within the prestigious DLF gated community — spacious layouts, modern architecture and everyday comfort for contemporary luxury living.",
-    highlights: ["5BHK Independent Floors", "DLF Gated Community", "24x7 Security", "S+4 Built Form"],
-  },
-  {
-    id: "c5",
-    no: "02",
-    title: "C5 at DLF Garden City",
-    location: "DLF Garden City, Sector 93, Gurugram",
-    status: "Now Selling",
-    config: "Independent Floors",
-    size: "G+4 Independent Floors",
-    img: "/images/C-5/building.jpg",
-    body: "Independent floors designed to invite light in and open life out — the Red Diamond of Gurugram. Double-height living and a Garden in the Sky terrace.",
-    highlights: ["The Red Diamond of Gurugram", "Garden in the Sky terrace", "Double-height living", "Italian marble flooring"],
-  },
-  {
-    id: "e11",
-    no: "03",
-    title: "E11 at DLF Garden City",
-    location: "DLF Garden City, Sector 93, Gurugram",
-    status: "New Launch",
-    config: "Independent Floors · Three-Side Open",
-    size: "G+4 · Three-Side Open",
-    img: "/images/E11/building.jpg",
-    body: "Three-side-open independent floors where imagination meets form — volume, light and architectural drama, with a private sky-garden terrace.",
-    highlights: ["Three-side open floors", "Volume, light & drama", "Sky-garden terrace", "Premium modular kitchen"],
-  },
-  {
-    id: "ea04",
-    no: "04",
-    title: "EA 04 at Alameda",
-    location: "Sector 73, Gurugram",
-    status: "Now Selling",
-    config: "Boutique Private Floors",
-    size: "Two-Side Open Private Floors",
-    img: "/images/EA4/building.jpg",
-    body: "A boutique luxury residence — private, two-side-open floors in a palette of deep emerald stone and 24k-gold accents. Architecture that commands.",
-    highlights: ["Boutique private floors", "Two-side open homes", "Dual high-speed elevators", "Emerald & 24k-gold palette"],
-  },
-];
+export default async function ProjectPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const project = (await getSanityProject(slug)) ?? getProject(slug);
+  if (!project) notFound();
 
-const additional = [
-  {
-    name: "DLF Garden City Plots",
-    location: "Sector 93, Gurugram",
-    type: "Freehold residential plots",
-  },
-  {
-    name: "DLF Independent Floors",
-    location: "Phase 3, Gurugram",
-    type: "Independent builder floors",
-  },
-];
-
-const FILTER_LINKS = [
-  { label: "C2 at DLF Garden City", href: "#c2" },
-  { label: "C5 at DLF Garden City", href: "#c5" },
-  { label: "E11 at DLF Garden City", href: "#e11" },
-  { label: "EA 04 at Alameda", href: "#ea04" },
-];
-
-export default async function ProjectsPage() {
-  // Merge any Sanity data over the static cards per slug, so a partial Sanity
-  // document never blanks out a card — empty fields fall back to static.
-  const sanityListings = await getSanityProjectListings();
-  const bySlug = new Map(sanityListings.map((s) => [s.slug, s]));
-  const pick = <T,>(v: T | null | undefined, fb: T): T =>
-    v === null || v === undefined || (typeof v === "string" && v.trim() === "")
-      ? fb
-      : v;
-
-  const cards = projects.map((base) => {
-    const s = bySlug.get(base.id);
-    if (!s) return base;
-    return {
-      id: base.id,
-      no: pick(s.no, base.no),
-      title: pick(s.title, base.title),
-      location: pick(s.location, base.location),
-      status: pick(s.status, base.status),
-      config: pick(s.config, base.config),
-      size: pick(s.size, base.size),
-      img: pick(s.heroImage, base.img),
-      body: pick(s.excerpt, pick(s.tagline, base.body)),
-      highlights: s.stats?.length
-        ? s.stats.map((st) => `${st.value} ${st.label}`)
-        : base.highlights,
-    };
-  });
-
-  // Append any projects that exist only in Sanity (not in the static list).
-  const staticIds = new Set(projects.map((p) => p.id));
-  const sanityOnly = sanityListings
-    .filter((s) => s.slug && !staticIds.has(s.slug) && s.heroImage)
-    .map((s) => ({
-      id: s.slug,
-      no: s.no ?? "",
-      title: s.title ?? "",
-      location: s.location ?? "",
-      status: s.status ?? "",
-      config: s.config ?? "",
-      size: s.size ?? "",
-      img: s.heroImage as string,
-      body: s.excerpt ?? s.tagline ?? "",
-      highlights: (s.stats ?? []).map((st) => `${st.value} ${st.label}`),
-    }));
-
-  const sanityProjects = [...cards, ...sanityOnly];
-
-  const { data: pageRaw } = await sanityFetch({ query: PROJECTS_PAGE_QUERY, tags: ["projectsPage"] });
+  const { data: ppRaw } = await sanityFetch({ query: PROJECTS_PAGE_QUERY, tags: ["projectsPage"] });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const pc = (pageRaw as any) ?? {};
-  const hero = mergeHero(pc?.hero, HERO_FALLBACK);
-
-  const filter = {
-    allLabel: pickStr(pc?.filter?.allLabel, "All Projects"),
-    links: pickArr(pc?.filter?.links, FILTER_LINKS),
-    trailing: pickStr(pc?.filter?.trailing, "Independent & Private Floors"),
+  const d = (ppRaw as any)?.detail ?? {};
+  const dl = {
+    breadcrumbHome: pickStr(d.breadcrumbHome, "Home"),
+    breadcrumbProjects: pickStr(d.breadcrumbProjects, "Projects"),
+    heroEnquireLabel: pickStr(d.heroEnquireLabel, "Enquire Now"),
+    heroFloorPlansLabel: pickStr(d.heroFloorPlansLabel, "View Floor Plans"),
+    overviewHeading1: pickStr(d.overviewHeading1, "Project"),
+    overviewHeading2: pickStr(d.overviewHeading2, "Overview."),
+    amenitiesHeading: pickStr(d.amenitiesHeading, "Amenities"),
+    amenitiesBlurb: project.amenitiesBlurb ?? pickStr(d.amenitiesBlurb, "Designed to make everyday living as effortless as possible."),
   };
-  const cardButtons = {
-    viewLabel: pickStr(pc?.cardButtons?.viewLabel, "View Project"),
-    enquireLabel: pickStr(pc?.cardButtons?.enquireLabel, "Enquire"),
-    configLabel: pickStr(pc?.cardButtons?.configLabel, "Configuration"),
-    sizesLabel: pickStr(pc?.cardButtons?.sizesLabel, "Sizes"),
+  const sectionLinks = [
+    { href: "#overview", label: pickStr(d.navOverview, "Overview") },
+    { href: "#amenities", label: pickStr(d.navAmenities, "Amenities") },
+    { href: "#floor-plans", label: pickStr(d.navFloorPlans, "Floor Plans") },
+    { href: "#gallery", label: pickStr(d.navGallery, "Gallery") },
+    { href: "#location", label: pickStr(d.navLocation, "Location") },
+    { href: "#enquiry", label: pickStr(d.navEnquire, "Enquire") },
+  ];
+  const floorPlansLabels = {
+    heading: pickStr(d.floorPlansHeading, "Floor Plans"),
+    blurb: project.floorPlansBlurb ?? pickStr(d.floorPlansBlurb, "Each floor has been planned with the same attention to detail that goes into every other aspect of the residence."),
+    requestLabel: pickStr(d.floorPlansRequestLabel, "Request detailed plan"),
+    badge: pickStr(d.floorPlansBadge, "Indicative"),
   };
-  const additionalHeading = pickStr(pc?.additionalHeading, "Plots and independent floors.");
-  const additionalItems = pickArr(pc?.additional, additional);
-  const cta = {
-    heading: pickStr(pc?.cta?.heading, "Considering a residence?"),
-    body: pickStr(
-      pc?.cta?.body,
-      "Our sales team will walk you through availability, pricing and the right configuration for your family."
-    ),
-    buttonLabel: pickStr(pc?.cta?.buttonLabel, "Speak to Sales"),
-    buttonHref: pickStr(pc?.cta?.buttonHref, "/contact"),
+  const galleryLabels = { heading: pickStr(d.galleryHeading, "Gallery") };
+  const connectivityLabels = {
+    heading1: pickStr(d.connectivityHeading1, "Location &"),
+    heading2: pickStr(d.connectivityHeading2, "Connectivity."),
+    blurb: project.connectivityBlurb ?? pickStr(d.connectivityBlurb, "Positioned in one of Gurugram's most well-connected corridors, placing everything the city has to offer within easy reach."),
+  };
+  const enquiryLabels = {
+    heading: pickStr(d.enquiryHeading, "Enquire about"),
+    blurb: pickStr(d.enquiryBlurb, "Share your details and our team will get back to you shortly for the next steps."),
+    phone: pickStr(d.enquiryPhone, "+91 84509 84509"),
+    email: pickStr(d.enquiryEmail, "info@emaratrealty.com"),
+    submitLabel: pickStr(d.enquirySubmitLabel, "Send Enquiry"),
+    interestedLabel: pickStr(d.enquiryInterestedLabel, "Interested in"),
+    nameLabel: pickStr(d.enquiryNameLabel, "Full Name"),
+    namePlaceholder: pickStr(d.enquiryNamePlaceholder, "Your name"),
+    phoneLabel: pickStr(d.enquiryPhoneLabel, "Phone"),
+    phonePlaceholder: pickStr(d.enquiryPhonePlaceholder, "+91 00000 00000"),
+    emailLabel: pickStr(d.enquiryEmailLabel, "Email"),
+    emailPlaceholder: pickStr(d.enquiryEmailPlaceholder, "your@email.com"),
+    configLabel: pickStr(d.enquiryConfigLabel, "Configuration"),
+    configPlaceholder: pickStr(d.enquiryConfigPlaceholder, "Preferred type"),
+    configOptions: pickArr<string>(d.enquiryConfigOptions, ["Site visit", "Investment / NRI"]),
+    messageLabel: pickStr(d.enquiryMessageLabel, "Message"),
+    messagePlaceholder: pickStr(d.enquiryMessagePlaceholder, "Tell us what you're looking for…"),
+    privacy: pickStr(d.enquiryPrivacy, "By submitting you agree to our privacy policy."),
   };
 
   return (
     <>
       <SiteNav />
       <main>
-        <PageHero {...hero} />
+        {/* ---------------- 1 · Hero Banner ---------------- */}
+        <section
+          id="top"
+          className="relative isolate flex min-h-[88svh] flex-col justify-end overflow-hidden px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:min-h-[92svh] lg:px-10 lg:pb-20 lg:pt-40"
+        >
+          <div className="pointer-events-none absolute inset-0 -z-20">
+            <Parallax speed={0.3} className="h-full w-full">
+              <Image
+                src={project.heroImage}
+                alt={project.title}
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover"
+                style={{ filter: "sepia(0.18) saturate(0.85) brightness(0.5) contrast(1.05)" }}
+              />
+            </Parallax>
+          </div>
+          <div className="pointer-events-none absolute inset-0 -z-10">
+            <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--bg)] via-[color:var(--bg)]/40 to-[color:var(--bg)]/30" />
+            <div className="absolute -left-40 top-1/4 h-[420px] w-[420px] rounded-full bg-[color:var(--accent)]/8 blur-[160px]" />
+          </div>
 
-        {/* Project filter strip */}
-        <section className="border-b border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-6 sm:px-6 sm:py-8 lg:px-10">
-          <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-x-8 gap-y-3 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
-            {filter.links.map((l) => (
-              <a key={l.href ?? l.label} href={l.href} className="transition-colors hover:text-[color:var(--accent)]">
-                {l.label}
+          {/* Breadcrumb */}
+          <Reveal as="div" y={16} className="mb-auto flex items-center gap-2 text-[0.6875rem] uppercase tracking-[0.2em] text-[color:var(--muted)]">
+            <Link href="/" className="transition-colors hover:text-[color:var(--fg)]">{dl.breadcrumbHome}</Link>
+            <span aria-hidden>/</span>
+            <Link href="/projects" className="transition-colors hover:text-[color:var(--fg)]">{dl.breadcrumbProjects}</Link>
+            <span aria-hidden>/</span>
+            <span className="text-[color:var(--accent)]">{project.shortName}</span>
+          </Reveal>
+
+          <div className="max-w-4xl">
+            <Reveal as="div" y={20} className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.22em] text-white">
+              <span>{project.location}</span>
+            </Reveal>
+
+            <SplitReveal as="h1" className="mt-6 font-display h-page text-[color:var(--fg)]">
+              {project.title}
+            </SplitReveal>
+
+            <Reveal as="p" delay={0.3} className="mt-5 max-w-xl font-display-alt text-2xl text-white/80 lg:text-3xl">
+              {project.tagline}
+            </Reveal>
+
+            <Reveal as="div" delay={0.45} className="mt-10 flex flex-wrap gap-3">
+              <CircleButton href="#enquiry" variant="filled">{dl.heroEnquireLabel}</CircleButton>
+              <CircleButton href="#floor-plans" variant="outline">{dl.heroFloorPlansLabel}</CircleButton>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Sticky section nav */}
+        <nav className="sticky top-0 z-40 border-y border-[color:var(--line)] bg-[color:var(--bg)]/90 backdrop-blur-md">
+          <div className="mx-auto flex max-w-[1440px] items-center gap-x-6 gap-y-2 overflow-x-auto px-6 py-4 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)] lg:px-10 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {sectionLinks.map((s) => (
+              <a key={s.href} href={s.href} className="whitespace-nowrap transition-colors hover:text-[color:var(--fg)]">
+                {s.label}
               </a>
             ))}
+            <a
+              href={project.brochure ?? "#enquiry"}
+              download={project.brochure ? true : undefined}
+              className="ml-auto flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-[color:var(--accent)]/50 px-4 py-1.5 text-[0.625rem] uppercase tracking-[0.2em] text-[color:var(--accent)] transition-colors hover:bg-[color:var(--accent)]/10"
+            >
+              <svg viewBox="0 0 16 16" className="h-3 w-3 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M8 2v8M5 7l3 3 3-3M3 13h10" />
+              </svg>
+              Download Brochure
+            </a>
           </div>
-        </section>
+        </nav>
 
-        {/* Detailed project cards — alternating image side (light cream) */}
-        <section className="theme-light px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
-          <div className="mx-auto max-w-[1440px] space-y-24 lg:space-y-32">
-            {(sanityProjects ?? projects).map((p, i) => (
-              <article
-                key={p.id}
-                id={p.id}
-                className="grid scroll-mt-32 grid-cols-12 items-center gap-8 lg:gap-12"
-              >
-                {/* Image */}
-                <div className={`col-span-12 lg:col-span-7 ${i % 2 === 1 ? "lg:order-2" : ""}`}>
-                  <Link href={`/projects/${p.id}`} className="group block">
-                    <Reveal className="relative aspect-[4/3] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
-                      <Image
-                        src={p.img}
-                        alt={p.title}
-                        fill
-                        sizes="(min-width: 1024px) 55vw, 100vw"
-                        className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105"
-                        style={{ filter: "sepia(0.15) saturate(0.88) brightness(0.86)" }}
-                      />
-                    </Reveal>
-                  </Link>
-                </div>
-
-                {/* Details */}
-                <div className={`col-span-12 lg:col-span-5 ${i % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <Link href={`/projects/${p.id}`} className="transition-colors hover:text-[color:var(--accent)]">
-                    <SplitReveal
-                      as="h2"
-                      className="font-display h-sub"
-                    >
-                      {p.title}
-                    </SplitReveal>
-                  </Link>
-
-                  <Reveal as="p" delay={0.2} className="mt-6 max-w-md text-base leading-relaxed text-[color:var(--muted)]">
-                    {p.body}
-                  </Reveal>
-
-                  {/* Spec table */}
-                  <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 border-y border-[color:var(--line)] py-6">
-                    <Reveal delay={0.25}>
-                      <div className="text-[0.625rem] uppercase tracking-[0.2em] text-[color:var(--muted)]">
-                        Location
-                      </div>
-                      <div className="mt-1 text-sm">{p.location}</div>
-                    </Reveal>
-                    <Reveal delay={0.3}>
-                      <div className="text-[0.625rem] uppercase tracking-[0.2em] text-[color:var(--muted)]">
-                        {cardButtons.sizesLabel}
-                      </div>
-                      <div className="mt-1 text-sm">{p.size}</div>
-                    </Reveal>
-                  </div>
-
-                  {/* Highlights */}
-                  <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs text-[color:var(--muted)]">
-                    {p.highlights.filter(h => !/s\+\d|built[\s-]?form/i.test(h)).slice(0, 3).map((h) => (
-                      <li key={h} className="flex items-center gap-2">
-                        <span className="inline-block h-1 w-1 rounded-full bg-[color:var(--accent)]" />
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Reveal delay={0.4} className="mt-8 flex gap-3">
-                    <CircleButton href={`/projects/${p.id}`} size="sm" variant="filled">
-                      {cardButtons.viewLabel}
-                    </CircleButton>
-                    <CircleButton href={`/projects/${p.id}#enquiry`} size="sm" variant="outline">
-                      {cardButtons.enquireLabel}
-                    </CircleButton>
-                  </Reveal>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* Closing CTA */}
-        <section className="px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
-          <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-8">
-            <div>
-              <SplitReveal
-                as="h2"
-                className="font-display h-sub"
-              >
-                {cta.heading}
+        {/* ---------------- 2 · Project Overview ---------------- */}
+        <section id="overview" className="scroll-mt-44 px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
+          <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-10 lg:gap-16">
+            <div className="col-span-12 lg:col-span-6">
+              <SplitReveal as="h2" className="font-display h-section">
+                {dl.overviewHeading1}
               </SplitReveal>
-              <Reveal as="p" delay={0.15} className="mt-4 max-w-md text-sm text-[color:var(--muted)]">
-                {cta.body}
+              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
+                {dl.overviewHeading2}
+              </SplitReveal>
+              {project.overview.map((para, i) => (
+                <Reveal as="p" key={i} delay={0.15 + i * 0.08} className="mt-6 max-w-xl text-base leading-relaxed text-[color:var(--muted)] lg:text-lg">
+                  {para}
+                </Reveal>
+              ))}
+
+              {/* Quick stats */}
+              <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-8 border-t border-[color:var(--line)] pt-10 sm:grid-cols-4">
+                {project.stats.map((s, i) => (
+                  <Reveal key={s.label} delay={i * 0.06}>
+                    <div className="font-display text-3xl tracking-tight text-[color:var(--accent)]">{s.value.split(" ")[0]}</div>
+                    <div className="mt-2 text-[0.625rem] uppercase tracking-[0.18em] text-[color:var(--muted)]">{s.label}</div>
+                  </Reveal>
+                ))}
+              </div>
+
+            </div>
+
+            <div className="col-span-12 lg:col-span-6">
+              <Parallax speed={0.22} className="relative aspect-[4/5] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
+                <Image
+                  src={project.overviewImage}
+                  alt={`${project.title} interior`}
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover"
+                  style={{ filter: "sepia(0.14) saturate(0.9) brightness(0.88)" }}
+                />
+              </Parallax>
+              <Reveal as="div" delay={0.2} className="mt-4 flex items-center justify-between text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
+                <span>{project.location}</span>
+                <span>{project.rera}</span>
               </Reveal>
             </div>
-            <CircleButton href={cta.buttonHref} variant="filled">
-              {cta.buttonLabel}
-            </CircleButton>
           </div>
         </section>
+
+        {/* ---------------- 3 · Amenities ---------------- */}
+        <section id="amenities" className="scroll-mt-44 border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-14 sm:px-6 sm:py-20 lg:px-10 lg:py-32">
+          <div className="mx-auto max-w-[1440px]">
+            <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
+              <SplitReveal as="h2" className="font-display h-section">
+                {dl.amenitiesHeading}
+              </SplitReveal>
+              <Reveal as="p" delay={0.15} className="max-w-sm text-sm text-[color:var(--muted)]">
+                {dl.amenitiesBlurb}
+              </Reveal>
+            </div>
+
+            <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+              {project.amenities.map((a, i) => (
+                <Reveal
+                  as="li"
+                  key={a.name}
+                  delay={(i % 4) * 0.06}
+                  className="group flex flex-col gap-4 rounded-md border border-[color:var(--line)] p-6 transition-colors hover:border-[color:var(--accent)]/40 lg:p-8"
+                >
+                  <span className="h-8 w-8 text-[color:var(--accent)] transition-transform duration-500 group-hover:-translate-y-1">
+                    {amenityIcons[a.icon]}
+                  </span>
+                  <span className="font-display-alt text-lg leading-snug">{a.name}</span>
+                </Reveal>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* ---------------- 4 · Floor Plans ---------------- */}
+        <FloorPlans plans={project.floorPlans} labels={floorPlansLabels} />
+
+        {/* ---------------- 5 · Gallery ---------------- */}
+        <ProjectGallery images={project.gallery} labels={galleryLabels} />
+
+        {/* ---------------- 6 · Location & Connectivity ---------------- */}
+        <Connectivity landmarks={project.connectivity} mapQuery={project.mapQuery} location={project.location} labels={connectivityLabels} />
+
+        {/* ---------------- 7 · Enquiry Form ---------------- */}
+        <EnquiryForm projectTitle={project.title} config={project.config} labels={enquiryLabels} />
       </main>
       <SiteFooter />
     </>
