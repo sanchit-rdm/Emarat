@@ -88,18 +88,15 @@ export default function NewsV2({ posts, labels }: { posts: Post[]; labels?: News
             const postHref = post.slug?.current ? `/news/${post.slug.current}` : allHref;
 
             return (
-              <Reveal key={post._id} delay={i * 0.1}>
-                <StrokeHover
-                  href={postHref}
-                  ariaLabel={post.title}
-                  className={`flex aspect-[5/6] flex-col justify-between rounded-md p-7 lg:p-9 ${
-                    withImage
-                      ? "text-white"
-                      : "border border-[color:var(--accent)]/30 bg-[color:var(--bg)] text-[color:var(--fg)]"
-                  }`}
-                >
-                  {withImage && (
-                    <div className="absolute inset-0 -z-10">
+              <Reveal key={post._id} delay={i * 0.1} className="h-full">
+                {withImage ? (
+                  <StrokeHover
+                    href={postHref}
+                    ariaLabel={post.title}
+                    className="flex h-full flex-col rounded-2xl border border-[color:var(--line)] bg-[color:var(--bg)] p-3"
+                  >
+                    {/* Portrait image — p-3 insets it so all 4 corners are visibly rounded */}
+                    <div className="relative aspect-[5/6] overflow-hidden rounded-xl">
                       <Image
                         src={img as string}
                         alt={post.title ?? ""}
@@ -107,28 +104,40 @@ export default function NewsV2({ posts, labels }: { posts: Post[]; labels?: News
                         sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
                         className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/35" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4">
+                        <div className="font-mono text-[0.625rem] uppercase tracking-[0.26em] text-white/80">{category}</div>
+                        <div className="flex items-end gap-2">
+                          <span className="font-display text-4xl leading-none text-white">{day}</span>
+                          <span className="mb-1 text-[0.625rem] uppercase tracking-[0.22em] text-white/80">{month}</span>
+                        </div>
+                      </div>
                     </div>
-                  )}
-
-                  <div className="relative z-10">
-                    <div className={`font-mono text-[0.625rem] uppercase tracking-[0.26em] ${withImage ? "text-white/80" : "text-[color:var(--accent)]"}`}>
-                      {category}
+                    {/* Title below image — heading font, sentence case */}
+                    <div className="px-3 pb-3 pt-4">
+                      <h3 className="font-display text-xl leading-tight text-[color:var(--fg)] transition-colors group-hover:text-[color:var(--accent)]">
+                        {post.title}
+                      </h3>
                     </div>
-                    <h3 className="mt-6 max-w-[18ch] text-sm font-medium uppercase leading-relaxed tracking-[0.1em]">
-                      {post.title}
-                    </h3>
-                  </div>
-
-                  <div className="relative z-10 flex items-end gap-3">
-                    <span className={`font-display text-6xl leading-none lg:text-7xl ${withImage ? "text-white" : "text-[color:var(--accent)]"}`}>
-                      {day}
-                    </span>
-                    <span className={`mb-2 text-[0.625rem] uppercase tracking-[0.22em] ${withImage ? "text-white/80" : "text-[color:var(--muted)]"}`}>
-                      {month}
-                    </span>
-                  </div>
-                </StrokeHover>
+                  </StrokeHover>
+                ) : (
+                  <StrokeHover
+                    href={postHref}
+                    ariaLabel={post.title}
+                    className="flex h-full flex-col justify-between rounded-2xl border border-[color:var(--accent)]/30 bg-[color:var(--bg)] p-7 text-[color:var(--fg)] lg:p-9"
+                  >
+                    <div className="relative z-10">
+                      <div className="font-mono text-[0.625rem] uppercase tracking-[0.26em] text-[color:var(--accent)]">{category}</div>
+                      <h3 className="mt-6 max-w-[18ch] font-display text-xl leading-tight">
+                        {post.title}
+                      </h3>
+                    </div>
+                    <div className="relative z-10 flex items-end gap-3">
+                      <span className="font-display text-6xl leading-none lg:text-7xl text-[color:var(--accent)]">{day}</span>
+                      <span className="mb-2 text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">{month}</span>
+                    </div>
+                  </StrokeHover>
+                )}
               </Reveal>
             );
           })}
