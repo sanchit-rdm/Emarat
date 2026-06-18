@@ -6,6 +6,7 @@ import IconicIntroV2 from "@/components/sections/v2/IconicIntroV2";
 import Location from "@/components/sections/Location";
 import ResidencesV2 from "@/components/sections/v2/ResidencesV2";
 import StatementV2 from "@/components/sections/v2/StatementV2";
+import StickyRevealSection from "@/components/sections/v2/StickyRevealSection";
 import PrinciplesV2 from "@/components/sections/v2/PrinciplesV2";
 import NewsV2 from "@/components/sections/v2/NewsV2";
 import ContactV2 from "@/components/sections/v2/ContactV2";
@@ -63,6 +64,7 @@ export default async function HomeV2() {
         <Location data={homePage?.location} />
         <ResidencesV2 projects={projects} labels={homePage?.designTwo?.residences} />
         <StatementV2 data={homePage?.statement} />
+        <StickyRevealSection />
         <PrinciplesV2 data={homePage?.approach} labels={homePage?.designTwo?.principles} />
         <NewsV2 posts={posts} labels={homePage?.designTwo?.news} />
         <ContactV2 data={homePage?.contact} labels={homePage?.designTwo?.contact} />

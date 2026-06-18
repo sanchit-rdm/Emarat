@@ -6,6 +6,7 @@ import CircleButton from "@/components/CircleButton";
 export default function BrochureButton() {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [heroVisible, setHeroVisible] = useState(true);
   const btnRef = useRef<HTMLButtonElement | null>(null);
   const rectRef = useRef<SVGRectElement | null>(null);
 
@@ -41,6 +42,17 @@ export default function BrochureButton() {
     return () => ro.disconnect();
   }, []);
 
+  useEffect(() => {
+    const hero = document.getElementById("top");
+    if (!hero) { setHeroVisible(false); return; }
+    const io = new IntersectionObserver(
+      ([entry]) => setHeroVisible(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    io.observe(hero);
+    return () => io.disconnect();
+  }, []);
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitted(true);
@@ -53,8 +65,8 @@ export default function BrochureButton() {
 
   return (
     <>
-      {/* Sticky vertical button */}
-      <div className="fixed right-0 top-1/2 z-40 -translate-y-1/2">
+      {/* Sticky vertical button — hidden over the hero scrub */}
+      <div className={`fixed right-0 top-1/2 z-40 -translate-y-1/2 transition-all duration-500 ${heroVisible ? "pointer-events-none translate-x-full opacity-0" : "translate-x-0 opacity-100"}`}>
         <button
           ref={btnRef}
           type="button"
@@ -65,12 +77,6 @@ export default function BrochureButton() {
           <svg className="link-hover__circle" aria-hidden="true">
             <rect ref={rectRef} fill="none" />
           </svg>
-          <span
-            className="relative z-10 text-[0.5625rem] font-semibold tracking-[0.22em]"
-            style={{ writingMode: "vertical-rl" }}
-          >
-            Request a callback
-          </span>
           {/* Phone icon */}
           <svg
             viewBox="0 0 24 24"
@@ -83,6 +89,12 @@ export default function BrochureButton() {
           >
             <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24 11.47 11.47 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.47 11.47 0 0 0 .57 3.6 1 1 0 0 1-.25 1.01z" />
           </svg>
+          <span
+            className="relative z-10 text-[0.5625rem] font-semibold uppercase tracking-[0.22em]"
+            style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+          >
+            Request a callback
+          </span>
         </button>
       </div>
 

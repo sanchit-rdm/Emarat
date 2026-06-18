@@ -75,12 +75,12 @@ export default function SiteNavClient({
                 </button>
                 {openDropdown === item.label && (
                   <div className="absolute left-0 top-full pt-4">
-                    <div className="min-w-[220px] rounded-md border border-[color:var(--line)] bg-[color:var(--bg)]/95 p-2 backdrop-blur-md">
+                    <div className="w-max min-w-[220px] rounded-md border border-[color:var(--line)] bg-[color:var(--bg)]/95 p-2 backdrop-blur-md">
                       {item.dropdown.map((d) => (
                         <Link
                           key={d.href}
                           href={d.href}
-                          className="block rounded px-3 py-2 text-sm tracking-[0.02em] text-white transition-colors hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--accent)]"
+                          className="block whitespace-nowrap rounded px-3 py-2 text-sm tracking-[0.02em] text-white transition-colors hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--accent)]"
                         >
                           {d.label}
                         </Link>

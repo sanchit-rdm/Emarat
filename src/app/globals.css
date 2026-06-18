@@ -69,6 +69,17 @@ html {
   color: var(--fg);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Responsive base: mobile 15px → tablet 16px → desktop 18px.
+     All rem-based sizes (text-sm, text-xs, spacing) scale with this. */
+  font-size: 15px;
+}
+
+@media (min-width: 640px) {
+  html { font-size: 16px; }
+}
+
+@media (min-width: 1024px) {
+  html { font-size: 18px; }
 }
 
 /* Guard against any stray full-bleed element (decorative blurs, pinned tracks,
@@ -84,6 +95,7 @@ body {
   color: var(--fg);
   font-family: var(--font-sans-pri), ui-sans-serif, system-ui, sans-serif;
   font-feature-settings: "ss01", "ss02";
+  font-weight: 500;
 }
 
 ::selection {
@@ -191,7 +203,8 @@ html {
    Screens ≤ 1920 px are unaffected (the rule only fires above that width). */
 @media (min-width: 1921px) {
   html {
-    font-size: calc(100vw / 120);
+    /* 1920 / 18 = 106.67 — keeps the 18px base smooth at the 1920px boundary */
+    font-size: calc(100vw / 106.67);
   }
   /* Scale fixed-pixel content columns so they occupy the same share of the
      canvas above 1920 px as they do at 1920 px. Values = px / 1920 × 100. */

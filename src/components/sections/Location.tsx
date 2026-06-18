@@ -331,7 +331,7 @@ export default function Location({ data }: { data?: LocationData }) {
                     <span className="h-7 w-7 lg:h-8 lg:w-8">{icons[p.icon]}</span>
                   </span>
 
-                  <div>
+                  <div className="whitespace-nowrap">
                     <div className="font-display-alt text-xl tracking-tight lg:text-2xl">{p.feature}</div>
                     <div className="mt-1 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
                       {p.name}
