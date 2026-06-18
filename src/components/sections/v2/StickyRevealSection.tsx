@@ -3,34 +3,38 @@
 import { useEffect, useRef } from "react";
 import { ensureGsap, scheduleScrollRefresh } from "@/lib/gsap";
 
+const HEADING_CLASS =
+  "font-display text-[clamp(2.1rem,4.1vw,4.1rem)] leading-[1.06] text-white";
+
+// 20% larger than original clamp(2rem,3.5vw,3.5rem)
+const SUBHEADING_CLASS =
+  "font-script text-[clamp(2.4rem,4.2vw,4.2rem)] leading-[1.15] text-[color:var(--accent)]";
+
+const PARAGRAPH_CLASS =
+  "mx-auto max-w-2xl text-lg font-medium leading-relaxed text-white/80 sm:text-xl";
+
 const SLIDES = [
   {
+    type: "heading" as const,
     text: "A Home Built the Way You Always Imagined",
-    className: "font-display text-[clamp(2.8rem,5.5vw,5.5rem)] leading-[1.06] text-white",
   },
   {
-    text: "Crafted",
-    className: "font-display text-[clamp(1.75rem,3vw,3rem)] leading-[1.1] text-[color:var(--accent)]",
-  },
-  {
+    type: "combined" as const,
+    line1: "Crafted",
+    line2: "With",
     text: "Luxury finishes, smartly planned layouts, premium materials — every Emarat residence is designed to the finest detail, where quality is not a feature, it is the foundation.",
-    className: "mx-auto max-w-2xl text-lg font-medium leading-relaxed text-white/80 sm:text-xl",
   },
   {
-    text: "Connected",
-    className: "font-display text-[clamp(1.75rem,3vw,3rem)] leading-[1.1] text-[color:var(--accent)]",
+    type: "combined" as const,
+    line1: "Connected",
+    line2: "With",
+    text: "Gurugram's premier schools, world-class healthcare, premium retail and seamless NCR connectivity, all within reach.",
   },
   {
-    text: "Located in Gurugram's most well-connected neighbourhoods — premier schools, world-class healthcare, premium retail and seamless NCR connectivity, all within reach.",
-    className: "mx-auto max-w-2xl text-lg font-medium leading-relaxed text-white/80 sm:text-xl",
-  },
-  {
-    text: "Complete",
-    className: "font-display text-[clamp(1.75rem,3vw,3rem)] leading-[1.1] text-[color:var(--accent)]",
-  },
-  {
-    text: "Luxury inside. Convenience outside. Everything your family needs — nothing missing, nothing compromised.",
-    className: "mx-auto max-w-2xl text-lg font-medium leading-relaxed text-white/80 sm:text-xl",
+    type: "combined" as const,
+    line1: "Complete",
+    line2: "Home",
+    text: "With luxury inside. Convenience outside. Everything your family needs — nothing missing, nothing compromised.",
   },
 ];
 
@@ -47,7 +51,6 @@ export default function StickyRevealSection() {
 
     const slides = slideRefs.current.filter(Boolean) as HTMLElement[];
 
-    // All slides start invisible, 50px below their resting position
     gsap.set(slides, { y: 50, autoAlpha: 0 });
 
     const ctx = gsap.context(() => {
@@ -55,8 +58,7 @@ export default function StickyRevealSection() {
         scrollTrigger: {
           trigger: wrap,
           start: "top top",
-          // Each slide gets 200vh — the bulk of it is the fade transition itself
-          end: () => `+=${slides.length * 200}vh`,
+          end: () => `+=${slides.length * 300}vh`,
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -66,13 +68,13 @@ export default function StickyRevealSection() {
       slides.forEach((el, i) => {
         const isLast = i === slides.length - 1;
 
-        // FADE IN UP — takes up the majority of scroll distance
+        // Fade in up
         tl.to(el, { y: 0, autoAlpha: 1, duration: 4, ease: "none" }, i === 0 ? 0 : ">");
 
-        // Hold — short pause at full opacity
+        // Hold
         tl.to(el, { duration: 0.8 });
 
-        // FADE OUT UP — same length as fade in
+        // Fade out up
         if (!isLast) {
           tl.to(el, { y: -50, autoAlpha: 0, duration: 4, ease: "none" });
         }
@@ -88,7 +90,7 @@ export default function StickyRevealSection() {
       ref={wrapRef}
       className="relative flex min-h-screen items-center overflow-hidden"
       style={{
-        backgroundImage: "url('/images/C-2/building.jpg')",
+        backgroundImage: "url('https://cdn.sanity.io/images/k6lgt7ii/production/ffe414a23af6679e70aa2300d9f90b77fc941832-2200x1100.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "fixed",
@@ -96,15 +98,24 @@ export default function StickyRevealSection() {
     >
       <div className="pointer-events-none absolute inset-0 bg-black/65" />
 
-      {/* Slide stage — fills the full pinned screen */}
       <div className="absolute inset-0 z-10">
         {SLIDES.map((slide, i) => (
           <div
             key={i}
             ref={(el) => { slideRefs.current[i] = el; }}
-            className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center sm:px-6 lg:px-10"
+            className="absolute inset-0 flex flex-col items-center justify-center gap-5 px-4 text-center sm:px-6 lg:px-10"
           >
-            <div className={slide.className}>{slide.text}</div>
+            {slide.type === "heading" ? (
+              <div className={HEADING_CLASS}>{slide.text}</div>
+            ) : (
+              <>
+                <div className={SUBHEADING_CLASS}>
+                  <span className="block">{slide.line1}</span>
+                  <span className="block">{slide.line2}</span>
+                </div>
+                <p className={PARAGRAPH_CLASS}>{slide.text}</p>
+              </>
+            )}
           </div>
         ))}
       </div>
