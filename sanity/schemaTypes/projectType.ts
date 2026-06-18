@@ -122,6 +122,13 @@ export const projectType = defineType({
       description: "Full-width banner shown at the top of the project page",
     }),
     defineField({
+      name: "sliderImage",
+      title: "Slider Image (Home Page)",
+      type: "image",
+      options: { hotspot: true },
+      description: "Image shown in the Residences slider on the home page. If left empty, the Hero Image is used as fallback.",
+    }),
+    defineField({
       name: "overviewImage",
       title: "Overview Image",
       type: "image",

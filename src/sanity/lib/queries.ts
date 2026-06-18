@@ -233,6 +233,7 @@ export const PROJECTS_LISTING_QUERY = defineQuery(`
     "slug": slug.current,
     no, title, location, status, config, size,
     "heroImage": heroImage.asset->url,
+    "sliderImage": sliderImage.asset->url,
     tagline,
     excerpt,
     "stats": stats[]{ _key, label, value }

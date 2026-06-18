@@ -203,6 +203,7 @@ type SanityProject = {
   config?: string;
   size?: string;
   heroImage?: string | null;
+  sliderImage?: string | null;
 };
 
 interface ResidencesLabels {
@@ -219,7 +220,7 @@ interface Props { projects?: SanityProject[]; labels?: ResidencesLabels }
 
 function toResidences(projects?: SanityProject[]): Residence[] {
   const mapped = (projects ?? [])
-    .filter((p) => p.heroImage)
+    .filter((p) => p.sliderImage || p.heroImage)
     .map((p, i) => {
       const fallback = RESIDENCES.find((r) => r.href === `/projects/${p.slug}`) ?? RESIDENCES[i % RESIDENCES.length];
       return {
@@ -228,7 +229,7 @@ function toResidences(projects?: SanityProject[]): Residence[] {
         place: p.location ?? "",
         status: p.status ?? "",
         type: p.size ?? p.config ?? "",
-        img: p.heroImage as string,
+        img: (p.sliderImage || p.heroImage) as string,
         href: p.slug ? `/projects/${p.slug}` : "/projects",
         features: fallback.features,
       };
