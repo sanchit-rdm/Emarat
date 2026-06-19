@@ -106,11 +106,12 @@ body {
 .font-display {
   font-family: var(--font-display-alt), Georgia, "Times New Roman", serif;
   font-weight: 400;
-  letter-spacing: normal;
+  letter-spacing: 0.07rem;
 }
 
 .font-display-alt {
   font-family: var(--font-display-alt), Georgia, "Times New Roman", serif;
+  letter-spacing: 0.07rem;
 }
 
 /* Cursive script accent (Bizantheum) — decorative flourishes such as the
