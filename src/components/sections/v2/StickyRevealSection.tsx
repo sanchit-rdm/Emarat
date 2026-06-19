@@ -21,13 +21,13 @@ const SLIDES = [
   {
     type: "combined" as const,
     line1: "Crafted",
-    line2: "With",
+    line2: "To",
     text: "Luxury finishes, smartly planned layouts, premium materials — every Emarat residence is designed to the finest detail, where quality is not a feature, it is the foundation.",
   },
   {
     type: "combined" as const,
     line1: "Connected",
-    line2: "With",
+    line2: "To",
     text: "Gurugram's premier schools, world-class healthcare, premium retail and seamless NCR connectivity, all within reach.",
   },
   {
