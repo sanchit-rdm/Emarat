@@ -430,6 +430,18 @@ html {
   .text-xs, .text-sm { font-size: 1rem; }
 }
 
+/* ----------------------------------------------------------------------------
+   Listing image blend — fades the inner edge of a project card image into the
+   page background. Direction is set per-image based on its column position.
+---------------------------------------------------------------------------- */
+@media (min-width: 1024px) {
+  .img-blend-left,
+  .img-blend-right {
+    -webkit-mask-image: radial-gradient(ellipse 80% 85% at 50% 50%, black 55%, transparent 100%);
+    mask-image: radial-gradient(ellipse 80% 85% at 50% 50%, black 55%, transparent 100%);
+  }
+}
+
 /* Animated underline for nav links — draws in the section accent on hover. */
 .nav-link {
   position: relative;

@@ -43,7 +43,7 @@ export const UPCOMING_PROJECTS_FALLBACK: UpcomingProject[] = [
     tagline: "Contemporary living in one of India's most desirable destinations.",
     location: "Goa",
     status: "Coming Soon",
-    heroImage: "/images/Goa.jpeg",
+    heroImage: "/images/Upcomimg Projects/Goa.jpeg",
     body: "Emarat Realty presents a thoughtfully designed residential project in Goa, India's premier lifestyle and investment destination. Merging modern architecture with functional layouts, the development promises contemporary comfort, superior construction quality, and lasting value. From concept to completion, Emarat ensures meticulous planning, timely delivery, and unmatched craftsmanship, reflecting the brand's commitment to creating high-quality, investment-worthy real estate. This project exemplifies Emarat's vision of delivering residences that balance aesthetics, functionality, and long-term growth.",
   },
   {
@@ -53,7 +53,7 @@ export const UPCOMING_PROJECTS_FALLBACK: UpcomingProject[] = [
     tagline: "Luxury wooden cottages in the hills of Bhimtal.",
     location: "Bhimtal, Uttarakhand",
     status: "Coming Soon",
-    heroImage: "/images/Bhimtal.jpeg",
+    heroImage: "/images/Upcomimg Projects/Bhimtal.jpeg",
     body: "Discover an exclusive collection of luxury wooden cottages set amidst Bhimtal's serene hills. Perched between lush forests and the tranquil lake, each home offers breathtaking valley and lake views.\n\nCrafted with premium natural materials, warm wooden finishes, and expansive decks, these residences seamlessly blend contemporary comfort with the timeless charm of mountain living.\n\nWake to misty mornings, unwind by shimmering waters, and embrace a lifestyle defined by peace, privacy, and nature.",
   },
   {
@@ -138,14 +138,13 @@ export default async function UpcomingProjectsPage() {
                 {project.heroImage && (
                   <div className={`col-span-12 lg:col-span-5 ${i % 2 === 1 ? "lg:order-2" : ""}`}>
                     <Link href={`/upcoming-projects/${project.slug}`} className="group block">
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
+                      <div className={`relative aspect-[4/3] overflow-hidden ${i % 2 === 1 ? "img-blend-right" : "img-blend-left"}`}>
                         <Image
                           src={project.heroImage}
                           alt={project.title}
                           fill
                           sizes="(min-width: 1024px) 40vw, 100vw"
                           className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105"
-                          style={{ filter: "sepia(0.1) saturate(0.9) brightness(0.9)" }}
                         />
                       </div>
                     </Link>
