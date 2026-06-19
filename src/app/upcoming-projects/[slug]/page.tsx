@@ -22,14 +22,14 @@ export const dynamic = 'force-dynamic';
 // ---------------------------------------------------------------------------
 type Highlight = { label: string; desc: string };
 type LocationFact = { label: string; value: string };
-type Enrichment = { highlights: Highlight[]; locationFacts: LocationFact[]; whyHeading: string; whyText: string };
+type Enrichment = { highlights: Highlight[]; locationFacts: LocationFact[]; whyHeading: string; whyText: string; gallery?: string[] };
 
 const ENRICHMENT: Record<string, Enrichment> = {
   bhimtal: {
     highlights: [
       { label: "Lake & Valley Views", desc: "Every residence frames panoramic views of Bhimtal Lake and the surrounding valley." },
-      { label: "Premium Wood Architecture", desc: "Crafted with natural wood, local stone, and warm finishes that complement the mountain landscape." },
-      { label: "Exclusive Low-Density Community", desc: "A small, private enclave — designed for seclusion, not scale." },
+      { label: "Premium Wood Architecture", desc: "Crafted with natural wood and warm finishes that complement the mountain landscape." },
+      { label: "Exclusive Low-Density Community", desc: "A small, private enclave — designed to feel exclusive, not crowded." },
       { label: "Year-Round Mountain Climate", desc: "Cooler temperatures and clean air make Bhimtal a genuine four-season retreat." },
     ],
     locationFacts: [
@@ -39,13 +39,18 @@ const ENRICHMENT: Record<string, Enrichment> = {
       { label: "Nearest City", value: "Nainital — 15 km" },
     ],
     whyHeading: "Why Bhimtal?",
-    whyText: "Bhimtal sits at the heart of Kumaon's lake district — serene, green, and unhurried. With a cooler climate year-round, proximity to Nainital, and growing demand for private mountain retreats, it offers both lifestyle value and strong long-term investment potential. As connectivity to the hills improves and remote working becomes the norm, Bhimtal is emerging as one of North India's most sought-after second-home destinations.",
+    whyText: "Bhimtal sits at the heart of Kumaon's lake district — serene, green, and unhurried. With a cooler climate year-round, proximity to Nainital, and growing demand for private mountain retreats, it offers both lifestyle value and strong long-term investment potential. As connectivity to the hills improves and remote working becomes the norm, Bhimtal is emerging as one of North India's most sought-after destinations.",
+    gallery: [
+      "/images/Upcomimg Projects/BL Outer.jpeg",
+      "/images/Upcomimg Projects/BL Living Room.jpeg",
+      "/images/Upcomimg Projects/BL Room.jpeg",
+    ],
   },
   lansdowne: {
     highlights: [
-      { label: "30 Acres of Pristine Landscape", desc: "Expansive land holding with natural forest cover, valley views, and open skies." },
+      { label: "30 Acres of Pristine Landscape", desc: "Expansive land surrounded by natural forest cover, valley views, and open skies." },
       { label: "Only 70 Residences", desc: "Rare low-density planning — complete privacy and an unhurried pace of living." },
-      { label: "Forest & Himalayan Views", desc: "Surrounded by Garhwal forests and framing views of the lower Himalayan range." },
+      { label: "Forest & Himalayan Views", desc: "Surrounded by Garhwal forests, with views of the lower Himalayan range." },
       { label: "Improved Delhi Connectivity", desc: "A comfortable drive from the capital, with ongoing infrastructure improvements." },
     ],
     locationFacts: [
@@ -55,14 +60,14 @@ const ENRICHMENT: Record<string, Enrichment> = {
       { label: "Type", value: "Hill Station Retreat" },
     ],
     whyHeading: "Why Lansdowne?",
-    whyText: "Lansdowne is one of Uttarakhand's best-kept secrets — a quiet cantonment town with colonial heritage, dense deodar forests, and sweeping Himalayan views. As mountain living gains momentum and Delhi buyers seek genuine seclusion, early ownership here represents rare value in an unspoilt location that has resisted overdevelopment. With only 70 residences across 30 acres, this will remain exactly that.",
+    whyText: "Lansdowne is one of Uttarakhand's best-kept secrets — a quiet hill town with old-world charm, dense deodar forests, and wide Himalayan views. As mountain living gains momentum and Delhi buyers look for peace away from the city, early ownership here represents rare value in a place that has stayed largely untouched. With only 70 residences across 30 acres, this will remain exactly that.",
   },
   goa: {
     highlights: [
       { label: "Prime Location", desc: "Thoughtfully positioned in one of India's most desirable lifestyle and investment destinations." },
-      { label: "Contemporary Architecture", desc: "Modern design principles applied with sensitivity to Goa's natural and cultural character." },
-      { label: "Superior Construction Quality", desc: "Built to the same meticulous standards as every Emarat Realty development." },
-      { label: "Investment-Grade Asset", desc: "Goa's real estate market continues to outperform with strong rental and capital appreciation." },
+      { label: "Contemporary Architecture", desc: "Modern design principles, shaped by Goa's natural surroundings and easy pace of life." },
+      { label: "Superior Construction Quality", desc: "Built to one consistent standard of quality across every Emarat development, without compromise." },
+      { label: "Strong Investment Potential", desc: "Goa remains one of India's most sought-after real estate markets for long-term investors." },
     ],
     locationFacts: [
       { label: "Location", value: "Goa, India" },
@@ -71,14 +76,20 @@ const ENRICHMENT: Record<string, Enrichment> = {
       { label: "Type", value: "Residential" },
     ],
     whyHeading: "Why Goa?",
-    whyText: "Goa remains India's premier lifestyle and second-home market — a place where quality of life, rental income, and long-term value converge. With increasing demand from domestic and NRI buyers, and limited premium inventory in well-located pockets, an Emarat development here offers genuine lifestyle appeal backed by solid investment fundamentals.",
+    whyText: "Goa has always stood for a different way of living, refreshing mornings, open spaces, and a pace of life that's hard to find elsewhere in India. It's this lifestyle that continues to draw people back, year after year. This is exactly what Emarat has set out to build here: a home that lets you live the way Goa has always made people want to live.",
+    gallery: [
+      "/images/Upcomimg Projects/Goa Outer.jpeg",
+      "/images/Upcomimg Projects/Goa Living room.jpeg",
+      "/images/Upcomimg Projects/Goa BedRoom.jpeg",
+      "/images/Upcomimg Projects/Goa Kitchen.jpeg",
+    ],
   },
   lakefarms: {
     highlights: [
       { label: "Near Noida International Airport", desc: "Strategically positioned in the Yamuna Expressway corridor — one of India's fastest-growing regions." },
       { label: "Luxury Farm Living", desc: "Expansive plots with tree-lined avenues, water features, and curated green zones." },
       { label: "Serene Lakes & Open Skies", desc: "A landscape defined by natural water bodies, open farmland, and panoramic horizons." },
-      { label: "Future-Ready Investment", desc: "Infrastructure growth around Jewar positions this as one of UP's highest-potential micro-markets." },
+      { label: "Future-Ready Investment", desc: "Infrastructure growth around Jewar positions this as one of UP's most promising growth corridors." },
     ],
     locationFacts: [
       { label: "Location", value: "Jewar, Uttar Pradesh" },
@@ -86,7 +97,7 @@ const ENRICHMENT: Record<string, Enrichment> = {
       { label: "Access", value: "Yamuna Expressway" },
       { label: "Type", value: "Luxury Farmland" },
     ],
-    whyHeading: "Why Jewar?",
+    whyHeading: "Why Lakefarms?",
     whyText: "The Yamuna Expressway corridor is undergoing a once-in-a-generation transformation. With the Noida International Airport, Film City, and DMIC investment flowing in, land values in this belt are on a steep upward trajectory. Emarat Lakefarms offers early access to this growth story — with the added appeal of a peaceful, nature-led lifestyle that the city simply cannot provide.",
   },
 };
@@ -227,8 +238,7 @@ export default async function UpcomingProjectDetailPage({
               </Reveal>
             )}
             <Reveal as="div" delay={0.45} className="mt-10 flex flex-wrap items-center gap-4">
-              <CircleButton href="#interest" variant="filled">Register Interest</CircleButton>
-              <CircleButton href="#about" variant="outline">Learn More</CircleButton>
+              <CircleButton href="#interest" variant="filled">Stay Updated</CircleButton>
             </Reveal>
           </div>
         </section>
@@ -293,13 +303,6 @@ export default async function UpcomingProjectDetailPage({
               />
             </Parallax>
             <div className="absolute inset-0 bg-black/30" />
-            <div className="absolute inset-0 flex items-center justify-center px-4 text-center">
-              <Reveal>
-                <p className="font-display text-[clamp(1.5rem,4vw,3.5rem)] leading-[1.1] text-white">
-                  {project.tagline}
-                </p>
-              </Reveal>
-            </div>
           </div>
         )}
 
@@ -319,13 +322,39 @@ export default async function UpcomingProjectDetailPage({
                 {enrichment.whyText}
               </Reveal>
               <Reveal delay={0.25} className="mt-10">
-                <CircleButton href="#interest" variant="outline" size="sm">Register Your Interest</CircleButton>
+                <CircleButton href="#interest" variant="outline" size="sm">Stay Updated</CircleButton>
               </Reveal>
             </div>
           </div>
         </section>
 
-        {/* ── 6 · Expression of Interest ─────────────────────────────── */}
+        {/* ── 6 · Gallery ────────────────────────────────────────────── */}
+        {enrichment.gallery?.length ? (
+          <section className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
+            <div className="mx-auto max-w-[1440px]">
+              <Reveal className="mb-10">
+                <h2 className="font-display h-sub">Gallery</h2>
+              </Reveal>
+              <div className={`grid gap-4 ${enrichment.gallery.length === 3 ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-2 lg:grid-cols-4"}`}>
+                {enrichment.gallery.map((src, i) => (
+                  <Reveal key={src} delay={i * 0.07}>
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-md">
+                      <Image
+                        src={src}
+                        alt={`${project.title} — ${i + 1}`}
+                        fill
+                        sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                        className="object-cover transition-transform duration-700 hover:scale-105"
+                      />
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
+
+        {/* ── 7 · Expression of Interest ─────────────────────────────── */}
         <section id="interest" className="scroll-mt-20 border-t border-[color:var(--line)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
           <div className="mx-auto max-w-[1440px]">
             <div className="mb-12 max-w-xl">
@@ -402,7 +431,7 @@ export default async function UpcomingProjectDetailPage({
                       By proceeding, you acknowledge and agree to our Privacy Policy. You also consent to receive updates, notifications, and promotional communications via Email, SMS, and WhatsApp.
                     </span>
                   </label>
-                  <CircleButton type="submit" variant="filled">Submit Interest</CircleButton>
+                  <CircleButton type="submit" variant="filled">Submit</CircleButton>
                 </div>
               </form>
             </Reveal>

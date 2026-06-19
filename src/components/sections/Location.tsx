@@ -301,44 +301,36 @@ export default function Location({ data }: { data?: LocationData }) {
 
         {/* Tab navigation */}
         <div className="mt-12 lg:mt-16">
-          <div className="flex flex-wrap items-center gap-y-6">
+          <div className="flex flex-wrap justify-between gap-y-6">
             {places.map((p, i) => (
-              <div key={p.id} className="flex items-center">
-                {i > 0 && (
-                  <div className="mx-4 hidden items-center gap-1 sm:flex lg:mx-8">
-                    <span className="deco-circle" />
-                    <span className="hidden h-px w-12 bg-[color:var(--accent)]/30 lg:inline-block" />
-                  </div>
-                )}
-
-                <button
-                  type="button"
-                  onMouseEnter={() => setActive(i)}
-                  onClick={() => setActive(i)}
-                  onFocus={() => setActive(i)}
-                  aria-pressed={i === active}
-                  className={`group flex items-center gap-4 text-left transition-opacity duration-500 ${
-                    i === active ? "opacity-100" : "opacity-55 hover:opacity-90"
+              <button
+                key={p.id}
+                type="button"
+                onMouseEnter={() => setActive(i)}
+                onClick={() => setActive(i)}
+                onFocus={() => setActive(i)}
+                aria-pressed={i === active}
+                className={`group flex items-center gap-4 text-left transition-opacity duration-500 ${
+                  i === active ? "opacity-100" : "opacity-55 hover:opacity-90"
+                }`}
+              >
+                <span
+                  className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-full border transition-colors duration-500 lg:h-20 lg:w-20 ${
+                    i === active
+                      ? "border-[color:var(--accent)] text-[color:var(--fg)]"
+                      : "border-[color:var(--line)] text-[color:var(--fg)]/70"
                   }`}
                 >
-                  <span
-                    className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-full border transition-colors duration-500 lg:h-20 lg:w-20 ${
-                      i === active
-                        ? "border-[color:var(--accent)] text-[color:var(--accent)]"
-                        : "border-[color:var(--line)] text-[color:var(--fg)]/70"
-                    }`}
-                  >
-                    <span className="h-7 w-7 lg:h-8 lg:w-8">{icons[p.icon]}</span>
-                  </span>
+                  <span className="h-7 w-7 lg:h-8 lg:w-8" style={{ filter: "brightness(0) invert(1)" }}>{icons[p.icon]}</span>
+                </span>
 
-                  <div className="whitespace-nowrap">
-                    <div className="font-display-alt text-xl tracking-tight lg:text-2xl">{p.feature}</div>
-                    <div className="mt-1 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
-                      {p.name}
-                    </div>
+                <div>
+                  <div className="font-display-alt text-base tracking-tight lg:text-lg">{p.feature}</div>
+                  <div className="mt-1 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">
+                    {p.name}
                   </div>
-                </button>
-              </div>
+                </div>
+              </button>
             ))}
           </div>
         </div>
