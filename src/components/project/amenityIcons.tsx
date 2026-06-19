@@ -1,6 +1,10 @@
 import type { AmenityIcon } from "@/lib/projects";
 
-/* Minimal stroke icons (currentColor) for the amenities grid. */
+const I = (src: string) => (
+  <img src={src} alt="" aria-hidden className="h-full w-full object-contain" />
+);
+
+/* Fallback stroke icons for amenities without a file asset. */
 const C = {
   fill: "none",
   stroke: "currentColor",
@@ -10,9 +14,7 @@ const C = {
 };
 
 export const amenityIcons: Record<AmenityIcon, React.ReactNode> = {
-  clubhouse: (
-    <svg viewBox="0 0 24 24" {...C}><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" /></svg>
-  ),
+  clubhouse: I("/Icons/DLF Club House.svg"),
   pool: (
     <svg viewBox="0 0 24 24" {...C}><path d="M3 18c1.5 0 1.5 1 3 1s1.5-1 3-1 1.5 1 3 1 1.5-1 3-1 1.5 1 3 1M8 14V6a2 2 0 0 1 4 0M8 10h4" /></svg>
   ),
@@ -22,15 +24,9 @@ export const amenityIcons: Record<AmenityIcon, React.ReactNode> = {
   garden: (
     <svg viewBox="0 0 24 24" {...C}><path d="M12 21v-7m0 0c-3 0-5-2-5-5 3 0 5 2 5 5zm0 0c0-3 2-5 5-5 0 3-2 5-5 5z" /></svg>
   ),
-  security: (
-    <svg viewBox="0 0 24 24" {...C}><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" /></svg>
-  ),
-  parking: (
-    <svg viewBox="0 0 24 24" {...C}><rect x="4" y="4" width="16" height="16" rx="2" /><path d="M9 17V8h3.5a2.5 2.5 0 0 1 0 5H9" /></svg>
-  ),
-  power: (
-    <svg viewBox="0 0 24 24" {...C}><path d="M13 3l-7 10h5l-1 8 7-10h-5z" /></svg>
-  ),
+  security: I("/Icons/Two Side Open and 247 Security.svg"),
+  parking: I("/Icons/Adajcent car parking Bays.svg"),
+  power: I("/Icons/Power Backup.svg"),
   concierge: (
     <svg viewBox="0 0 24 24" {...C}><path d="M4 18h16M5 18a7 7 0 0 1 14 0M12 8v3M9 5h6" /></svg>
   ),
@@ -46,36 +42,16 @@ export const amenityIcons: Record<AmenityIcon, React.ReactNode> = {
   spa: (
     <svg viewBox="0 0 24 24" {...C}><path d="M12 13c0-4 3-7 3-7s3 3 3 7M12 13c0-4-3-7-3-7S6 9 6 13M4 14c4 0 8 3 8 7 4-4 8-7 8-7" /></svg>
   ),
-  lift: (
-    <svg viewBox="0 0 24 24" {...C}><rect x="5" y="3" width="14" height="18" rx="1" /><path d="M12 3v18M9 8l1.5-2L12 8M12 16l1.5 2L15 16" /></svg>
-  ),
-  retail: (
-    <svg viewBox="0 0 24 24" {...C}><path d="M4 9h16l-1 11H5zM4 9l1.5-5h13L20 9M9 13a3 3 0 0 0 6 0" /></svg>
-  ),
-  balcony: (
-    <svg viewBox="0 0 24 24" {...C}><path d="M3 21h18M5 21v-7h14v7M5 14V9h14v5M8 14v7M12 14v7M16 14v7M9 9V4h6v5" /></svg>
-  ),
-  kitchen: (
-    <svg viewBox="0 0 24 24" {...C}><rect x="4" y="4" width="16" height="16" rx="2" /><circle cx="9" cy="9" r="1.6" /><circle cx="15" cy="9" r="1.6" /><path d="M7 14h10" /></svg>
-  ),
-  wardrobe: (
-    <svg viewBox="0 0 24 24" {...C}><rect x="5" y="3" width="14" height="18" rx="1" /><path d="M12 3v18M10 10h.5M14 10h-.5" /></svg>
-  ),
-  ev: (
-    <svg viewBox="0 0 24 24" {...C}><rect x="5" y="4" width="11" height="16" rx="1.5" /><path d="M16 9h2.5a1.5 1.5 0 0 1 1.5 1.5V15a1.5 1.5 0 0 1-3 0M11 8l-2 3.5h3L10 15" /></svg>
-  ),
-  ac: (
-    <svg viewBox="0 0 24 24" {...C}><rect x="3" y="5" width="18" height="8" rx="2" /><path d="M6 9h9M7 17c1.5 0 1.5-1.5 0-1.5M11 18c1.5 0 1.5-1.5 0-1.5M15 17c1.5 0 1.5-1.5 0-1.5" /></svg>
-  ),
-  vastu: (
-    <svg viewBox="0 0 24 24" {...C}><circle cx="12" cy="12" r="9" /><path d="M12 3v2M12 19v2M3 12h2M19 12h2M14.5 9.5l-2 5-2.5 2 2-5z" /></svg>
-  ),
-  lock: (
-    <svg viewBox="0 0 24 24" {...C}><rect x="5" y="10" width="14" height="10" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v2" /></svg>
-  ),
-  family: (
-    <svg viewBox="0 0 24 24" {...C}><circle cx="8" cy="7" r="2.2" /><circle cx="16" cy="7" r="2.2" /><path d="M3.5 20v-1a4.5 4.5 0 0 1 9 0v1M11.5 20v-1a4.5 4.5 0 0 1 9 0v1" /></svg>
-  ),
+  lift: I("/Icons/Dual High Speed Elevator.svg"),
+  retail: I("/Icons/Community Shoping.svg"),
+  balcony: I("/Icons/Wrap Around Balconies.svg"),
+  kitchen: I("/Icons/Moduler Kitchen With HOB Chimney Microwave & Oven.svg"),
+  wardrobe: I("/Icons/Walk in Bardrobes.svg"),
+  ev: I("/Icons/Electric Car Charging Provision.svg"),
+  ac: I("/Icons/All Season VRVVRF Air Conditioning.svg"),
+  vastu: I("/Icons/Vastu Compliant.svg"),
+  lock: I("/Icons/Digital Secure Door Lock.svg"),
+  family: I("/Icons/Dedicated Guest and Family Space.svg"),
   yoga: (
     <svg viewBox="0 0 24 24" {...C}><circle cx="12" cy="4" r="1.5" /><path d="M8 10c1 1.5 2.5 2.5 4 2.5s3-1 4-2.5M8 10l-2 7M16 10l2 7M7 17h10M10 8v2M14 8v2" /></svg>
   ),
@@ -136,18 +112,14 @@ export const amenityIcons: Record<AmenityIcon, React.ReactNode> = {
   wifi: (
     <svg viewBox="0 0 24 24" {...C}><path d="M1.5 9C6 4.5 18 4.5 22.5 9M5 13c2-2 7-5 14 0M9 17c1-1 2-1.5 3-1.5s2 .5 3 1.5" /><circle cx="12" cy="20" r="1.5" /></svg>
   ),
-  cctv: (
-    <svg viewBox="0 0 24 24" {...C}><path d="M4 9h9l4-4 4 2v10l-4 2-4-4H4V9z" /><circle cx="9" cy="13" r="2" /></svg>
-  ),
+  cctv: I("/Icons/Integrated Security Monitoring.svg"),
   intercom: (
     <svg viewBox="0 0 24 24" {...C}><rect x="8" y="3" width="8" height="18" rx="2" /><circle cx="12" cy="7" r="1.5" /><path d="M10 11h4M10 14h4M10 17h2" /></svg>
   ),
   water: (
     <svg viewBox="0 0 24 24" {...C}><path d="M12 3C9 8 5 11 5 15a7 7 0 0 0 14 0c0-4-4-7-7-12z" /></svg>
   ),
-  rainwater: (
-    <svg viewBox="0 0 24 24" {...C}><path d="M6 13a5 5 0 0 1 0-10h.3A6 6 0 0 1 18 8v1a4 4 0 0 1 0 8H6" /><path d="M8 17v4M12 15v4M16 17v4" /></svg>
-  ),
+  rainwater: I("/Icons/Storm Water Drains.svg"),
   solar: (
     <svg viewBox="0 0 24 24" {...C}><rect x="2" y="12" width="9" height="7" rx="1" /><rect x="13" y="12" width="9" height="7" rx="1" /><path d="M12 3v6M9 5l3 4 3-4M6 12L2 7M18 12l4-5" /></svg>
   ),

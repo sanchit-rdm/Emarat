@@ -21,114 +21,31 @@ type Residence = {
   features: Feature[];
 };
 
-/* ── SVG icon helpers ─────────────────────────────────────── */
+/* ── Icon helpers — use SVG file assets where available ─────── */
+const FI = (src: string) => (
+  <img src={src} alt="" aria-hidden className="h-6 w-6 object-contain brightness-0 invert" />
+);
+const SI = (el: React.ReactNode) => el;
+
 const Icons = {
-  floors: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-      <path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3" />
-    </svg>
-  ),
-  expand: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-    </svg>
-  ),
-  ac: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-      <rect x="2" y="6" width="20" height="8" rx="2" />
-      <path d="M7 18h.01M12 18h.01M17 18h.01M12 14v4" />
-    </svg>
-  ),
-  healthcare: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      <path d="M9 22V12h6v10M12 8v4M10 10h4" />
-    </svg>
-  ),
-  garden: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-      <path d="M12 22V12M12 12C12 7 7 3 2 4c1 5 5 8 10 8zM12 12c0-5 5-9 10-8-1 5-5 8-10 8z" />
-    </svg>
-  ),
-  marble: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-  ),
-  terrace: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-      <path d="M3 17l4-8 4 4 3-5 4 9M3 21h18" />
-    </svg>
-  ),
-  openFloors: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-      <path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3" />
-    </svg>
-  ),
-  kitchen: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-      <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2a5 5 0 0 0-5 5v6h3.5M21 22v-7" />
-    </svg>
-  ),
-  gold: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-      <path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 16l-4.9 2.2.9-5.5L4 8.8l5.5-.8z" />
-    </svg>
-  ),
-  elevator: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-      <rect x="5" y="2" width="14" height="20" rx="2" />
-      <path d="M9 8l3-3 3 3M9 16l3 3 3-3" />
-    </svg>
-  ),
-  gate: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-    </svg>
-  ),
-  security: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-      <circle cx="12" cy="13" r="4" />
-    </svg>
-  ),
-  concierge: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-      <path d="M18 20V10M12 20V4M6 20v-6" />
-      <path d="M2 20h20" />
-      <circle cx="12" cy="2" r="1" />
-    </svg>
-  ),
-  balcony: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-      <rect x="3" y="3" width="18" height="18" rx="2" />
-      <path d="M3 9h18M9 9v12M15 9v12" />
-      <path d="M9 6a3 3 0 0 1 6 0" />
-    </svg>
-  ),
-  doorbell: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-      <rect x="5" y="2" width="14" height="20" rx="2" />
-      <circle cx="12" cy="10" r="3" />
-      <path d="M12 15v2" />
-      <circle cx="12" cy="18" r="1" fill="currentColor" stroke="none" />
-    </svg>
-  ),
-  vastu: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-      <circle cx="12" cy="12" r="10" />
-      <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
-      <circle cx="12" cy="12" r="3" />
-      <path d="M12 9V7M12 17v-2M9 12H7M17 12h-2" />
-    </svg>
-  ),
-  ev: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-      <rect x="5" y="2" width="14" height="16" rx="2" />
-      <path d="M9 18v4M15 18v4M12 6v6M9 9h6" />
-      <path d="M16 18h2a1 1 0 0 0 1-1v-1" />
-    </svg>
-  ),
+  floors:     SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3" /></svg>),
+  expand:     SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>),
+  healthcare: SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><path d="M9 22V12h6v10M12 8v4M10 10h4" /></svg>),
+  garden:     SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M12 22V12M12 12C12 7 7 3 2 4c1 5 5 8 10 8zM12 12c0-5 5-9 10-8-1 5-5 8-10 8z" /></svg>),
+  marble:     SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>),
+  terrace:    SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M3 17l4-8 4 4 3-5 4 9M3 21h18" /></svg>),
+  openFloors: SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3" /></svg>),
+  gold:       SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 16l-4.9 2.2.9-5.5L4 8.8l5.5-.8z" /></svg>),
+  concierge:  SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M18 20V10M12 20V4M6 20v-6" /><path d="M2 20h20" /><circle cx="12" cy="2" r="1" /></svg>),
+  ac:         FI("/Icons/All Season VRVVRF Air Conditioning.svg"),
+  kitchen:    FI("/Icons/Moduler Kitchen With HOB Chimney Microwave & Oven.svg"),
+  balcony:    FI("/Icons/Wrap Around Balconies.svg"),
+  vastu:      FI("/Icons/Vastu Compliant.svg"),
+  ev:         FI("/Icons/Electric Car Charging Provision.svg"),
+  elevator:   FI("/Icons/Dual High Speed Elevator.svg"),
+  security:   FI("/Icons/Integrated Security Monitoring.svg"),
+  gate:       FI("/Icons/DFL Gated Community.svg"),
+  doorbell:   FI("/Icons/Digital Secure Door Lock.svg"),
 };
 
 const RESIDENCES: Residence[] = [
