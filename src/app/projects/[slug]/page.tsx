@@ -183,7 +183,7 @@ export default async function ProjectPage({
         </nav>
 
         {/* ---------------- 2 · Project Overview ---------------- */}
-        <section id="overview" className="scroll-mt-44 px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
+        <section id="overview" className="theme-light scroll-mt-44 px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
           <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-10 lg:gap-16">
             <div className="col-span-12 lg:col-span-6">
               <SplitReveal as="h2" className="font-display h-section">
@@ -230,7 +230,7 @@ export default async function ProjectPage({
         </section>
 
         {/* ---------------- 3 · Amenities ---------------- */}
-        <section id="amenities" className="scroll-mt-44 border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
+        <section id="amenities" className="theme-light scroll-mt-44 border-t border-[color:var(--line)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
           <div className="mx-auto max-w-[1440px]">
             <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
               <SplitReveal as="h2" className="font-display h-section">

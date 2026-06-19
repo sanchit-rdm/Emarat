@@ -152,7 +152,7 @@ export default async function SiteFooter() {
             fill
             sizes="100vw"
             className="object-cover"
-            style={{ filter: "sepia(0.12) saturate(0.9) brightness(0.8)" }}
+            style={undefined}
           />
         </div>
       )}

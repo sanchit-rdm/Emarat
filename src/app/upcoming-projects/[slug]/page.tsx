@@ -17,6 +17,97 @@ import { UPCOMING_PROJECTS_FALLBACK, type UpcomingProject } from "../page";
 
 export const dynamic = 'force-dynamic';
 
+// ---------------------------------------------------------------------------
+// Per-project enrichment — placeholder data, fully replaceable via Sanity
+// ---------------------------------------------------------------------------
+type Highlight = { label: string; desc: string };
+type LocationFact = { label: string; value: string };
+type Enrichment = { highlights: Highlight[]; locationFacts: LocationFact[]; whyHeading: string; whyText: string };
+
+const ENRICHMENT: Record<string, Enrichment> = {
+  bhimtal: {
+    highlights: [
+      { label: "Lake & Valley Views", desc: "Every residence frames panoramic views of Bhimtal Lake and the surrounding valley." },
+      { label: "Premium Wood Architecture", desc: "Crafted with natural wood, local stone, and warm finishes that complement the mountain landscape." },
+      { label: "Exclusive Low-Density Community", desc: "A small, private enclave — designed for seclusion, not scale." },
+      { label: "Year-Round Mountain Climate", desc: "Cooler temperatures and clean air make Bhimtal a genuine four-season retreat." },
+    ],
+    locationFacts: [
+      { label: "Location", value: "Bhimtal, Uttarakhand" },
+      { label: "Distance from Delhi", value: "~5.5 hrs by road" },
+      { label: "Altitude", value: "~1,370 m above sea level" },
+      { label: "Nearest City", value: "Nainital — 15 km" },
+    ],
+    whyHeading: "Why Bhimtal?",
+    whyText: "Bhimtal sits at the heart of Kumaon's lake district — serene, green, and unhurried. With a cooler climate year-round, proximity to Nainital, and growing demand for private mountain retreats, it offers both lifestyle value and strong long-term investment potential. As connectivity to the hills improves and remote working becomes the norm, Bhimtal is emerging as one of North India's most sought-after second-home destinations.",
+  },
+  lansdowne: {
+    highlights: [
+      { label: "30 Acres of Pristine Landscape", desc: "Expansive land holding with natural forest cover, valley views, and open skies." },
+      { label: "Only 70 Residences", desc: "Rare low-density planning — complete privacy and an unhurried pace of living." },
+      { label: "Forest & Himalayan Views", desc: "Surrounded by Garhwal forests and framing views of the lower Himalayan range." },
+      { label: "Improved Delhi Connectivity", desc: "A comfortable drive from the capital, with ongoing infrastructure improvements." },
+    ],
+    locationFacts: [
+      { label: "Location", value: "Lansdowne, Uttarakhand" },
+      { label: "Distance from Delhi", value: "~5–6 hrs by road" },
+      { label: "Altitude", value: "~1,706 m above sea level" },
+      { label: "Type", value: "Hill Station Retreat" },
+    ],
+    whyHeading: "Why Lansdowne?",
+    whyText: "Lansdowne is one of Uttarakhand's best-kept secrets — a quiet cantonment town with colonial heritage, dense deodar forests, and sweeping Himalayan views. As mountain living gains momentum and Delhi buyers seek genuine seclusion, early ownership here represents rare value in an unspoilt location that has resisted overdevelopment. With only 70 residences across 30 acres, this will remain exactly that.",
+  },
+  goa: {
+    highlights: [
+      { label: "Prime Location", desc: "Thoughtfully positioned in one of India's most desirable lifestyle and investment destinations." },
+      { label: "Contemporary Architecture", desc: "Modern design principles applied with sensitivity to Goa's natural and cultural character." },
+      { label: "Superior Construction Quality", desc: "Built to the same meticulous standards as every Emarat Realty development." },
+      { label: "Investment-Grade Asset", desc: "Goa's real estate market continues to outperform with strong rental and capital appreciation." },
+    ],
+    locationFacts: [
+      { label: "Location", value: "Goa, India" },
+      { label: "Status", value: "Coming Soon" },
+      { label: "Developer", value: "Emarat Realty" },
+      { label: "Type", value: "Residential" },
+    ],
+    whyHeading: "Why Goa?",
+    whyText: "Goa remains India's premier lifestyle and second-home market — a place where quality of life, rental income, and long-term value converge. With increasing demand from domestic and NRI buyers, and limited premium inventory in well-located pockets, an Emarat development here offers genuine lifestyle appeal backed by solid investment fundamentals.",
+  },
+  lakefarms: {
+    highlights: [
+      { label: "Near Noida International Airport", desc: "Strategically positioned in the Yamuna Expressway corridor — one of India's fastest-growing regions." },
+      { label: "Luxury Farm Living", desc: "Expansive plots with tree-lined avenues, water features, and curated green zones." },
+      { label: "Serene Lakes & Open Skies", desc: "A landscape defined by natural water bodies, open farmland, and panoramic horizons." },
+      { label: "Future-Ready Investment", desc: "Infrastructure growth around Jewar positions this as one of UP's highest-potential micro-markets." },
+    ],
+    locationFacts: [
+      { label: "Location", value: "Jewar, Uttar Pradesh" },
+      { label: "Near", value: "Noida International Airport" },
+      { label: "Access", value: "Yamuna Expressway" },
+      { label: "Type", value: "Luxury Farmland" },
+    ],
+    whyHeading: "Why Jewar?",
+    whyText: "The Yamuna Expressway corridor is undergoing a once-in-a-generation transformation. With the Noida International Airport, Film City, and DMIC investment flowing in, land values in this belt are on a steep upward trajectory. Emarat Lakefarms offers early access to this growth story — with the added appeal of a peaceful, nature-led lifestyle that the city simply cannot provide.",
+  },
+};
+
+const DEFAULT_ENRICHMENT: Enrichment = {
+  highlights: [
+    { label: "Thoughtful Design", desc: "Architecture that balances aesthetics with functionality and comfort." },
+    { label: "Prime Location", desc: "Strategically positioned for lifestyle appeal and long-term investment value." },
+    { label: "Natural Setting", desc: "Green spaces and natural elements woven into every aspect of the development." },
+    { label: "Emarat Quality", desc: "Built to the same exacting standards as our flagship projects in Gurugram." },
+  ],
+  locationFacts: [
+    { label: "Status", value: "Coming Soon" },
+    { label: "Developer", value: "Emarat Realty" },
+  ],
+  whyHeading: "Why This Project?",
+  whyText: "Every Emarat project is chosen for its long-term lifestyle and investment value. This upcoming development continues that tradition — combining thoughtful design, quality construction, and a location selected for its enduring appeal.",
+};
+
+// ---------------------------------------------------------------------------
+
 function resolveProject(
   sanityProjects: UpcomingProject[],
   slug: string
@@ -82,11 +173,14 @@ export default async function UpcomingProjectDetailPage({
   const project = resolveProject(sanityProjects, slug);
   if (!project) notFound();
 
+  const enrichment = ENRICHMENT[slug] ?? DEFAULT_ENRICHMENT;
+
   return (
     <>
       <SiteNav />
       <main>
-        {/* Hero */}
+
+        {/* ── 1 · Hero ───────────────────────────────────────────────── */}
         <section
           id="top"
           className="relative isolate flex min-h-[88svh] flex-col justify-end overflow-hidden px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:px-10 lg:pb-20 lg:pt-40"
@@ -108,40 +202,40 @@ export default async function UpcomingProjectDetailPage({
             <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--bg)] via-[color:var(--bg)]/40 to-[color:var(--bg)]/20" />
           </div>
 
-          {/* Breadcrumb */}
           <Reveal as="div" y={16} className="mb-auto flex items-center gap-2 text-[0.6875rem] uppercase tracking-[0.2em] text-[color:var(--muted)]">
             <Link href="/" className="transition-colors hover:text-[color:var(--fg)]">Home</Link>
             <span aria-hidden>/</span>
             <Link href="/upcoming-projects" className="transition-colors hover:text-[color:var(--fg)]">Upcoming Projects</Link>
             <span aria-hidden>/</span>
-            <span className="text-[color:var(--accent)]">{project.location}</span>
+            <span className="text-[color:var(--accent)]">{project.title}</span>
           </Reveal>
 
           <div className="max-w-4xl">
+            {project.status && (
+              <Reveal as="div" delay={0.1} className="mb-6">
+                <span className="rounded-full border border-[color:var(--accent)]/50 px-4 py-1.5 text-[0.625rem] uppercase tracking-[0.2em] text-[color:var(--accent)]">
+                  {project.status}
+                </span>
+              </Reveal>
+            )}
             <SplitReveal as="h1" className="font-display h-page text-[color:var(--fg)]">
               {project.title}
             </SplitReveal>
-
             {project.tagline && (
               <Reveal as="p" delay={0.3} className="mt-5 max-w-xl font-display-alt text-2xl text-white/80 lg:text-3xl">
                 {project.tagline}
               </Reveal>
             )}
-
             <Reveal as="div" delay={0.45} className="mt-10 flex flex-wrap items-center gap-4">
-              <CircleButton href="#newsletter" variant="filled">Stay Informed</CircleButton>
-              {project.status && (
-                <span className="rounded-full border border-white/30 px-4 py-2 text-[0.6875rem] uppercase tracking-[0.2em] text-white/70">
-                  {project.status}
-                </span>
-              )}
+              <CircleButton href="#interest" variant="filled">Register Interest</CircleButton>
+              <CircleButton href="#about" variant="outline">Learn More</CircleButton>
             </Reveal>
           </div>
         </section>
 
-        {/* Description */}
-        <section className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-10 lg:gap-16">
+        {/* ── 2 · About the Project ──────────────────────────────────── */}
+        <section id="about" className="theme-light scroll-mt-20 px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
+          <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-10 lg:gap-20">
             <div className="col-span-12 lg:col-span-4">
               <SplitReveal as="h2" className="font-display h-section">
                 About the
@@ -149,59 +243,169 @@ export default async function UpcomingProjectDetailPage({
               <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
                 Project.
               </SplitReveal>
-              {project.location && (
-                <Reveal delay={0.2} className="mt-8 border-t border-[color:var(--line)] pt-6">
-                  <div className="text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">Location</div>
-                  <div className="mt-2 font-display-alt text-lg">{project.location}</div>
-                </Reveal>
-              )}
-              {project.status && (
-                <Reveal delay={0.25} className="mt-6">
-                  <div className="text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">Status</div>
-                  <div className="mt-2 inline-block rounded-full border border-[color:var(--accent)]/40 px-3 py-1 text-[0.6875rem] uppercase tracking-[0.18em] text-[color:var(--accent)]">
-                    {project.status}
-                  </div>
-                </Reveal>
-              )}
+
             </div>
 
-            <div className="col-span-12 space-y-5 lg:col-span-8">
+            <div className="col-span-12 space-y-6 lg:col-span-8 lg:pt-4">
               <ProjectBody body={project.body} />
             </div>
           </div>
         </section>
 
-        {/* Newsletter */}
-        <section id="newsletter" className="border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto grid max-w-[1280px] grid-cols-12 items-end gap-8">
-            <div className="col-span-12 lg:col-span-7">
+        {/* ── 3 · Key Highlights ─────────────────────────────────────── */}
+        <section className="scroll-mt-20 px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
+          <div className="mx-auto max-w-[1440px]">
+            <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
+              <div>
+                <SplitReveal as="h2" className="font-display h-section">
+                  Key
+                </SplitReveal>
+                <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
+                  Highlights.
+                </SplitReveal>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {enrichment.highlights.map((h, i) => (
+                <Reveal key={h.label} delay={i * 0.07} className="group rounded-md border border-[color:var(--line)] p-8 transition-colors hover:border-[color:var(--accent)]/40">
+                  <div className="mb-3 text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--accent)]">
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <div className="mb-3 font-display-alt text-xl leading-snug">{h.label}</div>
+                  <p className="text-sm leading-relaxed text-[color:var(--muted)]">{h.desc}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── 4 · Full-bleed image ───────────────────────────────────── */}
+        {project.heroImage && (
+          <div className="relative h-[60vh] min-h-[320px] w-full overflow-hidden lg:h-[75vh]">
+            <Parallax speed={0.2} className="h-full w-full">
+              <Image
+                src={project.heroImage}
+                alt={project.title}
+                fill
+                sizes="100vw"
+                className="object-cover"
+              />
+            </Parallax>
+            <div className="absolute inset-0 bg-black/30" />
+            <div className="absolute inset-0 flex items-center justify-center px-4 text-center">
+              <Reveal>
+                <p className="font-display text-[clamp(1.5rem,4vw,3.5rem)] leading-[1.1] text-white">
+                  {project.tagline}
+                </p>
+              </Reveal>
+            </div>
+          </div>
+        )}
+
+        {/* ── 5 · Why This Location ──────────────────────────────────── */}
+        <section className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
+          <div className="mx-auto grid max-w-[1440px] grid-cols-12 items-center gap-10 lg:gap-20">
+            <div className="col-span-12 lg:col-span-5">
               <SplitReveal as="h2" className="font-display h-section">
-                Interested in upcoming
+                {enrichment.whyHeading.split(" ").slice(0, -1).join(" ")}
               </SplitReveal>
               <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
-                projects?
+                {enrichment.whyHeading.split(" ").slice(-1)[0]}
               </SplitReveal>
             </div>
-            <div className="col-span-12 lg:col-span-5">
-              <form className="flex items-center border-b border-[color:var(--line)] py-2">
-                <input
-                  type="email"
-                  placeholder="your@email.com"
-                  required
-                  className="flex-1 bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
-                  aria-label="Email"
-                />
-                <button
-                  type="submit"
-                  className="text-xs uppercase tracking-[0.18em] text-[color:var(--accent)] transition-colors hover:text-[color:var(--fg)]"
-                >
-                  Subscribe →
-                </button>
-              </form>
-              <p className="mt-3 text-xs text-[color:var(--muted)]">
-                Be the first to know about launch dates, pricing and more.
-              </p>
+            <div className="col-span-12 lg:col-span-7">
+              <Reveal as="p" delay={0.15} className="text-base leading-relaxed text-[color:var(--muted)] lg:text-lg">
+                {enrichment.whyText}
+              </Reveal>
+              <Reveal delay={0.25} className="mt-10">
+                <CircleButton href="#interest" variant="outline" size="sm">Register Your Interest</CircleButton>
+              </Reveal>
             </div>
+          </div>
+        </section>
+
+        {/* ── 6 · Expression of Interest ─────────────────────────────── */}
+        <section id="interest" className="scroll-mt-20 border-t border-[color:var(--line)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
+          <div className="mx-auto max-w-[1440px]">
+            <div className="mb-12 max-w-xl">
+              <SplitReveal as="h2" className="font-display h-section">
+                Register Your
+              </SplitReveal>
+              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
+                Interest.
+              </SplitReveal>
+              <Reveal as="p" delay={0.15} className="mt-6 text-sm leading-relaxed text-[color:var(--muted)]">
+                Be among the first to receive launch details, pricing, and exclusive updates for {project.title}. Submit your details and our team will be in touch.
+              </Reveal>
+            </div>
+
+            <Reveal delay={0.2} className="max-w-2xl">
+              <form className="flex flex-col gap-8">
+                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+                  <div className="border-b border-[color:var(--line)] pb-3">
+                    <input
+                      type="text"
+                      placeholder="Full name"
+                      className="w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
+                      aria-label="Name"
+                    />
+                  </div>
+                  <div className="border-b border-[color:var(--line)] pb-3">
+                    <input
+                      type="tel"
+                      placeholder="+91 00000 00000"
+                      className="w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
+                      aria-label="Phone"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+                  <div className="border-b border-[color:var(--line)] pb-3">
+                    <input
+                      type="email"
+                      placeholder="Email address"
+                      className="w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
+                      aria-label="Email"
+                    />
+                  </div>
+                  <div className="border-b border-[color:var(--line)] pb-3">
+                    <select
+                      defaultValue=""
+                      className="w-full bg-transparent text-sm text-[color:var(--muted)] outline-none"
+                      aria-label="Enquiry type"
+                    >
+                      <option value="" disabled>Enquiring as…</option>
+                      <option value="end-user">End User / Home Buyer</option>
+                      <option value="channel-partner">Channel Partner / Broker</option>
+                      <option value="investor">Investor</option>
+                      <option value="nri">NRI Buyer</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="border-b border-[color:var(--line)] pb-3">
+                  <textarea
+                    placeholder="Tell us what you're looking for…"
+                    rows={3}
+                    className="w-full resize-none bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
+                    aria-label="Message"
+                  />
+                </div>
+                <div className="flex flex-col items-start gap-6">
+                  <label className="flex cursor-pointer items-start gap-3">
+                    <input
+                      type="checkbox"
+                      required
+                      className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-[color:var(--accent)]"
+                    />
+                    <span className="text-[0.625rem] uppercase tracking-[0.14em] leading-relaxed text-[color:var(--muted)]">
+                      By proceeding, you acknowledge and agree to our Privacy Policy. You also consent to receive updates, notifications, and promotional communications via Email, SMS, and WhatsApp.
+                    </span>
+                  </label>
+                  <CircleButton type="submit" variant="filled">Submit Interest</CircleButton>
+                </div>
+              </form>
+            </Reveal>
           </div>
         </section>
 
