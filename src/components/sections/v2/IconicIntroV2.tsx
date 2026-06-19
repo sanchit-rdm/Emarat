@@ -15,7 +15,7 @@ interface IconicLabels {
 interface Props { data?: LocationData; labels?: IconicLabels }
 
 export default function IconicIntroV2({ data, labels }: Props) {
-  const bgImage = data?.places?.[0]?.image || "/images/C-5/c5-right-side-2026-03-06-at-2-44-11-pm-1.jpg";
+  const bgImage = "/images/Parallax.jpeg";
   const line1 = labels?.line1?.trim() || "Life within reach";
   const line2 = labels?.line2?.trim() || "of every iconic landmark";
 

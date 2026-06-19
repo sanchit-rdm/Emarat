@@ -249,7 +249,7 @@ export default async function ProjectPage({
                   delay={(i % 4) * 0.06}
                   className="group flex flex-col gap-4 rounded-md border border-[color:var(--line)] p-6 transition-colors hover:border-[color:var(--accent)]/40 lg:p-8"
                 >
-                  <span className="h-8 w-8 text-[color:var(--accent)] transition-transform duration-500 group-hover:-translate-y-1">
+                  <span className="h-14 w-14 text-[color:var(--accent)] transition-transform duration-500 group-hover:-translate-y-1">
                     {amenityIcons[a.icon]}
                   </span>
                   <span className="font-display-alt text-lg leading-snug">{a.name}</span>

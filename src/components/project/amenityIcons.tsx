@@ -1,7 +1,21 @@
 import type { AmenityIcon } from "@/lib/projects";
 
 const I = (src: string) => (
-  <img src={src} alt="" aria-hidden className="h-full w-full object-contain" />
+  <span
+    aria-hidden
+    className="block h-full w-full"
+    style={{
+      backgroundColor: "#01472E",
+      WebkitMaskImage: `url("${src}")`,
+      maskImage: `url("${src}")`,
+      WebkitMaskSize: "contain",
+      maskSize: "contain",
+      WebkitMaskRepeat: "no-repeat",
+      maskRepeat: "no-repeat",
+      WebkitMaskPosition: "center",
+      maskPosition: "center",
+    }}
+  />
 );
 
 /* Fallback stroke icons for amenities without a file asset. */

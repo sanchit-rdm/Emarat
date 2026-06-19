@@ -421,6 +421,15 @@ html {
   background: var(--accent-soft);
 }
 
+/* ----------------------------------------------------------------------------
+   Desktop minimum font size — 18px (1rem at the lg base).
+   text-xs and text-sm are nudged up to 1rem so nothing readable sits below
+   18px on large screens. Decorative labels (uppercase tracking) benefit too.
+---------------------------------------------------------------------------- */
+@media (min-width: 1024px) {
+  .text-xs, .text-sm { font-size: 1rem; }
+}
+
 /* Animated underline for nav links — draws in the section accent on hover. */
 .nav-link {
   position: relative;

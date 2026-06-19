@@ -21,7 +21,7 @@ const SLIDES = [
   {
     type: "combined" as const,
     line1: "Crafted",
-    line2: "To",
+    line2: "With",
     text: "Luxury finishes, smartly planned layouts, premium materials — every Emarat residence is designed to the finest detail, where quality is not a feature, it is the foundation.",
   },
   {

@@ -23,20 +23,35 @@ type Residence = {
 
 /* ── Icon helpers — use SVG file assets where available ─────── */
 const FI = (src: string) => (
-  <img src={src} alt="" aria-hidden className="h-6 w-6 object-contain brightness-0 invert" />
+  <span
+    aria-hidden
+    className="block h-9 w-9 shrink-0"
+    style={{
+      backgroundColor: "#000",
+      WebkitMaskImage: `url("${src}")`,
+      maskImage: `url("${src}")`,
+      WebkitMaskSize: "contain",
+      maskSize: "contain",
+      WebkitMaskRepeat: "no-repeat",
+      maskRepeat: "no-repeat",
+      WebkitMaskPosition: "center",
+      maskPosition: "center",
+    }}
+  />
 );
 const SI = (el: React.ReactNode) => el;
 
 const Icons = {
-  floors:     SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3" /></svg>),
-  expand:     SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>),
-  healthcare: SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><path d="M9 22V12h6v10M12 8v4M10 10h4" /></svg>),
-  garden:     SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M12 22V12M12 12C12 7 7 3 2 4c1 5 5 8 10 8zM12 12c0-5 5-9 10-8-1 5-5 8-10 8z" /></svg>),
-  marble:     SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>),
-  terrace:    SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M3 17l4-8 4 4 3-5 4 9M3 21h18" /></svg>),
-  openFloors: SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3" /></svg>),
-  gold:       SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 16l-4.9 2.2.9-5.5L4 8.8l5.5-.8z" /></svg>),
-  concierge:  SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M18 20V10M12 20V4M6 20v-6" /><path d="M2 20h20" /><circle cx="12" cy="2" r="1" /></svg>),
+  floors:     SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3" /></svg>),
+  expand:     SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>),
+  healthcare: SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><path d="M9 22V12h6v10M12 8v4M10 10h4" /></svg>),
+  garden:     SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M12 22V12M12 12C12 7 7 3 2 4c1 5 5 8 10 8zM12 12c0-5 5-9 10-8-1 5-5 8-10 8z" /></svg>),
+  marble:     SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>),
+  terrace:    SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M3 17l4-8 4 4 3-5 4 9M3 21h18" /></svg>),
+  openFloors: SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3" /></svg>),
+  gold:       SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 16l-4.9 2.2.9-5.5L4 8.8l5.5-.8z" /></svg>),
+  concierge:  SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M18 20V10M12 20V4M6 20v-6" /><path d="M2 20h20" /><circle cx="12" cy="2" r="1" /></svg>),
+  threeSideOpen: SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" /><circle cx="12" cy="12" r="3" /></svg>),
   ac:         FI("/Icons/All Season VRVVRF Air Conditioning.svg"),
   kitchen:    FI("/Icons/Moduler Kitchen With HOB Chimney Microwave & Oven.svg"),
   balcony:    FI("/Icons/Wrap Around Balconies.svg"),
@@ -61,7 +76,7 @@ const RESIDENCES: Residence[] = [
       { icon: Icons.floors, label: "5 BHK Independent Floors" },
       { icon: Icons.expand, label: "Large Open Spaces" },
       { icon: Icons.ac, label: "VRV/VRF Air Conditioning" },
-      { icon: Icons.healthcare, label: "Healthcare Centre" },
+      { icon: Icons.threeSideOpen, label: "Three Side Open" },
     ],
   },
   {
@@ -103,7 +118,7 @@ const RESIDENCES: Residence[] = [
     img: "/images/EA4/building.jpg",
     href: "/projects/ea04",
     features: [
-      { icon: Icons.elevator, label: "Dual High-Speed Elevators" },
+      { icon: Icons.elevator, label: "Dual High Speed Elevators" },
       { icon: Icons.security, label: "Security Monitoring" },
       { icon: Icons.ac, label: "VRV/VRF Air Conditioning" },
       { icon: Icons.concierge, label: "Arrival Experience" },

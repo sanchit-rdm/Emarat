@@ -134,7 +134,7 @@ export default async function DirectorsDeskPage() {
         </section>
 
         {/* Full message body */}
-        <section className="border-y border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
+        <section className="theme-light border-y border-[color:var(--line)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
           <div className="mx-auto max-w-3xl">
             {message.map((para, i) => (
               <Reveal
@@ -157,7 +157,7 @@ export default async function DirectorsDeskPage() {
 
 
         {/* CTA */}
-        <section className="border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
+        <section className="theme-light border-t border-[color:var(--line)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
           <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-8">
             <div>
               <SplitReveal as="h2" className="font-display h-sub">
