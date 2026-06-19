@@ -421,14 +421,6 @@ html {
   background: var(--accent-soft);
 }
 
-/* ----------------------------------------------------------------------------
-   Desktop minimum font size — 18px (1rem at the lg base).
-   text-xs and text-sm are nudged up to 1rem so nothing readable sits below
-   18px on large screens. Decorative labels (uppercase tracking) benefit too.
----------------------------------------------------------------------------- */
-@media (min-width: 1024px) {
-  .text-xs, .text-sm { font-size: 1rem; }
-}
 
 /* ----------------------------------------------------------------------------
    Listing image blend — fades the inner edge of a project card image into the
