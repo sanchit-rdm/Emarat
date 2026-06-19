@@ -71,9 +71,10 @@ export default function NewsV2({ posts, labels }: { posts: Post[]; labels?: News
             <StrokeHover
               href={allHref}
               ariaLabel={allLabel}
-              className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full border border-[color:var(--accent)]/40 text-[color:var(--fg)] transition-colors hover:text-[color:var(--accent)] lg:h-32 lg:w-32"
+              className="flex h-24 w-24 shrink-0 flex-col items-center justify-center gap-1 rounded-full border border-[color:var(--accent)]/40 text-[color:var(--fg)] transition-colors hover:text-[color:var(--accent)] lg:h-32 lg:w-32"
             >
               <span aria-hidden className="relative z-10 text-2xl">→</span>
+              <span className="relative z-10 text-center text-[0.6rem] uppercase tracking-[0.18em] leading-tight">{allLabel}</span>
             </StrokeHover>
           </Reveal>
         </div>

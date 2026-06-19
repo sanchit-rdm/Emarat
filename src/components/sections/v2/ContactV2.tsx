@@ -36,8 +36,8 @@ interface Props { data?: ContactData; labels?: ContactLabels }
 export default function ContactV2({ data, labels }: Props) {
   const heading1 = data?.heading1 ?? "Ready to find";
   const heading2 = data?.heading2 ?? "your perfect home?";
-  const eyebrow = labels?.eyebrow ?? "Make Your Enquiry";
-  const lead = labels?.lead ?? "Submit your details and we'll get back to you to assist you with the next steps.";
+  const eyebrow = labels?.eyebrow ?? "Get in Touch";
+  const lead = labels?.lead ?? "Submit your details and one of our representatives will get back to you as soon as possible.";
   const namePlaceholder = labels?.namePlaceholder?.trim() || "Your name";
   const phonePlaceholder = labels?.phonePlaceholder?.trim() || "+91 00000 00000";
   const categoryPlaceholder = labels?.categoryPlaceholder?.trim() || "Interested in…";
@@ -45,18 +45,18 @@ export default function ContactV2({ data, labels }: Props) {
     ? labels.categoryOptions
     : ["C2 at DLF Garden City", "C5 at DLF Garden City", "E11 at DLF Garden City", "EA 04 at Alameda"];
   const submitLabel = labels?.submitLabel?.trim() || "Request a Callback";
-  const privacy = labels?.privacy?.trim() || "By submitting you agree to our privacy policy.";
+  const privacy = labels?.privacy?.trim() || "By proceeding, you acknowledge and agree to our Privacy Policy. You also consent to receive updates, notifications, and promotional communications via Email, SMS, and WhatsApp.";
 
   return (
     <section id="contact" className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-      <div className="mx-auto max-w-2xl text-center">
+      <div className="mx-auto max-w-4xl text-center">
         <Reveal className="eyebrow mb-4 flex items-center justify-center font-script text-2xl text-[color:var(--accent)]">
           <span>{renderPortableText(eyebrow)}</span>
         </Reveal>
-        <SplitReveal as="h2" className="font-display h-page">
+        <SplitReveal as="h2" className="font-display h-page whitespace-nowrap">
           {toPlainText(heading1)}
         </SplitReveal>
-        <SplitReveal as="h2" delay={0.1} className="font-display h-page text-[color:var(--accent)]">
+        <SplitReveal as="h2" delay={0.1} className="font-display h-page whitespace-nowrap text-[color:var(--accent)]">
           {toPlainText(heading2)}
         </SplitReveal>
 
@@ -64,7 +64,7 @@ export default function ContactV2({ data, labels }: Props) {
           {renderPortableText(lead)}
         </Reveal>
 
-        <Reveal as="div" delay={0.15} className="mt-12">
+        <Reveal as="div" delay={0.15} className="mx-auto mt-12 max-w-2xl">
           <form className="flex flex-col gap-6 text-left">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div className="border-b border-[color:var(--line)] pb-3">
@@ -84,6 +84,30 @@ export default function ContactV2({ data, labels }: Props) {
                 />
               </div>
             </div>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <div className="border-b border-[color:var(--line)] pb-3">
+                <input
+                  type="email"
+                  placeholder="Email address"
+                  className="w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
+                  aria-label="Email"
+                />
+              </div>
+              <div className="border-b border-[color:var(--line)] pb-3">
+                <select
+                  className="w-full bg-transparent text-sm text-[color:var(--muted)] outline-none"
+                  aria-label="Enquiry type"
+                  defaultValue=""
+                >
+                  <option value="" disabled>Enquiring as…</option>
+                  <option value="end-user">End User / Home Buyer</option>
+                  <option value="channel-partner">Channel Partner / Broker</option>
+                  <option value="investor">Investor</option>
+                  <option value="corporate">Corporate / Institutional</option>
+                  <option value="nri">NRI Buyer</option>
+                </select>
+              </div>
+            </div>
             <div className="border-b border-[color:var(--line)] pb-3">
               <select
                 className="w-full bg-transparent text-sm text-[color:var(--muted)] outline-none"
@@ -96,13 +120,20 @@ export default function ContactV2({ data, labels }: Props) {
                 ))}
               </select>
             </div>
-            <div className="mt-4 flex flex-col items-center gap-4">
+            <div className="mt-4 flex flex-col items-center gap-6">
+              <label className="flex cursor-pointer items-start gap-3 text-left">
+                <input
+                  type="checkbox"
+                  required
+                  className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-[color:var(--accent)]"
+                />
+                <span className="text-[0.625rem] uppercase tracking-[0.16em] leading-relaxed text-[color:var(--muted)]">
+                  {privacy}
+                </span>
+              </label>
               <CircleButton type="submit" variant="filled">
                 {submitLabel}
               </CircleButton>
-              <p className="text-[0.625rem] uppercase tracking-[0.16em] text-[color:var(--muted)]">
-                {privacy}
-              </p>
             </div>
           </form>
         </Reveal>
