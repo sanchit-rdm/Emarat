@@ -390,6 +390,33 @@ export const homePageType = defineType({
           ],
         }),
         defineField({
+          name: "stickyReveal",
+          title: "Sticky Reveal Section",
+          description: "The scroll-pinned section with animated slide-in text. Appears between residences and principles.",
+          type: "object",
+          fields: [
+            defineField({ name: "heading", title: "Main Heading", type: "string" }),
+            defineField({
+              name: "slides",
+              title: "Slides",
+              description: "Up to 3 slides — each has a two-line script heading and a body paragraph.",
+              type: "array",
+              of: [
+                defineArrayMember({
+                  type: "object",
+                  fields: [
+                    defineField({ name: "line1", title: "Line 1 (large script)", type: "string" }),
+                    defineField({ name: "line2", title: "Line 2", type: "string" }),
+                    defineField({ name: "body", title: "Description", type: "text", rows: 3 }),
+                  ],
+                  preview: { select: { title: "line1", subtitle: "line2" } },
+                }),
+              ],
+              validation: (r) => r.max(3),
+            }),
+          ],
+        }),
+        defineField({
           name: "contact",
           title: "Callback Section",
           type: "object",

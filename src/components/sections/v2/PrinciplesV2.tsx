@@ -163,13 +163,13 @@ export default function PrinciplesV2({ data, labels }: Props) {
         </div>
 
         {/* Subtle radial gradient behind text */}
-        <div className="pointer-events-none absolute inset-0 z-[5] bg-[radial-gradient(ellipse_55%_50%_at_50%_50%,rgba(0,0,0,0.38)_0%,transparent_100%)]" />
+        <div className="pointer-events-none absolute inset-0 z-[5] bg-[radial-gradient(ellipse_55%_50%_at_50%_50%,rgba(0,0,0,0.65)_0%,transparent_100%)]" />
 
         {/* Fixed centre overlay — section heading, white, no button. */}
         <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-6 text-center">
-          <h2 className="font-script max-w-5xl text-[clamp(2.5rem,7vw,6.5rem)] leading-[1.02] text-white drop-shadow-[0_4px_40px_rgba(0,0,0,0.6)]">
+          <h2 className="font-script max-w-5xl text-[clamp(2.5rem,7vw,6.5rem)] leading-[1.25] tracking-[0.05em] text-white drop-shadow-[0_4px_40px_rgba(0,0,0,0.6)]">
             <span className="block">{renderInline(heading1)}</span>
-            <span className="block text-[color:#E2A724] uppercase font-bold italic tracking-[0.2em]">
+            <span className="block text-[color:#E2A724] uppercase italic tracking-[0.3em]">
               {renderInline(heading2)}
             </span>
             {heading3 ? <span className="block">{renderInline(heading3)}</span> : null}

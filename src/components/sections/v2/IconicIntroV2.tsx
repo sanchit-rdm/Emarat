@@ -32,7 +32,7 @@ export default function IconicIntroV2({ data, labels }: Props) {
         }}
       />
       {/* Plain dark overlay */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-black/55" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[#01472E]/40" />
 
       {/* Headline */}
       <Reveal className="relative z-10 text-center">

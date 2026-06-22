@@ -121,6 +121,7 @@ export const HOME_PAGE_QUERY = defineQuery(`
       residences { eyebrow, heading1, heading2, allLabel, allHref, locationLabel, configLabel, viewLabel },
       principles { heading3, heading1, heading2 },
       news { eyebrow, heading1, heading2, allLabel, allHref },
+      stickyReveal { heading, slides[]{ line1, line2, body } },
       contact { eyebrow, lead, namePlaceholder, phonePlaceholder, categoryPlaceholder, categoryOptions, submitLabel, privacy }
     },
     ${SEO_FIELDS}
