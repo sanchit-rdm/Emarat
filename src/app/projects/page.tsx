@@ -188,7 +188,7 @@ export default async function ProjectsPage() {
 
         {/* Project filter strip */}
         <section className="border-b border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-6 sm:px-6 sm:py-8 lg:px-10">
-          <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-x-8 gap-y-3 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
+          <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-x-8 gap-y-3 text-xs uppercase tracking-[0.22em] text-[color:var(--muted)]">
             {filter.links.map((l) => (
               <a key={l.href ?? l.label} href={l.href} className="transition-colors hover:text-[color:var(--accent)]">
                 {l.label}
@@ -199,7 +199,7 @@ export default async function ProjectsPage() {
 
         {/* Detailed project cards — alternating image side (light cream) */}
         <section className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto max-w-[1440px] space-y-24 lg:space-y-32">
+          <div className="mx-auto max-w-[1400px] space-y-24 lg:space-y-32">
             {(sanityProjects ?? projects).map((p, i) => (
               <article
                 key={p.id}

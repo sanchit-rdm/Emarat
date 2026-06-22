@@ -33,7 +33,7 @@ export default function StatementV2({ data }: Props) {
       <div className="pointer-events-none absolute inset-0 -z-10 bg-black/50" />
 
       {/* Headline — upper area */}
-      <div className="mx-auto w-full max-w-[1440px]">
+      <div className="mx-auto w-full max-w-[1400px]">
         <h2 className="max-w-5xl">
           <SplitReveal as="span" className="font-display h-page block text-[color:var(--accent)]">
             {toPlainText(lead)}
@@ -45,7 +45,7 @@ export default function StatementV2({ data }: Props) {
       </div>
 
       {/* Lead paragraph — lower-left */}
-      <div className="mx-auto mt-16 w-full max-w-[1440px]">
+      <div className="mx-auto mt-16 w-full max-w-[1400px]">
         <Reveal as="p" delay={0.15} className="max-w-md text-sm uppercase leading-relaxed tracking-[0.04em] text-[color:var(--fg)]/85">
           {renderPortableText(body)}
         </Reveal>

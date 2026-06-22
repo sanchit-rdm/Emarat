@@ -145,7 +145,7 @@ export default async function NewsPage() {
         {/* Featured article */}
         {featured && (
           <section className="border-y border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-            <div className="mx-auto max-w-[1440px]">
+            <div className="mx-auto max-w-[1400px]">
               <Reveal as="div" className="mb-8 text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
                 <span>{featuredLabel}</span>
               </Reveal>
@@ -192,7 +192,7 @@ export default async function NewsPage() {
 
         {/* Rest of articles grid (light cream) */}
         <section className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto max-w-[1440px]">
+          <div className="mx-auto max-w-[1400px]">
             <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
               <SplitReveal
                 as="h2"

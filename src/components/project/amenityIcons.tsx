@@ -35,15 +35,11 @@ export const amenityIcons: Record<AmenityIcon, React.ReactNode> = {
   gym: (
     <svg viewBox="0 0 24 24" {...C}><path d="M6.5 6.5l11 11M4 9l2-2m11 11l2-2M3 12l2 2 2-2-2-2zM17 12l2 2 2-2-2-2z" /></svg>
   ),
-  garden: (
-    <svg viewBox="0 0 24 24" {...C}><path d="M12 21v-7m0 0c-3 0-5-2-5-5 3 0 5 2 5 5zm0 0c0-3 2-5 5-5 0 3-2 5-5 5z" /></svg>
-  ),
+  garden: I("/Icons/Large Open Spaces.svg"),
   security: I("/Icons/Two Side Open and 247 Security.svg"),
   parking: I("/Icons/Adajcent car parking Bays.svg"),
   power: I("/Icons/Power Backup.svg"),
-  concierge: (
-    <svg viewBox="0 0 24 24" {...C}><path d="M4 18h16M5 18a7 7 0 0 1 14 0M12 8v3M9 5h6" /></svg>
-  ),
+  concierge: I("/Icons/Arrival Experience.svg"),
   kids: (
     <svg viewBox="0 0 24 24" {...C}><circle cx="12" cy="5" r="2" /><path d="M12 7v6m0 0l-3 5m3-5l3 5M7 10h10" /></svg>
   ),
@@ -152,4 +148,6 @@ export const amenityIcons: Record<AmenityIcon, React.ReactNode> = {
   fountain: (
     <svg viewBox="0 0 24 24" {...C}><path d="M12 3v6M9 5c0 2.5 1.5 4 3 4s3-1.5 3-4M6 9c0 4 2.5 6 6 6s6-2 6-6M4 21c1-2 4-4 8-4s7 2 8 4M12 15v2" /></svg>
   ),
+  threeSideOpen: I("/Icons/Three Side Open.svg"),
+  rearpark: I("/Icons/Rear Park Access.svg"),
 };

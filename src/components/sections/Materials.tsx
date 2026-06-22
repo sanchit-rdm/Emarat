@@ -51,7 +51,7 @@ const propertyTypes = [
 export default function Materials() {
   return (
     <section id="properties" className="px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-      <div className="mx-auto max-w-[1440px]">
+      <div className="mx-auto max-w-[1400px]">
         <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
           <div>
             <SplitReveal

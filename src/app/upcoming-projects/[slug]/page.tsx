@@ -213,6 +213,7 @@ export default async function UpcomingProjectDetailPage({
             <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--bg)] via-[color:var(--bg)]/40 to-[color:var(--bg)]/20" />
           </div>
 
+          <div className="mx-auto flex w-full max-w-[1400px] flex-col flex-1">
           <Reveal as="div" y={16} className="mb-auto flex items-center gap-2 text-[0.6875rem] uppercase tracking-[0.2em] text-[color:var(--muted)]">
             <Link href="/" className="transition-colors hover:text-[color:var(--fg)]">Home</Link>
             <span aria-hidden>/</span>
@@ -241,30 +242,46 @@ export default async function UpcomingProjectDetailPage({
               <CircleButton href="#interest" variant="filled">Stay Updated</CircleButton>
             </Reveal>
           </div>
+          </div>
         </section>
 
         {/* ── 2 · About the Project ──────────────────────────────────── */}
         <section id="about" className="theme-light scroll-mt-20 px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-10 lg:gap-20">
-            <div className="col-span-12 lg:col-span-4">
-              <SplitReveal as="h2" className="font-display h-section">
-                About the
-              </SplitReveal>
-              <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
-                Project.
-              </SplitReveal>
+          <div className="mx-auto grid max-w-[1400px] grid-cols-12 items-start gap-10 lg:gap-16">
+
+            {/* Property image */}
+            {project.heroImage && (
+              <Reveal className="col-span-12 lg:col-span-5">
+                <div className="relative aspect-[3/4] overflow-hidden rounded-md">
+                  <Image
+                    src={project.heroImage}
+                    alt={project.title}
+                    fill
+                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+              </Reveal>
+            )}
+
+            {/* Content */}
+            <div className={`col-span-12 flex flex-col justify-center ${project.heroImage ? "lg:col-span-7" : "lg:col-span-12"}`}>
+              <Reveal as="h2" className="font-display h-section whitespace-nowrap">
+                About the <span className="text-[color:var(--accent)]">Project.</span>
+              </Reveal>
+
+              <div className="mt-8 space-y-6">
+                <ProjectBody body={project.body} />
+              </div>
 
             </div>
 
-            <div className="col-span-12 space-y-6 lg:col-span-8 lg:pt-4">
-              <ProjectBody body={project.body} />
-            </div>
           </div>
         </section>
 
         {/* ── 3 · Key Highlights ─────────────────────────────────────── */}
         <section className="scroll-mt-20 px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto max-w-[1440px]">
+          <div className="mx-auto max-w-[1400px]">
             <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
               <div>
                 <SplitReveal as="h2" className="font-display h-section">
@@ -308,7 +325,7 @@ export default async function UpcomingProjectDetailPage({
 
         {/* ── 5 · Why This Location ──────────────────────────────────── */}
         <section className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto grid max-w-[1440px] grid-cols-12 items-center gap-10 lg:gap-20">
+          <div className="mx-auto grid max-w-[1400px] grid-cols-12 items-center gap-10 lg:gap-20">
             <div className="col-span-12 lg:col-span-5">
               <SplitReveal as="h2" className="font-display h-section">
                 {enrichment.whyHeading.split(" ").slice(0, -1).join(" ")}
@@ -331,7 +348,7 @@ export default async function UpcomingProjectDetailPage({
         {/* ── 6 · Gallery ────────────────────────────────────────────── */}
         {enrichment.gallery?.length ? (
           <section className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-            <div className="mx-auto max-w-[1440px]">
+            <div className="mx-auto max-w-[1400px]">
               <Reveal className="mb-10">
                 <h2 className="font-display h-sub">Gallery</h2>
               </Reveal>
@@ -356,16 +373,16 @@ export default async function UpcomingProjectDetailPage({
 
         {/* ── 7 · Expression of Interest ─────────────────────────────── */}
         <section id="interest" className="scroll-mt-20 border-t border-[color:var(--line)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto max-w-[1440px]">
+          <div className="mx-auto max-w-[1400px]">
             <div className="mb-12 max-w-xl">
               <SplitReveal as="h2" className="font-display h-section">
-                Register Your
+                Register For
               </SplitReveal>
               <SplitReveal as="h2" delay={0.1} className="font-display h-section text-[color:var(--accent)]">
-                Interest.
+                Updates.
               </SplitReveal>
               <Reveal as="p" delay={0.15} className="mt-6 text-sm leading-relaxed text-[color:var(--muted)]">
-                Be among the first to receive launch details, pricing, and exclusive updates for {project.title}. Submit your details and our team will be in touch.
+                Be among the first to receive launch details, pricing, and exclusive updates for {project.title}.
               </Reveal>
             </div>
 

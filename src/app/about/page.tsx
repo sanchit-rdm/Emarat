@@ -127,7 +127,7 @@ export default async function AboutPage() {
 
         {/* Opening statement + highlights (light cream) */}
         <section className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
+          <div className="mx-auto grid max-w-[1400px] grid-cols-12 gap-8">
             <div className="col-span-12 lg:col-span-10">
               <SplitReveal as="h2" className="font-display h-section">
                 {intro.heading1}
@@ -161,7 +161,7 @@ export default async function AboutPage() {
 
         {/* Community / Social (light cream) */}
         <section className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto max-w-[1440px]">
+          <div className="mx-auto max-w-[1400px]">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
               {[mission, vision].map((item, i) => (
                 <Reveal
@@ -183,7 +183,7 @@ export default async function AboutPage() {
         <section className="relative isolate overflow-hidden border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
           <div className="pointer-events-none absolute -right-32 top-1/4 h-[440px] w-[440px] rounded-full bg-[color:var(--accent)]/10 blur-[200px]" />
 
-          <div className="mx-auto grid max-w-[1440px] grid-cols-12 items-center gap-12">
+          <div className="mx-auto grid max-w-[1400px] grid-cols-12 items-center gap-12">
             <div className="col-span-12 lg:col-span-7">
               <SplitReveal as="blockquote" className="font-display h-sub">
                 {lead.quote}

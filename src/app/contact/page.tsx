@@ -120,7 +120,7 @@ export default async function ContactPage() {
 
         {/* Form + Office card */}
         <section className="px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8 lg:gap-16">
+          <div className="mx-auto grid max-w-[1400px] grid-cols-12 gap-8 lg:gap-16">
             {/* Form */}
             <div className="col-span-12 lg:col-span-7">
               <SplitReveal as="h2" className="font-display h-section">
@@ -271,7 +271,7 @@ export default async function ContactPage() {
 
         {/* Map */}
         <section className="px-6 pb-28 lg:px-10 lg:pb-40">
-          <div className="mx-auto max-w-[1440px]">
+          <div className="mx-auto max-w-[1400px]">
             <div className="relative aspect-[21/9] overflow-hidden rounded-md border border-[color:var(--line)] bg-[color:var(--bg-alt)]">
               <iframe
                 title={map.title}

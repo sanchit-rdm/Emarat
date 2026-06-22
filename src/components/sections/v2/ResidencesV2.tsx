@@ -42,16 +42,16 @@ const FI = (src: string) => (
 const SI = (el: React.ReactNode) => el;
 
 const Icons = {
-  floors:     SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3" /></svg>),
-  expand:     SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>),
+  floors:     FI("/Icons/5 BHK Independent Floors.svg"),
+  expand:     FI("/Icons/Large Open Spaces.svg"),
   healthcare: SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><path d="M9 22V12h6v10M12 8v4M10 10h4" /></svg>),
   garden:     SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M12 22V12M12 12C12 7 7 3 2 4c1 5 5 8 10 8zM12 12c0-5 5-9 10-8-1 5-5 8-10 8z" /></svg>),
   marble:     SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>),
   terrace:    SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M3 17l4-8 4 4 3-5 4 9M3 21h18" /></svg>),
   openFloors: SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3" /></svg>),
   gold:       SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 16l-4.9 2.2.9-5.5L4 8.8l5.5-.8z" /></svg>),
-  concierge:  SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M18 20V10M12 20V4M6 20v-6" /><path d="M2 20h20" /><circle cx="12" cy="2" r="1" /></svg>),
-  threeSideOpen: SI(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-9 w-9"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" /><circle cx="12" cy="12" r="3" /></svg>),
+  concierge:  FI("/Icons/Arrival Experience.svg"),
+  threeSideOpen: FI("/Icons/Three Side Open.svg"),
   ac:         FI("/Icons/All Season VRVVRF Air Conditioning.svg"),
   kitchen:    FI("/Icons/Moduler Kitchen With HOB Chimney Microwave & Oven.svg"),
   balcony:    FI("/Icons/Wrap Around Balconies.svg"),
@@ -186,7 +186,7 @@ export default function ResidencesV2({ projects, labels }: Props) {
 
   return (
     <section id="residences" className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-      <div className="mx-auto max-w-[1440px]">
+      <div className="mx-auto max-w-[1400px]">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-6 lg:mb-16">
           <div>
             <Reveal className="eyebrow mb-4 flex items-center font-script text-2xl text-[color:var(--accent)]">

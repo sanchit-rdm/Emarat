@@ -51,7 +51,7 @@ export default function SiteNavClient({
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:h-28 lg:px-10">
+      <div className="mx-auto flex h-20 max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:h-28 lg:px-10">
         <Link href="/" className="flex items-center" aria-label="Emarat Realty home">
           <Image src={logo} alt="Emarat Realty" priority className="h-auto w-[90px] sm:w-[100px] lg:w-[130px]" sizes="(min-width: 1024px) 130px, (min-width: 640px) 100px, 90px" />
         </Link>

@@ -209,7 +209,6 @@ html {
   }
   /* Scale fixed-pixel content columns so they occupy the same share of the
      canvas above 1920 px as they do at 1920 px. Values = px / 1920 × 100. */
-  .max-w-\[1440px\] { max-width: 75vw; }
   .max-w-\[1400px\] { max-width: 72.9vw; }
   .max-w-\[1280px\] { max-width: 66.67vw; }
   .max-w-\[1100px\] { max-width: 57.3vw; }

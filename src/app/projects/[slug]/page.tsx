@@ -163,7 +163,7 @@ export default async function ProjectPage({
 
         {/* Sticky section nav */}
         <nav className="sticky top-0 z-40 border-y border-[color:var(--line)] bg-[color:var(--bg)]/90 backdrop-blur-md">
-          <div className="mx-auto flex max-w-[1440px] items-center gap-x-6 gap-y-2 overflow-x-auto px-6 py-4 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)] lg:px-10 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto flex max-w-[1400px] items-center gap-x-6 gap-y-2 overflow-x-auto px-6 py-4 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)] lg:px-10 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {sectionLinks.map((s) => (
               <a key={s.href} href={s.href} className="whitespace-nowrap transition-colors hover:text-[color:var(--fg)]">
                 {s.label}
@@ -184,7 +184,7 @@ export default async function ProjectPage({
 
         {/* ---------------- 2 · Project Overview ---------------- */}
         <section id="overview" className="theme-light scroll-mt-44 px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-10 lg:gap-16">
+          <div className="mx-auto grid max-w-[1400px] grid-cols-12 gap-10 lg:gap-16">
             <div className="col-span-12 lg:col-span-6">
               <SplitReveal as="h2" className="font-display h-section">
                 {dl.overviewHeading1}
@@ -231,7 +231,7 @@ export default async function ProjectPage({
 
         {/* ---------------- 3 · Amenities ---------------- */}
         <section id="amenities" className="theme-light scroll-mt-44 border-t border-[color:var(--line)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto max-w-[1440px]">
+          <div className="mx-auto max-w-[1400px]">
             <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
               <SplitReveal as="h2" className="font-display h-section">
                 {dl.amenitiesHeading}

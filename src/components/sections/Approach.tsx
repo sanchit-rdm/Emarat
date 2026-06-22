@@ -68,7 +68,7 @@ export default function Approach({ data }: Props) {
       ref={sectionRef}
       className="bg-[color:var(--bg-alt)] px-6 py-28 lg:px-10 lg:py-[100px]"
     >
-      <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-4">
           <div className="lg:sticky lg:top-32">
             <SplitReveal as="h2" className="font-display h-section">

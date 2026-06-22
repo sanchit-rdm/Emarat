@@ -160,7 +160,7 @@ export default async function SiteFooter() {
       <div className="relative px-6 pb-10 pt-14 lg:px-10 lg:pt-20">
         <div className="brand-green-strip absolute inset-x-0 top-0" aria-hidden />
 
-        <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
+        <div className="mx-auto grid max-w-[1400px] grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-4">
           <Image src={logo} alt="Emarat Realty" className="h-auto w-36 lg:w-[200px]" sizes="(min-width: 1024px) 200px, 144px" />
           <p className="mt-6 max-w-md text-sm text-[color:var(--muted)]">{tagline}</p>
@@ -219,7 +219,7 @@ export default async function SiteFooter() {
         </div>
       </div>
 
-      <div className="mx-auto mt-16 flex max-w-[1440px] flex-wrap items-center justify-between gap-4 border-t border-[color:var(--line)] pt-6 text-xs text-[color:var(--muted)]">
+      <div className="mx-auto mt-16 flex max-w-[1400px] flex-wrap items-center justify-between gap-4 border-t border-[color:var(--line)] pt-6 text-xs text-[color:var(--muted)]">
         <span>{copyright}</span>
         <span>{legalNote}</span>
         <div className="flex flex-wrap items-center gap-4">

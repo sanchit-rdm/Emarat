@@ -54,7 +54,7 @@ export default function EnquiryForm({
     >
       <div className="pointer-events-none absolute -right-32 top-1/4 h-[440px] w-[440px] rounded-full bg-[color:var(--accent)]/10 blur-[200px]" />
 
-      <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-10 lg:gap-16">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-12 gap-10 lg:gap-16">
         <div className="col-span-12 lg:col-span-5">
           <SplitReveal as="h2" className="font-display h-section">
             {heading}

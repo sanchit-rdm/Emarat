@@ -58,7 +58,7 @@ export default function IntroV2({ data, eyebrow }: Props) {
       </div>
 
       {/* Full-bleed feature image — clip-wipe reveal + slow parallax drift. */}
-      <div className="mx-auto mt-16 max-w-[1440px] lg:mt-24">
+      <div className="mx-auto mt-16 max-w-[1400px] lg:mt-24">
         <RevealImage
           className="relative aspect-[16/10] rounded-lg sm:aspect-[21/9]"
           parallax={8}
@@ -75,7 +75,7 @@ export default function IntroV2({ data, eyebrow }: Props) {
       </div>
 
       {/* Thin services row. */}
-      <div className="mx-auto mt-16 flex max-w-[1440px] flex-wrap justify-center gap-x-6 gap-y-6 sm:gap-x-10 lg:mt-24 lg:gap-x-16 lg:gap-y-10">
+      <div className="mx-auto mt-16 flex max-w-[1400px] flex-wrap justify-center gap-x-6 gap-y-6 sm:gap-x-10 lg:mt-24 lg:gap-x-16 lg:gap-y-10">
         {services.map((svc, i) => (
           <Reveal
             key={svc._key ?? svc.title}

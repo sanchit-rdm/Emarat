@@ -126,7 +126,7 @@ export default async function UpcomingProjectsPage() {
 
         {/* Project entries */}
         <section className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto max-w-[1440px]">
+          <div className="mx-auto max-w-[1400px]">
             {projects.map((project, i) => (
               <Reveal
                 key={project._key}

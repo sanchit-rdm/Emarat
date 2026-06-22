@@ -50,7 +50,7 @@ export default function Contact({ data }: Props) {
       </div>
       <div className="pointer-events-none absolute -right-32 top-1/4 h-[440px] w-[440px] rounded-full bg-[color:var(--accent)]/12 blur-[200px]" />
 
-      <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-8">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-12 gap-8">
         <div className="col-span-12 lg:col-span-10">
           <SplitReveal as="h2" className="font-display h-page">
             {toPlainText(heading1)}

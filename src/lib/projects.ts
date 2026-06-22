@@ -62,7 +62,9 @@ export type AmenityIcon =
   | "banquet"
   | "business"
   | "fire"
-  | "fountain";
+  | "fountain"
+  | "threeSideOpen"
+  | "rearpark";
 
 export type Amenity = { name: string; icon: AmenityIcon };
 
@@ -309,7 +311,7 @@ export const projects: Project[] = [
       { label: "Community", value: "DLF Gated" },
     ],
     amenities: [
-      { name: "Three-Side Open Layout", icon: "rooftop" },
+      { name: "Three-Side Open Layout", icon: "threeSideOpen" },
       { name: "Wrap-around Balconies", icon: "balcony" },
       { name: "Modular Kitchen", icon: "kitchen" },
       { name: "Walk-in Wardrobes", icon: "wardrobe" },
@@ -372,7 +374,7 @@ export const projects: Project[] = [
       { name: "Modular Kitchen", icon: "kitchen" },
       { name: "Walk-in Wardrobes", icon: "wardrobe" },
       { name: "Guest & Family Space", icon: "lounge" },
-      { name: "Rear Park Access", icon: "garden" },
+      { name: "Rear Park Access", icon: "rearpark" },
       { name: "EV Charging Provision", icon: "ev" },
       { name: "Adjacent Car Parking", icon: "parking" },
       { name: "DLF Club House", icon: "clubhouse" },
