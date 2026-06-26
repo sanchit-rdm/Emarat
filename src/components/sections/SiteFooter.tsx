@@ -111,7 +111,7 @@ function getSocialIcon(label: string): ReactNode {
   return socialIcons[key] ?? <span className="text-xs uppercase tracking-[0.14em]">{label}</span>;
 }
 
-export default async function SiteFooter() {
+export default async function SiteFooter({ footerImage }: { footerImage?: string } = {}) {
   const year = new Date().getFullYear();
 
   let settings: FooterSettings | null = null;
@@ -123,7 +123,7 @@ export default async function SiteFooter() {
   }
 
   const f = settings?.footer;
-  const image = f?.image?.trim() || DEFAULT_FOOTER_IMAGE;
+  const image = footerImage || f?.image?.trim() || DEFAULT_FOOTER_IMAGE;
   const tagline = f?.tagline?.trim() || DEFAULT_TAGLINE;
   const addressLines = f?.addressLines?.length ? f.addressLines : DEFAULT_ADDRESS;
   const columns = f?.columns?.length ? f.columns : DEFAULT_COLUMNS;

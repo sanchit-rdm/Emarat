@@ -105,6 +105,13 @@ export default async function ProjectPage({
     privacy: pickStr(d.enquiryPrivacy, "By submitting you agree to our privacy policy."),
   };
 
+  const PROJECT_FOOTER_IMAGES: Record<string, string> = {
+    c2: "/images/C2 footer.jpeg",
+    c5: "/images/C5 footer.jpeg",
+    e11: "/images/E11 footer.jpeg",
+  };
+  const projectFooterImage = PROJECT_FOOTER_IMAGES[slug.toLowerCase()];
+
   return (
     <>
       <SiteNav />
@@ -271,7 +278,7 @@ export default async function ProjectPage({
         {/* ---------------- 7 · Enquiry Form ---------------- */}
         <EnquiryForm projectTitle={project.title} config={project.config} labels={enquiryLabels} />
       </main>
-      <SiteFooter />
+      <SiteFooter footerImage={projectFooterImage} />
     </>
   );
 }
