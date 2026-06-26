@@ -122,6 +122,7 @@ export const HOME_PAGE_QUERY = defineQuery(`
       principles { heading3, heading1, heading2 },
       news { eyebrow, heading1, heading2, allLabel, allHref },
       stickyReveal { heading, slides[]{ line1, line2, body } },
+      holidayHomes { eyebrow, heading, subheading, beachLabel, mountainLabel, exploreLabel },
       contact { eyebrow, lead, namePlaceholder, phonePlaceholder, categoryPlaceholder, categoryOptions, submitLabel, privacy }
     },
     ${SEO_FIELDS}

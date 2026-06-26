@@ -150,4 +150,7 @@ export const amenityIcons: Record<AmenityIcon, React.ReactNode> = {
   ),
   threeSideOpen: I("/Icons/Three Side Open.svg"),
   rearpark: I("/Icons/Rear Park Access.svg"),
+  domesticHelp: I("/Icons/Domestic Help Room.svg"),
+  staffWashroom: I("/Icons/Dedicated Staff Washroom.svg"),
+  dlfGated: I("/Icons/DFL Gated Community.svg"),
 };

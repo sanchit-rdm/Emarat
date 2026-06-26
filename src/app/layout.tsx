@@ -59,6 +59,18 @@ export default async function RootLayout({
 }>) {
   const { isEnabled: isDraftMode } = await draftMode();
 
+  type SocialLink = { platform?: string; url?: string };
+  type Settings = { contact?: { phone?: string }; socialLinks?: SocialLink[] };
+  let whatsappPhone = "+918450984509";
+  let instagramUrl = "https://www.instagram.com/emarat.realty/";
+  try {
+    const { data } = await sanityFetch({ query: SITE_SETTINGS_QUERY, tags: ["siteSettings"] });
+    const s = data as Settings | null;
+    if (s?.contact?.phone) whatsappPhone = s.contact.phone;
+    const ig = s?.socialLinks?.find((l) => l.platform === "Instagram");
+    if (ig?.url) instagramUrl = ig.url;
+  } catch { /* fall back to defaults */ }
+
   return (
     <html
       lang="en"
@@ -67,7 +79,7 @@ export default async function RootLayout({
       <body className="min-h-screen">
         {/* Brand rail — green track with gold thumb that tracks page scroll progress */}
         <ScrollRail />
-        <BrochureButton />
+        <BrochureButton whatsappPhone={whatsappPhone} instagramUrl={instagramUrl} />
         <SmoothScroll>{children}</SmoothScroll>
         <SanityLive />
         {isDraftMode && <VisualEditing />}

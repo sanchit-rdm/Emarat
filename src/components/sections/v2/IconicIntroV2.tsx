@@ -26,13 +26,14 @@ export default function IconicIntroV2({ data, labels }: Props) {
         className="pointer-events-none absolute inset-0 -z-20"
         style={{
           backgroundImage: `url(${bgImage})`,
-          backgroundSize: "cover",
+          backgroundSize: "contain",
           backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
         }}
       />
       {/* Plain dark overlay */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[#01472E]/40" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[#01472E]/70" />
 
       {/* Headline */}
       <Reveal className="relative z-10 text-center">

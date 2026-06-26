@@ -417,6 +417,20 @@ export const homePageType = defineType({
           ],
         }),
         defineField({
+          name: "holidayHomes",
+          title: "Holiday Homes Section",
+          description: "The 'Escape to nature' section on Home Design 2 showing beach/lake and mountain retreat projects.",
+          type: "object",
+          fields: [
+            defineField({ name: "eyebrow", title: "Eyebrow", type: "string", description: "e.g. Holiday Homes" }),
+            defineField({ name: "heading", title: "Heading", type: "string", description: "e.g. Escape to nature" }),
+            defineField({ name: "subheading", title: "Subheading Paragraph", type: "text", rows: 2 }),
+            defineField({ name: "beachLabel", title: "Beach & Lake Category Label", type: "string", description: "e.g. Beach & Lake" }),
+            defineField({ name: "mountainLabel", title: "Mountain Category Label", type: "string", description: "e.g. Mountain" }),
+            defineField({ name: "exploreLabel", title: "Explore Button Label", type: "string", description: "e.g. Explore" }),
+          ],
+        }),
+        defineField({
           name: "contact",
           title: "Callback Section",
           type: "object",

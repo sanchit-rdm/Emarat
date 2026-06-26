@@ -53,6 +53,9 @@ const amenityIconOptions = [
   { title: "Business Centre", value: "business" },
   { title: "Fire Safety System", value: "fire" },
   { title: "Water Feature / Fountain", value: "fountain" },
+  { title: "Domestic Help Room", value: "domesticHelp" },
+  { title: "Dedicated Staff Washroom", value: "staffWashroom" },
+  { title: "DLF Gated Community", value: "dlfGated" },
 ];
 
 export const projectType = defineType({
