@@ -26,7 +26,7 @@ export default function IconicIntroV2({ data, labels }: Props) {
         className="pointer-events-none absolute inset-0 -z-20"
         style={{
           backgroundImage: `url(${bgImage})`,
-          backgroundSize: "contain",
+          backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
