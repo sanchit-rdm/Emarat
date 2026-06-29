@@ -105,7 +105,7 @@ export default function HolidayHomesV2({ projects, labels }: Props) {
 
   const eyebrow = labels?.eyebrow?.trim() || "Holiday Homes";
   const heading = labels?.heading?.trim() || "Escape to nature";
-  const subheading = labels?.subheading?.trim() || "A curated collection of retreat residences — from sun-kissed coastlines to mist-covered hills.";
+  const subheading = labels?.subheading?.trim() || "A curated collection of retreat residences, from beaches that slow you down to hills that bring you peace.";
   const beachLabel = labels?.beachLabel?.trim() || "Beach & Lake";
   const mountainLabel = labels?.mountainLabel?.trim() || "Mountain";
   const exploreLabel = labels?.exploreLabel?.trim() || "Explore";

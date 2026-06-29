@@ -27,18 +27,15 @@ const DEFAULT_HEADING = "A Home Built the Way You Always Imagined";
 const DEFAULT_SLIDES: SanitySlide[] = [
   {
     line1: "Crafted",
-    line2: "With",
-    body: "Luxury finishes, smartly planned layouts, premium materials — every Emarat residence is designed to the finest detail, where quality is not a feature, it is the foundation.",
+    body: "With luxury finishes, smartly planned layouts, premium materials — every Emarat residence is designed to the finest detail, where quality is not a feature, it is the foundation.",
   },
   {
     line1: "Connected",
-    line2: "To",
-    body: "Gurugram's premier schools, world-class healthcare, premium retail and seamless NCR connectivity, all within reach.",
+    body: "To Gurugram's premier schools, world-class healthcare, premium retail and seamless NCR connectivity, all within reach.",
   },
   {
     line1: "Complete",
-    line2: "Home",
-    body: "With luxury inside. Convenience outside. Everything your family needs — nothing missing, nothing compromised.",
+    body: "Home with luxury inside. Convenience outside. Everything your family needs — nothing missing, nothing compromised.",
   },
 ];
 
@@ -118,9 +115,12 @@ export default function StickyRevealSection({ data }: { data?: StickyRevealData 
               <>
                 <div className={SUBHEADING_CLASS}>
                   <span className="block">{item.line1}</span>
-                  <span className="block">{item.line2}</span>
                 </div>
-                {item.body && <p className={PARAGRAPH_CLASS}>{item.body}</p>}
+                {item.body && (
+                  <p className={PARAGRAPH_CLASS}>
+                    {item.line2 ? `${item.line2} ${item.body}` : item.body}
+                  </p>
+                )}
               </>
             )}
           </div>
