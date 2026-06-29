@@ -20,7 +20,7 @@ export default function IconicIntroV2({ data, labels }: Props) {
   const line2 = labels?.line2?.trim() || "of every iconic landmark";
 
   return (
-    <section className="relative isolate flex min-h-[75vh] items-center justify-center overflow-hidden px-4 py-10 sm:px-6">
+    <section className="relative isolate flex min-h-[100vh] items-center justify-center overflow-hidden px-4 py-10 sm:px-6">
       {/* Fixed background image — stays in place as page scrolls */}
       <div
         className="pointer-events-none absolute inset-0 -z-20"
