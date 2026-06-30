@@ -27,6 +27,7 @@
     "@portabletext/block-tools": "^5.1.9",
     "@sanity/schema": "^6.2.0",
     "@tailwindcss/postcss": "^4",
+    "@types/jsdom": "^28.0.3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
