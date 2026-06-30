@@ -49,7 +49,11 @@ export async function generateMetadata(): Promise<Metadata> {
   } catch {
     /* fall back to the in-code defaults */
   }
-  return { title, description };
+  return {
+    metadataBase: new URL("https://www.emaratrealty.com"),
+    title,
+    description,
+  };
 }
 
 export default async function RootLayout({

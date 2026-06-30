@@ -35,7 +35,7 @@ const propertyTypes = [
   {
     id: "commercial",
     label: "Commercial",
-    caption: "High-end retail & offices EA 04 at Almeda",
+    caption: "High-end retail & offices EA 04 at Alameda",
     src: "/images/alameda-powder-room.webp",
     ratio: "aspect-[3/4]",
   },
