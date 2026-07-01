@@ -316,7 +316,7 @@ async function main() {
           asset: { _type: "reference", _ref: mainImageAssetId },
         };
       }
-      await client.createOrReplace(doc);
+      await client.createOrReplace(doc as Parameters<typeof client.createOrReplace>[0]);
       console.log(`    ✓ written as post.${p.slug}`);
     }
   }
