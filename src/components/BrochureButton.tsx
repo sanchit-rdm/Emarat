@@ -207,29 +207,20 @@ export default function BrochureButton({
                     />
                   </div>
                   <div className="border-b border-white/15 pb-3">
-                    <select
-                      className="w-full cursor-pointer bg-transparent text-sm text-white/60 outline-none"
-                      defaultValue=""
+                    <input
+                      type="text"
+                      placeholder="Preferred time to call…"
+                      className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/60"
                       aria-label="Preferred time"
-                    >
-                      <option value="" disabled className="bg-[#011f14]">Preferred time to call…</option>
-                      <option value="morning" className="bg-[#011f14]">Morning (9 am – 12 pm)</option>
-                      <option value="afternoon" className="bg-[#011f14]">Afternoon (12 pm – 4 pm)</option>
-                      <option value="evening" className="bg-[#011f14]">Evening (4 pm – 7 pm)</option>
-                    </select>
+                    />
                   </div>
                   <div className="border-b border-white/15 pb-3">
-                    <select
-                      className="w-full cursor-pointer bg-transparent text-sm text-white/60 outline-none"
-                      defaultValue=""
+                    <input
+                      type="text"
+                      placeholder="Interested in…"
+                      className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/60"
                       aria-label="Project interest"
-                    >
-                      <option value="" disabled className="bg-[#011f14]">Interested in…</option>
-                      <option value="c2" className="bg-[#011f14]">C2 at DLF Garden City</option>
-                      <option value="c5" className="bg-[#011f14]">C5 at DLF Garden City</option>
-                      <option value="e11" className="bg-[#011f14]">E11 at DLF Garden City</option>
-                      <option value="ea04" className="bg-[#011f14]">EA 04 at Alameda</option>
-                    </select>
+                    />
                   </div>
 
                   <div className="mt-2 flex flex-wrap items-center justify-between gap-4">

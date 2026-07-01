@@ -41,9 +41,6 @@ export default function ContactV2({ data, labels }: Props) {
   const namePlaceholder = labels?.namePlaceholder?.trim() || "Your name";
   const phonePlaceholder = labels?.phonePlaceholder?.trim() || "+91 00000 00000";
   const categoryPlaceholder = labels?.categoryPlaceholder?.trim() || "Interested in…";
-  const categoryOptions = labels?.categoryOptions?.length
-    ? labels.categoryOptions
-    : ["C2 at DLF Garden City", "C5 at DLF Garden City", "E11 at DLF Garden City", "EA 04 at Alameda"];
   const submitLabel = labels?.submitLabel?.trim() || "Request a Callback";
   const privacy = labels?.privacy?.trim() || "By proceeding, you acknowledge and agree to our Privacy Policy. You also consent to receive updates, notifications, and promotional communications via Email, SMS, and WhatsApp.";
 
@@ -94,31 +91,21 @@ export default function ContactV2({ data, labels }: Props) {
                 />
               </div>
               <div className="border-b border-[color:var(--line)] pb-3">
-                <select
-                  className="w-full bg-transparent text-sm text-[color:var(--muted)] outline-none"
+                <input
+                  type="text"
+                  placeholder="Enquiring as…"
+                  className="w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
                   aria-label="Enquiry type"
-                  defaultValue=""
-                >
-                  <option value="" disabled>Enquiring as…</option>
-                  <option value="end-user">End User / Home Buyer</option>
-                  <option value="channel-partner">Channel Partner / Broker</option>
-                  <option value="investor">Investor</option>
-                  <option value="corporate">Corporate / Institutional</option>
-                  <option value="nri">NRI Buyer</option>
-                </select>
+                />
               </div>
             </div>
             <div className="border-b border-[color:var(--line)] pb-3">
-              <select
-                className="w-full bg-transparent text-sm text-[color:var(--muted)] outline-none"
+              <input
+                type="text"
+                placeholder={categoryPlaceholder}
+                className="w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
                 aria-label="Project interest"
-                defaultValue=""
-              >
-                <option value="" disabled>{categoryPlaceholder}</option>
-                {categoryOptions.map((opt) => (
-                  <option key={opt} value={opt}>{opt}</option>
-                ))}
-              </select>
+              />
             </div>
             <div className="mt-4 flex flex-col items-center gap-6">
               <label className="flex cursor-pointer items-start gap-3 text-left">
