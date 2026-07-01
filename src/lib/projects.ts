@@ -320,8 +320,8 @@ export const projects: Project[] = [
     size: "G+4 · Three-Side Open",
     possession: "On Request",
     rera: "HRERA Registered",
-    heroImage: "/images/E11/E11.jpeg",
-    heroImageMobile: "/images/E11/E11 M.jpeg",
+    heroImage: "/images/E11/E11.jpg",
+    heroImageMobile: "/images/E11/E11 M.jpg",
     overviewImage: "/images/E11/e11-14-family-lounge-interior-view-v1-r1-20250412.jpg",
     overview: [
       "E11 at DLF Garden City is a collection of thoughtfully designed, three-side-open independent floors where imagination meets form. Created for those who don't just look for a home — they look for what a home can become.",
@@ -387,8 +387,8 @@ export const projects: Project[] = [
     size: "Two-Side Open Private Floors",
     possession: "On Request",
     rera: "HRERA Registered",
-    heroImage: "/images/EA4/EA 04.jpeg",
-    heroImageMobile: "/images/EA4/EA 04 M.jpeg",
+    heroImage: "/images/EA4/EA 04.png",
+    heroImageMobile: "/images/EA4/EA 04 M.jpg",
     overviewImage: "/images/EA4/ea-4-a-formal-dnd.jpg",
     overview: [
       "EA-04, Alameda is a boutique luxury residence in Sector 73, Gurugram — private, two-side-open floors for those who value space, elegance and absolute privacy. Architecture that commands; interiors that whisper, in a palette of deep emerald stone and 24k-gold accents.",

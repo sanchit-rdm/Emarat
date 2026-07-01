@@ -29,7 +29,7 @@ const FADE_IMG  = 0.05; // image crossfade duration on the 0..1 timeline
 const MOBILE_IMAGES = [
   "/images/C-2/C2 M.jpeg",
   "/images/C-5/C5 M.jpeg",
-  "/images/E11/E11 M.jpeg",
+  "/images/E11/E11 M.jpg",
 ];
 
 // Scroll progress points where images 0→1 and 1→2 crossfade.
