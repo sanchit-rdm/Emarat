@@ -106,9 +106,9 @@ export default async function ProjectPage({
   };
 
   const PROJECT_FOOTER_IMAGES: Record<string, string> = {
-    c2: "/images/C2 footer.jpeg",
-    c5: "/images/C5 footer.jpeg",
-    e11: "/images/E11 footer.jpeg",
+    c2: "/images/C2 footer.jpg",
+    c5: "/images/C5 footer.jpg",
+    e11: "/images/E11 footer.jpg",
   };
   const projectFooterImage = PROJECT_FOOTER_IMAGES[slug.toLowerCase()];
 
