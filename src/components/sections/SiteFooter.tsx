@@ -142,7 +142,7 @@ export default async function SiteFooter({ footerImage }: { footerImage?: string
   const contactHeading = f?.contactHeading?.trim() || "Get in Touch";
 
   return (
-    <footer className="theme-green relative">
+    <footer className="theme-green relative pb-16 lg:pb-0">
       {/* Feature image banner across the top of the footer */}
       {image && (
         <div className="relative h-[40vh] min-h-[240px] w-full overflow-hidden lg:h-[52vh]">
