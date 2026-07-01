@@ -219,7 +219,7 @@ export default async function SiteFooter({ footerImage }: { footerImage?: string
         </div>
       </div>
 
-      <div className="mx-auto mt-16 flex max-w-[1400px] flex-wrap items-center justify-between gap-4 border-t border-[color:var(--line)] pt-6 text-xs text-[color:var(--muted)]">
+      <div className="mx-auto mt-16 flex max-w-[1400px] flex-wrap items-center justify-center gap-4 border-t border-[color:var(--line)] pt-6 text-center text-xs text-[color:var(--muted)] sm:justify-between sm:text-left">
         <span>{copyright}</span>
         <span>{legalNote}</span>
         <div className="flex flex-wrap items-center gap-4">

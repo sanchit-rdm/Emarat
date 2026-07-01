@@ -82,8 +82,8 @@ export default function BrochureButton({
   return (
     <>
       <div
-        className={`fixed right-0 top-1/2 z-40 flex -translate-y-1/2 flex-col gap-px transition-all duration-500 ${
-          heroVisible ? "pointer-events-none translate-x-full opacity-0" : "translate-x-0 opacity-100"
+        className={`fixed bottom-0 inset-x-0 z-40 flex flex-row gap-px transition-all duration-500 lg:inset-x-auto lg:right-0 lg:bottom-auto lg:top-1/2 lg:flex-col lg:-translate-y-1/2 ${
+          heroVisible ? "pointer-events-none translate-y-full opacity-0 lg:translate-y-0 lg:translate-x-full" : "translate-y-0 opacity-100 lg:translate-x-0"
         }`}
       >
         {/* WhatsApp */}
@@ -93,7 +93,7 @@ export default function BrochureButton({
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat on WhatsApp"
-          className="link-hover relative flex flex-col items-center bg-[#01472E] px-3 py-4 text-white"
+          className="link-hover relative flex flex-1 flex-col items-center justify-center gap-1 bg-[#01472E] py-3 text-white lg:flex-none lg:px-3 lg:py-4"
         >
           <svg className="link-hover__circle" aria-hidden="true">
             <rect ref={(el) => { rectRefs.current[0] = el; }} fill="none" />
@@ -109,7 +109,7 @@ export default function BrochureButton({
           type="button"
           onClick={() => setOpen(true)}
           aria-label="Request a callback"
-          className="link-hover relative flex cursor-pointer flex-col items-center gap-3 bg-[#01472E] px-3 py-5 text-white"
+          className="link-hover relative flex flex-1 cursor-pointer flex-col items-center justify-center gap-1 bg-[#01472E] py-3 text-white lg:flex-none lg:gap-3 lg:px-3 lg:py-5"
         >
           <svg className="link-hover__circle" aria-hidden="true">
             <rect ref={(el) => { rectRefs.current[1] = el; }} fill="none" />
@@ -117,8 +117,11 @@ export default function BrochureButton({
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="relative z-10 h-5 w-5 shrink-0" aria-hidden="true">
             <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24 11.47 11.47 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.47 11.47 0 0 0 .57 3.6 1 1 0 0 1-.25 1.01z" />
           </svg>
+          <span className="relative z-10 text-[0.5625rem] font-semibold uppercase tracking-[0.22em] lg:hidden">
+            Callback
+          </span>
           <span
-            className="relative z-10 text-[0.5625rem] font-semibold uppercase tracking-[0.22em]"
+            className="relative z-10 hidden text-[0.5625rem] font-semibold uppercase tracking-[0.22em] lg:block"
             style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
           >
             Request a callback
@@ -132,7 +135,7 @@ export default function BrochureButton({
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Follow on Instagram"
-          className="link-hover relative flex flex-col items-center bg-[#01472E] px-3 py-4 text-white"
+          className="link-hover relative flex flex-1 flex-col items-center justify-center gap-1 bg-[#01472E] py-3 text-white lg:flex-none lg:px-3 lg:py-4"
         >
           <svg className="link-hover__circle" aria-hidden="true">
             <rect ref={(el) => { rectRefs.current[2] = el; }} fill="none" />
