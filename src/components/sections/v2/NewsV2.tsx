@@ -6,8 +6,8 @@ type Post = {
   _id: string;
   title?: string;
   slug?: { current?: string };
-  author?: { name?: string };
   mainImage?: { asset?: { url?: string } };
+  coverImage?: string;
   publishedAt?: string;
 };
 
@@ -15,13 +15,11 @@ const placeholders: Post[] = [
   {
     _id: "p1",
     title: "E11 at DLF Garden City: Gurugram's most anticipated launch",
-    author: { name: "Project Update" },
     publishedAt: "2026-11-03",
   },
   {
     _id: "p2",
     title: "Non-standard glazing on the facades of E11 Residences",
-    author: { name: "News" },
     publishedAt: "2026-08-14",
     mainImage: { asset: { url: "/images/E11/building.jpg" } },
   },
@@ -83,8 +81,7 @@ export default function NewsV2({ posts, labels }: { posts: Post[]; labels?: News
         <div className="grid flex-1 grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8">
           {items.map((post, i) => {
             const { day, month } = dateParts(post.publishedAt);
-            const category = (post.author?.name || "News").toUpperCase();
-            const img = post.mainImage?.asset?.url;
+            const img = (post as { coverImage?: string }).coverImage ?? post.mainImage?.asset?.url;
             const withImage = !!img;
             const postHref = post.slug?.current ? `/blog/${post.slug.current}` : allHref;
 
@@ -96,8 +93,7 @@ export default function NewsV2({ posts, labels }: { posts: Post[]; labels?: News
                     ariaLabel={post.title}
                     className="flex h-full flex-col rounded-2xl border border-[color:var(--line)] bg-[color:var(--bg)] p-3"
                   >
-                    {/* Portrait image — p-3 insets it so all 4 corners are visibly rounded */}
-                    <div className="relative aspect-[5/6] overflow-hidden rounded-xl">
+                    <div className="relative aspect-[16/9] overflow-hidden rounded-xl">
                       <Image
                         src={img as string}
                         alt={post.title ?? ""}
@@ -107,7 +103,7 @@ export default function NewsV2({ posts, labels }: { posts: Post[]; labels?: News
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4">
-                        <div className="font-mono text-[0.625rem] uppercase tracking-[0.26em] text-white/80">{category}</div>
+                        <div className="font-mono text-[0.625rem] uppercase tracking-[0.26em] text-white/80">News</div>
                         <div className="flex items-end gap-2">
                           <span className="font-display text-4xl leading-none text-white">{day}</span>
                           <span className="mb-1 text-[0.625rem] uppercase tracking-[0.22em] text-white/80">{month}</span>
@@ -128,7 +124,7 @@ export default function NewsV2({ posts, labels }: { posts: Post[]; labels?: News
                     className="flex h-full flex-col justify-between rounded-2xl border border-[color:var(--accent)]/30 bg-[color:var(--bg)] p-7 text-[color:var(--fg)] lg:p-9"
                   >
                     <div className="relative z-10">
-                      <div className="font-mono text-[0.625rem] uppercase tracking-[0.26em] text-[color:var(--accent)]">{category}</div>
+                      <div className="font-mono text-[0.625rem] uppercase tracking-[0.26em] text-[color:var(--accent)]">News</div>
                       <h3 className="mt-6 max-w-[18ch] font-display text-xl leading-tight">
                         {post.title}
                       </h3>

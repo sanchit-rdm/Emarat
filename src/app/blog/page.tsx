@@ -16,7 +16,6 @@ const FB = {
   featuredLabel: "★ Featured",
   readArticleLabel: "Read article",
   gridHeading: "More from the journal.",
-  authorFallback: "Emarat",
   emptyTitle: "Stay tuned.",
   emptyBody: "New articles published monthly.",
   newsletter: {
@@ -51,7 +50,6 @@ type Post = {
   _id: string;
   title?: string;
   slug?: { current?: string };
-  author?: { name?: string };
   mainImage?: { asset?: { url?: string } };
   coverImage?: string;
   publishedAt?: string;
@@ -62,7 +60,6 @@ const placeholders: Post[] = [
   {
     _id: "p1",
     title: "E11 at DLF Garden City: Why it is Gurugram's most anticipated launch of 2026",
-    author: { name: "Project Update" },
     publishedAt: "2026-04-18",
     excerpt: "Inside the new duplex penthouses, sky lounges and the design thinking behind our most ambitious residence yet.",
     mainImage: { asset: { url: "/images/alameda-bathroom.webp" } },
@@ -70,7 +67,6 @@ const placeholders: Post[] = [
   {
     _id: "p2",
     title: "Investing in Gurugram real estate in 2026 what the numbers actually say",
-    author: { name: "Market Note" },
     publishedAt: "2026-03-07",
     excerpt: "Five years of price data from Sectors 92–94 reveal a more nuanced story than the headlines suggest.",
     mainImage: { asset: { url: "/images/alameda-bedroom-4.webp" } },
@@ -78,7 +74,6 @@ const placeholders: Post[] = [
   {
     _id: "p3",
     title: "Why DLF Garden City remains Sector 93's most sought-after address",
-    author: { name: "Feature" },
     publishedAt: "2026-02-14",
     excerpt: "A walking tour of the township the architecture, the courtyards, the connectivity, and what comes next.",
     mainImage: { asset: { url: "/images/alameda-powder-room.webp" } },
@@ -86,7 +81,6 @@ const placeholders: Post[] = [
   {
     _id: "p4",
     title: "Inside the Dwarka Expressway: how Gurugram's most important road is being completed",
-    author: { name: "Infrastructure" },
     publishedAt: "2026-01-22",
     excerpt: "The signal-free corridor that will reshape NCR connectivity and what it means for property values along Sector 93.",
     mainImage: { asset: { url: "/images/alameda-bedroom-5.webp" } },
@@ -94,7 +88,6 @@ const placeholders: Post[] = [
   {
     _id: "p5",
     title: "What a luxury home actually costs to build in 2026",
-    author: { name: "Essay" },
     publishedAt: "2025-12-30",
     excerpt: "Italian marble, German plumbing, Indian craftsmanship a breakdown of where every rupee goes in a premium residence.",
     mainImage: { asset: { url: "/images/alameda-entrance.webp" } },
@@ -126,7 +119,6 @@ export default async function NewsPage() {
   const featuredLabel = pickStr(c?.featuredLabel, FB.featuredLabel);
   const readArticleLabel = pickStr(c?.readArticleLabel, FB.readArticleLabel);
   const gridHeading = pickStr(c?.gridHeading, FB.gridHeading);
-  const authorFallback = pickStr(c?.authorFallback, FB.authorFallback);
   const emptyTitle = pickStr(c?.emptyTitle, FB.emptyTitle);
   const emptyBody = pickStr(c?.emptyBody, FB.emptyBody);
   const nl = {
@@ -223,7 +215,7 @@ export default async function NewsPage() {
                     className="group flex flex-col"
                   >
                     <a href={`/blog/${post.slug?.current}`} className="block">
-                      <div className="relative mb-5 aspect-[4/5] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
+                      <div className="relative mb-5 aspect-[16/9] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
                         {(post.coverImage ?? post.mainImage?.asset?.url) && (
                           <Image
                             src={(post.coverImage ?? post.mainImage?.asset?.url)!}
