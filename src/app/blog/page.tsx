@@ -133,7 +133,7 @@ export default async function NewsPage() {
     <>
       <SiteNav />
       <main>
-        <PageHero {...hero} />
+        <PageHero {...hero} className="!min-h-[34svh] lg:!min-h-[85svh]" />
 
         {/* Featured article */}
         {featured && (

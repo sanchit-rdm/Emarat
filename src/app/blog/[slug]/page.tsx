@@ -42,7 +42,7 @@ export default async function PostPage({ params }: Props) {
       <main className="theme-light">
         {/* Hero image */}
         {img && (
-          <div className="relative h-[55vh] min-h-[320px] w-full overflow-hidden">
+          <div className="relative h-[34svh] min-h-[200px] w-full overflow-hidden lg:h-[85svh]">
             <Image
               src={img}
               alt={post.title ?? ""}
@@ -56,7 +56,7 @@ export default async function PostPage({ params }: Props) {
           </div>
         )}
 
-        <article className="mx-auto max-w-[740px] px-4 py-10 sm:px-6 sm:py-[50px] lg:py-[100px]">
+        <article className="mx-auto max-w-[1400px] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
           {/* Meta */}
           <div className="mb-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-[color:var(--muted)]">
             {publishedAt && <span>{publishedAt}</span>}
