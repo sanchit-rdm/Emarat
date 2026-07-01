@@ -159,7 +159,7 @@ export default function ScrollVideoHero({ blocks, videoSrc, posterSrc, scrollLab
         //    redundant sub-frame seeks (the source of jank).
         const proxy = { t: 0 };
         tl.to(proxy, {
-          t: duration,
+          t: Math.max(0, duration - 0.04),
           duration: 1,
           ease: "none",
           onUpdate: () => {

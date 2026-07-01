@@ -15,21 +15,21 @@ from the nearest keyframe. A normal clip keyframes ~every 1–2s, so seeks
 (especially reverse) stutter. `hero-scrub.mp4` fixes this: a **keyframe every 6
 frames**, so any seek decodes ≤6 frames — smooth in both directions.
 
-## Re-create `hero-scrub.mp4` (e.g. after swapping the source)
+## Re-create `home2-scrub.mp4` (e.g. after swapping the source)
 
 ```bash
+# Video — native resolution, all keyframes (buttery scrub), CRF 18 (high quality):
 ffmpeg -y -i "source.mp4" -an -c:v libx264 -profile:v high -pix_fmt yuv420p \
-  -vf "scale=1280:720:flags=lanczos" -g 6 -keyint_min 6 -sc_threshold 0 \
-  -crf 23 -preset slow -movflags +faststart hero-scrub.mp4
+  -g 1 -keyint_min 1 -sc_threshold 0 \
+  -crf 18 -preset slow -movflags +faststart home2-scrub.mp4
 
-# Poster from ~1s in, compressed to webp:
-ffmpeg -y -ss 1 -i "source.mp4" -frames:v 1 -vf "scale=1280:720:flags=lanczos" hero-frame.png
-node -e "require('sharp')('hero-frame.png').webp({quality:68,effort:6}).toFile('hero-poster.webp')"
+# Poster — first frame as webp (matches source resolution):
+ffmpeg -y -i "source.mp4" -frames:v 1 -c:v libwebp -quality 85 home2-poster.webp
 ```
 
-For maximum reverse-scrub smoothness use `-g 1 -keyint_min 1` (every frame a
-keyframe) — buttery but a larger file. To point the hero at a different file,
-edit the `<source>` in `ScrollVideoHero.tsx`.
+Current asset is 3840×2160, 73 MB (all-keyframe at native 4K). To reduce page-load
+weight at the cost of minor sharpness, add `-vf "scale=1920:1080:flags=lanczos"`.
+To point the hero at a different file, edit the `<source>` in `ScrollVideoHero.tsx`.
 
 ## Tuning (in ScrollVideoHero.tsx)
 
