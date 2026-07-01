@@ -15,10 +15,9 @@ import { ensureGsap, scheduleScrollRefresh } from "@/lib/gsap";
    (see src/components/motion/Parallax.tsx).
 
    Assets — in /public/videos/:
-     • hero-scrub.mp4    What the hero scrubs. Re-encoded keyframe-dense (a
-                         keyframe every 6 frames) so any seek decodes ≤6 frames
-                         and reverse scrubbing stays smooth. See videos/README.
-     • hero-poster.webp  First-frame still (poster + reduced-motion fallback).
+     • home2-scrub.mp4   What the hero scrubs. All-keyframe encode (CRF 18)
+                         so every seek is instant in both directions. See README.
+     • home2-poster.webp First-frame still (poster + reduced-motion fallback).
 ---------------------------------------------------------------------------- */
 
 // Total scroll length of the pinned hero, in viewport heights. Tune to taste:
@@ -222,7 +221,7 @@ export default function ScrollVideoHero({ blocks, videoSrc, posterSrc, scrollLab
         <video
           ref={videoRef}
           className="absolute inset-0 -z-20 h-full w-full object-cover"
-          poster={posterSrc ?? "/videos/hero-poster.webp"}
+          poster={posterSrc ?? "/videos/home2-poster.webp"}
           muted
           playsInline
           preload={enableScrub ? "auto" : "none"}
@@ -231,9 +230,8 @@ export default function ScrollVideoHero({ blocks, videoSrc, posterSrc, scrollLab
           aria-hidden="true"
           onError={() => setVideoFailed(true)}
         >
-          {/* Optimized scrub copy: 720p, keyframe every 6 frames (see README).
-              Re-encoded from the new hero clip for smooth seeking. */}
-          {enableScrub && <source src={videoSrc ?? "/videos/hero-scrub.mp4"} type="video/mp4" />}
+          {/* Scrub copy: 720p, all-keyframe, CRF 18 (see public/videos/README.md). */}
+          {enableScrub && <source src={videoSrc ?? "/videos/home2-scrub.mp4"} type="video/mp4" />}
         </video>
 
         {/* Overlay only beneath the text content area (bottom ~55%). */}

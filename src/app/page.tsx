@@ -1,16 +1,19 @@
 import SiteNav from "@/components/SiteNav";
 import ScrollVideoHero from "@/components/sections/ScrollVideoHero";
-import Gallery from "@/components/sections/Gallery";
-import Projects from "@/components/sections/Projects";
-import About from "@/components/sections/About";
+import IntroV2 from "@/components/sections/v2/IntroV2";
+import ElegantDesignV2 from "@/components/sections/v2/ElegantDesignV2";
+import IconicIntroV2 from "@/components/sections/v2/IconicIntroV2";
+import HolidayHomesV2 from "@/components/sections/v2/HolidayHomesV2";
 import Location from "@/components/sections/Location";
-import Approach from "@/components/sections/Approach";
-import News from "@/components/sections/News";
-import Contact from "@/components/sections/Contact";
+import ResidencesV2 from "@/components/sections/v2/ResidencesV2";
+import StickyRevealSection from "@/components/sections/v2/StickyRevealSection";
+import PrinciplesV2 from "@/components/sections/v2/PrinciplesV2";
+import NewsV2 from "@/components/sections/v2/NewsV2";
+import ContactV2 from "@/components/sections/v2/ContactV2";
 import SiteFooter from "@/components/sections/SiteFooter";
 import type { Metadata } from "next";
 import { sanityFetch } from "@/sanity/lib/live";
-import { HOME_PAGE_QUERY, POSTS_QUERY, PROJECTS_LISTING_QUERY } from "@/sanity/lib/queries";
+import { HOME_PAGE_QUERY, POSTS_QUERY, PROJECTS_LISTING_QUERY, UPCOMING_PROJECTS_PAGE_QUERY } from "@/sanity/lib/queries";
 import { buildMetadata } from "@/sanity/lib/page";
 
 export const dynamic = 'force-dynamic';
@@ -27,10 +30,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [{ data: homePageRaw }, { data: postsRaw }, { data: projectsRaw }] = await Promise.all([
+  const [{ data: homePageRaw }, { data: postsRaw }, { data: projectsRaw }, { data: upcomingRaw }] = await Promise.all([
     sanityFetch({ query: HOME_PAGE_QUERY, tags: ["homePage"] }),
     sanityFetch({ query: POSTS_QUERY, tags: ["post"] }),
     sanityFetch({ query: PROJECTS_LISTING_QUERY, tags: ["project"] }),
+    sanityFetch({ query: UPCOMING_PROJECTS_PAGE_QUERY, tags: ["upcomingProjectsPage"] }),
   ]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -39,25 +43,24 @@ export default async function Home() {
   const posts = (postsRaw as any[]) ?? [];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const projects = (projectsRaw as any[]) ?? [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const upcomingProjects = ((upcomingRaw as any)?.projects as any[]) ?? [];
 
   return (
     <>
       <SiteNav />
-      <main>
-        <ScrollVideoHero blocks={homePage?.heroBlocks} scrollLabel={homePage?.scrollCue} />
-        <Gallery images={homePage?.gallery} section={homePage?.gallerySection} />
-        <div className="theme-light">
-          <Projects data={homePage?.projectsSection} projects={projects} />
-        </div>
-        <About data={homePage?.about} />
+      <main className="home-v2">
+        <ScrollVideoHero blocks={homePage?.heroBlocks} scrollLabel={homePage?.scrollCue} videoSrc="/videos/home2-scrub.mp4" posterSrc="/videos/home2-poster.webp" />
+        <IntroV2 data={homePage?.about} eyebrow={homePage?.designTwo?.introEyebrow} />
+        <ElegantDesignV2 images={homePage?.gallery} labels={homePage?.designTwo?.elegant} />
+        <HolidayHomesV2 projects={upcomingProjects} labels={homePage?.designTwo?.holidayHomes} />
+        <IconicIntroV2 data={homePage?.location} labels={homePage?.designTwo?.iconic} />
         <Location data={homePage?.location} />
-        <div className="theme-light">
-          <Approach data={homePage?.approach} />
-        </div>
-        <div className="theme-light">
-          <News posts={posts} labels={homePage?.newsSection} />
-        </div>
-        <Contact data={homePage?.contact} />
+        <ResidencesV2 projects={projects} labels={homePage?.designTwo?.residences} />
+        <StickyRevealSection data={homePage?.designTwo?.stickyReveal} />
+        <PrinciplesV2 data={homePage?.approach} labels={homePage?.designTwo?.principles} />
+        <NewsV2 posts={posts} labels={homePage?.designTwo?.news} />
+        <ContactV2 data={homePage?.contact} labels={homePage?.designTwo?.contact} />
       </main>
       <SiteFooter />
     </>
