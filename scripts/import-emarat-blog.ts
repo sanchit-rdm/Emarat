@@ -140,6 +140,7 @@ type Post = {
   publishedAt: string;
   excerpt: string;
   html: string;
+  wpUrl: string; // original WordPress post URL — used to scrape og:image
 };
 
 // Extract the WordPress slug from the post's <link> URL (most canonical slug).
@@ -175,6 +176,7 @@ function readPosts(): Post[] {
       publishedAt: pub ? new Date(pub).toISOString() : new Date().toISOString(),
       excerpt,
       html,
+      wpUrl: tag(item, "link").trim(),
     };
   });
 }
@@ -195,6 +197,27 @@ async function uploadImage(url: string): Promise<string | null> {
     return asset._id;
   } catch (e) {
     console.warn(`    ! image failed (${url}): ${(e as Error).message}`);
+    return null;
+  }
+}
+
+// ── og:image scraper ─────────────────────────────────────────────────────────
+// WordPress sets og:image to the post's featured image. We fetch the post
+// page, parse out that tag, then re-upload the image as a Sanity asset.
+async function fetchOgImageAssetId(postUrl: string): Promise<string | null> {
+  try {
+    const res = await fetch(postUrl, { headers: { "User-Agent": "Mozilla/5.0" } });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const html = await res.text();
+    const m = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)
+              ?? html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
+    if (!m) {
+      console.warn(`    ! no og:image found at ${postUrl}`);
+      return null;
+    }
+    return await uploadImage(m[1]);
+  } catch (e) {
+    console.warn(`    ! og:image fetch failed (${postUrl}): ${(e as Error).message}`);
     return null;
   }
 }
@@ -248,13 +271,37 @@ async function main() {
     i++;
     const body = await htmlToPortableText(p.html);
     const imgCount = body.filter((b) => (b as { _type?: string })._type === "image").length;
+
+    // Scrape the WordPress post page for its featured image (og:image).
+    // In dry-run mode we still fetch + log the URL so you can verify before writing.
+    let mainImageAssetId: string | null = null;
+    if (p.wpUrl) {
+      console.log(`    fetching og:image from ${p.wpUrl} …`);
+      if (WRITE) {
+        mainImageAssetId = await fetchOgImageAssetId(p.wpUrl);
+      } else {
+        // Dry-run: just probe the page and report what we'd use
+        try {
+          const res = await fetch(p.wpUrl, { headers: { "User-Agent": "Mozilla/5.0" } });
+          const html = await res.text();
+          const m = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)
+                    ?? html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
+          if (m) console.log(`    og:image → ${m[1]}`);
+          else console.warn(`    ! no og:image found`);
+        } catch (e) {
+          console.warn(`    ! probe failed: ${(e as Error).message}`);
+        }
+      }
+    }
+
     console.log(
       `${String(i).padStart(2)}. ${p.title}\n` +
-        `    slug: ${p.slug}  |  date: ${p.publishedAt.slice(0, 10)}  |  blocks: ${body.length}  |  images: ${imgCount}`
+        `    slug: ${p.slug}  |  date: ${p.publishedAt.slice(0, 10)}  |  blocks: ${body.length}  |  images: ${imgCount}  |  mainImage: ${mainImageAssetId ?? (WRITE ? "none" : "dry-run")}`
     );
 
     if (WRITE) {
-      await client.createOrReplace({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const doc: Record<string, any> = {
         _id: `post.${p.slug}`,
         _type: "post",
         title: p.title,
@@ -262,7 +309,14 @@ async function main() {
         publishedAt: p.publishedAt,
         excerpt: p.excerpt,
         body,
-      });
+      };
+      if (mainImageAssetId) {
+        doc.mainImage = {
+          _type: "image",
+          asset: { _type: "reference", _ref: mainImageAssetId },
+        };
+      }
+      await client.createOrReplace(doc);
       console.log(`    ✓ written as post.${p.slug}`);
     }
   }
