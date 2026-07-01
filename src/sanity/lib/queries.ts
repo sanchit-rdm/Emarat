@@ -276,7 +276,9 @@ export const PROJECT_BY_SLUG_QUERY = defineQuery(`
 
 export const POSTS_QUERY = defineQuery(`
   *[_type == "post"] | order(publishedAt desc) {
-    _id, title, slug, excerpt, author->, mainImage { asset->{ url } }, publishedAt
+    _id, title, slug, excerpt, author->, publishedAt,
+    mainImage { asset->{ url } },
+    "coverImage": coalesce(mainImage.asset->url, body[_type == "image"][0].asset->url)
   }
 `);
 

@@ -53,6 +53,7 @@ type Post = {
   slug?: { current?: string };
   author?: { name?: string };
   mainImage?: { asset?: { url?: string } };
+  coverImage?: string;
   publishedAt?: string;
   excerpt?: string;
 };
@@ -152,9 +153,9 @@ export default async function NewsPage() {
               <div className="grid grid-cols-12 items-center gap-y-8 lg:gap-12">
                 <div className="col-span-12 lg:col-span-7">
                   <Reveal className="relative aspect-[16/10] overflow-hidden rounded-md bg-[color:var(--bg)]">
-                    {featured.mainImage?.asset?.url && (
+                    {(featured.coverImage ?? featured.mainImage?.asset?.url) && (
                       <Image
-                        src={featured.mainImage.asset.url}
+                        src={(featured.coverImage ?? featured.mainImage?.asset?.url)!}
                         alt={featured.title ?? ""}
                         fill
                         sizes="(min-width: 1024px) 60vw, 100vw"
@@ -223,9 +224,9 @@ export default async function NewsPage() {
                   >
                     <a href={`/blog/${post.slug?.current}`} className="block">
                       <div className="relative mb-5 aspect-[4/5] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
-                        {post.mainImage?.asset?.url && (
+                        {(post.coverImage ?? post.mainImage?.asset?.url) && (
                           <Image
-                            src={post.mainImage.asset.url}
+                            src={(post.coverImage ?? post.mainImage?.asset?.url)!}
                             alt={post.title ?? ""}
                             fill
                             sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
