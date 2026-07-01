@@ -180,7 +180,7 @@ export default async function NewsPage() {
                     </Reveal>
                   )}
                   <Reveal delay={0.3} className="mt-8">
-                    <CircleButton href="#" variant="outline" size="sm">
+                    <CircleButton href={`/blog/${featured.slug?.current ?? "#"}`} variant="outline" size="sm">
                       {readArticleLabel}
                     </CircleButton>
                   </Reveal>
@@ -221,7 +221,7 @@ export default async function NewsPage() {
                     delay={i * 0.06}
                     className="group flex flex-col"
                   >
-                    <a className="block">
+                    <a href={`/blog/${post.slug?.current}`} className="block">
                       <div className="relative mb-5 aspect-[4/5] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
                         {post.mainImage?.asset?.url && (
                           <Image
