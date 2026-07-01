@@ -296,13 +296,16 @@ async function main() {
 
     console.log(
       `${String(i).padStart(2)}. ${p.title}\n` +
-        `    slug: ${p.slug}  |  date: ${p.publishedAt.slice(0, 10)}  |  blocks: ${body.length}  |  images: ${imgCount}  |  mainImage: ${mainImageAssetId ?? (WRITE ? "none" : "dry-run")}`
+        `    id: ${p.slug}  |  date: ${p.publishedAt.slice(0, 10)}  |  blocks: ${body.length}  |  images: ${imgCount}  |  mainImage: ${mainImageAssetId ?? (WRITE ? "none" : "dry-run")}`
     );
 
     if (WRITE) {
+      // Use plain slug as _id (no type prefix). IDs like "post.<slug>" are
+      // treated as a restricted namespace by Sanity and are not publicly
+      // readable without auth, which breaks unauthenticated CDN fetches.
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const doc: Record<string, any> = {
-        _id: `post.${p.slug}`,
+        _id: p.slug,
         _type: "post",
         title: p.title,
         slug: { _type: "slug", current: p.slug },
@@ -317,7 +320,15 @@ async function main() {
         };
       }
       await client.createOrReplace(doc as Parameters<typeof client.createOrReplace>[0]);
-      console.log(`    ✓ written as post.${p.slug}`);
+
+      // Delete old document with the restricted "post.<slug>" _id if it exists.
+      try {
+        await client.delete(`post.${p.slug}`);
+      } catch {
+        // Already gone — fine.
+      }
+
+      console.log(`    ✓ written as ${p.slug} (deleted old post.${p.slug})`);
     }
   }
 
