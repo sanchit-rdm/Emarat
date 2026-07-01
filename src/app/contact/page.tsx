@@ -200,7 +200,7 @@ export default async function ContactPage() {
                 </label>
 
                 <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
-                  <p className="text-[0.625rem] uppercase tracking-[0.16em] text-[color:var(--muted)]">
+                  <p className="text-[12px] text-[color:var(--muted)]">
                     {form.privacy}
                   </p>
                   <CircleButton type="submit" variant="filled">

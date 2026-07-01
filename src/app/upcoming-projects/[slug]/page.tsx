@@ -444,7 +444,7 @@ export default async function UpcomingProjectDetailPage({
                       required
                       className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-[color:var(--accent)]"
                     />
-                    <span className="text-[0.625rem] uppercase tracking-[0.14em] leading-relaxed text-[color:var(--muted)]">
+                    <span className="text-[12px] leading-relaxed text-[color:var(--muted)]">
                       By proceeding, you acknowledge and agree to our Privacy Policy. You also consent to receive updates, notifications, and promotional communications via Email, SMS, and WhatsApp.
                     </span>
                   </label>

@@ -107,7 +107,7 @@ export default function EnquiryForm({
               </div>
 
               <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
-                <p className="text-xs uppercase tracking-[0.16em] text-[color:var(--muted)]">
+                <p className="text-[12px] text-[color:var(--muted)]">
                   {sent ? "Thank you — we'll be in touch shortly." : privacy}
                 </p>
                 <CircleButton type="submit" variant="filled">

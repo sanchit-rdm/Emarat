@@ -231,7 +231,7 @@ export default function BrochureButton({
                   </div>
 
                   <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
-                    <p className="text-[0.625rem] uppercase tracking-[0.14em] text-white/40">
+                    <p className="text-[12px] text-white/40">
                       By submitting you agree to our privacy policy.
                     </p>
                     <CircleButton type="submit" variant="filled" size="sm">
