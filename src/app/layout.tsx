@@ -14,7 +14,7 @@ import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 const montserrat = Montserrat({
   variable: "--font-sans-pri",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -80,6 +80,10 @@ export default async function RootLayout({
       lang="en"
       className={`${montserrat.variable} ${adelora.variable} ${bizantheum.variable} antialiased`}
     >
+      <head>
+        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+      </head>
       <body className="min-h-screen">
         {/* Brand rail — green track with gold thumb that tracks page scroll progress */}
         <ScrollRail />

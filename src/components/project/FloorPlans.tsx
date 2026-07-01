@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import Image from "@/components/Image";
 import type { FloorPlan } from "@/lib/projects";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
@@ -52,7 +52,7 @@ export default function FloorPlans({
           ))}
         </div>
 
-        <div className="mt-10 grid grid-cols-12 gap-8 lg:gap-12">
+        <div className="mt-10 grid grid-cols-12 gap-y-8 lg:gap-12">
           {/* Plan image */}
           <div className="col-span-12 lg:col-span-7">
             <div

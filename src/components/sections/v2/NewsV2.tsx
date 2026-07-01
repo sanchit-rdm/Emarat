@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/Image";
 import Reveal from "@/components/motion/Reveal";
 import StrokeHover from "@/components/StrokeHover";
 

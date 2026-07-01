@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Image from "next/image";
+import Image from "@/components/Image";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/sections/SiteFooter";
@@ -122,17 +122,34 @@ export default async function ProjectPage({
           className="relative isolate flex min-h-[88svh] flex-col justify-end overflow-hidden px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:min-h-[92svh] lg:px-10 lg:pb-20 lg:pt-40"
         >
           <div className="pointer-events-none absolute inset-0 -z-20">
-            <Parallax speed={0.3} className="h-full w-full">
-              <Image
-                src={project.heroImage}
-                alt={project.title}
-                fill
-                priority
-                sizes="100vw"
-                className="object-cover"
-                style={{ filter: "sepia(0.18) saturate(0.85) brightness(0.5) contrast(1.05)" }}
-              />
-            </Parallax>
+            {/* Mobile: no parallax so the 120% zoom trick doesn't crop the image */}
+            {project.heroImageMobile && (
+              <div className="absolute inset-0 lg:hidden">
+                <Image
+                  src={project.heroImageMobile}
+                  alt={project.title}
+                  fill
+                  priority
+                  sizes="100vw"
+                  className="object-cover"
+                  style={{ filter: "sepia(0.18) saturate(0.85) brightness(0.5) contrast(1.05)" }}
+                />
+              </div>
+            )}
+            {/* Desktop: parallax scroll effect */}
+            <div className={`absolute inset-0 ${project.heroImageMobile ? "hidden lg:block" : ""}`}>
+              <Parallax speed={0.3} className="h-full w-full">
+                <Image
+                  src={project.heroImage}
+                  alt={project.title}
+                  fill
+                  priority
+                  sizes="100vw"
+                  className="object-cover"
+                  style={{ filter: "sepia(0.18) saturate(0.85) brightness(0.5) contrast(1.05)" }}
+                />
+              </Parallax>
+            </div>
           </div>
           <div className="pointer-events-none absolute inset-0 -z-10">
             <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--bg)] via-[color:var(--bg)]/40 to-[color:var(--bg)]/30" />
@@ -191,7 +208,7 @@ export default async function ProjectPage({
 
         {/* ---------------- 2 · Project Overview ---------------- */}
         <section id="overview" className="theme-light scroll-mt-44 px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto grid max-w-[1400px] grid-cols-12 gap-10 lg:gap-16">
+          <div className="mx-auto grid max-w-[1400px] grid-cols-12 gap-y-8 lg:gap-16">
             <div className="col-span-12 lg:col-span-6">
               <SplitReveal as="h2" className="font-display h-section">
                 {dl.overviewHeading1}
@@ -224,8 +241,8 @@ export default async function ProjectPage({
                   alt={`${project.title} interior`}
                   fill
                   sizes="(min-width: 1024px) 50vw, 100vw"
+                  quality={90}
                   className="object-cover"
-                  style={{ filter: "sepia(0.14) saturate(0.9) brightness(0.88)" }}
                 />
               </Parallax>
               <Reveal as="div" delay={0.2} className="mt-4 flex items-center justify-between text-xs uppercase tracking-[0.18em] text-[color:var(--muted)]">

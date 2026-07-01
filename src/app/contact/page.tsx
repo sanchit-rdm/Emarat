@@ -120,7 +120,7 @@ export default async function ContactPage() {
 
         {/* Form + Office card */}
         <section className="px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto grid max-w-[1400px] grid-cols-12 gap-8 lg:gap-16">
+          <div className="mx-auto grid max-w-[1400px] grid-cols-12 gap-y-8 lg:gap-16">
             {/* Form */}
             <div className="col-span-12 lg:col-span-7">
               <SplitReveal as="h2" className="font-display h-section">

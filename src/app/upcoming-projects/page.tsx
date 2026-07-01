@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image from "@/components/Image";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/sections/SiteFooter";
@@ -33,6 +33,7 @@ export type UpcomingProject = {
   status?: string;
   body?: string | PortableTextBlock[];
   heroImage?: string;
+  heroImageMobile?: string;
 };
 
 export const UPCOMING_PROJECTS_FALLBACK: UpcomingProject[] = [
@@ -132,7 +133,7 @@ export default async function UpcomingProjectsPage() {
                 key={project._key}
                 as="article"
                 delay={0.05 * i}
-                className="grid grid-cols-12 items-center gap-8 border-t border-[color:var(--line)] py-10 lg:gap-12 lg:py-10"
+                className="grid grid-cols-12 items-center gap-y-8 border-t border-[color:var(--line)] py-10 lg:gap-12 lg:py-10"
               >
                 {/* Image */}
                 {project.heroImage && (

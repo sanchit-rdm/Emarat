@@ -18,37 +18,41 @@ export default function SmoothScroll({
   useEffect(() => {
     if (isStudio) return;
 
-    // Register ScrollTrigger before anything — even if reduced motion is on
-    const { gsap, ScrollTrigger } = ensureGsap();
+    let teardown: (() => void) | undefined;
+    let cancelled = false;
 
-    // Prevent mobile viewport-resize from retriggering all scroll positions
-    ScrollTrigger.config({ ignoreMobileResize: true });
+    (async () => {
+      const { gsap, ScrollTrigger } = await ensureGsap();
+      if (cancelled) return;
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
+      ScrollTrigger.config({ ignoreMobileResize: true });
 
-    const lenis = new Lenis({
-      duration: 0.5,
-      easing: (t: number) => 1 - Math.pow(1 - t, 3),
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 1.2,
-    });
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduced) return;
 
-    // Pass the direct reference so Lenis notifies ScrollTrigger on every scroll tick
-    lenis.on("scroll", ScrollTrigger.update);
+      const lenis = new Lenis({
+        duration: 0.5,
+        easing: (t: number) => 1 - Math.pow(1 - t, 3),
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 1.2,
+      });
 
-    // GSAP ticker drives Lenis — the officially recommended integration.
-    // gsap.ticker time is in seconds; lenis.raf expects milliseconds.
-    const tickerFn = (time: number) => lenis.raf(time * 1000);
-    gsap.ticker.add(tickerFn);
+      lenis.on("scroll", ScrollTrigger.update);
 
-    // Prevent GSAP from throttling the ticker on slow CPUs / background tabs
-    gsap.ticker.lagSmoothing(0);
+      const tickerFn = (time: number) => lenis.raf(time * 1000);
+      gsap.ticker.add(tickerFn);
+      gsap.ticker.lagSmoothing(0);
+
+      teardown = () => {
+        gsap.ticker.remove(tickerFn);
+        lenis.destroy();
+      };
+    })();
 
     return () => {
-      gsap.ticker.remove(tickerFn);
-      lenis.destroy();
+      cancelled = true;
+      teardown?.();
     };
   }, [isStudio]);
 

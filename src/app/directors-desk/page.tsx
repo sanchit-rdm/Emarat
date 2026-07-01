@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image from "@/components/Image";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/sections/SiteFooter";
 import PageHero from "@/components/PageHero";
@@ -102,7 +102,7 @@ export default async function DirectorsDeskPage() {
 
         {/* Director portrait + intro */}
         <section className="px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto grid max-w-[1280px] grid-cols-12 items-end gap-8 lg:gap-12">
+          <div className="mx-auto grid max-w-[1280px] grid-cols-12 items-end gap-y-8 lg:gap-12">
             <div className="col-span-12 lg:col-span-5">
               <Parallax speed={0.2} className="relative aspect-[4/5] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
                 <Image

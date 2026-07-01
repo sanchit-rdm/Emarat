@@ -1,44 +1,42 @@
 "use client";
 
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+// GSAP + ScrollTrigger are loaded as a separate async chunk so they don't
+// block initial page parse/hydration. The promise is cached so the dynamic
+// import runs at most once per page session.
 
-let registered = false;
+type GsapResult = {
+  gsap: typeof import("gsap").gsap;
+  ScrollTrigger: typeof import("gsap/ScrollTrigger").ScrollTrigger;
+};
 
-export function ensureGsap() {
-  if (registered) return { gsap, ScrollTrigger };
-  if (typeof window !== "undefined") {
-    gsap.registerPlugin(ScrollTrigger);
-    registered = true;
+let _promise: Promise<GsapResult> | null = null;
 
-    // The display font (Italiana) swaps in after first paint and reflows the
-    // headings, which shifts every trigger's start/end. The window `load`
-    // event fires once images settle. Both move layout after triggers were
-    // first measured, so re-measure when each happens.
-    const refresh = () => ScrollTrigger.refresh();
-    if (document.fonts?.ready) document.fonts.ready.then(refresh);
-    window.addEventListener("load", refresh, { once: true });
-  }
+async function _load(): Promise<GsapResult> {
+  const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+    import("gsap"),
+    import("gsap/ScrollTrigger"),
+  ]);
+  gsap.registerPlugin(ScrollTrigger);
+  const refresh = () => ScrollTrigger.refresh();
+  if (document.fonts?.ready) document.fonts.ready.then(refresh);
+  window.addEventListener("load", refresh, { once: true });
   return { gsap, ScrollTrigger };
 }
 
-let raf: number | undefined;
-
-/**
- * Debounced ScrollTrigger.refresh(). Call after creating a trigger so the
- * *final* set of triggers gets measured — this matters because React Strict
- * Mode (dev) mounts effects twice (mount → revert → mount), and a one-shot
- * refresh tied to the first mount would miss the second mount's triggers,
- * leaving above-the-fold reveals stuck in their hidden state until reload.
- * Collapsing to a single rAF means one refresh after the last mount in a tick.
- */
-export function scheduleScrollRefresh() {
-  if (typeof window === "undefined") return;
-  if (raf !== undefined) cancelAnimationFrame(raf);
-  raf = requestAnimationFrame(() => {
-    raf = undefined;
-    ScrollTrigger.refresh();
-  });
+export function ensureGsap(): Promise<GsapResult> {
+  if (!_promise) _promise = _load();
+  return _promise;
 }
 
-export { gsap, ScrollTrigger };
+let _raf: number | undefined;
+
+export function scheduleScrollRefresh() {
+  if (typeof window === "undefined") return;
+  if (_raf !== undefined) cancelAnimationFrame(_raf);
+  _raf = requestAnimationFrame(() => {
+    _raf = undefined;
+    // Only refresh if GSAP is already loaded — if not loaded yet, the load
+    // itself fires a refresh via the `load` event listener above.
+    _promise?.then(({ ScrollTrigger }) => ScrollTrigger.refresh());
+  });
+}

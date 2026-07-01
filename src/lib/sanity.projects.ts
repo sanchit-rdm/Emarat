@@ -17,6 +17,7 @@ const PROJECT_FIELDS = /* groq */ `
   possession,
   rera,
   "heroImage": heroImage.asset->url,
+  "heroImageMobile": heroImageMobile.asset->url,
   "overviewImage": overviewImage.asset->url,
   "overview": overview[],
   mapQuery,
@@ -143,6 +144,7 @@ export async function getSanityProjectListings(): Promise<SanityProjectListing[]
 const EMPTY_PROJECT: Project = {
   slug: "", no: "", title: "", shortName: "", tagline: "", location: "",
   status: "", config: "", size: "", possession: "", rera: "", heroImage: "",
+  heroImageMobile: undefined,
   overviewImage: "", overview: [], mapQuery: "", stats: [], amenities: [],
   floorPlans: [], gallery: [], connectivity: [], highlights: [],
 };
@@ -190,7 +192,10 @@ function normalize(raw: Record<string, unknown>, fallback: Project | null): Proj
     size: pick(raw.size as string, f.size),
     possession: pick(raw.possession as string, f.possession),
     rera: pick(raw.rera as string, f.rera),
-    heroImage: pick(raw.heroImage as string, f.heroImage),
+    // Prefer the static local image when defined — the new project renders
+    // are served from /public and not yet uploaded to Sanity CDN.
+    heroImage: f.heroImage || pick(raw.heroImage as string, ""),
+    heroImageMobile: f.heroImageMobile ?? pick(raw.heroImageMobile as string | undefined, undefined),
     overviewImage: pick(raw.overviewImage as string, f.overviewImage),
     overview: pick(raw.overview as string[], f.overview),
     mapQuery: pick(raw.mapQuery as string, f.mapQuery),

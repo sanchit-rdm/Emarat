@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image from "@/components/Image";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/sections/SiteFooter";
@@ -42,7 +42,7 @@ const projects = [
     status: "Now Selling",
     config: "5 BHK Independent Floors",
     size: "G+4 · 5 BHK",
-    img: "/images/C-2/building.jpg",
+    img: "/images/C-2/C2.jpeg",
     body: "Thoughtfully designed 5 BHK independent floors within the prestigious DLF gated community — spacious layouts, modern architecture and everyday comfort for contemporary luxury living.",
     highlights: ["5BHK Independent Floors", "DLF Gated Community", "24x7 Security", "S+4 Built Form"],
   },
@@ -54,7 +54,7 @@ const projects = [
     status: "Now Selling",
     config: "Independent Floors",
     size: "G+4 Independent Floors",
-    img: "/images/C-5/building.jpg",
+    img: "/images/C-5/C5.jpeg",
     body: "Independent floors designed to invite light in and open life out — the Red Diamond of Gurugram. Double-height living and a Garden in the Sky terrace.",
     highlights: ["The Red Diamond of Gurugram", "Garden in the Sky terrace", "Double-height living", "Italian marble flooring"],
   },
@@ -66,7 +66,7 @@ const projects = [
     status: "New Launch",
     config: "Independent Floors · Three-Side Open",
     size: "G+4 · Three-Side Open",
-    img: "/images/E11/building.jpg",
+    img: "/images/E11/E11.jpeg",
     body: "Three-side-open independent floors where imagination meets form — volume, light and architectural drama, with a private sky-garden terrace.",
     highlights: ["Three-side open floors", "Volume, light & drama", "Sky-garden terrace", "Premium modular kitchen"],
   },
@@ -78,7 +78,7 @@ const projects = [
     status: "Now Selling",
     config: "Boutique Private Floors",
     size: "Two-Side Open Private Floors",
-    img: "/images/EA4/building.jpg",
+    img: "/images/EA4/EA 04.jpeg",
     body: "A boutique luxury residence — private, two-side-open floors in a palette of deep emerald stone and 24k-gold accents. Architecture that commands.",
     highlights: ["Boutique private floors", "Two-side open homes", "Dual high-speed elevators", "Emerald & 24k-gold palette"],
   },
@@ -204,7 +204,7 @@ export default async function ProjectsPage() {
               <article
                 key={p.id}
                 id={p.id}
-                className="grid scroll-mt-32 grid-cols-12 items-center gap-8 lg:gap-12"
+                className="grid scroll-mt-32 grid-cols-12 items-center gap-y-8 lg:gap-12"
               >
                 {/* Image */}
                 <div className={`col-span-12 lg:col-span-7 ${i % 2 === 1 ? "lg:order-2" : ""}`}>

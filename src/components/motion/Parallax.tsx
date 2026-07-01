@@ -32,29 +32,39 @@ export default function Parallax({
     const wrap = wrapRef.current;
     const inner = innerRef.current;
     if (!wrap || !inner) return;
-    const { gsap } = ensureGsap();
 
     const yStart = direction === "lead" ? speed * 50 : -speed * 50;
     const yEnd = direction === "lead" ? -speed * 50 : speed * 50;
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        inner,
-        { yPercent: yStart },
-        {
-          yPercent: yEnd,
-          ease: "none",
-          scrollTrigger: {
-            trigger: wrap,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        }
-      );
-    }, wrap);
+    let ctx: { revert(): void } | undefined;
+    let cancelled = false;
 
-    return () => ctx.revert();
+    (async () => {
+      const { gsap } = await ensureGsap();
+      if (cancelled) return;
+
+      ctx = gsap.context(() => {
+        gsap.fromTo(
+          inner,
+          { yPercent: yStart },
+          {
+            yPercent: yEnd,
+            ease: "none",
+            scrollTrigger: {
+              trigger: wrap,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }, wrap);
+    })();
+
+    return () => {
+      cancelled = true;
+      ctx?.revert();
+    };
   }, [speed, direction]);
 
   return (

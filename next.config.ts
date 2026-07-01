@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
   images: {
     // Serve modern formats; AVIF first for the best compression.
     formats: ["image/avif", "image/webp"],

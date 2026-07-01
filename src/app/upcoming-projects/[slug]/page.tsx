@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Image from "next/image";
+import Image from "@/components/Image";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/sections/SiteFooter";
@@ -197,17 +197,34 @@ export default async function UpcomingProjectDetailPage({
           className="relative isolate flex min-h-[88svh] flex-col justify-end overflow-hidden px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:px-10 lg:pb-20 lg:pt-40"
         >
           <div className="pointer-events-none absolute inset-0 -z-20">
-            <Parallax speed={0.3} className="h-full w-full">
-              <Image
-                src={project.heroImage ?? "/images/alameda-bedroom-3.webp"}
-                alt={project.title}
-                fill
-                priority
-                sizes="100vw"
-                className="object-cover"
-                style={{ filter: "sepia(0.18) saturate(0.85) brightness(0.5) contrast(1.05)" }}
-              />
-            </Parallax>
+            {/* Mobile: no parallax so the 120% zoom trick doesn't crop the image */}
+            {project.heroImageMobile && (
+              <div className="absolute inset-0 lg:hidden">
+                <Image
+                  src={project.heroImageMobile}
+                  alt={project.title}
+                  fill
+                  priority
+                  sizes="100vw"
+                  className="object-cover"
+                  style={{ filter: "sepia(0.18) saturate(0.85) brightness(0.5) contrast(1.05)" }}
+                />
+              </div>
+            )}
+            {/* Desktop: parallax scroll effect */}
+            <div className={`absolute inset-0 ${project.heroImageMobile ? "hidden lg:block" : ""}`}>
+              <Parallax speed={0.3} className="h-full w-full">
+                <Image
+                  src={project.heroImage ?? "/images/alameda-bedroom-3.webp"}
+                  alt={project.title}
+                  fill
+                  priority
+                  sizes="100vw"
+                  className="object-cover"
+                  style={{ filter: "sepia(0.18) saturate(0.85) brightness(0.5) contrast(1.05)" }}
+                />
+              </Parallax>
+            </div>
           </div>
           <div className="pointer-events-none absolute inset-0 -z-10">
             <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--bg)] via-[color:var(--bg)]/40 to-[color:var(--bg)]/20" />
@@ -247,7 +264,7 @@ export default async function UpcomingProjectDetailPage({
 
         {/* ── 2 · About the Project ──────────────────────────────────── */}
         <section id="about" className="theme-light scroll-mt-20 px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto grid max-w-[1400px] grid-cols-12 items-start gap-10 lg:gap-16">
+          <div className="mx-auto grid max-w-[1400px] grid-cols-12 items-start gap-y-8 lg:gap-16">
 
             {/* Property image */}
             {project.heroImage && (
@@ -325,7 +342,7 @@ export default async function UpcomingProjectDetailPage({
 
         {/* ── 5 · Why This Location ──────────────────────────────────── */}
         <section className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto grid max-w-[1400px] grid-cols-12 items-center gap-10 lg:gap-20">
+          <div className="mx-auto grid max-w-[1400px] grid-cols-12 items-center gap-y-8 lg:gap-20">
             <div className="col-span-12 lg:col-span-5">
               <SplitReveal as="h2" className="font-display h-section">
                 {enrichment.whyHeading.split(" ").slice(0, -1).join(" ")}

@@ -26,33 +26,41 @@ export default function SplitReveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const { gsap, ScrollTrigger } = ensureGsap();
 
-    const ctx = gsap.context(() => {
-      const words = el.querySelectorAll<HTMLSpanElement>("[data-word]");
-      gsap.set(words, { yPercent: 110 });
-      const to = { yPercent: 0, ease: "power4.out", duration: 1.0, stagger, delay };
-      // In-view headings play immediately; see Reveal for why this avoids the
-      // cold-load font/measure race that left them stuck hidden until reload.
-      const inView = el.getBoundingClientRect().top < window.innerHeight * 0.95;
-      gsap.to(
-        words,
-        inView
-          ? to
-          : {
-              ...to,
-              scrollTrigger: {
-                trigger: el,
-                start,
-                toggleActions: "play none none none",
-              },
-            }
-      );
-    }, el);
+    let ctx: { revert(): void } | undefined;
+    let cancelled = false;
 
-    scheduleScrollRefresh();
+    (async () => {
+      const { gsap } = await ensureGsap();
+      if (cancelled) return;
 
-    return () => ctx.revert();
+      ctx = gsap.context(() => {
+        const words = el.querySelectorAll<HTMLSpanElement>("[data-word]");
+        gsap.set(words, { yPercent: 110 });
+        const to = { yPercent: 0, ease: "power4.out", duration: 1.0, stagger, delay };
+        const inView = el.getBoundingClientRect().top < window.innerHeight * 0.95;
+        gsap.to(
+          words,
+          inView
+            ? to
+            : {
+                ...to,
+                scrollTrigger: {
+                  trigger: el,
+                  start,
+                  toggleActions: "play none none none",
+                },
+              }
+        );
+      }, el);
+
+      scheduleScrollRefresh();
+    })();
+
+    return () => {
+      cancelled = true;
+      ctx?.revert();
+    };
   }, [start, stagger, delay]);
 
   const Tag = as as React.ElementType;

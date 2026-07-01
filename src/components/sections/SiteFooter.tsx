@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import Image from "next/image";
+import Image from "@/components/Image";
 import Link from "next/link";
 import logo from "@/images/logo.png";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -145,13 +145,14 @@ export default async function SiteFooter({ footerImage }: { footerImage?: string
     <footer className="theme-green relative pb-16 lg:pb-0">
       {/* Feature image banner across the top of the footer */}
       {image && (
-        <div className="relative h-[40vh] min-h-[240px] w-full overflow-hidden lg:h-[52vh]">
+        <div className="relative w-full overflow-hidden lg:h-[52vh]">
           <Image
             src={image}
             alt=""
-            fill
+            width={0}
+            height={0}
             sizes="100vw"
-            className="object-cover"
+            className="h-auto w-full object-cover lg:absolute lg:inset-0 lg:h-full lg:w-full"
             style={undefined}
           />
         </div>
@@ -160,7 +161,7 @@ export default async function SiteFooter({ footerImage }: { footerImage?: string
       <div className="relative px-6 pb-10 pt-14 lg:px-10 lg:pt-20">
         <div className="brand-green-strip absolute inset-x-0 top-0" aria-hidden />
 
-        <div className="mx-auto grid max-w-[1400px] grid-cols-12 gap-8">
+        <div className="mx-auto grid max-w-[1400px] grid-cols-12 gap-y-8 lg:gap-8">
         <div className="col-span-12 lg:col-span-4">
           <Image src={logo} alt="Emarat Realty" className="h-auto w-36 lg:w-[200px]" sizes="(min-width: 1024px) 200px, 144px" />
           <p className="mt-6 max-w-md text-sm text-[color:var(--muted)]">{tagline}</p>

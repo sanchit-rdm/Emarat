@@ -100,6 +100,7 @@ export type Project = {
   possession: string;
   rera: string;
   heroImage: string;
+  heroImageMobile?: string;
   overviewImage: string;
   overview: string[];
   stats: Stat[];
@@ -185,7 +186,8 @@ export const projects: Project[] = [
     size: "G+4 · 5 BHK",
     possession: "On Request",
     rera: "HRERA Registered",
-    heroImage: "/images/C-2/building.jpg",
+    heroImage: "/images/C-2/C2.jpeg",
+    heroImageMobile: "/images/C-2/C2 M.jpeg",
     overviewImage: "/images/C-2/c2-living-interior-view-approved-r0-20240122.jpg",
     overview: [
       "C2, DLF Garden City by Emarat Realty offers thoughtfully designed independent floors in a well-established and rapidly evolving residential community in Gurugram. The project is crafted with a focus on spacious layouts, modern architecture, and everyday comfort suited for contemporary luxury living. It enjoys excellent connectivity to Dwarka Expressway, NH-48, leading schools, hospitals, retail destinations, and key business hubs, ensuring daily convenience.",
@@ -251,7 +253,8 @@ export const projects: Project[] = [
     size: "G+4 Independent Floors",
     possession: "On Request",
     rera: "HRERA Registered",
-    heroImage: "/images/C-5/building.jpg",
+    heroImage: "/images/C-5/C5.jpeg",
+    heroImageMobile: "/images/C-5/C5 M.jpeg",
     overviewImage: "/images/C-5/c-5-11-family-lounge.jpg",
     overview: [
       "C5 at DLF Garden City is a collection of independent floors designed to invite light in and open life out — the Red Diamond of Gurugram. Crafted for those who see more and seek more, each home is an interplay of height, light and architectural drama.",
@@ -317,7 +320,8 @@ export const projects: Project[] = [
     size: "G+4 · Three-Side Open",
     possession: "On Request",
     rera: "HRERA Registered",
-    heroImage: "/images/E11/building.jpg",
+    heroImage: "/images/E11/E11.jpeg",
+    heroImageMobile: "/images/E11/E11 M.jpeg",
     overviewImage: "/images/E11/e11-14-family-lounge-interior-view-v1-r1-20250412.jpg",
     overview: [
       "E11 at DLF Garden City is a collection of thoughtfully designed, three-side-open independent floors where imagination meets form. Created for those who don't just look for a home — they look for what a home can become.",
@@ -383,7 +387,8 @@ export const projects: Project[] = [
     size: "Two-Side Open Private Floors",
     possession: "On Request",
     rera: "HRERA Registered",
-    heroImage: "/images/EA4/building.jpg",
+    heroImage: "/images/EA4/EA 04.jpeg",
+    heroImageMobile: "/images/EA4/EA 04 M.jpeg",
     overviewImage: "/images/EA4/ea-4-a-formal-dnd.jpg",
     overview: [
       "EA-04, Alameda is a boutique luxury residence in Sector 73, Gurugram — private, two-side-open floors for those who value space, elegance and absolute privacy. Architecture that commands; interiors that whisper, in a palette of deep emerald stone and 24k-gold accents.",

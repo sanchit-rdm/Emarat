@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/Image";
 import type { PortableTextBlock } from "@/lib/portableText";
 import { renderPortableText, toPlainText } from "@/lib/portableText";
 import Reveal from "@/components/motion/Reveal";

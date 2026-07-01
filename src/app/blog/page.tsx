@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image from "@/components/Image";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/sections/SiteFooter";
 import PageHero from "@/components/PageHero";
@@ -149,7 +149,7 @@ export default async function NewsPage() {
               <Reveal as="div" className="mb-8 text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
                 <span>{featuredLabel}</span>
               </Reveal>
-              <div className="grid grid-cols-12 items-center gap-8 lg:gap-12">
+              <div className="grid grid-cols-12 items-center gap-y-8 lg:gap-12">
                 <div className="col-span-12 lg:col-span-7">
                   <Reveal className="relative aspect-[16/10] overflow-hidden rounded-md bg-[color:var(--bg)]">
                     {featured.mainImage?.asset?.url && (
@@ -255,7 +255,7 @@ export default async function NewsPage() {
 
         {/* Newsletter */}
         <section className="border-t border-[color:var(--line)] bg-[color:var(--bg-alt)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
-          <div className="mx-auto grid max-w-[1280px] grid-cols-12 items-end gap-8">
+          <div className="mx-auto grid max-w-[1280px] grid-cols-12 items-end gap-y-8">
             <div className="col-span-12 lg:col-span-7">
               <SplitReveal
                 as="h2"

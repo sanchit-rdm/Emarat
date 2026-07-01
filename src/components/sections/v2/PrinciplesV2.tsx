@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
+import Image from "@/components/Image";
 import { ensureGsap, scheduleScrollRefresh } from "@/lib/gsap";
 
 const DEFAULT_IMAGES: string[] = [
@@ -108,28 +108,38 @@ export default function PrinciplesV2({ data, labels }: Props) {
     if (!section || !track) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const { gsap } = ensureGsap();
+    let ctx: { revert(): void } | undefined;
+    let cancelled = false;
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        track,
-        { xPercent: 8 },
-        {
-          xPercent: -8,
-          ease: "none",
-          scrollTrigger: {
-            trigger: section,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-            invalidateOnRefresh: true,
-          },
-        }
-      );
-    }, section);
+    (async () => {
+      const { gsap } = await ensureGsap();
+      if (cancelled) return;
 
-    scheduleScrollRefresh();
-    return () => ctx.revert();
+      ctx = gsap.context(() => {
+        gsap.fromTo(
+          track,
+          { xPercent: 8 },
+          {
+            xPercent: -8,
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+              invalidateOnRefresh: true,
+            },
+          }
+        );
+      }, section);
+
+      scheduleScrollRefresh();
+    })();
+
+    return () => {
+      cancelled = true;
+      ctx?.revert();
+    };
   }, []);
 
   return (

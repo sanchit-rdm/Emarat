@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import Image from "@/components/Image";
 import Link from "next/link";
 import CircleButton from "@/components/CircleButton";
 import logo from "@/images/logo.png";

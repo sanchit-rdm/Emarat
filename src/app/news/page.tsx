@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image from "@/components/Image";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/sections/SiteFooter";
@@ -97,7 +97,7 @@ export default async function MediaPage() {
               <Reveal as="div" className="mb-8 text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
                 <span>★ Featured</span>
               </Reveal>
-              <div className="grid grid-cols-12 items-center gap-8 lg:gap-12">
+              <div className="grid grid-cols-12 items-center gap-y-8 lg:gap-12">
                 <div className="col-span-12 lg:col-span-7">
                   <Reveal className="relative aspect-[16/10] overflow-hidden rounded-md bg-[color:var(--bg)]">
                     {featured.mainImage?.asset?.url && (

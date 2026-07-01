@@ -52,48 +52,55 @@ export default function RevealImage({
     const wrap = wrapRef.current;
     const inner = innerRef.current;
     if (!wrap || !inner) return;
-    const { gsap } = ensureGsap();
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let ctx: { revert(): void } | undefined;
+    let cancelled = false;
 
-    const ctx = gsap.context(() => {
-      if (reduced) {
-        gsap.set(wrap, { clipPath: OPEN });
-        return;
-      }
+    (async () => {
+      const { gsap } = await ensureGsap();
+      if (cancelled) return;
 
-      // Clip-path reveal. Elements already in view at mount play immediately —
-      // same cold-load guard as Reveal/SplitReveal — so a missed trigger can
-      // never leave an image stuck clipped (invisible).
-      const inView = wrap.getBoundingClientRect().top < window.innerHeight * 0.9;
-      const to = { clipPath: OPEN, duration: 1.2, ease: "power3.out" };
-      gsap.fromTo(
-        wrap,
-        { clipPath: CLOSED[from] },
-        inView
-          ? to
-          : {
-              ...to,
-              scrollTrigger: { trigger: wrap, start: "top 88%", toggleActions: "play none none none" },
-            }
-      );
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      // Parallax drift — image trails the page scroll (scrubbed).
-      if (parallax > 0) {
+      ctx = gsap.context(() => {
+        if (reduced) {
+          gsap.set(wrap, { clipPath: OPEN });
+          return;
+        }
+
+        const inView = wrap.getBoundingClientRect().top < window.innerHeight * 0.9;
+        const to = { clipPath: OPEN, duration: 1.2, ease: "power3.out" };
         gsap.fromTo(
-          inner,
-          { yPercent: -parallax },
-          {
-            yPercent: parallax,
-            ease: "none",
-            scrollTrigger: { trigger: wrap, start: "top bottom", end: "bottom top", scrub: true },
-          }
+          wrap,
+          { clipPath: CLOSED[from] },
+          inView
+            ? to
+            : {
+                ...to,
+                scrollTrigger: { trigger: wrap, start: "top 88%", toggleActions: "play none none none" },
+              }
         );
-      }
-    }, wrap);
 
-    scheduleScrollRefresh();
-    return () => ctx.revert();
+        if (parallax > 0) {
+          gsap.fromTo(
+            inner,
+            { yPercent: -parallax },
+            {
+              yPercent: parallax,
+              ease: "none",
+              scrollTrigger: { trigger: wrap, start: "top bottom", end: "bottom top", scrub: true },
+            }
+          );
+        }
+      }, wrap);
+
+      scheduleScrollRefresh();
+    })();
+
+    return () => {
+      cancelled = true;
+      ctx?.revert();
+    };
   }, [parallax, from]);
 
   // Overscan the parallax layer so its drift never exposes an empty edge.

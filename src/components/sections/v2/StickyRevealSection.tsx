@@ -49,38 +49,47 @@ export default function StickyRevealSection({ data }: { data?: StickyRevealData 
   useEffect(() => {
     const wrap = wrapRef.current;
     if (!wrap) return;
-
-    const { gsap, ScrollTrigger } = ensureGsap();
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const allSlides = slideRefs.current.filter(Boolean) as HTMLElement[];
+    let ctx: { revert(): void } | undefined;
+    let cancelled = false;
 
-    gsap.set(allSlides, { y: 50, autoAlpha: 0 });
+    (async () => {
+      const { gsap } = await ensureGsap();
+      if (cancelled) return;
 
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: wrap,
-          start: "top top",
-          end: () => `+=${allSlides.length * 300}vh`,
-          scrub: 1,
-          pin: true,
-          anticipatePin: 1,
-        },
-      });
+      const allSlides = slideRefs.current.filter(Boolean) as HTMLElement[];
+      gsap.set(allSlides, { y: 50, autoAlpha: 0 });
 
-      allSlides.forEach((el, i) => {
-        const isLast = i === allSlides.length - 1;
-        tl.to(el, { y: 0, autoAlpha: 1, duration: 4, ease: "none" }, i === 0 ? 0 : ">");
-        tl.to(el, { duration: 0.8 });
-        if (!isLast) {
-          tl.to(el, { y: -50, autoAlpha: 0, duration: 4, ease: "none" });
-        }
-      });
-    }, wrap);
+      ctx = gsap.context(() => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: wrap,
+            start: "top top",
+            end: () => `+=${allSlides.length * 300}vh`,
+            scrub: 1,
+            pin: true,
+            anticipatePin: 1,
+          },
+        });
 
-    scheduleScrollRefresh();
-    return () => ctx.revert();
+        allSlides.forEach((el, i) => {
+          const isLast = i === allSlides.length - 1;
+          tl.to(el, { y: 0, autoAlpha: 1, duration: 4, ease: "none" }, i === 0 ? 0 : ">");
+          tl.to(el, { duration: 0.8 });
+          if (!isLast) {
+            tl.to(el, { y: -50, autoAlpha: 0, duration: 4, ease: "none" });
+          }
+        });
+      }, wrap);
+
+      scheduleScrollRefresh();
+    })();
+
+    return () => {
+      cancelled = true;
+      ctx?.revert();
+    };
   }, []);
 
   // heading + slides combined into one flat list for the animation

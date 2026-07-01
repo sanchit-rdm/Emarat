@@ -28,7 +28,7 @@ export default function Connectivity({
     >
       <div className="pointer-events-none absolute -left-40 top-1/4 h-[420px] w-[420px] rounded-full bg-[color:var(--brand-green)]/15 blur-[160px]" />
 
-      <div className="mx-auto grid max-w-[1400px] grid-cols-12 gap-10 lg:gap-16">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-12 gap-y-8 lg:gap-16">
         {/* Left: heading + categorised landmarks */}
         <div className="col-span-12 lg:col-span-5">
           <SplitReveal as="h2" className="font-display h-section">
