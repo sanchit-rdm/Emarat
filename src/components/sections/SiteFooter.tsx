@@ -201,7 +201,7 @@ export default async function SiteFooter({ footerImage }: { footerImage?: string
           <a href={`mailto:${email}`} className="mt-2 block text-sm transition-colors hover:text-[color:var(--accent)]">
             {email}
           </a>
-          <p className="mt-3 text-xs text-[color:var(--muted)]">{hours}</p>
+          <p className="mt-3 text-sm text-[color:var(--muted)]">{hours}</p>
           <div className="mt-6 flex flex-wrap items-center gap-4 text-[color:var(--muted)]">
             {socials.map((s) => (
               <a

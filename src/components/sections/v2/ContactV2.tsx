@@ -91,12 +91,18 @@ export default function ContactV2({ data, labels }: Props) {
                 />
               </div>
               <div className="border-b border-[color:var(--line)] pb-3">
-                <input
-                  type="text"
-                  placeholder="Enquiring as…"
-                  className="w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
+                <select
+                  className="w-full bg-transparent text-sm text-[color:var(--muted)] outline-none"
                   aria-label="Enquiry type"
-                />
+                  defaultValue=""
+                >
+                  <option value="" disabled>Enquiring as…</option>
+                  <option value="end-user">End User / Home Buyer</option>
+                  <option value="channel-partner">Channel Partner / Broker</option>
+                  <option value="investor">Investor</option>
+                  <option value="corporate">Corporate / Institutional</option>
+                  <option value="nri">NRI Buyer</option>
+                </select>
               </div>
             </div>
             <div className="border-b border-[color:var(--line)] pb-3">

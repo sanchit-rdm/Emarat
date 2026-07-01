@@ -207,12 +207,16 @@ export default function BrochureButton({
                     />
                   </div>
                   <div className="border-b border-white/15 pb-3">
-                    <input
-                      type="text"
-                      placeholder="Preferred time to call…"
-                      className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/60"
+                    <select
+                      className="w-full cursor-pointer bg-transparent text-sm text-white/60 outline-none"
+                      defaultValue=""
                       aria-label="Preferred time"
-                    />
+                    >
+                      <option value="" disabled className="bg-[#011f14]">Preferred time to call…</option>
+                      <option value="morning" className="bg-[#011f14]">Morning (9 am – 12 pm)</option>
+                      <option value="afternoon" className="bg-[#011f14]">Afternoon (12 pm – 4 pm)</option>
+                      <option value="evening" className="bg-[#011f14]">Evening (4 pm – 7 pm)</option>
+                    </select>
                   </div>
                   <div className="border-b border-white/15 pb-3">
                     <input
