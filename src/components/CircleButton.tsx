@@ -13,6 +13,7 @@ type Props = {
   size?: "sm" | "md";
   className?: string;
   target?: string;
+  disabled?: boolean;
 };
 
 /**
@@ -33,6 +34,7 @@ export default function CircleButton({
   size = "md",
   className = "",
   target,
+  disabled = false,
 }: Props) {
   const wrapRef = useRef<HTMLElement | null>(null);
   const rectRef = useRef<SVGRectElement | null>(null);
@@ -100,7 +102,7 @@ export default function CircleButton({
     </>
   );
 
-  const cls = `link-hover relative inline-flex items-center justify-center gap-2 rounded-full transition-colors ${sizeCls} ${variantCls} ${className}`;
+  const cls = `link-hover relative inline-flex items-center justify-center gap-2 rounded-full transition-colors ${sizeCls} ${variantCls} ${disabled ? "pointer-events-none opacity-60" : ""} ${className}`;
 
   if (href) {
     return (
@@ -111,7 +113,7 @@ export default function CircleButton({
   }
 
   return (
-    <button ref={wrapRef as React.Ref<HTMLButtonElement>} type={type} onClick={onClick} className={cls}>
+    <button ref={wrapRef as React.Ref<HTMLButtonElement>} type={type} onClick={onClick} disabled={disabled} className={cls}>
       {inner}
     </button>
   );

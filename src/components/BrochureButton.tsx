@@ -15,6 +15,8 @@ export default function BrochureButton({
   const waUrl = `https://wa.me/${whatsappPhone.replace(/\D/g, "")}`;
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
   const [heroVisible, setHeroVisible] = useState(true);
 
   const btnRefs = useRef<(HTMLElement | null)[]>([]);
@@ -69,14 +71,42 @@ export default function BrochureButton({
     return () => io.disconnect();
   }, []);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    setSubmitting(true);
+    setError(false);
+    try {
+      const res = await fetch("/api/forms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          formName: "callback-request",
+          fields: {
+            Name: data.get("name"),
+            Phone: data.get("phone"),
+            "Preferred time": data.get("preferredTime"),
+            "Interested in": data.get("interest"),
+          },
+        }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setSubmitted(true);
+      form.reset();
+    } catch {
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   function handleClose() {
     setOpen(false);
-    setTimeout(() => setSubmitted(false), 300);
+    setTimeout(() => {
+      setSubmitted(false);
+      setError(false);
+    }, 300);
   }
 
   return (
@@ -194,6 +224,7 @@ export default function BrochureButton({
                   <div className="border-b border-white/15 pb-3">
                     <input
                       type="text"
+                      name="name"
                       placeholder="Your name"
                       required
                       className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/40"
@@ -203,6 +234,7 @@ export default function BrochureButton({
                   <div className="border-b border-white/15 pb-3">
                     <input
                       type="tel"
+                      name="phone"
                       placeholder="+91 00000 00000"
                       required
                       className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/40"
@@ -211,6 +243,7 @@ export default function BrochureButton({
                   </div>
                   <div className="border-b border-white/15 pb-3">
                     <select
+                      name="preferredTime"
                       className="w-full cursor-pointer bg-transparent text-sm text-white/60 outline-none"
                       defaultValue=""
                       aria-label="Preferred time"
@@ -224,6 +257,7 @@ export default function BrochureButton({
                   <div className="border-b border-white/15 pb-3">
                     <input
                       type="text"
+                      name="interest"
                       placeholder="Interested in…"
                       className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/60"
                       aria-label="Project interest"
@@ -232,10 +266,10 @@ export default function BrochureButton({
 
                   <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
                     <p className="text-[12px] text-white/40">
-                      By submitting you agree to our privacy policy.
+                      {error ? "Something went wrong — please try again." : "By submitting you agree to our privacy policy."}
                     </p>
-                    <CircleButton type="submit" variant="filled" size="sm">
-                      Submit
+                    <CircleButton type="submit" variant="filled" size="sm" disabled={submitting}>
+                      {submitting ? "Sending…" : "Submit"}
                     </CircleButton>
                   </div>
                 </form>

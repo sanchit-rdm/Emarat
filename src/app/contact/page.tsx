@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/sections/SiteFooter";
 import PageHero from "@/components/PageHero";
-import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
-import CircleButton from "@/components/CircleButton";
+import ContactForm from "@/components/ContactForm";
 import { sanityFetch } from "@/sanity/lib/live";
 import { CONTACT_PAGE_QUERY } from "@/sanity/lib/queries";
 import { getPageContent, mergeHero, buildMetadata, pickStr, pickArr } from "@/sanity/lib/page";
@@ -130,84 +129,7 @@ export default async function ContactPage() {
                 {form.heading2}
               </SplitReveal>
 
-              <Reveal as="form" delay={0.2} className="mt-12 flex flex-col gap-5">
-                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                  <div className="border-b border-[color:var(--line)] pb-3 transition-colors focus-within:border-[color:var(--accent)]">
-                    <label className="block text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                      {form.nameLabel}
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder={form.namePlaceholder}
-                      className="mt-2 w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]/60"
-                    />
-                  </div>
-                  <div className="border-b border-[color:var(--line)] pb-3 transition-colors focus-within:border-[color:var(--accent)]">
-                    <label className="block text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                      {form.phoneLabel}
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      placeholder={form.phonePlaceholder}
-                      className="mt-2 w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]/60"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                  <div className="border-b border-[color:var(--line)] pb-3 transition-colors focus-within:border-[color:var(--accent)]">
-                    <label className="block text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                      {form.emailLabel}
-                    </label>
-                    <input
-                      type="email"
-                      placeholder={form.emailPlaceholder}
-                      className="mt-2 w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]/60"
-                    />
-                  </div>
-                  <div className="border-b border-[color:var(--line)] pb-3 transition-colors focus-within:border-[color:var(--accent)]">
-                    <label className="block text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                      {form.subjectLabel}
-                    </label>
-                    <input
-                      type="text"
-                      placeholder={form.subjectPlaceholder}
-                      className="mt-2 w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]/60"
-                    />
-                  </div>
-                </div>
-
-                <div className="border-b border-[color:var(--line)] pb-3 transition-colors focus-within:border-[color:var(--accent)]">
-                  <label className="block text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">
-                    {form.messageLabel}
-                  </label>
-                  <textarea
-                    rows={3}
-                    placeholder={form.messagePlaceholder}
-                    className="mt-2 w-full resize-none bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]/60"
-                  />
-                </div>
-
-                <label className="flex cursor-pointer items-start gap-3 text-xs text-[color:var(--muted)]">
-                  <input
-                    type="checkbox"
-                    defaultChecked
-                    className="mt-0.5 h-3.5 w-3.5 accent-[color:var(--accent)]"
-                  />
-                  <span>{form.consent}</span>
-                </label>
-
-                <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
-                  <p className="text-[12px] text-[color:var(--muted)]">
-                    {form.privacy}
-                  </p>
-                  <CircleButton type="submit" variant="filled">
-                    {form.submitLabel}
-                  </CircleButton>
-                </div>
-              </Reveal>
+              <ContactForm form={form} />
             </div>
 
             {/* Office card */}

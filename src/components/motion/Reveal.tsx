@@ -12,6 +12,7 @@ type Props = {
   duration?: number;
   start?: string;
   once?: boolean;
+  [key: string]: unknown;
 };
 
 export default function Reveal({
@@ -23,6 +24,7 @@ export default function Reveal({
   duration = 1.0,
   start = "top 85%",
   once = true,
+  ...rest
 }: Props) {
   const ref = useRef<HTMLElement | null>(null);
 
@@ -69,7 +71,7 @@ export default function Reveal({
 
   const Tag = as as React.ElementType;
   return (
-    <Tag ref={ref as React.Ref<HTMLElement>} className={className}>
+    <Tag ref={ref as React.Ref<HTMLElement>} className={className} {...rest}>
       {children}
     </Tag>
   );

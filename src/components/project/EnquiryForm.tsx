@@ -31,6 +31,8 @@ export default function EnquiryForm({
   };
 }) {
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const heading = labels?.heading?.trim() || "Enquire about";
   const blurb = labels?.blurb?.trim() || "Share your details and our team will get back to you shortly for the next steps.";
   const phone = labels?.phone?.trim() || "+91 84509 84509";
@@ -78,11 +80,36 @@ export default function EnquiryForm({
 
         <div className="col-span-12 lg:col-span-7">
           <Reveal className="rounded-md border border-[color:var(--line)] bg-[color:var(--bg)]/40 p-5 sm:p-8 lg:p-10">
-            {/* Static, presentational form — wire to a backend / CRM later. */}
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
-                setSent(true);
+                const form = e.currentTarget;
+                const data = new FormData(form);
+                setSubmitting(true);
+                setError(false);
+                try {
+                  const res = await fetch("/api/forms", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      formName: "project-enquiry",
+                      fields: {
+                        Project: projectTitle,
+                        Name: data.get("name"),
+                        Phone: data.get("phone"),
+                        Email: data.get("email"),
+                        Message: data.get("message"),
+                      },
+                    }),
+                  });
+                  if (!res.ok) throw new Error("Request failed");
+                  setSent(true);
+                  form.reset();
+                } catch {
+                  setError(true);
+                } finally {
+                  setSubmitting(false);
+                }
               }}
               className="flex flex-col gap-5"
             >
@@ -100,6 +127,7 @@ export default function EnquiryForm({
                   {messageLabel}
                 </label>
                 <textarea
+                  name="message"
                   rows={3}
                   placeholder={messagePlaceholder}
                   className="mt-2 w-full resize-none bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]/60"
@@ -108,10 +136,14 @@ export default function EnquiryForm({
 
               <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
                 <p className="text-[12px] text-[color:var(--muted)]">
-                  {sent ? "Thank you — we'll be in touch shortly." : privacy}
+                  {sent
+                    ? "Thank you — we'll be in touch shortly."
+                    : error
+                    ? "Something went wrong — please try again."
+                    : privacy}
                 </p>
-                <CircleButton type="submit" variant="filled">
-                  {sent ? "Sent" : submitLabel}
+                <CircleButton type="submit" variant="filled" disabled={submitting || sent}>
+                  {sent ? "Sent" : submitting ? "Sending…" : submitLabel}
                 </CircleButton>
               </div>
             </form>
