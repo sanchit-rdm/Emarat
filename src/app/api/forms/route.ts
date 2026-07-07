@@ -6,6 +6,8 @@ const FORM_TITLES: Record<string, string> = {
   "project-enquiry": "New project enquiry",
   "callback-request": "New callback request",
   "home-callback": "New homepage callback request",
+  "upcoming-project-interest": "New upcoming project interest",
+  "newsletter-signup": "New newsletter signup",
 };
 
 export async function POST(req: NextRequest) {

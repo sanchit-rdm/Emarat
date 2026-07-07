@@ -8,6 +8,7 @@ import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import Parallax from "@/components/motion/Parallax";
 import CircleButton from "@/components/CircleButton";
+import UpcomingProjectInterestForm from "@/components/project/UpcomingProjectInterestForm";
 import { sanityFetch } from "@/sanity/lib/live";
 import { UPCOMING_PROJECTS_PAGE_QUERY } from "@/sanity/lib/queries";
 import { buildMetadata } from "@/sanity/lib/page";
@@ -404,70 +405,7 @@ export default async function UpcomingProjectDetailPage({
             </div>
 
             <Reveal delay={0.2} className="max-w-2xl">
-              <form className="flex flex-col gap-8">
-                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-                  <div className="border-b border-[color:var(--line)] pb-3">
-                    <input
-                      type="text"
-                      placeholder="Full name"
-                      className="w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
-                      aria-label="Name"
-                    />
-                  </div>
-                  <div className="border-b border-[color:var(--line)] pb-3">
-                    <input
-                      type="tel"
-                      placeholder="+91 00000 00000"
-                      className="w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
-                      aria-label="Phone"
-                    />
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-                  <div className="border-b border-[color:var(--line)] pb-3">
-                    <input
-                      type="email"
-                      placeholder="Email address"
-                      className="w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
-                      aria-label="Email"
-                    />
-                  </div>
-                  <div className="border-b border-[color:var(--line)] pb-3">
-                    <select
-                      defaultValue=""
-                      className="w-full bg-transparent text-sm text-[color:var(--muted)] outline-none"
-                      aria-label="Enquiry type"
-                    >
-                      <option value="" disabled>Enquiring as…</option>
-                      <option value="end-user">End User / Home Buyer</option>
-                      <option value="channel-partner">Channel Partner / Broker</option>
-                      <option value="investor">Investor</option>
-                      <option value="nri">NRI Buyer</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="border-b border-[color:var(--line)] pb-3">
-                  <textarea
-                    placeholder="Tell us what you're looking for…"
-                    rows={3}
-                    className="w-full resize-none bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
-                    aria-label="Message"
-                  />
-                </div>
-                <div className="flex flex-col items-start gap-6">
-                  <label className="flex cursor-pointer items-start gap-3">
-                    <input
-                      type="checkbox"
-                      required
-                      className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-[color:var(--accent)]"
-                    />
-                    <span className="text-[12px] leading-relaxed text-[color:var(--muted)]">
-                      By proceeding, you acknowledge and agree to our Privacy Policy. You also consent to receive updates, notifications, and promotional communications via Email, SMS, and WhatsApp.
-                    </span>
-                  </label>
-                  <CircleButton type="submit" variant="filled">Submit</CircleButton>
-                </div>
-              </form>
+              <UpcomingProjectInterestForm projectTitle={project.title} />
             </Reveal>
           </div>
         </section>

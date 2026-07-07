@@ -6,6 +6,7 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
+import NewsletterForm from "@/components/NewsletterForm";
 import { sanityFetch } from "@/sanity/lib/live";
 import { NEWS_PAGE_QUERY, POSTS_QUERY } from "@/sanity/lib/queries";
 import { getPageContent, mergeHero, buildMetadata, pickStr } from "@/sanity/lib/page";
@@ -265,20 +266,7 @@ export default async function NewsPage() {
               </SplitReveal>
             </div>
             <div className="col-span-12 lg:col-span-5">
-              <form className="flex items-center border-b border-[color:var(--line)] py-2">
-                <input
-                  type="email"
-                  placeholder={nl.placeholder}
-                  className="flex-1 bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
-                  aria-label="Email"
-                />
-                <button
-                  type="submit"
-                  className="text-xs uppercase tracking-[0.18em] text-[color:var(--accent)] transition-colors hover:text-[color:var(--fg)]"
-                >
-                  {nl.buttonLabel}
-                </button>
-              </form>
+              <NewsletterForm placeholder={nl.placeholder} buttonLabel={nl.buttonLabel} />
               <p className="mt-3 text-xs text-[color:var(--muted)]">
                 {nl.note}
               </p>
