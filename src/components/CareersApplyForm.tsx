@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function CareersApplyForm() {
-  const [status, setStatus] = useState<"idle" | "submitting" | "sent" | "error">("idle");
+  const router = useRouter();
+  const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
 
   return (
     <form
@@ -16,8 +18,8 @@ export default function CareersApplyForm() {
         try {
           const res = await fetch("/api/careers", { method: "POST", body: formData });
           if (!res.ok) throw new Error("Request failed");
-          setStatus("sent");
           target.reset();
+          router.push("/thank-you");
         } catch {
           setStatus("error");
         }
@@ -87,19 +89,13 @@ export default function CareersApplyForm() {
         </label>
       </div>
 
-      {status === "sent" ? (
-        <p className="mt-8 text-center text-sm text-[color:var(--accent)]">
-          Thank you — we&apos;ll be in touch within five business days if there&apos;s a fit.
-        </p>
-      ) : (
-        <button
-          type="submit"
-          disabled={status === "submitting"}
-          className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[color:var(--accent)] px-8 py-3 text-sm uppercase tracking-[0.24em] text-[color:var(--bg)] transition-colors hover:bg-[color:var(--accent)]/90 disabled:opacity-60"
-        >
-          {status === "submitting" ? "Submitting…" : "Submit Application"}
-        </button>
-      )}
+      <button
+        type="submit"
+        disabled={status === "submitting"}
+        className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[color:var(--accent)] px-8 py-3 text-sm uppercase tracking-[0.24em] text-[color:var(--bg)] transition-colors hover:bg-[color:var(--accent)]/90 disabled:opacity-60"
+      >
+        {status === "submitting" ? "Submitting…" : "Submit Application"}
+      </button>
       {status === "error" && (
         <p className="mt-4 text-center text-sm text-red-500">Something went wrong — please try again.</p>
       )}

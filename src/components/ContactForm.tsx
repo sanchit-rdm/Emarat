@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Reveal from "@/components/motion/Reveal";
 import CircleButton from "@/components/CircleButton";
 
@@ -23,7 +24,7 @@ export default function ContactForm({
     submitLabel: string;
   };
 }) {
-  const [sent, setSent] = useState(false);
+  const router = useRouter();
   const [error, setError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -54,11 +55,10 @@ export default function ContactForm({
             }),
           });
           if (!res.ok) throw new Error("Request failed");
-          setSent(true);
           target.reset();
+          router.push("/thank-you");
         } catch {
           setError(true);
-        } finally {
           setSubmitting(false);
         }
       }}
@@ -134,10 +134,10 @@ export default function ContactForm({
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
         <p className="text-[12px] text-[color:var(--muted)]">
-          {sent ? "Thank you — we'll be in touch shortly." : error ? "Something went wrong — please try again." : form.privacy}
+          {error ? "Something went wrong — please try again." : form.privacy}
         </p>
-        <CircleButton type="submit" variant="filled" disabled={submitting || sent}>
-          {sent ? "Sent" : submitting ? "Sending…" : form.submitLabel}
+        <CircleButton type="submit" variant="filled" disabled={submitting}>
+          {submitting ? "Sending…" : form.submitLabel}
         </CircleButton>
       </div>
     </Reveal>
