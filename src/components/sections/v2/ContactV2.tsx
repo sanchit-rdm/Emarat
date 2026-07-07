@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import type { PortableTextBlock } from "@/lib/portableText";
 import { renderPortableText, toPlainText } from "@/lib/portableText";
 import Reveal from "@/components/motion/Reveal";
@@ -34,6 +38,9 @@ interface Props { data?: ContactData; labels?: ContactLabels }
  * the footer, so they're intentionally omitted here.
  */
 export default function ContactV2({ data, labels }: Props) {
+  const router = useRouter();
+  const [error, setError] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const heading1 = data?.heading1 ?? "Ready to find";
   const heading2 = data?.heading2 ?? "your perfect home?";
   const eyebrow = labels?.eyebrow ?? "Get in Touch";
@@ -62,11 +69,44 @@ export default function ContactV2({ data, labels }: Props) {
         </Reveal>
 
         <Reveal as="div" delay={0.15} className="mx-auto mt-12 max-w-2xl">
-          <form className="flex flex-col gap-6 text-left">
+          <form
+            className="flex flex-col gap-6 text-left"
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const target = e.currentTarget;
+              const data = new FormData(target);
+              setSubmitting(true);
+              setError(false);
+              try {
+                const res = await fetch("/api/forms", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    formName: "home-callback",
+                    fields: {
+                      Name: data.get("name"),
+                      Phone: data.get("phone"),
+                      Email: data.get("email"),
+                      "Enquiring as": data.get("enquiryType"),
+                      "Interested in": data.get("interest"),
+                    },
+                  }),
+                });
+                if (!res.ok) throw new Error("Request failed");
+                target.reset();
+                router.push("/thank-you");
+              } catch {
+                setError(true);
+                setSubmitting(false);
+              }
+            }}
+          >
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div className="border-b border-[color:var(--line)] pb-3">
                 <input
                   type="text"
+                  name="name"
+                  required
                   placeholder={namePlaceholder}
                   className="w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
                   aria-label="Name"
@@ -75,6 +115,8 @@ export default function ContactV2({ data, labels }: Props) {
               <div className="border-b border-[color:var(--line)] pb-3">
                 <input
                   type="tel"
+                  name="phone"
+                  required
                   placeholder={phonePlaceholder}
                   className="w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
                   aria-label="Phone"
@@ -85,6 +127,7 @@ export default function ContactV2({ data, labels }: Props) {
               <div className="border-b border-[color:var(--line)] pb-3">
                 <input
                   type="email"
+                  name="email"
                   placeholder="Email address"
                   className="w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
                   aria-label="Email"
@@ -92,6 +135,7 @@ export default function ContactV2({ data, labels }: Props) {
               </div>
               <div className="border-b border-[color:var(--line)] pb-3">
                 <select
+                  name="enquiryType"
                   className="w-full bg-transparent text-sm text-[color:var(--muted)] outline-none"
                   aria-label="Enquiry type"
                   defaultValue=""
@@ -108,6 +152,7 @@ export default function ContactV2({ data, labels }: Props) {
             <div className="border-b border-[color:var(--line)] pb-3">
               <input
                 type="text"
+                name="interest"
                 placeholder={categoryPlaceholder}
                 className="w-full bg-transparent text-sm outline-none placeholder:text-[color:var(--muted)]"
                 aria-label="Project interest"
@@ -124,8 +169,11 @@ export default function ContactV2({ data, labels }: Props) {
                   {privacy}
                 </span>
               </label>
-              <CircleButton type="submit" variant="filled">
-                {submitLabel}
+              {error && (
+                <p className="text-[12px] text-red-500">Something went wrong — please try again.</p>
+              )}
+              <CircleButton type="submit" variant="filled" disabled={submitting}>
+                {submitting ? "Sending…" : submitLabel}
               </CircleButton>
             </div>
           </form>
