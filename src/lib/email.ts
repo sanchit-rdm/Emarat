@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 
-const DEFAULT_RECIPIENTS = ["Info@emaratrealty.com", "web@reddashmedia.com"];
+const DEFAULT_RECIPIENTS = ["info@emaratrealty.com", "web@reddashmedia.com"];
 
 export const FORM_RECIPIENT_EMAILS = process.env.FORM_RECIPIENT_EMAILS
   ? process.env.FORM_RECIPIENT_EMAILS.split(",").map((e) => e.trim()).filter(Boolean)
