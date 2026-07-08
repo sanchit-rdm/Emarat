@@ -197,7 +197,7 @@ export const projectType = defineType({
               name: "id",
               title: "ID",
               type: "string",
-              description: "One of: stilt, typical, terrace",
+              description: "One of: basement, stilt, typical, terrace",
             }),
             defineField({ name: "label", title: "Label", type: "string" }),
             defineField({ name: "config", title: "Configuration", type: "string" }),
