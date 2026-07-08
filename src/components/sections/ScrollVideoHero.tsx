@@ -7,11 +7,12 @@ import { ensureGsap, scheduleScrollRefresh } from "@/lib/gsap";
 /* ----------------------------------------------------------------------------
    Scroll-pinned hero. Behaviour adapts by screen size:
 
-   Mobile / tablet (< lg):
+   Mobile / tablet (< lg, or any touch/coarse-pointer device even if wide,
+   e.g. an iPad in landscape):
      Three project building images that crossfade as the user scrolls,
      in lockstep with the heading text. No video downloaded.
 
-   Desktop (lg+):
+   Desktop (lg+ AND a fine pointer, i.e. an actual mouse):
      Video whose `currentTime` is tied to scroll — scrolling advances /
      rewinds the footage. Same GSAP ScrollTrigger pin, same text timing.
 
@@ -109,7 +110,7 @@ export default function ScrollVideoHero({
 
   useEffect(() => {
     const reduced   = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const desktop   = window.matchMedia("(min-width: 1024px)").matches;
+    const desktop   = window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches;
     isDesktopRef.current = desktop;
     setIsDesktop(desktop);
     setEnableScrub(!reduced && !videoFailed);
