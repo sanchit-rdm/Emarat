@@ -29,7 +29,7 @@ const PROJECT_FIELDS = /* groq */ `
     label,
     "config": config,
     "image": image.asset->url,
-    "specs": specs[]{_key, label, value}
+    "specs": coalesce(specs[]{_key, label, value}, [])
   },
   "gallery": gallery[]{
     _key,

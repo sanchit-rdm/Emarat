@@ -75,7 +75,7 @@ export default function FloorPlans({
             <div className="font-display-alt text-2xl sm:text-3xl lg:text-4xl">{plan.label}</div>
 
             <dl className="mt-8 grid grid-cols-1 gap-x-6 gap-y-4 border-t border-[color:var(--line)] pt-8 sm:grid-cols-2 sm:gap-y-6">
-              {plan.specs.map((s) => (
+              {(plan.specs ?? []).map((s) => (
                 <div key={s.label}>
                   <dt className="text-[0.625rem] uppercase tracking-[0.2em] text-[color:var(--muted)]">{s.label}</dt>
                   <dd className="mt-1 font-display-alt text-xl tracking-tight lg:text-2xl">{s.value}</dd>
