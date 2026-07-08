@@ -273,20 +273,6 @@ export default function ScrollVideoHero({
           </video>
         )}
 
-        {/* Fallback poster when not yet scrubbing (SSR / reduced-motion) */}
-        {!enableScrub && !isDesktop && (
-          <div className="absolute inset-0 -z-20">
-            <Image
-              src={posterSrc ?? "/videos/home2-poster.webp"}
-              fill
-              sizes="100vw"
-              className="object-cover"
-              alt=""
-              priority
-            />
-          </div>
-        )}
-
         {/* Gradient overlays */}
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-[color:var(--bg)]/70 to-transparent" />
