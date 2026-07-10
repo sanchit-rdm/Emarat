@@ -26,7 +26,7 @@ export default function Connectivity({
       id="location"
       className="relative isolate scroll-mt-44 overflow-hidden border-t border-[color:var(--line)] px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]"
     >
-      <div className="pointer-events-none absolute -left-40 top-1/4 h-[420px] w-[420px] rounded-full bg-[color:var(--brand-green)]/15 blur-[160px]" />
+      <div className="pointer-events-none absolute -left-40 top-1/4 hidden h-[420px] w-[420px] rounded-full bg-[color:var(--brand-green)]/15 blur-[160px] lg:block" />
 
       <div className="mx-auto grid max-w-[1400px] grid-cols-12 gap-y-8 lg:gap-16">
         {/* Left: heading + categorised landmarks */}

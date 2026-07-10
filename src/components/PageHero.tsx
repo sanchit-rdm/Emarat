@@ -47,7 +47,7 @@ export default function PageHero({
       </div>
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[color:var(--bg)]/50" />
-        <div className="absolute -left-40 top-1/4 h-[420px] w-[420px] rounded-full bg-[color:var(--accent)]/8 blur-[160px]" />
+        <div className="absolute -left-40 top-1/4 hidden h-[420px] w-[420px] rounded-full bg-[color:var(--accent)]/8 blur-[160px] lg:block" />
       </div>
 
       {eyebrow && (

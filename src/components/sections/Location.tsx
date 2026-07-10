@@ -240,6 +240,13 @@ interface LocationData {
 
 export default function Location({ data }: { data?: LocationData }) {
   const [active, setActive] = useState(0);
+  // Only mount backgrounds the user has actually viewed — stacking every
+  // place as a full-screen filtered layer costs too much GPU memory on phones.
+  const [visited, setVisited] = useState<Set<number>>(() => new Set([0]));
+  const activate = (i: number) => {
+    setActive(i);
+    setVisited((prev) => (prev.has(i) ? prev : new Set(prev).add(i)));
+  };
   const eyebrow = data?.eyebrow?.trim() || "Location & Connectivity";
   const places: Place[] = data?.places?.length
     ? data.places.map((p, i) => ({
@@ -261,21 +268,23 @@ export default function Location({ data }: { data?: LocationData }) {
     >
       {/* Crossfading full-bleed background images */}
       <div className="pointer-events-none absolute inset-0 -z-20">
-        {places.map((p, i) => (
-          <Image
-            key={p.id}
-            src={p.bg}
-            alt=""
-            fill
-            sizes="100vw"
-            priority={i === 0}
-            className="object-cover transition-opacity duration-[1.2s] ease-out"
-            style={{
-              opacity: i === active ? 1 : 0,
-              filter: "sepia(0.22) saturate(0.85) brightness(0.42) contrast(1.05)",
-            }}
-          />
-        ))}
+        {places.map((p, i) =>
+          visited.has(i) ? (
+            <Image
+              key={p.id}
+              src={p.bg}
+              alt=""
+              fill
+              sizes="100vw"
+              priority={i === 0}
+              className="object-cover transition-opacity duration-[1.2s] ease-out"
+              style={{
+                opacity: i === active ? 1 : 0,
+                filter: "sepia(0.22) saturate(0.85) brightness(0.42) contrast(1.05)",
+              }}
+            />
+          ) : null,
+        )}
       </div>
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[color:var(--bg)]/35" />
 
@@ -306,9 +315,9 @@ export default function Location({ data }: { data?: LocationData }) {
               <button
                 key={p.id}
                 type="button"
-                onMouseEnter={() => setActive(i)}
-                onClick={() => setActive(i)}
-                onFocus={() => setActive(i)}
+                onMouseEnter={() => activate(i)}
+                onClick={() => activate(i)}
+                onFocus={() => activate(i)}
                 aria-pressed={i === active}
                 className={`group flex items-center gap-4 text-left transition-opacity duration-500 ${
                   i === active ? "opacity-100" : "opacity-55 hover:opacity-90"

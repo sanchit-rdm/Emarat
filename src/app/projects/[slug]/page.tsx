@@ -153,7 +153,7 @@ export default async function ProjectPage({
           </div>
           <div className="pointer-events-none absolute inset-0 -z-10">
             <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--bg)] via-[color:var(--bg)]/40 to-[color:var(--bg)]/30" />
-            <div className="absolute -left-40 top-1/4 h-[420px] w-[420px] rounded-full bg-[color:var(--accent)]/8 blur-[160px]" />
+            <div className="absolute -left-40 top-1/4 hidden h-[420px] w-[420px] rounded-full bg-[color:var(--accent)]/8 blur-[160px] lg:block" />
           </div>
 
           {/* Breadcrumb */}

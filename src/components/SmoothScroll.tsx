@@ -28,7 +28,10 @@ export default function SmoothScroll({
       ScrollTrigger.config({ ignoreMobileResize: true });
 
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (reduced) return;
+      // Touch devices scroll natively: Lenis adds per-frame work and fights
+      // iOS momentum scrolling, which reads as jank on real phones.
+      const coarse = window.matchMedia("(pointer: coarse)").matches;
+      if (reduced || coarse) return;
 
       const lenis = new Lenis({
         duration: 0.5,

@@ -296,8 +296,10 @@ export default function ScrollVideoHero({
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-[color:var(--bg)]/70 to-transparent" />
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[color:var(--line)] to-transparent" />
-          <div className="absolute -left-40 top-1/3 h-[480px] w-[480px] rounded-full bg-[color:var(--accent)]/8 blur-[160px]" />
-          <div className="absolute -right-40 bottom-0 h-[560px] w-[560px] rounded-full bg-[color:var(--accent)]/6 blur-[200px]" />
+          {/* Decorative blur orbs are desktop-only: giant blur() layers are
+              expensive to composite on mobile GPUs. */}
+          <div className="absolute -left-40 top-1/3 hidden h-[480px] w-[480px] rounded-full bg-[color:var(--accent)]/8 blur-[160px] lg:block" />
+          <div className="absolute -right-40 bottom-0 hidden h-[560px] w-[560px] rounded-full bg-[color:var(--accent)]/6 blur-[200px] lg:block" />
         </div>
 
         {/* Text overlays — GSAP drives opacity/y via blockRefs */}
