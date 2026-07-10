@@ -15,23 +15,25 @@ interface IconicLabels {
 interface Props { data?: LocationData; labels?: IconicLabels }
 
 export default function IconicIntroV2({ data, labels }: Props) {
-  const bgImage = "/images/Parallax.png";
   const line1 = labels?.line1?.trim() || "Life within reach";
   const line2 = labels?.line2?.trim() || "of every iconic landmark";
 
   return (
     <section className="relative isolate flex min-h-[100vh] items-center justify-center overflow-hidden px-4 py-10 sm:px-6">
-      {/* Fixed background image — stays in place as page scrolls */}
-      <div
-        className="pointer-events-none absolute inset-0 -z-20"
-        style={{
-          backgroundImage: `url(${bgImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
-        }}
-      />
+      {/* Background image. Sized per breakpoint (a media-gated CSS background
+          only downloads the matching file) and fixed-attachment only on
+          desktop: fixed backgrounds force whole-layer repaints on phones and
+          iOS Safari mishandles them. */}
+      <style>{`
+        #iconic-bg { background-image: url("/images/parallax-bg-mobile.webp"); }
+        @media (min-width: 1024px) and (pointer: fine) {
+          #iconic-bg {
+            background-image: url("/images/parallax-bg.webp");
+            background-attachment: fixed;
+          }
+        }
+      `}</style>
+      <div id="iconic-bg" className="pointer-events-none absolute inset-0 -z-20 bg-cover bg-center bg-no-repeat" />
       {/* Plain dark overlay */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[#01472E]/70" />
 

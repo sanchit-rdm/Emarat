@@ -101,14 +101,21 @@ export default function StickyRevealSection({ data }: { data?: StickyRevealData 
   return (
     <div
       ref={wrapRef}
-      className="relative flex min-h-screen items-center overflow-hidden"
-      style={{
-        backgroundImage: "url('https://cdn.sanity.io/images/k6lgt7ii/production/ffe414a23af6679e70aa2300d9f90b77fc941832-2200x1100.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed",
-      }}
+      id="sticky-reveal-bg"
+      className="relative flex min-h-screen items-center overflow-hidden bg-cover bg-center"
     >
+      {/* Sized-per-breakpoint background via Sanity CDN transforms; fixed
+          attachment only on desktop — it forces whole-layer repaints on
+          phones and iOS Safari mishandles it. */}
+      <style>{`
+        #sticky-reveal-bg { background-image: url("https://cdn.sanity.io/images/k6lgt7ii/production/ffe414a23af6679e70aa2300d9f90b77fc941832-2200x1100.jpg?w=1080&fm=webp&q=75"); }
+        @media (min-width: 1024px) and (pointer: fine) {
+          #sticky-reveal-bg {
+            background-image: url("https://cdn.sanity.io/images/k6lgt7ii/production/ffe414a23af6679e70aa2300d9f90b77fc941832-2200x1100.jpg?w=2048&fm=webp&q=80");
+            background-attachment: fixed;
+          }
+        }
+      `}</style>
       <div className="pointer-events-none absolute inset-0 bg-black/65" />
 
       <div className="absolute inset-0 z-10">
