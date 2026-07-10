@@ -65,7 +65,7 @@ const DEFAULT_HOURS = "Mon Fri · 9am – 6pm";
 const DEFAULT_SOCIALS: FooterLink[] = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/emarat-realty/" },
   { label: "Instagram", href: "https://www.instagram.com/emarat.realty/" },
-  { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61570740803559" },
+  { label: "Facebook", href: "https://www.facebook.com/emaratrealty1/" },
   { label: "X", href: "https://x.com/Emaratrealty" },
   { label: "YouTube", href: "https://youtube.com/@emarat.realty" },
 ];

@@ -50,7 +50,7 @@ const FB = {
     socials: [
       { label: "LinkedIn", href: "https://www.linkedin.com/company/emarat-realty/" },
       { label: "Instagram", href: "https://www.instagram.com/emarat.realty/" },
-      { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61570740803559" },
+      { label: "Facebook", href: "https://www.facebook.com/emaratrealty1/" },
       { label: "X", href: "https://x.com/Emaratrealty" },
     ],
   },

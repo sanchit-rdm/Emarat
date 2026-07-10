@@ -46,7 +46,7 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
       socialLinks: wk([
         { platform: "LinkedIn", url: "https://www.linkedin.com/company/emarat-realty/" },
         { platform: "Instagram", url: "https://www.instagram.com/emarat.realty/" },
-        { platform: "Facebook", url: "https://www.facebook.com/profile.php?id=61570740803559" },
+        { platform: "Facebook", url: "https://www.facebook.com/emaratrealty1/" },
         { platform: "Twitter / X", url: "https://x.com/Emaratrealty" },
         { platform: "YouTube", url: "https://youtube.com/@emarat.realty" },
       ]),
@@ -429,7 +429,7 @@ const docs: Array<{ _id: string; _type: string; fields: Record<string, unknown> 
         socials: wk([
           { label: "LinkedIn", href: "https://www.linkedin.com/company/emarat-realty/" },
           { label: "Instagram", href: "https://www.instagram.com/emarat.realty/" },
-          { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61570740803559" },
+          { label: "Facebook", href: "https://www.facebook.com/emaratrealty1/" },
           { label: "X", href: "https://x.com/Emaratrealty" },
         ]),
       },
