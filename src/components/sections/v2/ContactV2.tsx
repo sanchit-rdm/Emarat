@@ -55,7 +55,8 @@ export default function ContactV2({ data, labels }: Props) {
     <section id="contact" className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
       <div className="mx-auto max-w-4xl text-center">
         <Reveal className="eyebrow mb-4 flex items-center justify-center font-script text-2xl text-[color:var(--accent)]">
-          <span>{renderPortableText(eyebrow)}</span>
+          {/* div, not span — renderPortableText emits <p>, invalid inside <span> */}
+          <div>{renderPortableText(eyebrow)}</div>
         </Reveal>
         <SplitReveal as="h2" className="font-display h-page whitespace-nowrap">
           {toPlainText(heading1)}
@@ -64,7 +65,7 @@ export default function ContactV2({ data, labels }: Props) {
           {toPlainText(heading2)}
         </SplitReveal>
 
-        <Reveal as="p" delay={0.1} className="mx-auto mt-8 max-w-md text-sm text-[color:var(--muted)]">
+        <Reveal delay={0.1} className="mx-auto mt-8 max-w-md text-sm text-[color:var(--muted)]">
           {renderPortableText(lead)}
         </Reveal>
 

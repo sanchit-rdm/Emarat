@@ -46,7 +46,7 @@ export default function StatementV2({ data }: Props) {
 
       {/* Lead paragraph — lower-left */}
       <div className="mx-auto mt-16 w-full max-w-[1400px]">
-        <Reveal as="p" delay={0.15} className="max-w-md text-sm uppercase leading-relaxed tracking-[0.04em] text-[color:var(--fg)]/85">
+        <Reveal delay={0.15} className="max-w-md text-sm uppercase leading-relaxed tracking-[0.04em] text-[color:var(--fg)]/85">
           {renderPortableText(body)}
         </Reveal>
       </div>

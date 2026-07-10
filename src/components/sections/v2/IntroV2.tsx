@@ -48,8 +48,9 @@ export default function IntroV2({ data, eyebrow }: Props) {
           {toPlainText(heading2)}
         </SplitReveal>
 
+        {/* div, not p — renderPortableText emits <p> children and nested
+            <p> is invalid HTML (causes a hydration mismatch). */}
         <Reveal
-          as="p"
           delay={0.2}
           className="mx-auto mt-10 max-w-2xl text-base leading-relaxed text-[color:var(--muted)] lg:text-lg"
         >
