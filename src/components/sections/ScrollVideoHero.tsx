@@ -93,6 +93,7 @@ export default function ScrollVideoHero({
   scrollLabel?: string;
 }) {
   const resolvedBlocks = resolveBlocks(blocks);
+  const poster = posterSrc ?? "/videos/home2-poster.webp";
 
   const sectionRef = useRef<HTMLElement | null>(null);
   const pinRef     = useRef<HTMLDivElement | null>(null);
@@ -230,11 +231,29 @@ export default function ScrollVideoHero({
 
   return (
     <section id="top" ref={sectionRef} className="relative">
-      <div ref={pinRef} className="relative isolate h-[100svh] w-full overflow-hidden">
+      <div ref={pinRef} id="hero-pin" className="relative isolate h-[100svh] w-full overflow-hidden">
+
+        {/* First-paint fix: the server always renders the mobile stack (it
+            can't know the viewport), so desktop briefly flashed a mobile image
+            before hydration swapped in the video. Gate the swap in CSS instead:
+            desktop hides the stack and paints the poster as a background from
+            the very first frame. A CSS background inside a non-matching media
+            query is never downloaded, so mobile doesn't fetch the poster and
+            the video reuses it from cache. */}
+        <style>{`
+          @media (min-width: 1024px) and (pointer: fine) {
+            #hero-pin {
+              background-image: url("${poster}");
+              background-size: cover;
+              background-position: center;
+            }
+            #hero-mobile-stack { display: none; }
+          }
+        `}</style>
 
         {/* ── Mobile / tablet background: 3 project images ── */}
         {!isDesktop && (
-          <div className="absolute inset-0 -z-20">
+          <div id="hero-mobile-stack" className="absolute inset-0 -z-20">
             {MOBILE_IMAGES.map((src, i) => (
               <div
                 key={src}
@@ -260,7 +279,7 @@ export default function ScrollVideoHero({
           <video
             ref={videoRef}
             className="absolute inset-0 -z-20 h-full w-full object-cover"
-            poster={posterSrc ?? "/videos/home2-poster.webp"}
+            poster={poster}
             muted
             playsInline
             preload="none"
