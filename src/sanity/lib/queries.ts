@@ -4,6 +4,7 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
   *[_type == "siteSettings"][0] {
     siteTitle,
     siteDescription,
+    "ogImage": ogImage.asset->url,
     contact {
       phone, phoneHours, email, emailNote, address
     },

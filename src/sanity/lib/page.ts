@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { sanityFetch } from "./live";
-import { pageQuery } from "./queries";
+import { pageQuery, SITE_SETTINGS_QUERY } from "./queries";
 
 export type HeroData = {
   eyebrow?: string;
@@ -77,20 +77,31 @@ export function pickArr<T>(v: T[] | null | undefined, fb: T[]): T[] {
   return Array.isArray(v) && v.length > 0 ? v : fb;
 }
 
-/* Build Next.js Metadata from Sanity SEO, falling back to provided defaults. */
-export function buildMetadata(
+/* Site-wide share image fallback, shipped in /public (1200×630). */
+const DEFAULT_OG_IMAGE = "/og-image.jpg";
+
+/* Build Next.js Metadata from Sanity SEO, falling back to provided defaults.
+   Share image resolution: page seo.ogImage → siteSettings.ogImage → static file. */
+export async function buildMetadata(
   seo: SeoData | undefined,
   fallback: { title: string; description: string }
-): Metadata {
+): Promise<Metadata> {
   const title = seo?.metaTitle?.trim() || fallback.title;
   const description = seo?.metaDescription?.trim() || fallback.description;
+  let ogImage = seo?.ogImage || undefined;
+  if (!ogImage) {
+    try {
+      const { data } = await sanityFetch({ query: SITE_SETTINGS_QUERY, tags: ["siteSettings"] });
+      ogImage = (data as { ogImage?: string | null } | null)?.ogImage || undefined;
+    } catch {
+      /* fall through to the static default */
+    }
+  }
+  const images = [{ url: ogImage ?? DEFAULT_OG_IMAGE, width: 1200, height: 630 }];
   return {
     title,
     description,
-    openGraph: {
-      title,
-      description,
-      images: seo?.ogImage ? [{ url: seo.ogImage }] : undefined,
-    },
+    openGraph: { title, description, type: "website", images },
+    twitter: { card: "summary_large_image", title, description, images: images.map((i) => i.url) },
   };
 }

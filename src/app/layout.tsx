@@ -41,18 +41,23 @@ export async function generateMetadata(): Promise<Metadata> {
   let title = "Emarat Realty Luxury Real Estate in Gurugram";
   let description =
     "A distinguished leader in luxury real estate, specialising in exquisite residences and high-end commercial spaces at DLF Garden City, Sector 93, Gurugram.";
+  let ogImage = "/og-image.jpg";
   try {
     const { data } = await sanityFetch({ query: SITE_SETTINGS_QUERY, tags: ["siteSettings"] });
-    const s = data as { siteTitle?: string; siteDescription?: string } | null;
+    const s = data as { siteTitle?: string; siteDescription?: string; ogImage?: string | null } | null;
     if (s?.siteTitle?.trim()) title = s.siteTitle;
     if (s?.siteDescription?.trim()) description = s.siteDescription;
+    if (s?.ogImage) ogImage = s.ogImage;
   } catch {
     /* fall back to the in-code defaults */
   }
+  const images = [{ url: ogImage, width: 1200, height: 630 }];
   return {
     metadataBase: new URL("https://www.emaratrealty.com"),
     title,
     description,
+    openGraph: { siteName: "Emarat Realty", type: "website", title, description, images },
+    twitter: { card: "summary_large_image", title, description, images: images.map((i) => i.url) },
   };
 }
 

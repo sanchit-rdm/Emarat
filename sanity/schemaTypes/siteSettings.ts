@@ -8,6 +8,14 @@ export const siteSettingsType = defineType({
     defineField({ name: "siteTitle", title: "Site Title", type: "string" }),
     defineField({ name: "siteDescription", title: "Site Description", type: "text", rows: 2 }),
     defineField({
+      name: "ogImage",
+      title: "Default Social Share Image",
+      type: "image",
+      description:
+        "Shown when any page is shared on WhatsApp / social and the page has no share image of its own (1200×630).",
+      options: { hotspot: true },
+    }),
+    defineField({
       name: "contact",
       title: "Contact Details",
       type: "object",
