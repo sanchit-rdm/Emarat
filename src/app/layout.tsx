@@ -9,6 +9,7 @@ import ScrollRail from "@/components/ScrollRail";
 import BrochureButton from "@/components/BrochureButton";
 import { SanityLive, sanityFetch } from "@/sanity/lib/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // Body text — Montserrat. Drives --font-sans-pri.
 const montserrat = Montserrat({
@@ -96,6 +97,7 @@ export default async function RootLayout({
         <SmoothScroll>{children}</SmoothScroll>
         <SanityLive />
         {isDraftMode && <VisualEditing />}
+        <SpeedInsights />
       </body>
     </html>
   );
