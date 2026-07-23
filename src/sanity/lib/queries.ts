@@ -283,6 +283,24 @@ export const POSTS_QUERY = defineQuery(`
   }
 `);
 
+export const PRIVACY_POLICY_PAGE_QUERY = defineQuery(`
+  *[_type == "privacyPolicyPage"][0] {
+    ${HERO_FIELDS},
+    effectiveDate,
+    body,
+    ${SEO_FIELDS}
+  }
+`);
+
+export const TERMS_PAGE_QUERY = defineQuery(`
+  *[_type == "termsPage"][0] {
+    ${HERO_FIELDS},
+    effectiveDate,
+    body,
+    ${SEO_FIELDS}
+  }
+`);
+
 export const NEWS_ARTICLES_QUERY = defineQuery(`
   *[_type == "newsArticle"] | order(publishedAt desc) {
     _id, title, slug, excerpt, mainImage { asset->{ url } }, publishedAt, body

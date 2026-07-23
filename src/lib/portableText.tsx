@@ -14,6 +14,8 @@ export interface PortableTextBlock {
   style?: string;
   children?: PortableTextSpan[];
   markDefs?: Array<{ _key?: string; _type?: string; href?: string }>;
+  listItem?: "bullet" | "number";
+  level?: number;
   // image block fields
   asset?: { _type?: string; _ref?: string; url?: string };
 }
@@ -91,17 +93,41 @@ function renderSpans(
   });
 }
 
+const LIST_TAG: Record<"bullet" | "number", "ul" | "ol"> = {
+  bullet: "ul",
+  number: "ol",
+};
+const LIST_CLASSES: Record<"bullet" | "number", string> = {
+  bullet: "my-5 list-disc space-y-2 pl-6",
+  number: "my-5 list-decimal space-y-2 pl-6",
+};
+
 export function renderPortableText(
   value: string | PortableTextBlock[] | undefined
 ): ReactNode {
   if (!value) return null;
   if (typeof value === "string") return <p>{value}</p>;
 
-  return value.map((block, blockIndex) => {
-    if (!block) return null;
+  const nodes: ReactNode[] = [];
+  let listBuffer: { type: "bullet" | "number"; items: ReactNode[] } | null = null;
+
+  const flushList = () => {
+    if (!listBuffer) return;
+    const Tag = LIST_TAG[listBuffer.type];
+    nodes.push(
+      <Tag key={`list-${nodes.length}`} className={LIST_CLASSES[listBuffer.type]}>
+        {listBuffer.items}
+      </Tag>
+    );
+    listBuffer = null;
+  };
+
+  value.forEach((block, blockIndex) => {
+    if (!block) return;
 
     // Inline image block uploaded by the importer
     if (block._type === "image") {
+      flushList();
       let imgSrc: string | null = null;
       try {
         // Prefer pre-resolved url, fall back to building from asset ref
@@ -113,8 +139,8 @@ export function renderPortableText(
       } catch {
         imgSrc = null;
       }
-      if (!imgSrc) return null;
-      return (
+      if (!imgSrc) return;
+      nodes.push(
         <div
           key={`img-${blockIndex}`}
           className="relative my-8 aspect-[16/9] w-full overflow-hidden rounded-md"
@@ -128,28 +154,44 @@ export function renderPortableText(
           />
         </div>
       );
+      return;
     }
 
-    if (block._type !== "block" || !Array.isArray(block.children)) return null;
+    if (block._type !== "block" || !Array.isArray(block.children)) {
+      flushList();
+      return;
+    }
 
-    const style = block.style || "normal";
     const spans = renderSpans(
       block.children,
       block.markDefs ?? [],
       blockIndex
     );
 
+    if (block.listItem === "bullet" || block.listItem === "number") {
+      if (!listBuffer || listBuffer.type !== block.listItem) {
+        flushList();
+        listBuffer = { type: block.listItem, items: [] };
+      }
+      listBuffer.items.push(<li key={`li-${blockIndex}`}>{spans}</li>);
+      return;
+    }
+
+    flushList();
+    const style = block.style || "normal";
+
     if (HEADING_STYLES.has(style)) {
       const Tag = style as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-      return (
+      nodes.push(
         <Tag key={`block-${blockIndex}`} className={HEADING_CLASSES[style]}>
           {spans}
         </Tag>
       );
+      return;
     }
 
     if (style === "blockquote") {
-      return (
+      nodes.push(
         <blockquote
           key={`block-${blockIndex}`}
           className="my-6 border-l-4 border-[color:var(--accent)] pl-5 italic text-[color:var(--muted)]"
@@ -157,12 +199,16 @@ export function renderPortableText(
           {spans}
         </blockquote>
       );
+      return;
     }
 
-    return (
+    nodes.push(
       <p key={`block-${blockIndex}`} className="mt-5 first:mt-0">
         {spans}
       </p>
     );
   });
+
+  flushList();
+  return nodes;
 }

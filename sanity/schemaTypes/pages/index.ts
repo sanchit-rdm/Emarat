@@ -5,6 +5,8 @@ import { contactPageType } from "./contactPage";
 import { newsPageType } from "./newsPage";
 import { projectsPageType } from "./projectsPage";
 import { upcomingProjectsPageType } from "./upcomingProjectsPage";
+import { privacyPolicyPageType } from "./privacyPolicyPage";
+import { termsPageType } from "./termsPage";
 
 export {
   aboutPageType,
@@ -14,6 +16,8 @@ export {
   newsPageType,
   projectsPageType,
   upcomingProjectsPageType,
+  privacyPolicyPageType,
+  termsPageType,
 };
 
 export const pageSingletonTypes = [
@@ -24,6 +28,8 @@ export const pageSingletonTypes = [
   newsPageType,
   projectsPageType,
   upcomingProjectsPageType,
+  privacyPolicyPageType,
+  termsPageType,
 ];
 
 export const pageSingletonNames = pageSingletonTypes.map((t) => t.name);

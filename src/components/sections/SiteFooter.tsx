@@ -38,6 +38,8 @@ const DEFAULT_COLUMNS: FooterColumn[] = [
       { label: "About Us", href: "/about" },
       { label: "Director's Desk", href: "/directors-desk" },
       { label: "Careers", href: "/careers" },
+      { label: "Privacy Policy", href: "/privacy-policy" },
+      { label: "Terms & Conditions", href: "/terms-and-conditions" },
     ],
   },
   {

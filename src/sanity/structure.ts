@@ -22,6 +22,8 @@ export const structure: StructureResolver = (S) =>
       singleton(S, "newsPage", "News Page"),
       singleton(S, "contactPage", "Contact Page"),
       singleton(S, "upcomingProjectsPage", "Upcoming Projects Page"),
+      singleton(S, "privacyPolicyPage", "Privacy Policy Page"),
+      singleton(S, "termsPage", "Terms & Conditions Page"),
       S.divider(),
 
       // Collections
