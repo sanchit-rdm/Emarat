@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import CircleButton from "@/components/CircleButton";
+import Honeypot from "@/components/Honeypot";
+import { HONEYPOT_FIELD, TIMESTAMP_FIELD } from "@/lib/antiSpam";
 
 export default function UpcomingProjectInterestForm({ projectTitle }: { projectTitle: string }) {
   const router = useRouter();
@@ -31,6 +33,8 @@ export default function UpcomingProjectInterestForm({ projectTitle }: { projectT
                 Email: data.get("email"),
                 "Enquiring as": data.get("enquiryType"),
                 Message: data.get("message"),
+                [HONEYPOT_FIELD]: data.get(HONEYPOT_FIELD),
+                [TIMESTAMP_FIELD]: data.get(TIMESTAMP_FIELD),
               },
             }),
           });
@@ -43,6 +47,7 @@ export default function UpcomingProjectInterestForm({ projectTitle }: { projectT
         }
       }}
     >
+      <Honeypot />
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
         <div className="border-b border-[color:var(--line)] pb-3">
           <input

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Honeypot from "@/components/Honeypot";
 
 export default function CareersApplyForm() {
   const router = useRouter();
@@ -25,6 +26,7 @@ export default function CareersApplyForm() {
         }
       }}
     >
+      <Honeypot />
       <div className="grid gap-6">
         <label className="block text-sm text-[color:var(--muted)]">
           <span className="font-display-alt text-base">Full name</span>

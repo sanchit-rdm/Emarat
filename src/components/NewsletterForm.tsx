@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Honeypot from "@/components/Honeypot";
+import { HONEYPOT_FIELD, TIMESTAMP_FIELD } from "@/lib/antiSpam";
 
 export default function NewsletterForm({
   placeholder,
@@ -29,7 +31,11 @@ export default function NewsletterForm({
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               formName: "newsletter-signup",
-              fields: { Email: data.get("email") },
+              fields: {
+                Email: data.get("email"),
+                [HONEYPOT_FIELD]: data.get(HONEYPOT_FIELD),
+                [TIMESTAMP_FIELD]: data.get(TIMESTAMP_FIELD),
+              },
             }),
           });
           if (!res.ok) throw new Error("Request failed");
@@ -39,6 +45,7 @@ export default function NewsletterForm({
         }
       }}
     >
+      <Honeypot />
       <input
         type="email"
         name="email"

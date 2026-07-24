@@ -7,6 +7,8 @@ import { renderPortableText, toPlainText } from "@/lib/portableText";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
+import Honeypot from "@/components/Honeypot";
+import { HONEYPOT_FIELD, TIMESTAMP_FIELD } from "@/lib/antiSpam";
 
 interface ContactData {
   heading1?: string | PortableTextBlock[];
@@ -90,6 +92,8 @@ export default function ContactV2({ data, labels }: Props) {
                       Email: data.get("email"),
                       "Enquiring as": data.get("enquiryType"),
                       "Interested in": data.get("interest"),
+                      [HONEYPOT_FIELD]: data.get(HONEYPOT_FIELD),
+                      [TIMESTAMP_FIELD]: data.get(TIMESTAMP_FIELD),
                     },
                   }),
                 });
@@ -102,6 +106,7 @@ export default function ContactV2({ data, labels }: Props) {
               }
             }}
           >
+            <Honeypot />
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div className="border-b border-[color:var(--line)] pb-3">
                 <input

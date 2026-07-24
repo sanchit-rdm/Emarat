@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Reveal from "@/components/motion/Reveal";
 import CircleButton from "@/components/CircleButton";
+import Honeypot from "@/components/Honeypot";
+import { HONEYPOT_FIELD, TIMESTAMP_FIELD } from "@/lib/antiSpam";
 
 export default function ContactForm({
   form,
@@ -51,6 +53,8 @@ export default function ContactForm({
                 Email: data.get("email"),
                 Subject: data.get("subject"),
                 Message: data.get("message"),
+                [HONEYPOT_FIELD]: data.get(HONEYPOT_FIELD),
+                [TIMESTAMP_FIELD]: data.get(TIMESTAMP_FIELD),
               },
             }),
           });
@@ -63,6 +67,7 @@ export default function ContactForm({
         }
       }}
     >
+      <Honeypot />
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div className="border-b border-[color:var(--line)] pb-3 transition-colors focus-within:border-[color:var(--accent)]">
           <label className="block text-[0.625rem] uppercase tracking-[0.22em] text-[color:var(--muted)]">

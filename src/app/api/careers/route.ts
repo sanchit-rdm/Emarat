@@ -1,14 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
+import { checkBotId } from "botid/server";
 import { sendFormSubmissionEmail } from "@/lib/email";
+import { HONEYPOT_FIELD, TIMESTAMP_FIELD, isSpamSubmission, isRateLimited } from "@/lib/antiSpam";
 
 const MAX_RESUME_BYTES = 8 * 1024 * 1024; // 8MB
 
 export async function POST(req: NextRequest) {
+  const botVerification = await checkBotId();
+  if (botVerification.isBot) {
+    return NextResponse.json({ error: "Access denied" }, { status: 403 });
+  }
+
   let formData: FormData;
   try {
     formData = await req.formData();
   } catch {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+  }
+
+  if (isSpamSubmission(formData.get(HONEYPOT_FIELD), formData.get(TIMESTAMP_FIELD))) {
+    // Pretend success so bots get no signal that they were caught.
+    return NextResponse.json({ ok: true });
+  }
+
+  if (isRateLimited(req)) {
+    return NextResponse.json({ error: "Too many submissions — please try again later" }, { status: 429 });
   }
 
   const fields: Record<string, string> = {};

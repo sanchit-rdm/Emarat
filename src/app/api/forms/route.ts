@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
+import { checkBotId } from "botid/server";
 import { sendFormSubmissionEmail } from "@/lib/email";
+import { HONEYPOT_FIELD, TIMESTAMP_FIELD, isSpamSubmission, isRateLimited } from "@/lib/antiSpam";
 
 const FORM_TITLES: Record<string, string> = {
   contact: "New contact enquiry",
@@ -11,6 +13,11 @@ const FORM_TITLES: Record<string, string> = {
 };
 
 export async function POST(req: NextRequest) {
+  const botVerification = await checkBotId();
+  if (botVerification.isBot) {
+    return NextResponse.json({ error: "Access denied" }, { status: 403 });
+  }
+
   let body: unknown;
   try {
     body = await req.json();
@@ -28,9 +35,25 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid form submission" }, { status: 400 });
   }
 
+  const rawFields = fields as Record<string, unknown>;
+
+  if (isSpamSubmission(rawFields[HONEYPOT_FIELD], rawFields[TIMESTAMP_FIELD])) {
+    // Pretend success so bots get no signal that they were caught.
+    return NextResponse.json({ ok: true });
+  }
+
+  if (isRateLimited(req)) {
+    return NextResponse.json({ error: "Too many submissions — please try again later" }, { status: 429 });
+  }
+
   const cleanFields: Record<string, string> = {};
-  for (const [key, value] of Object.entries(fields as Record<string, unknown>)) {
+  for (const [key, value] of Object.entries(rawFields)) {
+    if (key === HONEYPOT_FIELD || key === TIMESTAMP_FIELD) continue;
     if (typeof value === "string") cleanFields[key] = value.slice(0, 5000);
+  }
+
+  if (Object.keys(cleanFields).length === 0) {
+    return NextResponse.json({ error: "Invalid form submission" }, { status: 400 });
   }
 
   try {

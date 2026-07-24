@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import Reveal from "@/components/motion/Reveal";
 import SplitReveal from "@/components/motion/SplitReveal";
 import CircleButton from "@/components/CircleButton";
+import Honeypot from "@/components/Honeypot";
+import { HONEYPOT_FIELD, TIMESTAMP_FIELD } from "@/lib/antiSpam";
 
 export default function EnquiryForm({
   projectTitle,
@@ -100,6 +102,8 @@ export default function EnquiryForm({
                         Phone: data.get("phone"),
                         Email: data.get("email"),
                         Message: data.get("message"),
+                        [HONEYPOT_FIELD]: data.get(HONEYPOT_FIELD),
+                        [TIMESTAMP_FIELD]: data.get(TIMESTAMP_FIELD),
                       },
                     }),
                   });
@@ -113,6 +117,7 @@ export default function EnquiryForm({
               }}
               className="flex flex-col gap-5"
             >
+              <Honeypot />
               <div className="text-xs uppercase tracking-[0.22em] text-[color:var(--accent)]">
                 {interestedLabel} · {projectTitle}
               </div>

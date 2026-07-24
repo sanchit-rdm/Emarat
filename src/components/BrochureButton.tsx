@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import CircleButton from "@/components/CircleButton";
+import Honeypot from "@/components/Honeypot";
+import { HONEYPOT_FIELD, TIMESTAMP_FIELD } from "@/lib/antiSpam";
 
 interface Props {
   whatsappPhone?: string;
@@ -88,6 +90,8 @@ export default function BrochureButton({
             Phone: data.get("phone"),
             "Preferred time": data.get("preferredTime"),
             "Interested in": data.get("interest"),
+            [HONEYPOT_FIELD]: data.get(HONEYPOT_FIELD),
+            [TIMESTAMP_FIELD]: data.get(TIMESTAMP_FIELD),
           },
         }),
       });
@@ -221,6 +225,7 @@ export default function BrochureButton({
                 </div>
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                  <Honeypot />
                   <div className="border-b border-white/15 pb-3">
                     <input
                       type="text"
