@@ -192,6 +192,27 @@ body {
   }
 }
 
+/* ----------------------------------------------------------------------------
+   Hero scroll cue — a gold highlight travels down the vertical line
+---------------------------------------------------------------------------- */
+@keyframes emarat-scroll-line {
+  0%   { background-position: 0 220%; }
+  100% { background-position: 0 -120%; }
+}
+
+.animate-scroll-line {
+  background-image: linear-gradient(to bottom, transparent, var(--accent-2) 45%, transparent 80%);
+  background-size: 100% 220%;
+  background-repeat: no-repeat;
+  animation: emarat-scroll-line 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll-line {
+    animation: none;
+  }
+}
+
 html {
   scroll-behavior: auto;
   /* Anchor jumps clear the fixed site header (h-28 = 7rem). */

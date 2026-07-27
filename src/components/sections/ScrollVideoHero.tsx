@@ -327,7 +327,9 @@ export default function ScrollVideoHero({
           className="pointer-events-none absolute inset-x-0 bottom-8 z-10 flex items-center justify-center gap-3 text-[0.625rem] uppercase tracking-[0.3em] text-[color:var(--muted)]"
         >
           <span>{scrollLabel?.trim() || "Scroll"}</span>
-          <span className="h-8 w-px bg-gradient-to-b from-[color:var(--accent)]/60 to-transparent" />
+          <span className="relative h-8 w-px overflow-hidden bg-[color:var(--accent)]/25">
+            <span className="animate-scroll-line absolute inset-y-0 left-1/2 w-[3px] -translate-x-1/2" />
+          </span>
         </div>
       </div>
     </section>
