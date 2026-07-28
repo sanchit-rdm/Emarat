@@ -139,6 +139,41 @@ export const siteSettingsType = defineType({
         defineField({ name: "legalNote", title: "Legal Note (e.g. RERA)", type: "string" }),
       ],
     }),
+
+    /* ---- Form confirmation email (sent to the person who submits any site form) ---- */
+    defineField({
+      name: "emailNotifications",
+      title: "Form Confirmation Email",
+      description:
+        "Sent automatically to whoever submits a form on the site (contact, enquiries, newsletter, careers, etc).",
+      type: "object",
+      fields: [
+        defineField({
+          name: "enabled",
+          title: "Send confirmation emails",
+          type: "boolean",
+          initialValue: true,
+        }),
+        defineField({ name: "fromName", title: "From Name", type: "string", initialValue: "Emarat Realty" }),
+        defineField({ name: "subject", title: "Subject", type: "string", initialValue: "We've received your message" }),
+        defineField({
+          name: "heading",
+          title: "Heading",
+          type: "string",
+          initialValue: "Thank you for reaching out",
+        }),
+        defineField({
+          name: "body",
+          title: "Body",
+          type: "text",
+          rows: 4,
+          description: "Main message shown under the heading.",
+          initialValue:
+            "We've received your submission and a member of our team will be in touch with you shortly.",
+        }),
+        defineField({ name: "signature", title: "Signature Line", type: "string", initialValue: "— The Emarat Realty Team" }),
+      ],
+    }),
   ],
   preview: { prepare: () => ({ title: "Site Settings" }) },
 });

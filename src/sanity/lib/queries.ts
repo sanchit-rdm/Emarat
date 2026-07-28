@@ -27,6 +27,9 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
       officeHours,
       copyright,
       legalNote
+    },
+    emailNotifications {
+      enabled, fromName, subject, heading, body, signature
     }
   }
 `);

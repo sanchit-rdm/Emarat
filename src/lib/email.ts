@@ -56,6 +56,55 @@ export async function sendFormSubmissionEmail(params: {
   }
 }
 
+export type EmailNotificationsSettings = {
+  enabled?: boolean | null;
+  fromName?: string | null;
+  subject?: string | null;
+  heading?: string | null;
+  body?: string | null;
+  signature?: string | null;
+};
+
+export async function sendUserConfirmationEmail(params: {
+  to: string;
+  template: EmailNotificationsSettings;
+}) {
+  const { to, template } = params;
+  const resend = getResend();
+
+  const fromName = template.fromName || "Emarat Realty";
+  const subject = template.subject || "We've received your message";
+  const heading = template.heading || "Thank you for reaching out";
+  const body = template.body || "We've received your submission and a member of our team will be in touch with you shortly.";
+  const signature = template.signature || "— The Emarat Realty Team";
+
+  const fromAddress = (process.env.FORM_FROM_EMAIL || "Emarat Realty Website <onboarding@resend.dev>").replace(
+    /^[^<]*(?=<)/,
+    `${fromName} `
+  );
+
+  const html = `
+    <div style="font-family:sans-serif;font-size:14px;color:#222;line-height:1.6;">
+      <h2 style="margin:0 0 12px;">${escapeHtml(heading)}</h2>
+      <p style="white-space:pre-wrap;margin:0 0 16px;">${escapeHtml(body)}</p>
+      <p style="margin:0;color:#555;">${escapeHtml(signature)}</p>
+    </div>
+  `;
+  const text = `${heading}\n\n${body}\n\n${signature}`;
+
+  const { error } = await resend.emails.send({
+    from: fromAddress,
+    to,
+    subject,
+    text,
+    html,
+  });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+}
+
 function escapeHtml(value: string) {
   return value
     .replace(/&/g, "&amp;")

@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { checkBotId } from "botid/server";
-import { sendFormSubmissionEmail } from "@/lib/email";
+import { sendFormSubmissionEmail, sendUserConfirmationEmail } from "@/lib/email";
 import { HONEYPOT_FIELD, TIMESTAMP_FIELD, isSpamSubmission, isRateLimited } from "@/lib/antiSpam";
+import { sanityFetch } from "@/sanity/lib/live";
+import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
+import type { EmailNotificationsSettings } from "@/lib/email";
 
 const FORM_TITLES: Record<string, string> = {
   contact: "New contact enquiry",
@@ -64,6 +67,22 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     console.error("Failed to send form submission email", err);
     return NextResponse.json({ error: "Failed to send" }, { status: 502 });
+  }
+
+  const submitterEmail = cleanFields.Email || cleanFields.email;
+  if (submitterEmail) {
+    try {
+      const { data } = await sanityFetch({ query: SITE_SETTINGS_QUERY });
+      const settings = data as { emailNotifications?: EmailNotificationsSettings | null } | null;
+      if (settings?.emailNotifications?.enabled !== false) {
+        await sendUserConfirmationEmail({
+          to: submitterEmail,
+          template: settings?.emailNotifications || {},
+        });
+      }
+    } catch (err) {
+      console.error("Failed to send user confirmation email", err);
+    }
   }
 
   return NextResponse.json({ ok: true });
