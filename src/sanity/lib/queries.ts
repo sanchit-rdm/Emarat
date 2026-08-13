@@ -315,7 +315,7 @@ export const NEWS_ARTICLES_QUERY = defineQuery(`
 const LANDING_PROJECT_FIELDS = `
   "slug": slug.current,
   no, title, location, status, config, size,
-  "heroImage": heroImage.asset->url,
+  "heroImage": coalesce(heroImage.asset->url, sliderImage.asset->url, overviewImage.asset->url),
   "stats": stats[]{ _key, label, value }
 `;
 
