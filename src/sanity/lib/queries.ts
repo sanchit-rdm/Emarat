@@ -326,13 +326,12 @@ const LANDING_SECTIONS_FIELDS = `
       "images": images[]{ _key, "src": asset->url, label },
       buttonLabel, buttonHref
     },
-    _type == "projectShowcaseBlock" => {
-      eyebrow, heading, viewLabel, enquireLabel,
+    _type == "featureCardsBlock" => {
+      eyebrow, heading, enquireLabel,
       "cards": cards[]{
         _key,
         "image": image.asset->url,
-        title, description, location, builtForm, tags,
-        "linkedSlug": linkedProject->slug.current
+        title, description
       }
     },
     _type == "categorizedCardGridBlock" => {

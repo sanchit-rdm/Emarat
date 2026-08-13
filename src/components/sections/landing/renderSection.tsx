@@ -1,5 +1,5 @@
 import RichTextSection from "./RichTextSection";
-import ProjectShowcaseSection from "./ProjectShowcaseSection";
+import FeatureCardsSection from "./FeatureCardsSection";
 import CategorizedCardGridSection from "./CategorizedCardGridSection";
 import StatementV2 from "@/components/sections/v2/StatementV2";
 import ElegantDesignV2 from "@/components/sections/v2/ElegantDesignV2";
@@ -56,14 +56,13 @@ export default async function renderSection(section: Section) {
         />
       );
 
-    case "projectShowcaseBlock":
+    case "featureCardsBlock":
       return (
-        <ProjectShowcaseSection
+        <FeatureCardsSection
           key={section._key}
           eyebrow={section.eyebrow}
           heading={section.heading}
           cards={section.cards}
-          viewLabel={section.viewLabel}
           enquireLabel={section.enquireLabel}
         />
       );
