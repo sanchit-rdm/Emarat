@@ -30,7 +30,7 @@ interface ContactLabels {
   submitLabel?: string;
   privacy?: string;
 }
-interface Props { data?: ContactData; labels?: ContactLabels }
+interface Props { data?: ContactData; labels?: ContactLabels; formName?: string }
 
 /**
  * Design Option 2 — closing callback section on a cream surface.
@@ -39,7 +39,7 @@ interface Props { data?: ContactData; labels?: ContactLabels }
  * form, all centre-aligned in a single narrow column. Contact details live in
  * the footer, so they're intentionally omitted here.
  */
-export default function ContactV2({ data, labels }: Props) {
+export default function ContactV2({ data, labels, formName = "home-callback" }: Props) {
   const router = useRouter();
   const [error, setError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -85,7 +85,7 @@ export default function ContactV2({ data, labels }: Props) {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({
-                    formName: "home-callback",
+                    formName,
                     fields: {
                       Name: data.get("name"),
                       Phone: data.get("phone"),

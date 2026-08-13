@@ -8,11 +8,14 @@ import { homePageType } from "./homePage";
 import { seoType } from "./objects/seo";
 import { pageHeroType } from "./objects/pageHero";
 import { pageSingletonTypes } from "./pages";
+import { pageBuilderBlockTypes } from "./objects/blocks";
+import { seoLandingPageType } from "./seoLandingPageType";
 
 export const schemaTypes = [
   // Objects
   seoType,
   pageHeroType,
+  ...pageBuilderBlockTypes,
   // Globals / singletons
   siteSettingsType,
   homePageType,
@@ -22,5 +25,6 @@ export const schemaTypes = [
   postType,
   newsArticleType,
   authorType,
+  seoLandingPageType,
   blockContentType,
 ];
