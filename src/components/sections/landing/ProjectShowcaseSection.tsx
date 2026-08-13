@@ -66,21 +66,21 @@ export default function ProjectShowcaseSection({
                 key={c._key ?? i}
                 className="grid grid-cols-12 items-center gap-y-8 lg:gap-12"
               >
-                <div className={`col-span-12 lg:col-span-7 ${i % 2 === 1 ? "lg:order-2" : ""}`}>
+                <div className={`col-span-12 lg:col-span-6 ${i % 2 === 1 ? "lg:order-2" : ""}`}>
                   <Reveal className="relative aspect-[4/3] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
                     {c.image && (
                       <Image
                         src={c.image}
                         alt={c.title ?? ""}
                         fill
-                        sizes="(min-width: 1024px) 55vw, 100vw"
+                        sizes="(min-width: 1024px) 50vw, 100vw"
                         className="object-cover"
                       />
                     )}
                   </Reveal>
                 </div>
 
-                <div className={`col-span-12 lg:col-span-5 ${i % 2 === 1 ? "lg:order-1" : ""}`}>
+                <div className={`col-span-12 lg:col-span-6 ${i % 2 === 1 ? "lg:order-1" : ""}`}>
                   <SplitReveal as="h3" className="font-display h-sub">
                     {c.title ?? ""}
                   </SplitReveal>
