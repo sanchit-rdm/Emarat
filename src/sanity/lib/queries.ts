@@ -310,15 +310,6 @@ export const NEWS_ARTICLES_QUERY = defineQuery(`
   }
 `);
 
-/* Shared per-project projection for seoLandingPage's Project Showcase block —
-   mirrors PROJECTS_LISTING_QUERY so it maps directly onto ResidencesV2/Projects-page fields. */
-const LANDING_PROJECT_FIELDS = `
-  "slug": slug.current,
-  no, title, location, status, config, size,
-  "heroImage": coalesce(heroImage.asset->url, sliderImage.asset->url, overviewImage.asset->url),
-  "stats": stats[]{ _key, label, value }
-`;
-
 /* Conditional per-_type projection for the seoLandingPage `sections` array —
    each branch only fires for its matching block _type. */
 const LANDING_SECTIONS_FIELDS = `
@@ -337,7 +328,12 @@ const LANDING_SECTIONS_FIELDS = `
     },
     _type == "projectShowcaseBlock" => {
       eyebrow, heading, viewLabel, enquireLabel,
-      "projects": projects[]->{ ${LANDING_PROJECT_FIELDS} }
+      "cards": cards[]{
+        _key,
+        "image": image.asset->url,
+        title, description, location, builtForm, tags,
+        "linkedSlug": linkedProject->slug.current
+      }
     },
     _type == "categorizedCardGridBlock" => {
       eyebrow, heading, subheading, exploreLabel,

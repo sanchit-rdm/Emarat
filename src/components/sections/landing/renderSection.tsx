@@ -62,7 +62,7 @@ export default async function renderSection(section: Section) {
           key={section._key}
           eyebrow={section.eyebrow}
           heading={section.heading}
-          projects={section.projects}
+          cards={section.cards}
           viewLabel={section.viewLabel}
           enquireLabel={section.enquireLabel}
         />

@@ -1,7 +1,9 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 
-/* Featured project cards — references existing `project` documents.
-   Renders as alternating image/detail cards (Location, Built Form, tags, View/Enquire CTAs). */
+/* Featured project cards — each card's content (image, title, copy, tags) is
+   authored independently per landing page, since the same project reads
+   differently on every SEO page. `linkedProject` is optional and only used
+   to point the View/Enquire buttons at a real /projects/[slug] page. */
 export const projectShowcaseBlockType = defineType({
   name: "projectShowcaseBlock",
   title: "Project Showcase",
@@ -10,11 +12,46 @@ export const projectShowcaseBlockType = defineType({
     defineField({ name: "eyebrow", title: "Eyebrow", type: "string" }),
     defineField({ name: "heading", title: "Heading", type: "string" }),
     defineField({
-      name: "projects",
-      title: "Projects",
+      name: "cards",
+      title: "Project Cards",
       type: "array",
-      description: "Pick which projects to feature, in display order",
-      of: [defineArrayMember({ type: "reference", to: [{ type: "project" }] })],
+      description: "Each card's content is independent — edit freely for this page without affecting other pages",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "card",
+          fields: [
+            defineField({
+              name: "image",
+              title: "Image",
+              type: "image",
+              options: { hotspot: true },
+              validation: (r) => r.required(),
+            }),
+            defineField({ name: "title", title: "Title", type: "string", validation: (r) => r.required() }),
+            defineField({ name: "description", title: "Description", type: "text", rows: 3 }),
+            defineField({ name: "location", title: "Location", type: "string" }),
+            defineField({ name: "builtForm", title: "Built Form", type: "string", description: "e.g. 'S + 4'" }),
+            defineField({
+              name: "tags",
+              title: "Tags",
+              type: "array",
+              description: "Short highlight bullets, e.g. '5BHK Independent Floors', 'DLF Gated Community'",
+              of: [defineArrayMember({ type: "string" })],
+            }),
+            defineField({
+              name: "linkedProject",
+              title: "Linked Project (for buttons)",
+              type: "reference",
+              to: [{ type: "project" }],
+              description: "Optional — makes View Project / Enquire link to the real project page",
+            }),
+          ],
+          preview: {
+            select: { title: "title", subtitle: "location", media: "image" },
+          },
+        }),
+      ],
       validation: (r) => r.min(1),
     }),
     defineField({
@@ -31,10 +68,10 @@ export const projectShowcaseBlockType = defineType({
     }),
   ],
   preview: {
-    select: { title: "heading", subtitle: "eyebrow", projects: "projects" },
-    prepare: ({ title, subtitle, projects }) => ({
+    select: { title: "heading", subtitle: "eyebrow", cards: "cards" },
+    prepare: ({ title, subtitle, cards }) => ({
       title: title || "Project Showcase",
-      subtitle: `${subtitle ? subtitle + " · " : ""}${projects?.length ?? 0} project(s)`,
+      subtitle: `${subtitle ? subtitle + " · " : ""}${cards?.length ?? 0} card(s)`,
     }),
   },
 });
