@@ -3,6 +3,7 @@ import FeatureCardsSection from "./FeatureCardsSection";
 import CategorizedCardGridSection from "./CategorizedCardGridSection";
 import StatementV2 from "@/components/sections/v2/StatementV2";
 import ElegantDesignV2 from "@/components/sections/v2/ElegantDesignV2";
+import ResidencesV2 from "@/components/sections/v2/ResidencesV2";
 import NewsV2 from "@/components/sections/v2/NewsV2";
 import ContactV2 from "@/components/sections/v2/ContactV2";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -64,6 +65,24 @@ export default async function renderSection(section: Section) {
           heading={section.heading}
           cards={section.cards}
           enquireLabel={section.enquireLabel}
+        />
+      );
+
+    case "residencesBlock":
+      return (
+        <ResidencesV2
+          key={section._key}
+          projects={section.projects}
+          labels={{
+            eyebrow: section.eyebrow,
+            heading1: section.heading1,
+            heading2: section.heading2,
+            allLabel: section.allLabel,
+            allHref: section.allHref,
+            locationLabel: section.locationLabel,
+            configLabel: section.configLabel,
+            viewLabel: section.viewLabel,
+          }}
         />
       );
 

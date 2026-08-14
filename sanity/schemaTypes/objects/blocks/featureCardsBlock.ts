@@ -29,6 +29,25 @@ export const featureCardsBlockType = defineType({
             }),
             defineField({ name: "title", title: "Heading", type: "string", validation: (r) => r.required() }),
             defineField({ name: "description", title: "Body Copy", type: "text", rows: 4 }),
+            defineField({
+              name: "location",
+              title: "Location (optional)",
+              type: "string",
+              description: "Shown as a small spec row on the card when filled in — leave blank to hide",
+            }),
+            defineField({
+              name: "builtForm",
+              title: "Built Form (optional)",
+              type: "string",
+              description: "e.g. 'S + 4' — leave blank to hide",
+            }),
+            defineField({
+              name: "tags",
+              title: "Tags (optional)",
+              type: "array",
+              description: "Short highlight bullets, e.g. '5BHK Independent Floors' — leave empty to hide",
+              of: [defineArrayMember({ type: "string" })],
+            }),
           ],
           preview: {
             select: { title: "title", subtitle: "description", media: "image" },

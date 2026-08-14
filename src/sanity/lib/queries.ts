@@ -331,7 +331,17 @@ const LANDING_SECTIONS_FIELDS = `
       "cards": cards[]{
         _key,
         "image": image.asset->url,
-        title, description
+        title, description, location, builtForm, tags
+      }
+    },
+    _type == "residencesBlock" => {
+      eyebrow, heading1, heading2, allLabel, allHref,
+      locationLabel, configLabel, viewLabel,
+      "projects": projects[]->{
+        "slug": slug.current,
+        no, title, location, status, config, size,
+        "heroImage": heroImage.asset->url,
+        "sliderImage": sliderImage.asset->url
       }
     },
     _type == "categorizedCardGridBlock" => {

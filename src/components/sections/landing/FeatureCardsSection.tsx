@@ -8,6 +8,9 @@ type Card = {
   image?: string | null;
   title?: string;
   description?: string;
+  location?: string;
+  builtForm?: string;
+  tags?: string[];
 };
 
 interface Props {
@@ -49,44 +52,80 @@ export default function FeatureCardsSection({
         )}
 
         <div className="space-y-24 lg:space-y-32">
-          {list.map((c, i) => (
-            <article
-              key={c._key ?? i}
-              className="grid grid-cols-12 items-center gap-y-8 lg:gap-12"
-            >
-              <div className={`col-span-12 lg:col-span-6 ${i % 2 === 1 ? "lg:order-2" : ""}`}>
-                <Reveal className="relative aspect-[4/3] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
-                  {c.image && (
-                    <Image
-                      src={c.image}
-                      alt={c.title ?? ""}
-                      fill
-                      sizes="(min-width: 1024px) 50vw, 100vw"
-                      className="object-cover"
-                    />
-                  )}
-                </Reveal>
-              </div>
+          {list.map((c, i) => {
+            const tags = (c.tags ?? []).filter(Boolean).slice(0, 4);
 
-              <div className={`col-span-12 lg:col-span-6 ${i % 2 === 1 ? "lg:order-1" : ""}`}>
-                <SplitReveal as="h3" className="font-display h-sub">
-                  {c.title ?? ""}
-                </SplitReveal>
-
-                {c.description && (
-                  <Reveal delay={0.15} className="mt-5 text-sm leading-relaxed text-[color:var(--muted)]">
-                    {c.description}
+            return (
+              <article
+                key={c._key ?? i}
+                className="grid grid-cols-12 items-center gap-y-8 lg:gap-12"
+              >
+                <div className={`col-span-12 lg:col-span-6 ${i % 2 === 1 ? "lg:order-2" : ""}`}>
+                  <Reveal className="relative aspect-[4/3] overflow-hidden rounded-md bg-[color:var(--bg-alt)]">
+                    {c.image && (
+                      <Image
+                        src={c.image}
+                        alt={c.title ?? ""}
+                        fill
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        className="object-cover"
+                      />
+                    )}
                   </Reveal>
-                )}
+                </div>
 
-                <Reveal delay={0.4} className="mt-8">
-                  <CircleButton href="/contact" size="sm" variant="filled">
-                    {enquire}
-                  </CircleButton>
-                </Reveal>
-              </div>
-            </article>
-          ))}
+                <div className={`col-span-12 lg:col-span-6 ${i % 2 === 1 ? "lg:order-1" : ""}`}>
+                  <SplitReveal as="h3" className="font-display h-sub">
+                    {c.title ?? ""}
+                  </SplitReveal>
+
+                  {c.description && (
+                    <Reveal delay={0.15} className="mt-5 text-sm leading-relaxed text-[color:var(--muted)]">
+                      {c.description}
+                    </Reveal>
+                  )}
+
+                  {(c.location || c.builtForm) && (
+                    <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 border-y border-[color:var(--line)] py-6">
+                      {c.location && (
+                        <Reveal delay={0.25}>
+                          <div className="text-[0.625rem] uppercase tracking-[0.2em] text-[color:var(--muted)]">
+                            Location
+                          </div>
+                          <div className="mt-1 text-sm">{c.location}</div>
+                        </Reveal>
+                      )}
+                      {c.builtForm && (
+                        <Reveal delay={0.3}>
+                          <div className="text-[0.625rem] uppercase tracking-[0.2em] text-[color:var(--muted)]">
+                            Built Form
+                          </div>
+                          <div className="mt-1 text-sm">{c.builtForm}</div>
+                        </Reveal>
+                      )}
+                    </div>
+                  )}
+
+                  {tags.length > 0 && (
+                    <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs text-[color:var(--muted)]">
+                      {tags.map((t) => (
+                        <li key={t} className="flex items-center gap-2">
+                          <span className="inline-block h-1 w-1 rounded-full bg-[color:var(--accent)]" />
+                          {t}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  <Reveal delay={0.4} className="mt-8">
+                    <CircleButton href="/contact" size="sm" variant="filled">
+                      {enquire}
+                    </CircleButton>
+                  </Reveal>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

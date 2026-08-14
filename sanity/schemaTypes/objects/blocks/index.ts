@@ -2,6 +2,7 @@ import { richTextBlockType } from "./richTextBlock";
 import { statementBannerBlockType } from "./statementBannerBlock";
 import { imageBandBlockType } from "./imageBandBlock";
 import { featureCardsBlockType } from "./featureCardsBlock";
+import { residencesBlockType } from "./residencesBlock";
 import { categorizedCardGridBlockType } from "./categorizedCardGridBlock";
 import { newsTeaserBlockType } from "./newsTeaserBlock";
 import { contactFormBlockType } from "./contactFormBlock";
@@ -11,6 +12,7 @@ export {
   statementBannerBlockType,
   imageBandBlockType,
   featureCardsBlockType,
+  residencesBlockType,
   categorizedCardGridBlockType,
   newsTeaserBlockType,
   contactFormBlockType,
@@ -23,6 +25,7 @@ export const pageBuilderBlockTypes = [
   statementBannerBlockType,
   imageBandBlockType,
   featureCardsBlockType,
+  residencesBlockType,
   categorizedCardGridBlockType,
   newsTeaserBlockType,
   contactFormBlockType,
