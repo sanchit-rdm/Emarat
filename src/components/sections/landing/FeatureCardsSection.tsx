@@ -74,7 +74,7 @@ export default function FeatureCardsSection({
                 </div>
 
                 <div className={`col-span-12 lg:col-span-6 ${i % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <SplitReveal as="h3" className="font-display h-sub">
+                  <SplitReveal as="h3" className="font-display text-[1.602rem] leading-tight text-[color:var(--brand-green)] sm:text-[1.926rem] lg:text-[2.565rem]">
                     {c.title ?? ""}
                   </SplitReveal>
 
