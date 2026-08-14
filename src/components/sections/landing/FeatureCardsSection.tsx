@@ -11,27 +11,26 @@ type Card = {
   location?: string;
   builtForm?: string;
   tags?: string[];
+  button?: { label?: string; href?: string };
 };
 
 interface Props {
   eyebrow?: string;
   heading?: string;
   cards?: Card[];
-  enquireLabel?: string;
 }
 
 /* Alternating image + heading + paragraph cards — each card is an editorial
    section rendered visually as a card, authored independently per landing
-   page (not tied to the shared `project` docs). */
+   page (not tied to the shared `project` docs). Each card's button (label +
+   link) is optional and independently configurable in Sanity. */
 export default function FeatureCardsSection({
   eyebrow,
   heading,
   cards,
-  enquireLabel,
 }: Props) {
   const list = (cards ?? []).filter((c) => c.title);
   if (list.length === 0) return null;
-  const enquire = enquireLabel?.trim() || "Enquire";
 
   return (
     <section className="theme-light px-4 py-10 sm:px-6 sm:py-[50px] lg:px-10 lg:py-[100px]">
@@ -117,11 +116,13 @@ export default function FeatureCardsSection({
                     </ul>
                   )}
 
-                  <Reveal delay={0.4} className="mt-8">
-                    <CircleButton href="/contact" size="sm" variant="filled">
-                      {enquire}
-                    </CircleButton>
-                  </Reveal>
+                  {c.button?.label && c.button?.href && (
+                    <Reveal delay={0.4} className="mt-8">
+                      <CircleButton href={c.button.href} size="sm" variant="filled">
+                        {c.button.label}
+                      </CircleButton>
+                    </Reveal>
+                  )}
                 </div>
               </article>
             );

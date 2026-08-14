@@ -327,11 +327,11 @@ const LANDING_SECTIONS_FIELDS = `
       buttonLabel, buttonHref
     },
     _type == "featureCardsBlock" => {
-      eyebrow, heading, enquireLabel,
+      eyebrow, heading,
       "cards": cards[]{
         _key,
         "image": image.asset->url,
-        title, description, location, builtForm, tags
+        title, description, location, builtForm, tags, button
       }
     },
     _type == "residencesBlock" => {

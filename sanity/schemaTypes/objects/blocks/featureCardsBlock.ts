@@ -48,6 +48,17 @@ export const featureCardsBlockType = defineType({
               description: "Short highlight bullets, e.g. '5BHK Independent Floors' — leave empty to hide",
               of: [defineArrayMember({ type: "string" })],
             }),
+            defineField({
+              name: "button",
+              title: "Button (optional)",
+              type: "object",
+              description: "Leave blank to hide the button on this card",
+              fields: [
+                defineField({ name: "label", title: "Label", type: "string" }),
+                defineField({ name: "href", title: "Link", type: "string", description: "e.g. '/contact' or '/projects/c2'" }),
+              ],
+              preview: { select: { title: "label", subtitle: "href" } },
+            }),
           ],
           preview: {
             select: { title: "title", subtitle: "description", media: "image" },
@@ -55,12 +66,6 @@ export const featureCardsBlockType = defineType({
         }),
       ],
       validation: (r) => r.min(1),
-    }),
-    defineField({
-      name: "enquireLabel",
-      title: "“Enquire” Button Label",
-      type: "string",
-      initialValue: "Enquire",
     }),
   ],
   preview: {

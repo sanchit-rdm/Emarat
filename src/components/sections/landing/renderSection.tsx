@@ -64,7 +64,6 @@ export default async function renderSection(section: Section) {
           eyebrow={section.eyebrow}
           heading={section.heading}
           cards={section.cards}
-          enquireLabel={section.enquireLabel}
         />
       );
 
