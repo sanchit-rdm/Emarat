@@ -59,21 +59,23 @@ export default function PageHero({
       )}
 
       <div className="my-8 max-w-6xl lg:my-20">
-        <SplitReveal
-          as="h1"
-          className="font-display h-page"
-        >
-          {titleTop}
-        </SplitReveal>
-        {titleBottom && (
+        <h1>
           <SplitReveal
-            as="h1"
-            delay={0.1}
-            className="font-display h-page text-[color:var(--accent)]"
+            as="span"
+            className="font-display h-page block"
           >
-            {titleBottom}
+            {titleTop}
           </SplitReveal>
-        )}
+          {titleBottom && (
+            <SplitReveal
+              as="span"
+              delay={0.1}
+              className="font-display h-page block text-[color:var(--accent)]"
+            >
+              {titleBottom}
+            </SplitReveal>
+          )}
+        </h1>
 
         {subtitle && (
           <Reveal
