@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import { draftMode } from "next/headers";
 import Script from "next/script";
 import { VisualEditing } from "next-sanity/visual-editing";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import ScrollRail from "@/components/ScrollRail";
@@ -132,6 +133,7 @@ export default async function RootLayout({
         <SmoothScroll>{children}</SmoothScroll>
         <SanityLive />
         {isDraftMode && <VisualEditing />}
+        <Analytics />
       </body>
     </html>
   );
